@@ -14,13 +14,17 @@ import { Object3D } from 'three'
 
 
 const Car = (props) => {
+
+  // Quaternion, Position 인스턴스 생성
   const worldPosition = useMemo(() => new Vector3(), [])
+  const worldQuaternion = useMemo(() => new THREE.Quaternion(), [])
 
   const chassisBodyValue = useControls('chassisBody', {
     width: { value: 0.16, min: 0, max: 1, },
     height: { value: 0.12, min: 0, max: 1, },
     front: { value: 0.17, min: 0, max: 1, },
   })
+ 
   // 위치 초기값
   const position = [0, 0.1, 0];
 
@@ -75,12 +79,12 @@ const Car = (props) => {
   );
   const [smoothedCameraTarget] = useState(() => new THREE.Vector3());
 
+
 // Back-View 카메라
 useFrame((state, delta) => {
   if (socket.id === props.player.id) {
-      const worldQuaternion = new THREE.Quaternion();  // Quaternion 인스턴스 생성
 
-    const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3());
+    const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
     const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
     // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
@@ -105,31 +109,37 @@ useFrame((state, delta) => {
   }
 })
 
-// 철구형 카메라
-  // useFrame((state, delta)=>{
-  //   // makeFollowCam()
-  //   if (socket.id === props.player.id) {
-  //     const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+ //시간마다 현재 위치를 서버로 보냄
+ const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+  useEffect(() => {
+      savedCallback.current = callback;
+  }, [callback]);
 
-  //     const cameraPosition = new THREE.Vector3();
-  //     cameraPosition.copy(bodyPosition);
-  //     cameraPosition.z += 2.25;
-  //     cameraPosition.y += 0.65;
-
-  //     const cameraTarget = new THREE.Vector3();
-  //     cameraTarget.copy(bodyPosition);
-  //     cameraTarget.y += 0.25;
-
-  //     smoothedCameraPosition.lerp(cameraPosition, 5 * delta);
-  //     smoothedCameraTarget.lerp(cameraTarget, 5 * delta);
-
-  //     state.camera.position.copy(smoothedCameraPosition);
-  //     state.camera.lookAt(smoothedCameraTarget);
-  //   }
-  // })
-
+  useEffect(() => {
+    function tick() {
+      savedCallback.current()
+    }
+    
+    if (delay !== null) {
+      let id = setInterval(tick, delay)
+      return (() => clearInterval(id))
+    }
+  },[delay])
+}
+const Timer = () => {
+  useInterval(() => {
+    const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+    const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
+  
+    const currentState = {
+      position: chassisBody.current.getWorldPosition(bodyPosition),
+      rotation: chassisBody.current.getWorldQuaternion(bodyRotation)
+    }
+    socket.emit("currentState", currentState)    
+  }, 1000)
+}
   return (
-    <group ref={body}>
       <group ref={vehicle}>
         <group ref={chassisBody}>
           <DummyCarBody width={chassisBodyValue.width} height={chassisBodyValue.height} front={chassisBodyValue.front * 2} color={props.player.color} />
@@ -138,8 +148,8 @@ useFrame((state, delta) => {
         <DummyWheel wheelRef={wheels[1]} radius={wheelRadius} />
         <DummyWheel wheelRef={wheels[2]} radius={wheelRadius} />
         <DummyWheel wheelRef={wheels[3]} radius={wheelRadius} />
+        <Timer />
       </group>
-    </group>
   )
 }
 

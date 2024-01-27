@@ -24,6 +24,12 @@ io.on("connection", (socket)=>{
   // new player update
   io.emit('updatePlayers', backEndPlayers);
 
+  // 각 소켓에서 보낸 위치 정보를 받고 다른 유저에게 전달
+  socket.on('currentState',(data) => {
+    console.log(data);
+    socket.broadcast.emit('updateAnotherPlayer', data)
+  })
+
   // 자신의 키다운 이벤트를 상대에게 
   socket.on('keydown', ({ keycode, sequenceNumber }) => {
     backEndPlayers[socket.id].sequenceNumber = sequenceNumber

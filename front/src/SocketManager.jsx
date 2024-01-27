@@ -5,22 +5,35 @@ import {io} from "socket.io-client"
 export const socket = io("http://localhost:3000")
 export const PlayerAtom = atom([])
 
-export const SocketManager = ()=>{
+const SocketManager = () => {
   const [_players, setPlayers] = useAtom(PlayerAtom)
-  
+
   useEffect(()=>{
-    function onPlayers(value){ 
-      console.log(value);
-      setPlayers(value)
+    function onHello(){
+      console.log("hello do you hear me!!!!")
     }
 
-    socket.on("updatePlayers", onPlayers)
-    socket.on("hello", () => {
-        console.log("hello");
-    })
-    return (() => {
+    function updatePlayers(backEndPlayers){ 
+      const playersArray = Object.values(backEndPlayers);
+      setPlayers(playersArray)
+    }
 
-    })
+    socket.on("updatePlayers", updatePlayers)
+    socket.on("hello", onHello)
+    
+    return ()=>{
+      socket.off("updatePlayers", onPlayers)
+    }
   })
-  
 }
+
+export default SocketManager();
+
+function onPlayers(backEndPlayers){ 
+  const playersArray = Object.values(backEndPlayers);
+  setPlayers(playersArray)
+}
+
+return (() =>{
+  socket.on("updatePlayers", onPlayers)
+})
