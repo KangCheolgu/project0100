@@ -14,6 +14,12 @@ import { Object3D } from 'three'
 
 
 const Car = (props) => {
+  
+  const object = new Object3D()
+  object.matrixAutoUpdate = false;
+  object.position.copy(props.position)
+  object.quaternion.copy(props.rotation)
+  object.updateMatrix();
 
   // Quaternion, Position 인스턴스 생성
   const worldPosition = useMemo(() => new Vector3(), [])
@@ -25,10 +31,13 @@ const Car = (props) => {
     front: { value: 0.17, min: 0, max: 1, },
   })
  
+  const [position, setPosition] = useState();
+  const [rotation, setRotation] = useState();
   // 위치 값
-  
-  const position = props.position;
-  const rotation = props.rotation;
+  useEffect(() => {
+    setPosition(props.position)
+    setRotation(props.rotation)
+  },[])
 
   let width, height, front, mass, wheelRadius;
 
@@ -84,6 +93,8 @@ const Car = (props) => {
   useFrame((state, delta) => {
     if (socket.id === props.id) {
 
+      object.matrix.setPosition( props.position );
+
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
@@ -110,6 +121,22 @@ const Car = (props) => {
     } 
   })
 
+  useEffect(() => {
+    function updateAnotherPlayer(updateData){
+      if(updateData.id === props.id) {
+        chassisApi.position.set(updateData.position.x, updateData.position.y, updateData.position.z);
+        // chassisApi.rotation.set(updateData.rotation._x, updateData.rotation._y, updateData.rotation._z);
+        // chassisApi.velocity.set(0, 0, 0); // Optional: Reset velocity if needed
+        // chassisApi.angularVelocity.set(0, 0, 0); // Optional: Reset angular velocity if needed
+      }
+    }
+    socket.on("updateAnotherPlayer", updateAnotherPlayer)
+
+    return(() => {
+      socket.off("updateAnotherPlayer", updateAnotherPlayer)
+    })
+  })
+
  //시간마다 현재 위치를 서버로 보냄
   const useInterval = (callback, delay) => {
     const savedCallback = useRef();
@@ -129,7 +156,6 @@ const Car = (props) => {
     },[delay])
   }
   const Timer = () => {
-    
       useInterval(() => {
         if(socket.id === props.id){
           const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
@@ -140,13 +166,10 @@ const Car = (props) => {
             position: chassisBody.current.getWorldPosition(bodyPosition),
             rotation: chassisBody.current.getWorldQuaternion(bodyRotation)
           }
-          //
-          // console.log(currentState);
           socket.emit("currentState", currentState)   
         } 
-      }, 3000)
+      }, 100)
   }
-
 
   return (
       <group ref={vehicle}>

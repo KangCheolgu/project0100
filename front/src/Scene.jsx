@@ -22,26 +22,9 @@ function Scene() {
     socket.on("updatePlayers", onPlayers)
 
     return (() => {
-
+      socket.off("updatePlayers", onPlayers);
     })
   },[]) 
-
-  useEffect(() => {
-    function updateAnotherPlayer(updateData){
-      console.log(players);
-      const otherplayer = players.find((player) => player.id === updateData.id)
-      // 상대방 아이디  
-      console.log(otherplayer.position, updateData.position);
-      console.log(otherplayer.rotation, updateData.rotation);
-      otherplayer.position = updateData.position
-      otherplayer.rotation = updateData.rotation 
-    }
-    socket.on("updateAnotherPlayer", updateAnotherPlayer)
-
-    return(() => {
-      socket.off("updateAnotherPlayer")
-    })
-  })
 
   return (
     <>

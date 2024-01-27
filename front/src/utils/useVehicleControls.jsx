@@ -23,10 +23,10 @@ export const useVehicleControls = (vehicleApi, chassisApi, id) => {
                 window.addEventListener('keydown', KeDownPressHandler);
                 window.addEventListener('keyup', KeUpPressHandler);
             
-            // return () => {
-            //     window.removeEventListener('keydown', KeDownPressHandler);
-            //     window.removeEventListener('keyup', KeUpPressHandler);
-            // }
+            return () => {
+                window.removeEventListener('keydown', KeDownPressHandler);
+                window.removeEventListener('keyup', KeUpPressHandler);
+            }
         }
     },[])
     
