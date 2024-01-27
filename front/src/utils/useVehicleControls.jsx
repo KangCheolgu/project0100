@@ -4,56 +4,56 @@ import { socket } from "../Scene.jsx";
 export const useVehicleControls = (vehicleApi, chassisApi, id) => {
     const [controls, setControls] = useState({});
 
-    // const KeDownPressHandler = (e) => {
-    //     setControls((controls) => ({ 
-    //         ...controls, [e.key]: true 
-    //     }));
-    //     console.log('Down',e)
-    // }
+    const KeDownPressHandler = (e) => {
+        setControls((controls) => ({ 
+            ...controls, [e.key]: true 
+        }));
+        console.log('Down',e)
+    }
 
-    // const KeUpPressHandler = (e) => {
-    //     setControls((controls) => ({ 
-    //         ...controls, [e.key]: false,
-    //     }));
-    //     console.log('Up',e)
-    // }
+    const KeUpPressHandler = (e) => {
+        setControls((controls) => ({ 
+            ...controls, [e.key]: false,
+        }));
+        console.log('Up',e)
+    }
 
+    useEffect(()=>{
+        if(socket.id === id){            
+                window.addEventListener('keydown', KeDownPressHandler);
+                window.addEventListener('keyup', KeUpPressHandler);
+            
+            // return () => {
+            //     window.removeEventListener('keydown', KeDownPressHandler);
+            //     window.removeEventListener('keyup', KeUpPressHandler);
+            // }
+        }
+    },[])
+    
     // useEffect(()=>{
-    //     if(socket.id === id){            
+    //     if(socket.id === id){
+    //         const KeDownPressHandler = (e) => {
+    //             setControls((controls) => ({ 
+    //                 ...controls, [e.key]: true 
+    //             }));
+    //             // console.log('Down',e)
+    //         }
+    //         const KeUpPressHandler = (e) => {
+    //             setControls((controls) => ({ 
+    //                 ...controls, [e.key]: false,
+    //             }));
+    //             // console.log('Up',e)
+    //         }
+            
     //             window.addEventListener('keydown', KeDownPressHandler);
     //             window.addEventListener('keyup', KeUpPressHandler);
-            
+                
     //         return () => {
     //             window.removeEventListener('keydown', KeDownPressHandler);
     //             window.removeEventListener('keyup', KeUpPressHandler);
     //         }
     //     }
     // },[])
-    
-    useEffect(()=>{
-        if(socket.id === id){
-            const KeDownPressHandler = (e) => {
-                setControls((controls) => ({ 
-                    ...controls, [e.key]: true 
-                }));
-                // console.log('Down',e)
-            }
-            const KeUpPressHandler = (e) => {
-                setControls((controls) => ({ 
-                    ...controls, [e.key]: false,
-                }));
-                // console.log('Up',e)
-            }
-            
-                window.addEventListener('keydown', KeDownPressHandler);
-                window.addEventListener('keyup', KeUpPressHandler);
-            
-            return () => {
-                window.removeEventListener('keydown', KeDownPressHandler);
-                window.removeEventListener('keyup', KeUpPressHandler);
-            }
-        }
-    },[])
 
     useEffect(() => {
         if (controls.w) {

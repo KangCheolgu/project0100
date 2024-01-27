@@ -19,8 +19,7 @@ const SocketManager = () => {
     }
 
     socket.on("updatePlayers", updatePlayers)
-    socket.on("hello", onHello)
-    
+        
     return ()=>{
       socket.off("updatePlayers", onPlayers)
     }

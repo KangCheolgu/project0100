@@ -17,6 +17,7 @@ io.on("connection", (socket)=>{
   backEndPlayers[socket.id] = {
     id: socket.id,
     position: [0, 0.1, 0],
+    rotation: [0, Math.PI, 0],
     color: `hsl(${360 * Math.random()}, 100%, 50%)`
   }
   console.log(backEndPlayers);
@@ -26,8 +27,9 @@ io.on("connection", (socket)=>{
 
   // 각 소켓에서 보낸 위치 정보를 받고 다른 유저에게 전달
   socket.on('currentState',(data) => {
-    console.log(data);
+    // console.log(data);
     socket.broadcast.emit('updateAnotherPlayer', data)
+    // io.emit('updateAnotherPlayer', "data")
   })
 
   // 자신의 키다운 이벤트를 상대에게 
@@ -54,7 +56,6 @@ io.on("connection", (socket)=>{
   // 접속 해제시 
   socket.on('disconnect', (reason) => {
     console.log(reason)
-    console.log(socket.id);
     delete backEndPlayers[socket.id]
     io.emit('updatePlayers', backEndPlayers)
   })

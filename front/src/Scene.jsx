@@ -5,28 +5,43 @@ import Car from "./Car";
 import DummyBall from "./dummy/DummyBall";
 import DummyBox from "./dummy/DummyBox";
 import DummyWall from "./dummy/DummyWall";
-import io, { Socket } from "socket.io-client"
+import io from "socket.io-client"
 import { useState, useEffect, useRef, React } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
-import * as THREE from "three";
-// import SocketManager from "./SocketManager.jsx"
 
 export const socket = io("http://localhost:5000")
 function Scene() {
-
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
+  
   useEffect(() => {
-
     function onPlayers(backEndPlayers){ 
       const playersArray = Object.values(backEndPlayers);
       setPlayers(playersArray)
     }
 
-    return (() =>{
-      socket.on("updatePlayers", onPlayers)
+    socket.on("updatePlayers", onPlayers)
+
+    return (() => {
+
     })
-  }) 
+  },[]) 
+
+  useEffect(() => {
+    function updateAnotherPlayer(updateData){
+      console.log(players);
+      const otherplayer = players.find((player) => player.id === updateData.id)
+      // 상대방 아이디  
+      console.log(otherplayer.position, updateData.position);
+      console.log(otherplayer.rotation, updateData.rotation);
+      otherplayer.position = updateData.position
+      otherplayer.rotation = updateData.rotation 
+    }
+    socket.on("updateAnotherPlayer", updateAnotherPlayer)
+
+    return(() => {
+      socket.off("updateAnotherPlayer")
+    })
+  })
 
   return (
     <>
@@ -38,7 +53,7 @@ function Scene() {
           <Debug>
             {
               players.map((player) => (
-                  <Car key={player.id} player={player}/>
+                  <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color}/>
               ))
             } 
             <DummyBall position={[0,0.2,-2]} args={[0.15]}/>
