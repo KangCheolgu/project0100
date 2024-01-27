@@ -11,9 +11,11 @@ import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 // import useFollowCam from "./utils/useFollowCam";
 import { Object3D } from 'three'
-
+import useGame from './stores/useGame.jsx'
+import { useKeyboardControls } from '@react-three/drei';
 
 const Car = (props) => {
+  const [subscribeKeys, getKeys] = useKeyboardControls()
   const worldPosition = useMemo(() => new Vector3(), [])
 
   const chassisBodyValue = useControls('chassisBody', {
@@ -75,12 +77,49 @@ const Car = (props) => {
   );
   const [smoothedCameraTarget] = useState(() => new THREE.Vector3());
 
+  /* 
+  *   About phase
+  */
+  const start = useGame((state) => state.start)
+  const end = useGame((state)=> state.end)
+  const restart = useGame((state)=> state.restart)
+  const phase = useGame((state)=> state.phase)
+
+  const reset = () =>
+  {
+    // 직접 position 속성을 이용하여 초기 위치로 설정
+    chassisApi.position.set(0, 1, 0);
+    chassisApi.velocity.set(0, 0, 0);  // 필요에 따라 속도도 초기화
+    chassisApi.angularVelocity.set(0, 0, 0);  // 필요에 따라 각속도도 초기화
+  }
+  useEffect(()=>
+  {
+    const unsubscribeReset = useGame.subscribe(
+      (state) => state.phase,
+      (value) =>
+      {
+        if(value === 'ready')
+          reset()
+      }
+    )
+    const unsubscribeAny = subscribeKeys(
+      ()=>
+      {
+        start()
+      }
+    )
+    return()=>
+    {
+      unsubscribeReset()
+      unsubscribeAny()
+    }
+  })
 // Back-View 카메라
 useFrame((state, delta) => {
+  const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3());
+  console.log(bodyPosition)
   if (socket.id === props.player.id) {
       const worldQuaternion = new THREE.Quaternion();  // Quaternion 인스턴스 생성
-
-    const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3());
     const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
     // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
@@ -103,6 +142,16 @@ useFrame((state, delta) => {
     cameraTarget.y += 0.25;
     state.camera.lookAt(cameraTarget);
   }
+  /* Phases*/
+
+  if(bodyPosition.x>10){
+    end()
+    console.log("end")
+  }
+  /*if(bodyPosition.y<-4){
+    restart()
+    console.log("restart")
+  }*/
 })
 
 // 철구형 카메라
