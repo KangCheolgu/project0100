@@ -14,12 +14,6 @@ import { Object3D } from 'three'
 
 
 const Car = (props) => {
-  
-  const object = new Object3D()
-  object.matrixAutoUpdate = false;
-  object.position.copy(props.position)
-  object.quaternion.copy(props.rotation)
-  object.updateMatrix();
 
   // Quaternion, Position 인스턴스 생성
   const worldPosition = useMemo(() => new Vector3(), [])
@@ -32,11 +26,12 @@ const Car = (props) => {
   })
  
   const [position, setPosition] = useState();
-  const [rotation, setRotation] = useState();
+  // const [rotation, setRotation] = useState();
+  const [quaternion, setQuaternion] = useState();
   // 위치 값
   useEffect(() => {
     setPosition(props.position)
-    setRotation(props.rotation)
+    setQuaternion(props.rotation)
   },[])
 
   let width, height, front, mass, wheelRadius;
@@ -53,7 +48,7 @@ const Car = (props) => {
     () => ({
       position,
       mass: mass,
-      rotation,
+      rotation:[0, 0, 0, 0],
       shapes: [
         {
           args: chassisBodyArgs,
@@ -93,8 +88,6 @@ const Car = (props) => {
   useFrame((state, delta) => {
     if (socket.id === props.id) {
 
-      object.matrix.setPosition( props.position );
-
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
@@ -110,8 +103,8 @@ const Car = (props) => {
       // smooth camera 전환속도
       smoothedCameraPosition.lerp(cameraPosition, 9 * delta);
 
-      state.camera.position.copy(smoothedCameraPosition);
-      // state.camera.position.copy(cameraPosition);
+      // state.camera.position.copy(smoothedCameraPosition);
+      state.camera.position.copy(cameraPosition);
 
       // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
       const cameraTarget = new THREE.Vector3();
@@ -122,14 +115,31 @@ const Car = (props) => {
   })
 
   useEffect(() => {
+    let lastPosition = new THREE.Vector3(chassisApi.position.x, chassisApi.position.y, chassisApi.position.z);
+    let lastQuaternion = new THREE.Vector4(chassisApi.quaternion._x,chassisApi.quaternion._y,chassisApi.quaternion._z,chassisApi.quaternion._w)
+    // let lastQuaternion = new THREE.Vector4(chassisApi.quaternion[0],chassisApi.quaternion[1],chassisApi.quaternion[2],chassisApi.quaternion[3])
+
     function updateAnotherPlayer(updateData){
       if(updateData.id === props.id) {
-        chassisApi.position.set(updateData.position.x, updateData.position.y, updateData.position.z);
-        // chassisApi.rotation.set(updateData.rotation._x, updateData.rotation._y, updateData.rotation._z);
+        const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
+        const targetQuaternion = new THREE.Quaternion(updateData.rotation[0], updateData.rotation[1], updateData.rotation[2], updateData.rotation[3]);
+
+        // chassisApi.position.set(updateData.position.x, updateData.position.y, updateData.position.z);
+        // chassisApi.quaternion.set(updateData.rotation[0], updateData.rotation[1], updateData.rotation[2], updateData.rotation[3]);
         // chassisApi.velocity.set(0, 0, 0); // Optional: Reset velocity if needed
         // chassisApi.angularVelocity.set(0, 0, 0); // Optional: Reset angular velocity if needed
+
+        lastPosition.lerp(targetPosition, 1); // 두 번째 매개변수는 보간 강도입니다.
+        chassisApi.position.copy(lastPosition);
+
+        // 쿼터니언도 마찬가지로 보간합니다.
+        lastQuaternion.lerp(targetQuaternion, 1);
+        chassisApi.quaternion.copy(lastQuaternion);
       }
     }
+
+    
+
     socket.on("updateAnotherPlayer", updateAnotherPlayer)
 
     return(() => {
@@ -168,7 +178,7 @@ const Car = (props) => {
           }
           socket.emit("currentState", currentState)   
         } 
-      }, 100)
+      }, 30)
   }
 
   return (
