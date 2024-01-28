@@ -59,4 +59,8 @@ io.on("connection", (socket)=>{
     delete backEndPlayers[socket.id]
     io.emit('updatePlayers', backEndPlayers)
   })
+
+  socket.on("ping", (callback) => {
+    callback();
+  });
 })

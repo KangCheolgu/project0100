@@ -19,6 +19,15 @@ function Scene() {
       setPlayers(playersArray)
     }
 
+    setInterval(() => {
+      const start = Date.now();
+      console.log(start);
+      socket.emit("ping", () => {
+        const duration = Date.now() - start;
+        console.log("ping is ", duration, " ms");
+      });
+    }, 1000);
+
     socket.on("updatePlayers", onPlayers)
 
     return (() => {

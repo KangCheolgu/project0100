@@ -5,10 +5,12 @@ export const useVehicleControls = (vehicleApi, chassisApi, id) => {
     const [controls, setControls] = useState({});
 
     const KeDownPressHandler = (e) => {
-        setControls((controls) => ({ 
-            ...controls, [e.key]: true 
-        }));
-        console.log('Down',e)
+        if(!controls[e.key]) {
+            setControls((controls) => ({ 
+                ...controls, [e.key]: true 
+            }));
+            console.log('Down',e)
+        }
     }
 
     const KeUpPressHandler = (e) => {
@@ -28,7 +30,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id) => {
                 window.removeEventListener('keyup', KeUpPressHandler);
             }
         }
-    },[])
+    })
     
     // useEffect(()=>{
     //     if(socket.id === id){

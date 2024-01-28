@@ -87,7 +87,7 @@ const Car = (props) => {
 // Back-View 카메라
   useFrame((state, delta) => {
     if (socket.id === props.id) {
-
+      
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
@@ -101,7 +101,7 @@ const Car = (props) => {
       cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
 
       // smooth camera 전환속도
-      smoothedCameraPosition.lerp(cameraPosition, 9 * delta);
+      // smoothedCameraPosition.lerp(cameraPosition, 0.5);
 
       // state.camera.position.copy(smoothedCameraPosition);
       state.camera.position.copy(cameraPosition);
@@ -121,20 +121,35 @@ const Car = (props) => {
 
     function updateAnotherPlayer(updateData){
       if(updateData.id === props.id) {
+        // const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
+        // const targetQuaternion = new THREE.Quaternion(updateData.rotation[0], updateData.rotation[1], updateData.rotation[2], updateData.rotation[3]);
+        
+        // // chassisApi.position.set(updateData.position.x, updateData.position.y, updateData.position.z);
+        // // chassisApi.quaternion.set(updateData.rotation[0], updateData.rotation[1], updateData.rotation[2], updateData.rotation[3]);
+        // // chassisApi.velocity.set(0, 0, 0); // Optional: Reset velocity if needed
+        // // chassisApi.angularVelocity.set(0, 0, 0); // Optional: Reset angular velocity if needed
+
+        // lastPosition.lerp(targetPosition, 0.5); // 두 번째 매개변수는 보간 강도입니다.
+        // chassisApi.position.copy(lastPosition);
+
+        // // 쿼터니언도 마찬가지로 보간합니다.
+        // lastQuaternion.lerp(targetQuaternion, 0.5);
+        // chassisApi.quaternion.copy(lastQuaternion);
+
         const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
         const targetQuaternion = new THREE.Quaternion(updateData.rotation[0], updateData.rotation[1], updateData.rotation[2], updateData.rotation[3]);
-
-        // chassisApi.position.set(updateData.position.x, updateData.position.y, updateData.position.z);
-        // chassisApi.quaternion.set(updateData.rotation[0], updateData.rotation[1], updateData.rotation[2], updateData.rotation[3]);
-        // chassisApi.velocity.set(0, 0, 0); // Optional: Reset velocity if needed
-        // chassisApi.angularVelocity.set(0, 0, 0); // Optional: Reset angular velocity if needed
-
-        lastPosition.lerp(targetPosition, 1); // 두 번째 매개변수는 보간 강도입니다.
-        chassisApi.position.copy(lastPosition);
-
-        // 쿼터니언도 마찬가지로 보간합니다.
-        lastQuaternion.lerp(targetQuaternion, 1);
-        chassisApi.quaternion.copy(lastQuaternion);
+        
+        // 보간된 값을 계산합니다.
+        const newPosition = new THREE.Vector3().lerpVectors(lastPosition, targetPosition, 0.5);
+        const newQuaternion = new THREE.Quaternion().slerpQuaternions(lastQuaternion, targetQuaternion, 0.5);
+        
+        // 물리 엔진을 통해 위치와 방향을 설정합니다.
+        chassisApi.position.set(newPosition.x, newPosition.y, newPosition.z);
+        chassisApi.quaternion.set(newQuaternion.x, newQuaternion.y, newQuaternion.z, newQuaternion.w);
+        
+        // 이전 위치와 방향을 업데이트합니다.
+        lastPosition.copy(newPosition);
+        lastQuaternion.copy(newQuaternion);
       }
     }
 
@@ -178,7 +193,7 @@ const Car = (props) => {
           }
           socket.emit("currentState", currentState)   
         } 
-      }, 30)
+      }, 100)
   }
 
   return (
