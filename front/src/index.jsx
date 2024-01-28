@@ -5,7 +5,7 @@ import Scene from './Scene';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Scene />
-  </React.StrictMode>
+  // </React.StrictMode>
 );
