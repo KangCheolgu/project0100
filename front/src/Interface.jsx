@@ -5,7 +5,7 @@ import { useKeyboardControls } from '@react-three/drei'
 import {addEffect} from '@react-three/fiber'
 import useGame from './stores/useGame'
 export default function Interface(){
-
+    const lapse = useRef()
     const time = useRef()
     const forward = useKeyboardControls((state)=>state.forward) 
     const backward = useKeyboardControls((state)=>state.backward)
@@ -20,7 +20,7 @@ export default function Interface(){
         {
             const state = useGame.getState()
             let elapsedTime=0
-
+            let newLapse = state.lapse
             if(state.phase ==='playing')
                 elapsedTime = Date.now() - state.startTime
             else if(state.phase==='ended')
@@ -31,6 +31,7 @@ export default function Interface(){
 
             if(time.current)
                 time.current.textContent = elapsedTime
+                lapse.current.textContent = newLapse+"/2"
         })
         return ()=>{
             unsubscribeEffect()
@@ -38,9 +39,10 @@ export default function Interface(){
     }, [])
     const controls = useKeyboardControls((state)=>state)
     return <div className="interface">
+        {/* lapse */}
+        <div ref={lapse} className ="lapse">0/2</div>
         {/* Time */}
         <div ref = { time } className="time">0.00</div>
-
         {/* Restart */}
         {phase==='ended'?<div className="restart" onClick={restart}>Restart</div>:null}
         {/*<div className="restart" onClick={restart}>Restart</div>*/}

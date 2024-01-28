@@ -15,6 +15,14 @@ import useGame from './stores/useGame.jsx'
 import { useKeyboardControls } from '@react-three/drei';
 
 const Car = (props) => {
+  // 체크포인트 위치
+  const spot = [{x: 20, y: 0, z:0},
+                {x: 20, y: 0, z:40},
+                {x: -80, y: 0, z:40},
+                {x: -80, y: 0, z:0}]
+  
+  // 시작 지점
+  const startSpot={x:0, y:0, z:0}
   const [subscribeKeys, getKeys] = useKeyboardControls()
   const worldPosition = useMemo(() => new Vector3(), [])
 
@@ -40,7 +48,7 @@ const Car = (props) => {
     () => ({
       position,
       mass: mass,
-      rotation: [0, Math.PI, 0],
+      rotation: [0, -Math.PI/2, 0],
       shapes: [
         {
           args: chassisBodyArgs,
@@ -84,6 +92,13 @@ const Car = (props) => {
   const end = useGame((state)=> state.end)
   const restart = useGame((state)=> state.restart)
   const phase = useGame((state)=> state.phase)
+  const around = useGame((state)=> state.around)
+  const inspot= useGame((state)=> state.inspot)
+  const outspot = useGame((state)=> state.outspot)
+  let isIn = useGame((state)=> state.isIn)
+  const lapse = useGame((state)=> state.lapse)
+
+  // const velocity = chassisBody.velocity
 
   const reset = () =>
   {
@@ -117,7 +132,6 @@ const Car = (props) => {
 // Back-View 카메라
 useFrame((state, delta) => {
   const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3());
-  console.log(bodyPosition)
   if (socket.id === props.player.id) {
       const worldQuaternion = new THREE.Quaternion();  // Quaternion 인스턴스 생성
     const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
@@ -131,12 +145,12 @@ useFrame((state, delta) => {
     cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
     cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
 
-    // smooth camera 전환속도
+    //smooth camera 전환속도
     smoothedCameraPosition.lerp(cameraPosition, 3 * delta);
 
     state.camera.position.copy(smoothedCameraPosition);
 
-    // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
+    //카메라가 항상 자동차의 뒷부분을 바라보도록 설정
     const cameraTarget = new THREE.Vector3();
     cameraTarget.copy(bodyPosition);
     cameraTarget.y += 0.25;
@@ -144,38 +158,39 @@ useFrame((state, delta) => {
   }
   /* Phases*/
 
-  if(bodyPosition.x>10){
+  /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
+  if(lapse===2
+    &&bodyPosition.x < startSpot.x + 1 && startSpot.x > startSpot.x - 1 
+    && bodyPosition.z < startSpot.z+ 10 && bodyPosition.z > startSpot.z-10){
     end()
     console.log("end")
   }
-  /*if(bodyPosition.y<-4){
-    restart()
-    console.log("restart")
-  }*/
+  /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
+  else if(isIn.every((elem)=>elem===true)
+          &&bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
+          && bodyPosition.z < startSpot.z+ 10 && bodyPosition.z > startSpot.z-10){
+    around()
+    
+    console.log("around")
+  }
+  else{
+    /* 체크포인트 지날 때 */
+    const newisIn = [false, false, false, false]
+    for(let i=0;i<4;i++){
+      newisIn[i] = bodyPosition.x < spot[i].x + 10 && bodyPosition.x > spot[i].x - 10 && bodyPosition.z < spot[i].z+ 10 && bodyPosition.z > spot[i].z-10
+      if(newisIn[0]){
+        inspot(0)
+        break
+      }
+      
+      if(isIn[i-1]===true&&newisIn[i]){
+        inspot(i)
+      }
+    }
+  } 
+  /* outspot 구현 예정
+      체크 포인트를 잘못된 방향으로 벗어났을때 true-> false */
 })
-
-// 철구형 카메라
-  // useFrame((state, delta)=>{
-  //   // makeFollowCam()
-  //   if (socket.id === props.player.id) {
-  //     const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-
-  //     const cameraPosition = new THREE.Vector3();
-  //     cameraPosition.copy(bodyPosition);
-  //     cameraPosition.z += 2.25;
-  //     cameraPosition.y += 0.65;
-
-  //     const cameraTarget = new THREE.Vector3();
-  //     cameraTarget.copy(bodyPosition);
-  //     cameraTarget.y += 0.25;
-
-  //     smoothedCameraPosition.lerp(cameraPosition, 5 * delta);
-  //     smoothedCameraTarget.lerp(cameraTarget, 5 * delta);
-
-  //     state.camera.position.copy(smoothedCameraPosition);
-  //     state.camera.lookAt(smoothedCameraTarget);
-  //   }
-  // })
 
   return (
     <group ref={body}>
