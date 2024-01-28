@@ -76,7 +76,7 @@ const Car = (props) => {
     useRef(null),
   );
 
-  useVehicleControls(vehicleApi, chassisApi, props.id)
+  useVehicleControls(vehicleApi, chassisApi, props.id, props.state)
 
   const [smoothedCameraPosition] = useState(
     () => new THREE.Vector3(10, 10, 10)

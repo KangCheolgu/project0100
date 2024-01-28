@@ -12,22 +12,36 @@ export const socket = io("http://localhost:5000")
 function Scene() {
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
-  
+  const [state, setState] = useState(false)
+  let count = 3;
   useEffect(() => {
     function onPlayers(backEndPlayers){ 
       const playersArray = Object.values(backEndPlayers);
       setPlayers(playersArray)
     }
+    // 핑퐁 테스트
+    // setInterval(() => {
+    //   const start = Date.now();
+    //   console.log(start);
+    //   socket.emit("ping", () => {
+    //     const duration = Date.now() - start;
+    //     console.log("ping is ", duration, " ms");
+    //   });
+    // }, 1000);
 
-    setInterval(() => {
-      const start = Date.now();
-      console.log(start);
-      socket.emit("ping", () => {
-        const duration = Date.now() - start;
-        console.log("ping is ", duration, " ms");
-      });
+    let countdown = setInterval(() => {
+      
+      if(count === 0) {
+        console.log("start");
+        setState(true)
+        clearInterval(countdown)
+      }
+      else {
+        console.log(count);
+        count -= 1;
+      }
     }, 1000);
-
+    
     socket.on("updatePlayers", onPlayers)
 
     return (() => {
@@ -45,7 +59,7 @@ function Scene() {
           <Debug>
             {
               players.map((player) => (
-                  <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color}/>
+                  <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state}/>
               ))
             } 
             <DummyBall position={[0,0.2,-2]} args={[0.15]}/>

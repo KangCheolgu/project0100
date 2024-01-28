@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { socket } from "../Scene.jsx";
 
-export const useVehicleControls = (vehicleApi, chassisApi, id) => {
+export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     const [controls, setControls] = useState({});
 
     const KeDownPressHandler = (e) => {
@@ -9,7 +9,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id) => {
             setControls((controls) => ({ 
                 ...controls, [e.key]: true 
             }));
-            console.log('Down',e)
+            console.log('Down',e.code)
         }
     }
 
@@ -17,17 +17,19 @@ export const useVehicleControls = (vehicleApi, chassisApi, id) => {
         setControls((controls) => ({ 
             ...controls, [e.key]: false,
         }));
-        console.log('Up',e)
+        console.log('Up',e.code)
     }
 
     useEffect(()=>{
-        if(socket.id === id){            
-                window.addEventListener('keydown', KeDownPressHandler);
-                window.addEventListener('keyup', KeUpPressHandler);
-            
-            return () => {
-                window.removeEventListener('keydown', KeDownPressHandler);
-                window.removeEventListener('keyup', KeUpPressHandler);
+        if(state === true){
+            if(socket.id === id){            
+                    window.addEventListener('keydown', KeDownPressHandler);
+                    window.addEventListener('keyup', KeUpPressHandler);
+                
+                return () => {
+                    window.removeEventListener('keydown', KeDownPressHandler);
+                    window.removeEventListener('keyup', KeUpPressHandler);
+                }
             }
         }
     })
