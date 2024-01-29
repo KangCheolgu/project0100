@@ -26,7 +26,6 @@ const Car = (props) => {
   })
  
   const [position, setPosition] = useState();
-  // const [rotation, setRotation] = useState();
   const [quaternion, setQuaternion] = useState();
   // 위치 값
   useEffect(() => {
