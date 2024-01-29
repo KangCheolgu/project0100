@@ -7,6 +7,7 @@ import DummyBox from "./dummy/DummyBox";
 import DummyWall from "./dummy/DummyWall";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React } from "react";
+import Interface from "./Interface";
 
 export const socket = io("http://localhost:5000")
 function Scene() {
@@ -23,7 +24,6 @@ function Scene() {
     }
 
     socket.on("clientCount", (numClient)=>{
-      console.log(numClient)
       if (numClient === numPlayers){
         startCountdown()
       }
@@ -64,6 +64,7 @@ function Scene() {
     <>
       <Canvas camera={{ fov:75, position:[1.5, 8, 4]}}>
         {/* <SocketManager /> */}
+        
         <ambientLight/>
         <directionalLight position={[0, 5, 5]} />
         <Physics gravity={[0, -2.6, 0]}>
