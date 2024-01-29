@@ -6,6 +6,9 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
 {
     return {
         
+        //Countdown
+        count: 3,
+
         // Time        
         startTime: 0, 
         endTime: 0,
@@ -13,10 +16,12 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
         // lap
         lapse : 0,
         isIn : [false,false, false, false],
+
         // Phase
         phase: 'ready',
         start:() =>
 
+        
         {
             set((state)=>
             {
@@ -41,7 +46,6 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
         {
             set((state)=>
             {  
-                console.log('end!!!!')
                 if(state.phase === 'playing')
                     return {phase: 'ended', endTime: Date.now(), lapse: 2}
                 return {}
@@ -72,7 +76,12 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
             updateIsIn[index] = false
             //set({isIn: updateIsIn})
             return { ...state, isIn: updateIsIn };
-        }
+        },
 
+        Countdown: ()=>{
+            set((state)=>{
+                return {count : state.count - 1}
+            })
+        }
     }
 }))

@@ -10,6 +10,7 @@ import { CurvedRoad } from "./components/CurveRoad"
 import {Wall, Floor} from './components/Ruins/Ruin.jsx'
 import Interface from "./Interface"
 import ColliderWall from "./ColliderWall"
+import useGame from "./stores/useGame.jsx";
 export const socket = io("http://localhost:5000")
 function Scene() {
   const defaultY = -0.08
@@ -17,8 +18,23 @@ function Scene() {
   const [players, setPlayers] = useState([])
   const [state, setState] = useState(false)
   let numPlayers = 2
-  let count = 3
+  let count = useGame((state)=> state.count)
+  let Countdown = useGame((state)=> state.Countdown)
+  var countIntervalRef = useRef(null)
+  
+  useEffect(()=>{
+    if (count === 0){
+      console.log("start")
+      setState(true)
+      clearInterval(countIntervalRef.current)
+    }
+  },[count])
 
+  const startCountdown = ()=>{
+   countIntervalRef.current = setInterval(()=>{
+    Countdown()
+  }, 1000)
+}
   useEffect(() => {
     function onPlayers(backEndPlayers){ 
       const playersArray = Object.values(backEndPlayers);
@@ -27,24 +43,9 @@ function Scene() {
 
     socket.on("clientCount", (numClient)=>{
       if (numClient === numPlayers){
-        startCountdown()
+       startCountdown()
       }
     })
-
-    const startCountdown = ()=>{
-    let countdown = setInterval(() => {
-      
-      if(count === 0) {
-        console.log("start");
-        setState(true)
-        clearInterval(countdown)
-      }
-      else {
-        console.log(count);
-        count -= 1;
-      }
-    }, 1000);
-  }
     
     socket.on("updatePlayers", onPlayers)
 
