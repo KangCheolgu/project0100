@@ -7,15 +7,11 @@ export const Wheel = ({ wheelRef, radius, lefSide }) => {
 
   return(
     <group ref={wheelRef} scale={0.5}>
-      <group rotation={lefSide ? [0, -Math.PI, 0 ] :[ 0, 0, 0] } scale={0.05} >
-        <mesh geometry={nodes.Circle.geometry} material={materials.besi} />
-        {/* <mesh geometry={nodes.Circle001.geometry} material={materials.besi} />
-        <mesh geometry={nodes.Circle002.geometry} material={materials.besi} />
-        <mesh geometry={nodes.Circle003.geometry} material={materials.besi} /> */}
-        <mesh geometry={nodes.Cylinder.geometry} material={materials.Ban} />
-        {/* <mesh geometry={nodes.Cylinder001.geometry} material={materials.Ban}/>
-        <mesh geometry={nodes.Cylinder002.geometry} material={materials.Ban}/>
-        <mesh geometry={nodes.Cylinder003.geometry} material={materials.Ban}/> */}
+      <group rotation={lefSide ? [0, -Math.PI, 0 ] :[ 0, 0, 0] }  scale={0.08} >
+        <mesh geometry={nodes.Cylinder.geometry} material={materials.Ban} position={[2.701, 1.144, 2.949]} />
+        {/* <mesh geometry={nodes.Cylinder001.geometry} material={materials.Ban} position={[2.701, 1.144, -3.085]} />
+        <mesh geometry={nodes.Cylinder002.geometry} material={materials.Ban} position={[-2.701, 1.144, -3.085]} />
+        <mesh geometry={nodes.Cylinder003.geometry} material={materials.Ban} position={[-2.701, 1.144, 2.949]} /> */}
       </group>
     </group>
   );

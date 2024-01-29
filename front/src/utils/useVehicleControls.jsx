@@ -3,7 +3,7 @@ import { socket } from "../Scene.jsx";
 
 export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     const [controls, setControls] = useState({});
-    const engineForce = 120;
+    const engineForce = 100;
     
     const KeDownPressHandler = (e) => {
         if(!controls[e.key]) {
@@ -48,15 +48,15 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
         }
     
         if (controls.ArrowLeft) {
-          vehicleApi.setSteeringValue(0.35, 2);
-          vehicleApi.setSteeringValue(0.35, 3);
-          vehicleApi.setSteeringValue(-0.1, 0);
-          vehicleApi.setSteeringValue(-0.1, 1);
+          vehicleApi.setSteeringValue(0.3, 2);
+          vehicleApi.setSteeringValue(0.3, 3);
+          vehicleApi.setSteeringValue(-0.07, 0);
+          vehicleApi.setSteeringValue(-0.07, 1);
         } else if (controls.ArrowRight) {
-          vehicleApi.setSteeringValue(-0.35, 2);
-          vehicleApi.setSteeringValue(-0.35, 3);
-          vehicleApi.setSteeringValue(0.1, 0);
-          vehicleApi.setSteeringValue(0.1, 1);
+          vehicleApi.setSteeringValue(-0.3, 2);
+          vehicleApi.setSteeringValue(-0.3, 3);
+          vehicleApi.setSteeringValue(0.07, 0);
+          vehicleApi.setSteeringValue(0.07, 1);
         } else {
           for (let i = 0; i < 4; i++) {
             vehicleApi.setSteeringValue(0, i);
