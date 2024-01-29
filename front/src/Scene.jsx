@@ -14,7 +14,7 @@ import { StraightRoad } from "./components/StraightRoad"
 import { CurvedRoad } from "./components/CurveRoad"
 import Interface from "./Interface"
 import useGame from './stores/useGame.jsx'
-import {Wall, Floor} from './components/Ruins/Wall.jsx'
+import {Wall, Floor} from './components/Ruins/Ruin.jsx'
 
 export const socket = io("http://localhost:5000")
 function Scene() {
