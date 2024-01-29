@@ -13,12 +13,21 @@ function Scene() {
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
   const [state, setState] = useState(false)
-  let count = 3;
+  let numPlayers = 2
+  let count = 3
+
   useEffect(() => {
     function onPlayers(backEndPlayers){ 
       const playersArray = Object.values(backEndPlayers);
       setPlayers(playersArray)
     }
+
+    socket.on("clientCount", (numClient)=>{
+      console.log(numClient)
+      if (numClient === numPlayers){
+        startCountdown()
+      }
+    })
     // 핑퐁 테스트
     // setInterval(() => {
     //   const start = Date.now();
@@ -29,6 +38,7 @@ function Scene() {
     //   });
     // }, 1000);
 
+    const startCountdown = () =>{
     let countdown = setInterval(() => {
       
       if(count === 0) {
@@ -41,6 +51,7 @@ function Scene() {
         count -= 1;
       }
     }, 1000);
+  }
     
     socket.on("updatePlayers", onPlayers)
 
@@ -62,9 +73,6 @@ function Scene() {
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state}/>
               ))
             } 
-            <DummyBall position={[0,0.2,-2]} args={[0.15]}/>
-            <DummyBox position={[1,0.2,-2]} args={[0.2,0.2,0.2]}/>
-            <DummyBox position={[-1,0.2,1.5]} args={[0.2,0.4,0.2]} type={"Static"}/>
             <DummyWall position={[5,0.5,0]} args={[1,1,10]} />
             <Ground rotation={[-Math.PI/2,0,0]}/>
           </Debug>
