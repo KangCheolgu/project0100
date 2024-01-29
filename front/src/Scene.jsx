@@ -9,12 +9,12 @@ import io from "socket.io-client"
 import { useState, useEffect, useRef, React } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import Wall from "./Wall"
 import { OrbitControls } from '@react-three/drei';
 import { StraightRoad } from "./components/StraightRoad"
 import { CurvedRoad } from "./components/CurveRoad"
 import Interface from "./Interface"
 import useGame from './stores/useGame.jsx'
+import {Wall, Floor} from './components/Ruins/Wall.jsx'
 
 export const socket = io("http://localhost:5000")
 function Scene() {
@@ -42,6 +42,7 @@ function Scene() {
         <ambientLight/>
         <directionalLight position={[0, 5, 5]} />
         <Physics gravity={[0, -2.6, 0]}>
+
           <Debug>
             {
               players.map((player) => (
@@ -117,7 +118,6 @@ function Scene() {
             <StraightRoad scale={0.3} position={[-80.5, defaultY, 25]} rotation={[0, Math.PI/2, 0]}/>
             <StraightRoad scale={0.3} position={[-80.5, defaultY, 30]} rotation={[0, Math.PI/2, 0]}/>
             <StraightRoad scale={0.3} position={[-80.5, defaultY, 35]} rotation={[0, Math.PI/2, 0]}/>
-            <Wall/>
           </Debug>
         </Physics>
       </Canvas>
