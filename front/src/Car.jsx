@@ -83,34 +83,34 @@ const Car = (props) => {
 
 
 // Back-View 카메라
-  useFrame((state, delta) => {
-    if (socket.id === props.id) {
+  // useFrame((state, delta) => {
+  //   if (socket.id === props.id) {
       
-      const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-      const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
+  //     const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+  //     const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
-      // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
+  //     // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
+  //     const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
 
-      // 카메라의 전역 위치 계산
-      const cameraPosition = new THREE.Vector3();
-      cameraPosition.copy(relativeCameraPosition);
-      cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
-      cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
+  //     // 카메라의 전역 위치 계산
+  //     const cameraPosition = new THREE.Vector3();
+  //     cameraPosition.copy(relativeCameraPosition);
+  //     cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
+  //     cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
 
-      // smooth camera 전환속도
-      // smoothedCameraPosition.lerp(cameraPosition, 0.5);
+  //     // smooth camera 전환속도
+  //     // smoothedCameraPosition.lerp(cameraPosition, 0.5);
 
-      // state.camera.position.copy(smoothedCameraPosition);
-      state.camera.position.copy(cameraPosition);
+  //     // state.camera.position.copy(smoothedCameraPosition);
+  //     state.camera.position.copy(cameraPosition);
 
-      // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
-      const cameraTarget = new THREE.Vector3();
-      cameraTarget.copy(bodyPosition);
-      cameraTarget.y += 0.25;
-      state.camera.lookAt(cameraTarget);
-    } 
-  })
+  //     // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
+  //     const cameraTarget = new THREE.Vector3();
+  //     cameraTarget.copy(bodyPosition);
+  //     cameraTarget.y += 0.25;
+  //     state.camera.lookAt(cameraTarget);
+  //   } 
+  // })
 
   useEffect(() => {
     let lastPosition = new THREE.Vector3(chassisApi.position.x, chassisApi.position.y, chassisApi.position.z);
@@ -197,7 +197,7 @@ const Car = (props) => {
   return (
       <group ref={vehicle}>
         <group ref={chassisBody}>
-            <CarModel width={chassisBodyValue.width} height={chassisBodyValue.height} front={chassisBodyValue.front * 2} color={props.color}/>
+            <CarModel />
         </group>
         <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
         <Wheel wheelRef={wheels[1]} radius={wheelRadius} />
