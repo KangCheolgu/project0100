@@ -11,7 +11,7 @@ export default function ColliderBox({position, scale, rotation}){
     return (
         <mesh position={position} rotation={rotation}>
             <boxGeometry args={scale}/>
-            <meshBasicMaterial transparent={true} opacity={0.25}/>
+            <meshBasicMaterial transparent={true} opacity={0}/>
         </mesh>
     )
 }
