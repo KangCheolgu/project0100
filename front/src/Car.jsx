@@ -9,8 +9,8 @@ import { Vector3 } from "three";
 import { socket } from "./Scene.jsx";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-// import useFollowCam from "./utils/useFollowCam";
-import { Object3D } from 'three'
+import useGame from './stores/useGame.jsx'
+import { useKeyboardControls } from '@react-three/drei';
 
 
 const Car = (props) => {
@@ -43,12 +43,14 @@ const Car = (props) => {
   mass = 150;
 
   const chassisBodyArgs = [width, height, front * 2];
-
+  const startEuler = new THREE.Euler(0, -Math.PI/2, 0, 'XYZ');
+  const startQuaternion = new THREE.Quaternion();
+  startQuaternion.setFromEuler(startEuler);
   const [chassisBody, chassisApi] = useCompoundBody(
     () => ({
       position,
       mass: mass,
-      rotation:[0, 0, 0, 0],
+      rotation: [0, -Math.PI/2, 0],
       shapes: [
         {
           args: chassisBodyArgs,
@@ -83,9 +85,40 @@ const Car = (props) => {
   );
   const [smoothedCameraTarget] = useState(() => new THREE.Vector3());
 
+  /* 
+  *   About phase
+  */
 
+  // 체크포인트 위치
+  const spot = [{x: 20, y: 0, z:0},
+    {x: 20, y: 0, z:40},
+    {x: -80, y: 0, z:40},
+    {x: -80, y: 0, z:0}]
+
+  // 시작 지점
+  const startSpot={x:0, y:0, z:0}
+  const [subscribeKeys, getKeys] = useKeyboardControls()
+
+  const start = useGame((state) => state.start)
+  const end = useGame((state)=> state.end)
+  const restart = useGame((state)=> state.restart)
+  const phase = useGame((state)=> state.phase)
+  const around = useGame((state)=> state.around)
+  const inspot= useGame((state)=> state.inspot)
+  const outspot = useGame((state)=> state.outspot)
+  let isIn = useGame((state)=> state.isIn)
+  const lapse = useGame((state)=> state.lapse)
+
+  const reset = () =>
+  {
+    // 직접 position 속성을 이용하여 초기 위치로 설정
+    chassisApi.position.set(0, 1, 0);
+    chassisApi.velocity.set(0, 0, 0);  // 필요에 따라 속도도 초기화
+    chassisApi.angularVelocity.set(0, 0, 0);  // 필요에 따라 각속도도 초기화
+  }
 // Back-View 카메라
   useFrame((state, delta) => {
+    const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3());
     if (socket.id === props.id) {
       
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
@@ -100,10 +133,6 @@ const Car = (props) => {
       cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
       cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
 
-      // smooth camera 전환속도
-      // smoothedCameraPosition.lerp(cameraPosition, 0.5);
-
-      // state.camera.position.copy(smoothedCameraPosition);
       state.camera.position.copy(cameraPosition);
 
       // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
@@ -112,29 +141,49 @@ const Car = (props) => {
       cameraTarget.y += 0.25;
       state.camera.lookAt(cameraTarget);
     } 
+
+    /* Phases*/
+
+  /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
+  if(lapse===2
+    &&bodyPosition.x < startSpot.x + 1 && startSpot.x > startSpot.x - 1 
+    && bodyPosition.z < startSpot.z+ 10 && bodyPosition.z > startSpot.z-10){
+    end()
+    console.log("end")
+  }
+  /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
+  else if(isIn.every((elem)=>elem===true)
+          &&bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
+          && bodyPosition.z < startSpot.z+ 10 && bodyPosition.z > startSpot.z-10){
+    around()
+    
+    console.log("around")
+  }
+  else{
+    /* 체크포인트 지날 때 */
+    const newisIn = [false, false, false, false]
+    for(let i=0;i<4;i++){
+      newisIn[i] = bodyPosition.x < spot[i].x + 10 && bodyPosition.x > spot[i].x - 10 && bodyPosition.z < spot[i].z+ 10 && bodyPosition.z > spot[i].z-10
+      if(newisIn[0]){
+        inspot(0)
+        break
+      }
+      
+      if(isIn[i-1]===true&&newisIn[i]){
+        inspot(i)
+      }
+    }
+  } 
+  /* outspot 구현 예정
+      체크 포인트를 잘못된 방향으로 벗어났을때 true-> false */
   })
 
   useEffect(() => {
     let lastPosition = new THREE.Vector3(chassisApi.position.x, chassisApi.position.y, chassisApi.position.z);
     let lastQuaternion = new THREE.Vector4(chassisApi.quaternion._x,chassisApi.quaternion._y,chassisApi.quaternion._z,chassisApi.quaternion._w)
-    // let lastQuaternion = new THREE.Vector4(chassisApi.quaternion[0],chassisApi.quaternion[1],chassisApi.quaternion[2],chassisApi.quaternion[3])
 
     function updateAnotherPlayer(updateData){
       if(updateData.id === props.id) {
-        // const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
-        // const targetQuaternion = new THREE.Quaternion(updateData.rotation[0], updateData.rotation[1], updateData.rotation[2], updateData.rotation[3]);
-        
-        // // chassisApi.position.set(updateData.position.x, updateData.position.y, updateData.position.z);
-        // // chassisApi.quaternion.set(updateData.rotation[0], updateData.rotation[1], updateData.rotation[2], updateData.rotation[3]);
-        // // chassisApi.velocity.set(0, 0, 0); // Optional: Reset velocity if needed
-        // // chassisApi.angularVelocity.set(0, 0, 0); // Optional: Reset angular velocity if needed
-
-        // lastPosition.lerp(targetPosition, 0.5); // 두 번째 매개변수는 보간 강도입니다.
-        // chassisApi.position.copy(lastPosition);
-
-        // // 쿼터니언도 마찬가지로 보간합니다.
-        // lastQuaternion.lerp(targetQuaternion, 0.5);
-        // chassisApi.quaternion.copy(lastQuaternion);
 
         const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
         const targetQuaternion = new THREE.Quaternion(updateData.rotation[0], updateData.rotation[1], updateData.rotation[2], updateData.rotation[3]);
@@ -149,16 +198,32 @@ const Car = (props) => {
         
         // 이전 위치와 방향을 업데이트합니다.
         lastPosition.copy(newPosition);
-        lastQuaternion.copy(newQuaternion);
+        lastQuaternion.copy(newQuaternion);    
       }
     }
-
-    
-
     socket.on("updateAnotherPlayer", updateAnotherPlayer)
+
+    /* Phase */
+    const unsubscribeReset = useGame.subscribe(
+      (state) => state.phase,
+      (value) =>
+      {
+        if(value === 'ready')
+          reset()
+      }
+    )
+    const unsubscribeAny = subscribeKeys(
+      ()=>
+      {
+        start()
+      }
+    )
 
     return(() => {
       socket.off("updateAnotherPlayer", updateAnotherPlayer)
+      /* Phase */
+      unsubscribeReset()
+      unsubscribeAny()
     })
   })
 
