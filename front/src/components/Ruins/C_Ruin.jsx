@@ -7,22 +7,23 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import ColliderBox from '../../ColliderBox'
 
-export function Wall(props) {
+export function C_Wall(props) {
   const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
   const position = props.position || [0, 0, 0];
   const rotation = props.rotation || [0, 0, 0];
+  const scale = props.scale || [0, 0, 0];
   return (
-    <group {...props} dispose={null}>
-      <ColliderBox position={[position[0],position[1]+1, position[2]-0.11]} scale={[2, 0.29, 2]} rotation ={[rotation[0]-Math.PI/2, rotation[1], rotation[2]]}></ColliderBox>
-      <group  rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-        <mesh geometry={nodes.Wall_1.geometry} material={materials.Highlights} />
-        <mesh geometry={nodes.Wall_2.geometry} material={materials.Main} />
+    <group dispose={null} >
+      <ColliderBox scale={[scale[0]+2,scale[1]+0.29, scale[2]+2]} position={[position[0],position[1]+1, position[2]-0.11]} rotation ={[rotation[2]-Math.PI/2, rotation[0], rotation[1]]}></ColliderBox>
+      <group rotation={[rotation[2]-Math.PI / 2, rotation[0], rotation[1]]} scale={[100+scale[0], 100+scale[1], 100+scale[2]]} position={[position[0], position[1], position[2]]}>
+        <mesh geometry={nodes.Wall_1.geometry} material={materials.Highlights}/>
+        <mesh geometry={nodes.Wall_2.geometry} material={materials.Main}/>
       </group>
     </group>
   )
 }
 
-export function Floor(props) {
+export function C_Floor1(props) {
     const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
     return (
       <group {...props} dispose={null}>
@@ -35,7 +36,7 @@ export function Floor(props) {
     )
 }
 
-export function Floor2(props) {
+export function C_Floor2(props) {
     const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
     return (
       <group {...props} dispose={null}>
@@ -48,7 +49,7 @@ export function Floor2(props) {
     )
 }
 
-export function Floor3(props) {
+export function C_Floor3(props) {
   const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
   const position = props.position || [0, 0, 0];
 
