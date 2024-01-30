@@ -9,7 +9,7 @@ export default function Interface(){
     const time = useRef()
     const forward = useKeyboardControls((state)=>state.forward) 
     const backward = useKeyboardControls((state)=>state.backward)
-    const leftward = useKeyboardControls((state)=>state.leftrward)
+    const leftward = useKeyboardControls((state)=>state.leftward)
     const rightward = useKeyboardControls((state)=>state.rightward)
     const restart = useGame((state)=> state.restart)
     const phase = useGame((state)=> state.phase)
