@@ -14,8 +14,8 @@ export function C_Wall(props) {
   const scale = props.scale || [0, 0, 0];
   return (
     <group dispose={null} >
-      <ColliderBox scale={[scale[0]+2,scale[1]+0.29, scale[2]+2]} position={[position[0],position[1]+1, position[2]-0.11]} rotation ={[rotation[2]-Math.PI/2, rotation[0], rotation[1]]}></ColliderBox>
-      <group rotation={[rotation[2]-Math.PI / 2, rotation[0], rotation[1]]} scale={[100+scale[0], 100+scale[1], 100+scale[2]]} position={[position[0], position[1], position[2]]}>
+      <ColliderBox scale={[scale[0]+4,scale[1]+0.29, scale[2]+4]} position={[position[0],position[1]+2, position[2]+1]} rotation ={[rotation[2]-Math.PI/2, rotation[0], rotation[1]]}></ColliderBox>
+      <group rotation={[rotation[2]-Math.PI / 2, rotation[0], rotation[1]]} scale={[200+scale[0], 200+scale[1], 200+scale[2]]} position={[position[0], position[1], position[2]+1.5]}>
         <mesh geometry={nodes.Wall_1.geometry} material={materials.Highlights}/>
         <mesh geometry={nodes.Wall_2.geometry} material={materials.Main}/>
       </group>
@@ -27,8 +27,8 @@ export function C_Floor1(props) {
     const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
     return (
       <group {...props} dispose={null}>
-        <ColliderBox {...props} scale={[2, 0.29, 2]} rotation ={[0, 0, 0]}></ColliderBox>
-        <group position={[0, -0.03, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[100, 100, 5.973]}>
+        <ColliderBox {...props} scale={[4, 0.29, 4]} rotation ={[0, 0, 0]}></ColliderBox>
+        <group position={[0, -0.03, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[200, 200, 5.973]}>
             <mesh geometry={nodes.Floor_Standard_1.geometry} material={materials.Highlights} />
             <mesh geometry={nodes.Floor_Standard_2.geometry} material={materials.Main} />
       </group>
@@ -40,8 +40,8 @@ export function C_Floor2(props) {
     const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
     return (
       <group {...props} dispose={null}>
-        <ColliderBox {...props} scale={[2, 0.01, 2]}></ColliderBox>
-        <group position={[0, -0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 5.973]}>
+        <ColliderBox {...props} scale={[4, 0.01, 4]}></ColliderBox>
+        <group position={[0, -0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[200, 200, 5.973]}>
             <mesh geometry={nodes.Floor_Diamond_1.geometry} material={materials.Highlights} />
             <mesh geometry={nodes.Floor_Diamond_2.geometry} material={materials.Main} />
         </group>
@@ -56,8 +56,8 @@ export function C_Floor3(props) {
   return (
     <group {...props} dispose={null}>
       
-      <ColliderBox {...props} scale={[2, 0.01, 2]}/>
-      <group position={[0, -0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 5.973]}>
+      <ColliderBox {...props} scale={[4, 0.01, 4]}/>
+      <group position={[0, -0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[200, 200, 5.973]}>
           <mesh geometry={nodes.Floor_Squares_1.geometry} material={materials.Highlights} />
           <mesh geometry={nodes.Floor_Squares_2.geometry} material={materials.Main} />
       </group>

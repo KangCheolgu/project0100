@@ -6,7 +6,7 @@ import io from "socket.io-client"
 import { useState, useEffect, useRef, React } from "react";
 import { OrbitControls } from '@react-three/drei';
 import Interface from "./Interface"
-import Map from "./Map"
+import Map from "./Library"
 export const socket = io("http://localhost:5000")
 function Scene() {
   const defaultY = -0.3
