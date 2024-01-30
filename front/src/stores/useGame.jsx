@@ -80,7 +80,10 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
 
         Countdown: ()=>{
             set((state)=>{
-                return {count : state.count - 1}
+                if(state.count > 0)
+                    return {count : state.count - 1}
+                else
+                    return {count : state.count = 0}
             })
         }
     }

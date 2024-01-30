@@ -22,8 +22,9 @@ function Scene() {
   let Countdown = useGame((state)=> state.Countdown)
   var countIntervalRef = useRef(null)
   
+  //count값 바뀔 때마다 
   useEffect(()=>{
-    if (count === 0){
+    if (count <= 0){
       console.log("start")
       setState(true)
       clearInterval(countIntervalRef.current)
