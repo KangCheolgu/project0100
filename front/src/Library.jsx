@@ -5,6 +5,11 @@ import {C_Wall,C_Floor3, C_Floor2} from './components/Ruins/C_Ruin.jsx'
 import {YellowWall} from './components/Map/YellowWall.jsx'
 
 export default function Map(props){
+  const leftZoffset = Math.PI/2
+  const rightZoffset = -Math.PI/2
+
+  const position = props.position
+
     const generateXBasicAlley8 = (startX, endX, offsetY) => {
         const alleys = [];
         for (let x = startX; x <= endX; x += 4) {
@@ -29,25 +34,19 @@ export default function Map(props){
         return wallsX;
       };
       
-      const generateWallsZ = (startZ, endZ, offsetX) => {
+      const generateWallsZ = (startZ, endZ, offsetX, offset) => {
         const wallsZ = [];
-        for (let z = startZ; z <= endZ; z -= 4) {
-          wallsZ.push(<C_Wall key={`wall-${z}`} position={[offsetX, 0, z]} />);
+        for (let z = startZ; z <= endZ; z += 4) {
+          wallsZ.push(<C_Wall key={`wall-${z}`} position={[offsetX, 0, z]} rotation={[0, offset, 0]} />);
         }
         return wallsZ ;
       };
-      {/*const generateWallsZ = (startY, endY, offsetX) => {
-        const wallsX = [];
-        for (let z = startY; z <= endY; z += 2) {
-          wallsX.push(<C_Wall key={`wall-${z}`} position={[z, 0, offsetX]} />);
-        }
-        return wallsX;
-      };*/}
     
     return(<group {...props}>
         
       {/* Alley1 */}
       {generateXBasicAlley8(0, 8, 0)}
+
 
       <C_Wall position={[12, 0, 1]}/>
       {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
@@ -72,23 +71,8 @@ export default function Map(props){
       {generateWallsX(16, 26, -39)}
         
       {/* generateWallsZ */ }
-      <C_Wall position = {[-2, 0, -9]} rotation={[0, Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -13]} rotation={[0, Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -17]} rotation={[0, Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -21]} rotation={[0, Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -25]} rotation={[0, Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -29]} rotation={[0, Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -33]} rotation={[0, Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -37]} rotation={[0, Math.PI/2,0]}/>
-
-      <C_Wall position = {[26, 0, -9]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[26, 0, -13]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[26, 0, -17]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[26, 0, -21]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[26, 0, -25]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[26, 0, -29]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[26, 0, -33]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[26, 0, -37]} rotation={[0, -Math.PI/2,0]}/>
+      {generateWallsZ(-37, -9, -2, leftZoffset)}
+      {generateWallsZ(-37, -9, 26, rightZoffset)}
 
       {/*Alley2*/}
       <YBasicAlley4 position={[12, 0, -40]}/>
@@ -121,21 +105,9 @@ export default function Map(props){
       {generateWallsX(0, 16, -83)}      
 
       {/* generateWallZ */}
-      <C_Wall position = {[-2, 0, -57]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -61]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -65]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -69]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -73]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -77]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -81]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[-2, 0, -57]} rotation={[0, -Math.PI/2,0]}/>
-
-      <C_Wall position = {[18, 0, -57]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[18, 0, -61]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[18, 0, -65]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[18, 0, -69]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[18, 0, -73]} rotation={[0, -Math.PI/2,0]}/>
-      <C_Wall position = {[18, 0, -81]} rotation={[0, -Math.PI/2,0]}/>
+      {generateWallsZ(-81, -57, -2, leftZoffset)}
+      {generateWallsZ(-81, -78, 18, rightZoffset)}
+      {generateWallsZ(-73, -57, 18, rightZoffset)}
 
       {/* Alley3 */}
       {generateXBasicAlley8(20, 24, -76)}
@@ -149,22 +121,11 @@ export default function Map(props){
       {generateCFloor2(28, 36, -60)}
       {generateCFloor2(28, 36, -56)}
 
-      <C_Wall position={[26, 0, -82]} rotation={[0, Math.PI/2, 0]}/>
-      <C_Wall position={[26, 0, -74]} rotation={[0, Math.PI/2, 0]}/>
-      <C_Wall position={[26, 0, -70]} rotation={[0, Math.PI/2, 0]}/>
-      <C_Wall position={[26, 0, -66]} rotation={[0, Math.PI/2, 0]}/>
-      <C_Wall position={[26, 0, -62]} rotation={[0, Math.PI/2, 0]}/>
-      <C_Wall position={[26, 0, -58]} rotation={[0, Math.PI/2, 0]}/>
-
-      <C_Wall position={[38, 0, -82]} rotation={[0, -Math.PI/2, 0]}/>
-      <C_Wall position={[38, 0, -78]} rotation={[0, -Math.PI/2, 0]}/>
-      <C_Wall position={[38, 0, -74]} rotation={[0, -Math.PI/2, 0]}/>
-      <C_Wall position={[38, 0, -70]} rotation={[0, -Math.PI/2, 0]}/>
-      <C_Wall position={[38, 0, -66]} rotation={[0, -Math.PI/2, 0]}/>
-      <C_Wall position={[38, 0, -62]} rotation={[0, -Math.PI/2, 0]}/>
+      {generateWallsZ(-82, -79, 26, leftZoffset)}
+      {generateWallsZ(-74, -58, 26, leftZoffset)}
+      {generateWallsZ(-82, -62, 38, rightZoffset)}
 
       {generateWallsX(28, 36, -83.5)}
-      
       
       {/* Alley 4*/}
       
