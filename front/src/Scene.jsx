@@ -44,7 +44,8 @@ function Scene() {
 
     socket.on("clientCount", (numClient)=>{
       if (numClient === numPlayers){
-       startCountdown()
+        if(count > 0)
+          startCountdown()
       }
     })
     

@@ -49,7 +49,7 @@ export default function Interface(){
         {/* Time */}
         <div ref = { time } className="time">0.00</div>
         {/* Countdown */}
-        <div className="countdown" >{count}</div>
+        {count > 0 && <div className="countdown" >{count}</div>}
         {/* Restart */}
         {phase==='ended'?<div className="restart" onClick={restart}>Restart</div>:null}
         {/*<div className="restart" onClick={restart}>Restart</div>*/}
