@@ -11,7 +11,7 @@ export const socket = io("http://localhost:5000")
 function Scene() {
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
-  const [state, setState] = useState(false)
+  const [state, setState] = useState(true)
   let count = 3;
   useEffect(() => {
     function onPlayers(backEndPlayers){ 
@@ -43,10 +43,10 @@ function Scene() {
     <>
       <Canvas camera={{ fov:75, position:[1.5, 8, 4]}}>
         {/* <SocketManager /> */}
-        
+
         <OrbitControls makeDefault />
         <ambientLight/>
-        <directionalLight position={[0, 5, 5]} />
+        <directionalLight intensity={4} position={[0, 5, 5]} />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
             {
