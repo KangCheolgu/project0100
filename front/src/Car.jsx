@@ -11,24 +11,23 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 
 const Car = (props) => {
-
   // Quaternion, Position 인스턴스 생성
-  const worldPosition = useMemo(() => new Vector3(), [])
-  const worldQuaternion = useMemo(() => new THREE.Quaternion(), [])
+  const worldPosition = useMemo(() => new Vector3(), []);
+  const worldQuaternion = useMemo(() => new THREE.Quaternion(), []);
 
   const chassisBodyValue = useControls('chassisBody', {
     width: { value: 0.16, min: 0, max: 1, },
     height: { value: 0.12, min: 0, max: 1, },
     front: { value: 0.17, min: 0, max: 1, },
-  })
+  });
 
-  // const [rotation, setRotation] = useState();
   const [quaternion, setQuaternion] = useState();
+
   // 위치 값
   useEffect(() => {
-    setPosition(props.position)
-    setQuaternion(props.rotation)
-  }, [])
+    setPosition(props.position);
+    setQuaternion(props.rotation);
+  }, []);
 
   let width, height, front, mass, wheelRadius;
 
@@ -53,7 +52,7 @@ const Car = (props) => {
   const chassisBodyArgs = [width, height, front * 2];
   const [position, setPosition] = useState();
   const [chassisBody, chassisApi] = useCompoundBody(() => ({
-    position: initialPosition, // 랜덤 초기 위치 사용
+    position: initialPosition,
     mass: mass,
     rotation: [0, 0, 0, 0],
     shapes: [
@@ -81,45 +80,76 @@ const Car = (props) => {
     useRef(null),
   );
 
-  useVehicleControls(vehicleApi, chassisApi, props.id, props.state)
+  useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
 
   const [smoothedCameraPosition] = useState(
     () => new THREE.Vector3(10, 10, 10)
   );
-  const [smoothedCameraTarget] = useState(() => new THREE.Vector3());
+  const [smoothedCameraRotation] = useState(
+    () => new THREE.Quaternion()
+  );
+  const [carVelocity, setCarVelocity] = useState(new THREE.Vector3());
 
+  // // Back-View 카메라
+  // useFrame((state, delta) => {
+  //   if (socket.id === props.id) {
 
-  // Back-View 카메라
+  //     const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+  //     const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
+
+  //     // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
+  //     const relativeCameraPosition = new THREE.Vector3(0, 0.7, 0.65);
+
+  //     // 카메라의 전역 위치 계산
+  //     const cameraPosition = new THREE.Vector3();
+  //     cameraPosition.copy(relativeCameraPosition);
+  //     cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
+  //     cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
+
+  //     // smooth camera 전환속도
+  //     smoothedCameraPosition.lerp(cameraPosition, 0.5);
+
+  //     state.camera.position.copy(smoothedCameraPosition);
+  //     // state.camera.position.copy(cameraPositin);
+
+  //     // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
+  //     const cameraTarget = new THREE.Vector3();
+  //     cameraTarget.copy(bodyPosition);
+  //     cameraTarget.y += 0.25;
+  //     state.camera.lookAt(cameraTarget);
+  //   }
+  // })
+
+  // back-vie 카메라 수정중
   useFrame((state, delta) => {
     if (socket.id === props.id) {
-
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
-      // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
       const relativeCameraPosition = new THREE.Vector3(0, 0.7, 0.65);
-
-      // 카메라의 전역 위치 계산
       const cameraPosition = new THREE.Vector3();
       cameraPosition.copy(relativeCameraPosition);
-      cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
-      cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
+      cameraPosition.applyQuaternion(bodyRotation);
+      cameraPosition.add(bodyPosition);
 
-      // smooth camera 전환속도
-      smoothedCameraPosition.lerp(cameraPosition, 0.5);
+      const dampingFactor = Math.min(Math.max(carVelocity.length() * 0.1, 0.5), 0.8);
+
+      const delta = 0.5;
+      smoothedCameraPosition.lerp(cameraPosition, dampingFactor * delta);
+      const desiredRotation = new THREE.Quaternion(); // 원하는 회전 계산 필요
+      smoothedCameraRotation.slerp(desiredRotation, dampingFactor * delta);
 
       state.camera.position.copy(smoothedCameraPosition);
-      // state.camera.position.copy(cameraPositin);
+      state.camera.quaternion.copy(smoothedCameraRotation);
 
-      // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
       const cameraTarget = new THREE.Vector3();
       cameraTarget.copy(bodyPosition);
       cameraTarget.y += 0.25;
       state.camera.lookAt(cameraTarget);
     }
-  })
+  });
 
-    useEffect(() => {
+  useEffect(() => {
     let lastPosition = new THREE.Vector3(chassisApi.position.x, chassisApi.position.y, chassisApi.position.z);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
 
@@ -202,6 +232,8 @@ const Car = (props) => {
           velocity: newVelocity.clone(),
           acceleration: newAcceleration.clone(),
         };
+
+        setCarVelocity(newVelocity.clone()); // 속도 상태 업데이트
 
         const currentState = {
           id: socket.id,
