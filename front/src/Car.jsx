@@ -26,26 +26,27 @@ const Car = (props) => {
 
   // const [position, setPosition] = useState();
   // const [quaternion, setQuaternion] = useState();
-  let position = [0, 0.1 ,0];
-  let rotation = null;
+  let position = props.position;
+  let rotation = [0, -Math.PI/2, 0];
+  const playerNum = props.index
 
+  if(playerNum === 0) {
+    position = props.position;
+  } 
+  else if (playerNum === 1) {
+    position = props.position;
+  }
   // 위치 값
-  useEffect(() => {
-    const playerNum = props.index
-    // console.log(playerNum);
-
-    if(playerNum === 0) {
-      console.log("playerNum 0 맞습니다.");
-      chassisApi.position.set(0, 0.1, -0.5);
-      rotation =  [0, -3.14, -3.14, 0]
-    } 
-    else if (playerNum === 1) {
-      console.log("playerNum 1 맞습니다.");
-
-      chassisApi.position.set(0, 0.1, 0.5);
-      rotation = props.rotation
-    }
-  },[])
+  // useEffect(() => {
+  //   const playerNum = props.index
+  //   // console.log(playerNum);
+  //   if(playerNum === 0) {
+  //     let position = props.position;
+  //   } 
+  //   else if (playerNum === 1) {
+  //     let position = props.position;
+  //   }
+  // },[])
 
   let width, height, front, mass, wheelRadius;
 
@@ -55,24 +56,15 @@ const Car = (props) => {
   wheelRadius = 0.05;
   mass = 150;
 
-  // 랜덤 위치 생성 함수
-  const randomPosition = () => {
-    return [
-      Math.random() * 10 - 5, // X 축
-      0.1,                    // Y 축 (지면 위에 위치)
-      Math.random() * 10 - 5  // Z 축
-    ];
-  };
-
   const chassisBodyArgs = [width, height, front * 2];
   const startEuler = new THREE.Euler(0, -Math.PI/2, 0, 'XYZ');
   const startQuaternion = new THREE.Quaternion();
   startQuaternion.setFromEuler(startEuler);
   const [chassisBody, chassisApi] = useCompoundBody(
     () => ({
-      position : [-40, 0, 39],
+      position,
       mass: mass,
-      rotation: [0, -Math.PI/2, 0],
+      rotation,
       shapes: [
         {
           args: chassisBodyArgs,
@@ -110,71 +102,37 @@ const Car = (props) => {
   );
   const [carVelocity, setCarVelocity] = useState(new THREE.Vector3());
 
-  // // Back-View 카메라
-  // useFrame((state, delta) => {
-  //   if (socket.id === props.id) {
-
-  //     const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-  //     const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
-
-  //     // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-  //     const relativeCameraPosition = new THREE.Vector3(0, 0.7, 0.65);
-
-  //     // 카메라의 전역 위치 계산
-  //     const cameraPosition = new THREE.Vector3();
-  //     cameraPosition.copy(relativeCameraPosition);
-  //     cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
-  //     cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
-
-  //     // smooth camera 전환속도
-  //     smoothedCameraPosition.lerp(cameraPosition, 0.5);
-
-  //     state.camera.position.copy(smoothedCameraPosition);
-  //     // state.camera.position.copy(cameraPositin);
-
-  //     // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
-  //     const cameraTarget = new THREE.Vector3();
-  //     cameraTarget.copy(bodyPosition);
-  //     cameraTarget.y += 0.25;
-  //     state.camera.lookAt(cameraTarget);
-  //   }
-  // })
-
-  // back-vie 카메라 수정중
-  useFrame((state, delta) => {
+   // Back-View 카메라
+   useFrame((state, delta) => {
     if (socket.id === props.id) {
+
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
+      const relativeCameraPosition = new THREE.Vector3(0, 0.7, 0.65);
 
       // 카메라의 전역 위치 계산
-      // const relativeCameraPosition = new THREE.Vector3(0, 0.7, 0.65);
-
       const cameraPosition = new THREE.Vector3();
       cameraPosition.copy(relativeCameraPosition);
-      cameraPosition.applyQuaternion(bodyRotation);
-      cameraPosition.add(bodyPosition);
+      cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
+      cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
 
-      const dampingFactor = Math.min(Math.max(carVelocity.length() * 0.1, 0.5), 0.8);
+      // smooth camera 전환속도
+      smoothedCameraPosition.lerp(cameraPosition, 0.5);
 
-      const delta = 0.5;
-      smoothedCameraPosition.lerp(cameraPosition, dampingFactor * delta);
-      const desiredRotation = new THREE.Quaternion(); // 원하는 회전 계산 필요
-      smoothedCameraRotation.slerp(desiredRotation, dampingFactor * delta);
+      // state.camera.position.copy(smoothedCameraPosition);
+      state.camera.position.copy(cameraPosition);
 
-      state.camera.position.copy(smoothedCameraPosition);
-      state.camera.quaternion.copy(smoothedCameraRotation);
-
+      // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
       const cameraTarget = new THREE.Vector3();
       cameraTarget.copy(bodyPosition);
       cameraTarget.y += 0.25;
       state.camera.lookAt(cameraTarget);
     }
-  });
+  })
 
-  useEffect(() => {
+    useEffect(() => {
     let lastPosition = new THREE.Vector3(chassisApi.position.x, chassisApi.position.y, chassisApi.position.z);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
 
@@ -194,7 +152,7 @@ const Car = (props) => {
         extrapolatedPosition.add(targetAcceleration.clone().multiplyScalar(0.5 * Math.pow(adjustedDelta, 2)));
 
         // extrapolation을 한 포지션과 이전 위치를 interpolation
-        const lerpFactor = 0.6; // Interpolation strength
+        const lerpFactor = 0.4; // Interpolation strength
         lastPosition.lerp(extrapolatedPosition, lerpFactor);
         chassisApi.position.copy(lastPosition);
 
@@ -239,7 +197,7 @@ const Car = (props) => {
 
     useInterval(() => {
       if (socket.id === props.id) {
-        const delta = 0.05; // 100ms expressed in seconds
+        const delta = 1; // 100ms expressed in seconds
         const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
         const bodyQuaternion = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
@@ -258,8 +216,6 @@ const Car = (props) => {
           acceleration: newAcceleration.clone(),
         };
 
-        setCarVelocity(newVelocity.clone()); // 속도 상태 업데이트
-
         const currentState = {
           id: socket.id,
           position: bodyPosition,
@@ -271,6 +227,7 @@ const Car = (props) => {
       }
     }, 30);
   };
+
 
   return (
       <group ref={vehicle}>

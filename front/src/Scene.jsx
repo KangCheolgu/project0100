@@ -67,12 +67,12 @@ function Scene() {
       <Interface/>
 
       <Canvas camera={{ fov:75, position:[1.5, 8, 4]}}>
-        {/* <SocketManager /> */}
         <ambientLight/>
         <directionalLight intensity={5} position={[0, 5, 5]} />
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
+            {/* <Ground /> */}
             <Library position={[-40, 0, 39]}/>
             <Castle/>
             {
