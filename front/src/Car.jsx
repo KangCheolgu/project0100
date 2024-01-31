@@ -61,13 +61,9 @@ const Car = (props) => {
     ];
   };
 
-  // 랜덤 초기 위치 설정
-  const [initialPosition] = useState(randomPosition());
-
   const chassisBodyArgs = [width, height, front * 2];
-  const [position, setPosition] = useState();
   const [chassisBody, chassisApi] = useCompoundBody(() => ({
-    position: initialPosition,
+    position: position,
     mass: mass,
     rotation: [0, 0, 0, 0],
     shapes: [
