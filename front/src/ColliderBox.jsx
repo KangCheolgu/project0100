@@ -1,6 +1,9 @@
 import {useBox} from '@react-three/cannon';
 
-export default function ColliderBox({position, scale, rotation}){
+export default function ColliderBox(props){
+    const position = props.position
+    const rotation = props.rotation
+    const scale = props.scale
     useBox(()=>({
         args:scale,
         position,
@@ -11,7 +14,7 @@ export default function ColliderBox({position, scale, rotation}){
     return (
         <mesh position={position} rotation={rotation}>
             <boxGeometry args={scale}/>
-            <meshBasicMaterial transparent={true} opacity={0.25}/>
+            <meshBasicMaterial transparent={true} opacity={0}/>
         </mesh>
     )
 }
