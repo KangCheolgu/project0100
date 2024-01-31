@@ -34,7 +34,7 @@ const Car = (props) => {
     if(playerNum === 0) {
       console.log("playerNum 0 맞습니다.");
       chassisApi.position.set(0, 0.1, -0.5);
-      rotation = (props.rotation)
+      rotation =  [0, -3.14, -3.14, 0]
     } 
     else if (playerNum === 1) {
       console.log("playerNum 1 맞습니다.");

@@ -50,6 +50,8 @@ export default function Interface(){
         <div ref = { time } className="time">0.00</div>
         {/* Countdown */}
         {count > 0 && count < 4 && <div className="countdown" >{count}</div>}
+        {/* raceStart */}
+        {count <=0 && count > -2 && <div className="countdown" ><h1>Start</h1></div>}
         {/* Restart */}
         {phase==='ended'?<div className="restart" onClick={restart}>Restart</div>:null}
         {/*<div className="restart" onClick={restart}>Restart</div>*/}

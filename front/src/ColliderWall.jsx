@@ -3,13 +3,14 @@ import * as THREE from 'three'
 import { useBox } from "@react-three/cannon";
 import ColliderBox from './ColliderBox'
 
-export default function Wall(){
+export default function Wall(props){
     const wallGeometry = new THREE.BoxGeometry(1, 1, 1)
     const wallMaterial = new THREE.MeshStandardMaterial({color: "brown"})
     // const [meshRef] = useBox(
     //     () => ({ mass: 1, type: 'Static'}),
     //  )
-    return (<>
+    return (
+    <group rotation={props.rotation}>
         {/* 동 */}
         <ColliderBox position = {[-28, 10, 3.57]} scale = {[100, 1, 20]} rotation={[Math.PI/2, 0, 0]}></ColliderBox>
         <ColliderBox position = {[-25, 10, -3.57]} scale = {[120, 1, 20]} rotation={[Math.PI/2, 0, 0]}></ColliderBox>
@@ -41,5 +42,6 @@ export default function Wall(){
         <mesh ref={meshRef} geometry = {wallGeometry} position={[28.5, 10, 40]} scale={[20, 1, 20]} material = {wallMaterial} rotation={[Math.PI/2, 0, -Math.PI/4]}/>
         <mesh ref={meshRef} geometry = {wallGeometry} position={[-83.5, 10, 0]} scale={[20, 1, 20]} material = {wallMaterial} rotation={[-Math.PI/2, 0, Math.PI/4]}/>
         <mesh ref={meshRef} geometry = {wallGeometry} position={[-83.5, 10, 40]} scale={[20, 1, 20]} material = {wallMaterial} rotation={[Math.PI/2, 0, Math.PI/4]}/> */}
-    </>)
+    </group>
+    )
 }
