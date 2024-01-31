@@ -7,7 +7,7 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function RedCarpet(props) {
-  const { nodes, materials } = useGLTF('/assets/models/RedCarpet.glb')
+  const { nodes, materials } = useGLTF('/assets/models/Red_Carpet.glb')
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.carpet1.geometry} material={materials['castle.003']} rotation={[Math.PI / 2, 0, 0]} scale={[0.03, 0.007, 0.01]} />
@@ -15,4 +15,4 @@ export function RedCarpet(props) {
   )
 }
 
-useGLTF.preload('/assets/models/RedCarpet.glb')
+useGLTF.preload('/assets/models/Red_Carpet.glb')

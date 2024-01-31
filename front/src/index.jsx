@@ -13,7 +13,7 @@ root.render(
         {name: 'leftward', keys:['ArrowLeft', 'KeyA']},
         {name: 'rightward', keys:['ArrowRight', 'KeyD']},
         {name: 'jump', keys:['Space']}
-      ] }
+      ] } 
   >
     <Scene />
   </KeyboardControls>
