@@ -10,7 +10,16 @@ export function RedCarpet(props) {
   const { nodes, materials } = useGLTF('/assets/models/redCarpet_fix.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.carpet1.geometry} material={materials['castle.003']} rotation={[Math.PI / 2, 0, 0]} scale={[0.05, 0.01, 0.01]} />
+      <mesh geometry={nodes.carpet1.geometry} material={materials['castle.003']} rotation={[Math.PI / 2, 0, 0]} scale={[0.048, 0.01, 0.01]} />
+    </group>
+  )
+}
+
+export function RedCarpet1(props) {
+  const { nodes, materials } = useGLTF('/assets/models/redCarpet_fix.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.carpet1.geometry} material={materials['castle.003']} rotation={[Math.PI / 2, 0, -Math.PI / 2]} scale={[0.04, 0.01, 0.01]} />
     </group>
   )
 }
