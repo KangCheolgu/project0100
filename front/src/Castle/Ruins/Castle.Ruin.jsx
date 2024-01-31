@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import ColliderBox from '../../Map/ColliderBox';
+import ColliderBox from '../../Castle/ColliderBox';
 
 export function Wall(props) { // 큰 세로벽
   const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')

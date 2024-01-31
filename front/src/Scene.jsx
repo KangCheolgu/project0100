@@ -4,7 +4,7 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React } from "react";
-import Castle from "./Map/Castle";
+import Castle from "./Castle/Castle";
 import { OrbitControls } from '@react-three/drei'
 
 export const socket = io("http://localhost:5000")
