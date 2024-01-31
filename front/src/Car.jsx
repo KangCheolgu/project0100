@@ -27,15 +27,9 @@ const Car = (props) => {
   // const [position, setPosition] = useState();
   // const [quaternion, setQuaternion] = useState();
   let position = props.position;
-  let rotation = [0, -Math.PI/2, 0];
+  let rotation = [0, 0, 0];
   const playerNum = props.index
 
-  if(playerNum === 0) {
-    position = props.position;
-  } 
-  else if (playerNum === 1) {
-    position = props.position;
-  }
   // 위치 값
   // useEffect(() => {
   //   const playerNum = props.index
@@ -110,7 +104,7 @@ const Car = (props) => {
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.7, 0.65);
+      const relativeCameraPosition = new THREE.Vector3(0, 0.4, 0.65);
 
       // 카메라의 전역 위치 계산
       const cameraPosition = new THREE.Vector3();
@@ -200,7 +194,6 @@ const Car = (props) => {
         const delta = 1; // 100ms expressed in seconds
         const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
         const bodyQuaternion = chassisBody.current.getWorldQuaternion(worldQuaternion);
-
         // 속도 계산
         const newVelocity = new THREE.Vector3();
         newVelocity.subVectors(bodyPosition, lastState.current.position).divideScalar(delta);

@@ -12,13 +12,22 @@ const backEndPlayers = {}
 var numClients = 2
 
 io.on("connection", (socket)=>{
+
   console.log(`${socket.id} user connect`)
-  
+
+  let position;
+
   // 접속시 socket.id
+  if(Object.keys(backEndPlayers).length === 0){
+    position = [-29, 0.3, 39]
+  } else {
+    position = [-27, 0.3, 38]
+  }
+  
   backEndPlayers[socket.id] = {
     id: socket.id,
-    position: [0, 0.1, 0],
-    rotation: [0, Math.PI, 0],
+    position: position,
+    rotation: [0, 0, 0],
     color: `hsl(${360 * Math.random()}, 100%, 50%)`
   }
   console.log(backEndPlayers);
@@ -44,6 +53,7 @@ io.on("connection", (socket)=>{
   socket.on('disconnect', (reason) => {
     console.log(reason)
     delete backEndPlayers[socket.id]
+    console.log(backEndPlayers);
     io.emit('updatePlayers', backEndPlayers)
   })
 

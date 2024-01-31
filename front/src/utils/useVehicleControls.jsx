@@ -10,7 +10,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
             setControls((controls) => ({ 
                 ...controls, [e.key]: true 
             }));
-            console.log('Down',e.code)
+            // console.log('Down',e.code)
         }
     }
 
@@ -18,7 +18,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
         setControls((controls) => ({ 
             ...controls, [e.key]: false,
         }));
-        console.log('Up',e.code)
+        // console.log('Up',e.code)
     }
 
     useEffect(()=>{
