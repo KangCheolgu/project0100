@@ -10,6 +10,7 @@ import Interface from "./Interface"
 import Library from "./components/library/Library.jsx"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
+import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
 
 export const socket = io("http://localhost:5000")
 
@@ -74,6 +75,7 @@ function Scene() {
           <Debug>
             {/* <Ground /> */}
             <Library position={[-40, 0, 39]}/>
+            {/* 물음표박스 장애물 */}
             <Castle/>
             {
               players.map((player, index) => (
