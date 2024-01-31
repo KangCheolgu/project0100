@@ -6,7 +6,6 @@ import { KeyboardControls } from '@react-three/drei';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
   <KeyboardControls
       map={[
         {name: 'forward', keys:['ArrowUp', 'KeyW']},
@@ -18,5 +17,4 @@ root.render(
   >
     <Scene />
   </KeyboardControls>
-</React.StrictMode>
 );

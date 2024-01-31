@@ -9,6 +9,7 @@ const io = new Server({
 io.listen(5000)
 
 const backEndPlayers = {}
+var numClients = 2
 
 io.on("connection", (socket)=>{
   console.log(`${socket.id} user connect`)
@@ -21,6 +22,13 @@ io.on("connection", (socket)=>{
     color: `hsl(${360 * Math.random()}, 100%, 50%)`
   }
   console.log(backEndPlayers);
+
+  //원하는 클라이언트 수와 배열 수 같으면 게임 시작
+  if(Object.keys(backEndPlayers).length === numClients){
+    io.emit("clientCount", Object.keys(backEndPlayers).length)
+  }
+
+
   socket.emit("hello")
   // new player update
   io.emit('updatePlayers', backEndPlayers);
