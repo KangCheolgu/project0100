@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.2.16 public/assets/models/YellowWall.glb -o src/component
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import ColliderBox from '../../ColliderBox'
+import ColliderBox from '../../../ColliderBox'
 
 export function YellowWall(props) {
   const { nodes, materials } = useGLTF('/assets/models/YellowWall.glb')

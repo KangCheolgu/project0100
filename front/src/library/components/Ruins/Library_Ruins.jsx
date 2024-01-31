@@ -59,6 +59,21 @@ export function Floor3(props) {
   )
 }
 
+export function OvergrownWall(props){
+  const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
+  const position = props.position || [0, 0, 0];
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={200}>
+        <mesh geometry={nodes.Wall_Overgrown_1.geometry} material={materials.Highlights} />
+        <mesh geometry={nodes.Wall_Overgrown_2.geometry} material={materials.Main} />
+        <mesh geometry={nodes.Wall_Overgrown_3.geometry} material={materials.Green} />
+        <mesh geometry={nodes.Wall_Overgrown_4.geometry} material={materials.Leaf_Texture} />
+      </group>
+    </group>
+  )
+}
+
 export function Model(props) {
   const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
 
@@ -86,12 +101,7 @@ export function Model(props) {
         <mesh geometry={nodes.Floor_Tree_3.geometry} material={materials.Main2} />
         <mesh geometry={nodes.Floor_Tree_4.geometry} material={materials.Dirt} />
       </group>
-      <group position={[15.939, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-        <mesh geometry={nodes.Wall_Overgrown_1.geometry} material={materials.Highlights} />
-        <mesh geometry={nodes.Wall_Overgrown_2.geometry} material={materials.Main} />
-        <mesh geometry={nodes.Wall_Overgrown_3.geometry} material={materials.Green} />
-        <mesh geometry={nodes.Wall_Overgrown_4.geometry} material={materials.Leaf_Texture} />
-      </group>
+      
       <group position={[19.219, 0, 0]} rotation={[Math.PI, 0, 0]} scale={[100, 100, 5.973]}>
         <mesh geometry={nodes.Window_Open_1.geometry} material={materials.Highlights} />
         <mesh geometry={nodes.Window_Open_2.geometry} material={materials.Main} />

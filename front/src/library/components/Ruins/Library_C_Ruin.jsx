@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.2.16 public/assets/models/ModularRuinsPack.glb -o src/com
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import ColliderBox from '../../ColliderBox'
+import ColliderBox from '../../../ColliderBox'
 
 export function C_Wall(props) {
   const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')

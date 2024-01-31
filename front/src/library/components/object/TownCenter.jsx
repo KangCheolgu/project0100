@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.16 public/assets/models/TownCenter.glb -o src/component
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function TownCenter(props) {
+export default function TownCenter(props) {
   const { nodes, materials } = useGLTF('/assets/models/TownCenter.glb')
   return (
     <group {...props} dispose={null}>
