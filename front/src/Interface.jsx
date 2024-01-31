@@ -4,15 +4,18 @@ import * as THREE from 'three'
 import { useKeyboardControls } from '@react-three/drei'
 import {addEffect} from '@react-three/fiber'
 import useGame from './stores/useGame'
+import Scene from './Scene'
 export default function Interface(){
     const lapse = useRef()
     const time = useRef()
     const forward = useKeyboardControls((state)=>state.forward) 
     const backward = useKeyboardControls((state)=>state.backward)
-    const leftward = useKeyboardControls((state)=>state.leftrward)
+    const leftward = useKeyboardControls((state)=>state.leftward)
     const rightward = useKeyboardControls((state)=>state.rightward)
     const restart = useGame((state)=> state.restart)
     const phase = useGame((state)=> state.phase)
+    let count = useGame((state)=> state.count)
+
 
     useEffect(()=>
     {
@@ -38,11 +41,17 @@ export default function Interface(){
         }
     }, [])
     const controls = useKeyboardControls((state)=>state)
+
+
     return <div className="interface">
         {/* lapse */}
         <div ref={lapse} className ="lapse">0/2</div>
         {/* Time */}
         <div ref = { time } className="time">0.00</div>
+        {/* Countdown */}
+        {count > 0 && count < 4 && <div className="countdown" >{count}</div>}
+        {/* raceStart */}
+        {count <=0 && count > -2 && <div className="countdown" ><h1>Start</h1></div>}
         {/* Restart */}
         {phase==='ended'?<div className="restart" onClick={restart}>Restart</div>:null}
         {/*<div className="restart" onClick={restart}>Restart</div>*/}

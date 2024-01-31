@@ -9,44 +9,63 @@ import { OrbitControls } from '@react-three/drei';
 import Interface from "./Interface"
 import Library from "./components/library/Library.jsx"
 import {Ground} from "./Ground.jsx"
+import useGame from "./stores/useGame.jsx";
 
 export const socket = io("http://localhost:5000")
+
 function Scene() {
   const defaultY = -0.3
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
-  const [state, setState] = useState(true)
-  let count = 3;
+
+  const [state, setState] = useState(false)
+  let numPlayers = 2
+  let count = useGame((state)=> state.count)
+  let Countdown = useGame((state)=> state.Countdown)
+  var countIntervalRef = useRef(null)
+  
+  //count값 바뀔 때마다 
+  useEffect(()=>{
+    if (count === 0){
+      setState(true)
+      //count 가 -2 가 되면 Start 문자가 사라지게
+    } else if (count === -2) {
+      clearInterval(countIntervalRef.current)
+    }
+  },[count])
+
+  const startCountdown = ()=>{
+   countIntervalRef.current = setInterval(()=>{
+      Countdown()
+    }, 1000)
+  }
+  
   useEffect(() => {
+    // 접속한 유저 목록 갱신
     function onPlayers(backEndPlayers){ 
       const playersArray = Object.values(backEndPlayers);
       setPlayers(playersArray)
     }
 
-    let countdown = setInterval(() => {
-      
-      if(count === 0) {
-        console.log("start");
-        setState(true)
-        clearInterval(countdown)
+    // 내가 설정한 최대 인원 숫자와 현재 인원이 같으면 카운트다운
+    socket.on("clientCount", (numClient)=>{
+      if (numClient === numPlayers){
+        if(count > -3)
+          startCountdown()
       }
-      else {
-        console.log(count);
-        count -= 1;
-      }
-    }, 1000);
+    })
     
     socket.on("updatePlayers", onPlayers)
 
     return (() => {
       socket.off("updatePlayers", onPlayers);
     })
-  },[]) 
+  },[])
 
   return (
     <>
       <Interface/>
-      
+
       <Canvas camera={{ fov:75, position:[1.5, 8, 4]}}>
         {/* <SocketManager /> */}
         <ambientLight/>
@@ -54,13 +73,13 @@ function Scene() {
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
-            {/*
-              players.map((player) => (
-                  <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state}/>
-              ))
-              */} 
             <Library position={[-40, 0, 39]}/>
             <Castle/>
+            {
+              players.map((player, index) => (
+                  <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
+              ))
+            } 
           </Debug>
         </Physics>
       </Canvas>

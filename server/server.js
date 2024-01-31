@@ -9,6 +9,7 @@ const io = new Server({
 io.listen(5000)
 
 const backEndPlayers = {}
+var numClients = 2
 
 io.on("connection", (socket)=>{
   console.log(`${socket.id} user connect`)
@@ -21,6 +22,13 @@ io.on("connection", (socket)=>{
     color: `hsl(${360 * Math.random()}, 100%, 50%)`
   }
   console.log(backEndPlayers);
+
+  //원하는 클라이언트 수와 배열 수 같으면 게임 시작
+  if(Object.keys(backEndPlayers).length === numClients){
+    io.emit("clientCount", Object.keys(backEndPlayers).length)
+  }
+
+
   socket.emit("hello")
   // new player update
   io.emit('updatePlayers', backEndPlayers);
@@ -32,27 +40,6 @@ io.on("connection", (socket)=>{
     // io.emit('updateAnotherPlayer', "data")
   })
 
-  // 자신의 키다운 이벤트를 상대에게 
-  socket.on('keydown', ({ keycode, sequenceNumber }) => {
-    backEndPlayers[socket.id].sequenceNumber = sequenceNumber
-    switch (keycode) {
-      case 'KeyW':
-        console.log("상대가 w 누름");
-        break
-
-      case 'KeyA':
-        console.log("상대가 a 누름");
-        break
-
-      case 'KeyS':
-        console.log("상대가 a 누름");
-        break
-
-      case 'KeyD':
-        console.log("상대가 a 누름");
-        break
-    }
-  })
   // 접속 해제시 
   socket.on('disconnect', (reason) => {
     console.log(reason)
