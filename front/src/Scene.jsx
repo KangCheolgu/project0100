@@ -6,7 +6,7 @@ import io from "socket.io-client"
 import { useState, useEffect, useRef, React } from "react";
 import { OrbitControls } from '@react-three/drei';
 import Interface from "./Interface"
-import Map from "./Library"
+import Library from "./Library"
 export const socket = io("http://localhost:5000")
 function Scene() {
   const defaultY = -0.3
@@ -56,9 +56,7 @@ function Scene() {
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state}/>
               ))
               */}
-            <Map/> 
-            
-            
+            <Library position={[40, 0, 0]}/>
           </Debug>
         </Physics>
       </Canvas>
