@@ -18,11 +18,11 @@ const Car = (props) => {
   const worldPosition = useMemo(() => new Vector3(), []);
   const worldQuaternion = useMemo(() => new THREE.Quaternion(), []);
 
-  const chassisBodyValue = useControls('chassisBody', {
-    width: { value: 0.16, min: 0, max: 1, },
-    height: { value: 0.12, min: 0, max: 1, },
-    front: { value: 0.17, min: 0, max: 1, },
-  })
+  // const chassisBodyValue = useControls('chassisBody', {
+  //   width: { value: 0.16, min: 0, max: 1, },
+  //   height: { value: 0.12, min: 0, max: 1, },
+  //   front: { value: 0.17, min: 0, max: 1, },
+  // })
 
   // const [position, setPosition] = useState();
   // const [quaternion, setQuaternion] = useState();
