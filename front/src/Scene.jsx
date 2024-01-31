@@ -4,7 +4,7 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React } from "react";
-import Map from "./Map/Map";
+import Castle from "./Map/Castle";
 import { OrbitControls } from '@react-three/drei'
 
 export const socket = io("http://localhost:5000")
@@ -46,7 +46,7 @@ function Scene() {
 
         <OrbitControls makeDefault />
         <ambientLight/>
-        <directionalLight intensity={4} position={[0, 5, 5]} />
+        <directionalLight intensity={5} position={[0, 5, 5]} />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
             {
@@ -54,7 +54,7 @@ function Scene() {
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state}/>
               ))
             } 
-            <Map/>
+            <Castle />
           </Debug>
         </Physics>
       </Canvas>

@@ -87,21 +87,37 @@ export function Floor2(props) {
     )
 }
 
+// export function Floor7(props) { // 큰바닥
+//   const { nodes, materials } = useGLTF('/assets/models/Royalboard.glb')
+//   const position = props.position || [0, 0, 0];
+
+//   return (
+//     <group {...props} dispose={null}>
+      
+//       <ColliderBox {...props} scale={[4, 0.01, 4]}/>
+//       <group position={[0, -0.03, 0]} rotation={[0, 0, 0]} scale={[7, 1, 5]}>
+//         <mesh geometry={nodes.cuttingBoard_1.geometry} material={materials.brownLight} />
+//         <mesh geometry={nodes.cuttingBoard_1_1.geometry} material={materials.brown} />
+//       </group>
+//     </group>
+//   )
+// }
+
 export function Floor3(props) { // 큰바닥
-  const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
+  const { nodes, materials } = useGLTF('/assets/models/stoneFloor.glb')
   const position = props.position || [0, 0, 0];
 
   return (
     <group {...props} dispose={null}>
       
       <ColliderBox {...props} scale={[4, 0.01, 4]}/>
-      <group position={[0, -0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[200, 200, 5.973]}>
-          <mesh geometry={nodes.Floor_Squares_1.geometry} material={materials.Highlights} />
-          <mesh geometry={nodes.Floor_Squares_2.geometry} material={materials.Main} />
+      <group rotation={[Math.PI / 2, 0, 0]} scale={[0.01, 0.01, 0.01]}>
+        <mesh geometry={nodes.FloorTIle.geometry} material={materials['Stone_Floor.003']} />
       </group>
     </group>
   )
 }
+
 
 export function Floor4(props) { // 큰바닥( 천장 )
   const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
@@ -120,36 +136,36 @@ export function Floor4(props) { // 큰바닥( 천장 )
 }
 
 export function Floor5(props) { // 큰 방바닥
-  const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
+  const { nodes, materials } = useGLTF('/assets/models/Royalboard.glb')
   const position = props.position || [0, 0, 0];
 
   return (
     <group {...props} dispose={null}>
       
       <ColliderBox {...props} scale={[48, 0.01, 24]}/>
-      <group position={[0, -0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[2450, 1210, 5.973]}>
-          <mesh geometry={nodes.Floor_Squares_1.geometry} material={materials.Highlights} />
-          <mesh geometry={nodes.Floor_Squares_2.geometry} material={materials.Main} />
+      <group position={[0, -0.045, 0]} rotation={[0, 0, 0]} scale={[85.6, 1, 30.25]}>
+        <mesh geometry={nodes.cuttingBoard_1.geometry} material={materials.brownLight} />
+        <mesh geometry={nodes.cuttingBoard_1_1.geometry} material={materials.brown} />
       </group>
     </group>
   )
 }
 
 export function Floor6(props) { // 작은 방바닥
-  const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
+  const { nodes, materials } = useGLTF('/assets/models/stoneFloor.glb')
   const position = props.position || [0, 0, 0];
 
   return (
     <group {...props} dispose={null}>
       
       <ColliderBox {...props} scale={[12, 0.01, 32]}/>
-      <group position={[0, -0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[600, 1620, 5.973]}>
-          <mesh geometry={nodes.Floor_Squares_1.geometry} material={materials.Highlights} />
-          <mesh geometry={nodes.Floor_Squares_2.geometry} material={materials.Main} />
+      <group position={[0, -0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.03, 0.081, 0.01]}>
+      <mesh geometry={nodes.FloorTIle.geometry} material={materials['Stone_Floor.003']} />
       </group>
     </group>
   )
 }
+
 
 export function BrickDoor(props) {
   const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
@@ -170,3 +186,5 @@ export function BrickDoor(props) {
 
 
 useGLTF.preload('/assets/models/ModularRuinsPack.glb')
+useGLTF.preload('/assets/models/woodFloor.glb')
+useGLTF.preload('/assets/models/Royalboard.glb')
