@@ -11,7 +11,10 @@ import {Wall, Floor} from './components/Ruins/Ruin.jsx'
 import Interface from "./Interface"
 import ColliderWall from "./ColliderWall"
 import useGame from "./stores/useGame.jsx";
+import { UpdownObstacle } from "./components/UpdownObstacle.jsx";
+
 export const socket = io("http://localhost:5000")
+
 function Scene() {
   const defaultY = -0.08
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
@@ -73,6 +76,8 @@ function Scene() {
             } 
             
             <Ground rotation={[-Math.PI/2,0,0]}/>
+            
+            <UpdownObstacle position={[0, 0.3, 0]} speed={0.5}/>
             {/*x축 + */}
             <StraightRoad scale={0.3} position={[0, defaultY, 0]}/>
             <StraightRoad scale={0.3} position={[5, defaultY, 0]}/>
