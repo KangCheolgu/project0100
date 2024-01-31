@@ -7,6 +7,7 @@ import TownCenter from './object/TownCenter.jsx'
 import {StoneStep} from './Map/StoneStep.jsx'
 import {RedCarpet} from './object/RedCarpet.jsx'
 import {OvergrownWall} from './Ruins/Library_Ruins.jsx'
+import YBasicAlley4 from "./Map/ZBasicAlley4.jsx"
 export default function Map(props){
   const leftZoffset = Math.PI/2
   const rightZoffset = -Math.PI/2
@@ -47,15 +48,9 @@ export default function Map(props){
     return(<group>
         
       {/* Alley1 */}
-      {generateXBasicAlley8(position[0]+0, position[0]+8, position[2])}
-
-
-      <C_Wall position={[position[0]+12, position[1]+0, position[2]+1]}/>
-      {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
-      <C_Wall position={[position[0]+14, position[1]+0, position[2]+-1.5]} rotation={[0, -Math.PI/2, 0]}/>
-      <C_Floor3 position={[position[0]+12, position[1], position[2]]}/>
 
       <ZBasicAlley4 position={[position[0]+12, position[1]+0, position[2]-4]}/>
+      <ZBasicAlley4 position={[position[0]+12, position[1]+0, position[2]]}/>
 
       {/* Lobby */ } 
       <TownCenter position={[position[0]+12, position[1], position[2]-18]} scale={[5, 5, 5]}/>
@@ -174,12 +169,31 @@ export default function Map(props){
 
       {generateXBasicAlley8(position[0]+24, position[0]+36, position[2]-40)}
       
+      <ZBasicAlley4 position={[position[0]+44, position[1], position[2]+4]}/>
+      <ZBasicAlley4 position={[position[0]+44, position[1], position[2]+8]}/>
+      <ZBasicAlley4 position={[position[0]+44, position[1], position[2]+12]}/>
+      <ZBasicAlley4 position={[position[0]+44, position[1], position[2]+16]}/>
+      <ZBasicAlley4 position={[position[0]+44, position[1], position[2]+20]}/>
+      <ZBasicAlley4 position={[position[0]+44, position[1], position[2]+24]}/>
+     
       
-      {/*       
-      <C_Wall position={[position[0]+36, position[1]+0, position[2]-43.5]}/>
-      {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>
-      <C_Wall position={[position[0]+38, position[1]+0, position[2]-41.5]} rotation={[0, -Math.PI/2, 0]}/>
-      <C_Floor3 position={[position[0]+36, position[1]+0, position[2]-40]}/> */}
+      <C_Wall position={[position[0]+44, position[1]+0, position[2]+28]} rotation={[0, Math.PI, 0]}/>
+      <C_Wall position={[position[0]+46, position[1]+0, position[2]+26]} rotation={[0, Math.PI/2, 0]}/>
+      <C_Floor3 position={[position[0]+44, position[1]+0, position[2]+28]}/>
+
+      {generateXBasicAlley8(position[0]+16, position[0]+40, position[2]+28)}
+
+      <C_Wall position={[position[0]+12, position[1]+0, position[2]+28]} rotation={[0, Math.PI, 0]}/>
+      <C_Wall position={[position[0]+10, position[1]+0, position[2]+26]} rotation={[0, Math.PI/2, 0]}/>
+      <C_Floor3 position={[position[0]+12, position[1]+0, position[2]+28]}/>
+      
+      <ZBasicAlley4 position={[-28, 0, 63]}/>
+      <ZBasicAlley4 position={[-28, 0, 59]}/>
+      <ZBasicAlley4 position={[-28, 0, 55]}/>
+      <ZBasicAlley4 position={[-28, 0, 51]}/>
+      <ZBasicAlley4 position={[-28, 0, 47]}/>
+      <ZBasicAlley4 position={[-28, 0, 43]}/>
+
     </group>
     );
 }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            

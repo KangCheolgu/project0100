@@ -14,7 +14,7 @@ export function C_Wall(props) {
   const scale = props.scale || [0, 0, 0];
   return (
     <group dispose={null} >
-      <ColliderBox scale={[scale[0]+4,scale[1]+0.29, scale[2]+4]} position={[position[0],position[1]+2, position[2]+1]} rotation ={[rotation[2]-Math.PI/2, rotation[0], rotation[1]]}></ColliderBox>
+      <ColliderBox scale={[scale[0]+4,scale[1]+0.29, scale[2]+3.9]} position={[position[0],position[1]+2, position[2]+1]} rotation ={[rotation[2]-Math.PI/2, rotation[0], rotation[1]]}></ColliderBox>
       <group rotation={[rotation[2]-Math.PI / 2, rotation[0], rotation[1]]} scale={[200+scale[0], 200+scale[1], 200+scale[2]]} position={[position[0], position[1], position[2]+1.5]}>
         <mesh geometry={nodes.Wall_1.geometry} material={materials.Highlights}/>
         <mesh geometry={nodes.Wall_2.geometry} material={materials.Main}/>
