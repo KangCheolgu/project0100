@@ -43,11 +43,11 @@ export function QuestionObstacle(props){
       <meshStandardMaterial map={texture}/>
     </mesh>
     {/* 책장 */}
-    <BookShelf position={[props.position[0]+0.8,props.position[1],-(props.position[2]-1)]} scale={[0.28, 0.5, 2]} rotation={[0, Math.PI/2, 0]}/>
+    <BookShelf position={[props.position[0]+0.8,props.position[1],-(props.position[2]-1)]} scale={[0.28, 0.5, 2]} rotation={[props.rotation[0], props.rotation[1], props.rotation[2]]}/>
     <ColliderBox position={[props.position[0]+0.8,props.position[1],-(props.position[2]-1)]} scale={[2, 3, 1.4]}/>
     {/* 물음표 위 창벽 */}
-    <WallWindow position={[props.position[0]+0.1, props.position[1]+0.8, props.position[2]+1]} scale={[1.3, 0.3, 8]} rotation={[0, -Math.PI/2, 0]}/>
-    <WallWindow position={[props.position[0]+0.1, props.position[1]+0.8, -(props.position[2]+1)]} scale={[1.3, 0.3, 8]} rotation={[0, -Math.PI/2, 0]}/>
+    <WallWindow position={[props.position[0]+0.1, props.position[1]+0.8, props.position[2]+1]} scale={[1.3, 0.3, 8]} rotation={[props.rotation[0], -props.rotation[1], props.rotation[2]]}/>
+    <WallWindow position={[props.position[0]+0.1, props.position[1]+0.8, -(props.position[2]+1)]} scale={[1.3, 0.3, 8]} rotation={[props.rotation[0], -props.rotation[1], props.rotation[2]]}/>
     
   </>
 }
