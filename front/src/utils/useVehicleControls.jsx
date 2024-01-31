@@ -37,14 +37,14 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
 
     useEffect(() => {
         if (controls.ArrowUp || controls.w) {
-          vehicleApi.applyEngineForce(engineForce, 2);
-          vehicleApi.applyEngineForce(engineForce, 3);
+          vehicleApi.applyEngineForce(engineForce, 0);
+          vehicleApi.applyEngineForce(engineForce, 1);
         } else if (controls.ArrowDown || controls.s) {
-          vehicleApi.applyEngineForce(-engineForce, 2);
-          vehicleApi.applyEngineForce(-engineForce, 3);
+          vehicleApi.applyEngineForce(-engineForce, 0);
+          vehicleApi.applyEngineForce(-engineForce, 1);
         } else {
-          vehicleApi.applyEngineForce(0, 2);
-          vehicleApi.applyEngineForce(0, 3);
+          vehicleApi.applyEngineForce(0, 0);
+          vehicleApi.applyEngineForce(0, 1);
         }
     
         if (controls.ArrowLeft || controls.a) {

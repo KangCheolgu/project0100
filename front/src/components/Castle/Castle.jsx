@@ -1,7 +1,7 @@
 import ColliderWall from './ColliderWall.jsx'
 import { Wall, Wall2, Floor3, Floor4, Floor5, Floor6, Floor7, BrickDoor } from './Ruins/Castle.Ruin.jsx';
 import { Torch, Torch2 } from './Object/Torch.jsx';
-import { Sign } from './Object/Sign.jsx';
+import { Sign, Sign2, Sign3, Sign4 } from './Object/Sign.jsx';
 import { RedCarpet } from './Object/RedCarpet.jsx';
 
 export default function Map(props){
@@ -277,17 +277,32 @@ export default function Map(props){
         {/* 오브젝트 */}
         <BrickDoor position={[-2, 0, -1]}/>
 
-        <Sign position={[21.45, 1.5, -1.3]}/>
+        <Sign position={[21.45, 1.3, -1.3]}/>
+        <Sign position={[61.3, 1.3, -1.3]}/>
+        <Sign position={[2.3, 1.3, 2.5]}/>
+        <Sign position={[-2.3, 1.3, -37.5]}/>
+        <Sign position={[-21.8, 1.3, -13.5]}/>
+        
+        <Sign2 position={[37.3, 1.3, 11]}/>
+        <Sign2 position={[-29.5, 1.3, 67]}/>
+
+        <Sign3 position={[19.8, 1.3, 12.4]}/>
+        <Sign3 position={[35.7, 1.3, -2.6]}/>
+        <Sign3 position={[-40, 1.3, 1.6]}/>
+        <Sign3 position={[-25, 1.3, -42.2]}/>
+        <Sign3 position={[-5, 1.3, -15.6]}/>
+        <Sign3 position={[-20.5, 1.3, 0.5]}/>
+
+
+        <Sign4 position={[60, 1.3, 32.3]}/>
+        <Sign4 position={[12, 1.3, 1.2]}/>
+        <Sign4 position={[4, 1.3, 68.3]}/>
+        <Sign4 position={[-16, 1.3, 1.6]}/>
+        <Sign4 position={[-28, 1.3, -10.8]}/>
+        <Sign4 position={[0, 1.3, -11.6]}/>
 
         <RedCarpet position={[38, -0.01, 29]} />
 
-        {/* <Torch position={[1, 2, -2.7]}/>
-        <Torch position={[9, 2, -2.7]}/>
-        <Torch position={[17, 2, -2.7]}/>
-
-        <Torch2 position={[1, 2, 0.5]}/>
-        <Torch2 position={[9, 2, 0.5]}/>
-        <Torch2 position={[17, 2, 0.5]}/> */}
 
     </group>
     );
