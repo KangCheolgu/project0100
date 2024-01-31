@@ -13,7 +13,7 @@ export function Ground(props) {
     ref={meshRef} 
     receiveShadow
     >
-    <planeGeometry args={[30, 30]} />
+    {/*<planeGeometry args={[30, 30]} />*/}
     <meshStandardMaterial color="white" opacity={0}/>
   </mesh>
   )

@@ -37,13 +37,26 @@ export function Floor2(props) {
     const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
     return (
       <group {...props} dispose={null}>
-        <ColliderBox position={[0, 1, -0.11]} scale={[2, 0.29, 2]} rotation ={[0, 0, 0]}></ColliderBox>
-        <group position={[7.54, 0, 28]} rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 5.973]}>
+        <ColliderBox position={[0, 0.03, 0]} scale={[2, 0.01, 2]} rotation ={[0, 0, 0]}></ColliderBox>
+        <group position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 5.973]}>
             <mesh geometry={nodes.Floor_Diamond_1.geometry} material={materials.Highlights} />
             <mesh geometry={nodes.Floor_Diamond_2.geometry} material={materials.Main} />
         </group>
       </group>
     )
+}
+
+export function Floor3(props) {
+  const { nodes, materials } = useGLTF('/assets/models/ModularRuinsPack.glb')
+  return (
+    <group {...props} dispose={null}>
+      <ColliderBox position={[0, 0.03, 0]} scale={[2, 0.01, 2]} rotation ={[0, 0, 0]}></ColliderBox>
+      <group position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 5.973]}>
+          <mesh geometry={nodes.Floor_Squares_1.geometry} material={materials.Highlights} />
+          <mesh geometry={nodes.Floor_Squares_2.geometry} material={materials.Main} />
+      </group>
+    </group>
+  )
 }
 
 

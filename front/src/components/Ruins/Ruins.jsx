@@ -179,10 +179,7 @@ export function Model(props) {
         <mesh geometry={nodes.Wall_ArchRound_1.geometry} material={materials.Highlights} />
         <mesh geometry={nodes.Wall_ArchRound_2.geometry} material={materials.Main} />
       </group>
-      <group position={[0.967, 0, 28]} rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 5.973]}>
-        <mesh geometry={nodes.Floor_Squares_1.geometry} material={materials.Highlights} />
-        <mesh geometry={nodes.Floor_Squares_2.geometry} material={materials.Main} />
-      </group>
+      
       <group position={[4.249, 0, 28]} rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 5.973]}>
         <mesh geometry={nodes.Floor_Standard_Half_1.geometry} material={materials.Highlights} />
         <mesh geometry={nodes.Floor_Standard_Half_2.geometry} material={materials.Main} />

@@ -40,27 +40,6 @@ io.on("connection", (socket)=>{
     // io.emit('updateAnotherPlayer', "data")
   })
 
-  // 자신의 키다운 이벤트를 상대에게 
-  socket.on('keydown', ({ keycode, sequenceNumber }) => {
-    backEndPlayers[socket.id].sequenceNumber = sequenceNumber
-    switch (keycode) {
-      case 'KeyW':
-        console.log("상대가 w 누름");
-        break
-
-      case 'KeyA':
-        console.log("상대가 a 누름");
-        break
-
-      case 'KeyS':
-        console.log("상대가 a 누름");
-        break
-
-      case 'KeyD':
-        console.log("상대가 a 누름");
-        break
-    }
-  })
   // 접속 해제시 
   socket.on('disconnect', (reason) => {
     console.log(reason)
