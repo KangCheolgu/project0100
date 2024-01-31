@@ -19,15 +19,30 @@ const Car = (props) => {
     width: { value: 0.16, min: 0, max: 1, },
     height: { value: 0.12, min: 0, max: 1, },
     front: { value: 0.17, min: 0, max: 1, },
-  });
-
-  const [quaternion, setQuaternion] = useState();
+  })
+ 
+  // const [position, setPosition] = useState();
+  // const [quaternion, setQuaternion] = useState();
+  let position = [0, 0.1 ,0];
+  let rotation = null;
 
   // 위치 값
   useEffect(() => {
-    setPosition(props.position);
-    setQuaternion(props.rotation);
-  }, []);
+    const playerNum = props.index
+    // console.log(playerNum);
+
+    if(playerNum === 0) {
+      console.log("playerNum 0 맞습니다.");
+      chassisApi.position.set(0, 0.1, -0.5);
+      rotation = (props.rotation)
+    } 
+    else if (playerNum === 1) {
+      console.log("playerNum 1 맞습니다.");
+
+      chassisApi.position.set(0, 0.1, 0.5);
+      rotation = props.rotation
+    }
+  },[])
 
   let width, height, front, mass, wheelRadius;
 

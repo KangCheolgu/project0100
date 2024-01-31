@@ -55,14 +55,13 @@ function Scene() {
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
             {
-              players.map((player) => (
-                  <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state}/>
+              players.map((player, index) => (
+                  <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
               ))
-              } 
-            <Wall/>
+            } 
+            {/* <Wall/> */}
             <Floor3 position={[0, 0, 0]}/>
             <Ground rotation={[-Math.PI/2,0,0]}/>
-            
           </Debug>
         </Physics>
       </Canvas>
