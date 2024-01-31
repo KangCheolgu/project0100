@@ -59,7 +59,7 @@ function Scene() {
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state}/>
               ))
               */} 
-            <Library position={[40, 0, 0]}/>
+            <Library position={[-40, 0, 39]}/>
             <Castle/>
           </Debug>
         </Physics>

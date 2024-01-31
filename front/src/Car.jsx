@@ -47,7 +47,7 @@ const Car = (props) => {
   startQuaternion.setFromEuler(startEuler);
   const [chassisBody, chassisApi] = useCompoundBody(
     () => ({
-      position,
+      position : [-40, 0, 39],
       mass: mass,
       rotation: [0, -Math.PI/2, 0],
       shapes: [

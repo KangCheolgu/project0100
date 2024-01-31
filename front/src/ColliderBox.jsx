@@ -1,6 +1,9 @@
 import {useBox} from '@react-three/cannon';
 
-export default function ColliderBox({position, scale, rotation}){
+export default function ColliderBox(props){
+    const position = props.position
+    const rotation = props.rotation
+    const scale = props.scale
     useBox(()=>({
         args:scale,
         position,

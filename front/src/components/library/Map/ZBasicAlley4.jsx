@@ -1,7 +1,7 @@
 import {Wall,Floor3} from '../Ruins/Library_Ruins.jsx'
 import ColliderBox from '../../../ColliderBox.jsx'
 
-export default function ZBasicAlley4(props){
+export default function YBasicAlley4(props){
     const position = props.position||[0, 0, 0];
     const rotation = props.roation||[0, 0, 0];
     const scale = props.scale||[0, 0, 0];
@@ -17,4 +17,3 @@ export default function ZBasicAlley4(props){
     </group>
     );
 }
-

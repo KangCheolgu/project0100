@@ -40,11 +40,12 @@ export default function Map(props){
       const generateWallsZ = (startZ, endZ, offsetX, offset) => {
         const wallsZ = [];
         for (let z = startZ; z <= endZ; z += 4) {
-          wallsZ.push(<C_Wall key={`wall-${z}`} position={[offsetX, 0, z]}/>);
+          wallsZ.push(<C_Wall key={`wall-${z}`} position={[offsetX, 0, z]} rotation={[0, offset, 0]} />);
         }
         return wallsZ ;
       };
-    return(<group {...props}>
+    return(<group>
+        
       {/* Alley1 */}
       {generateXBasicAlley8(position[0]+0, position[0]+8, position[2])}
 
@@ -171,25 +172,14 @@ export default function Map(props){
       <C_Wall position={[position[0]+17.5, position[1]+0, position[2]-41.5]} rotation={[0, -Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+20, position[1]+0, position[2]-40]}/>
 
-      {generateXBasicAlley8(position[0]+24, position[0]+32, position[2]-40)}
+      {generateXBasicAlley8(position[0]+24, position[0]+36, position[2]-40)}
       
+      
+      {/*       
       <C_Wall position={[position[0]+36, position[1]+0, position[2]-43.5]}/>
-      {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
+      {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>
       <C_Wall position={[position[0]+38, position[1]+0, position[2]-41.5]} rotation={[0, -Math.PI/2, 0]}/>
-      <C_Floor3 position={[position[0]+36, position[1]+0, position[2]-40]}/>
-
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]-36]}/>
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]-32]}/>
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]-28]}/>
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]-24]}/>
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]-20]}/>
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]-16]}/>
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]-12]}/>
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]-8]}/>
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]-4]}/>
-      <ZBasicAlley4 position={[position[0]+36, position[1]+0, position[2]+0]}/>
-
-
+      <C_Floor3 position={[position[0]+36, position[1]+0, position[2]-40]}/> */}
     </group>
     );
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
