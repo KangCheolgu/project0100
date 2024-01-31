@@ -9,7 +9,6 @@ import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import useGame from './stores/useGame.jsx'
 import { useKeyboardControls } from '@react-three/drei';
-import { useFrame } from "@react-three/fiber"
 import { CarModel } from "./components/CarModel.jsx";
 import { Wheel } from "./components/Wheel.jsx";
 

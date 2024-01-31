@@ -4,11 +4,12 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React } from "react";
-import Castle from "./Castle/Castle";
-import { OrbitControls } from '@react-three/drei'
+import Castle from "./components/Castle/Castle.jsx";
 import { OrbitControls } from '@react-three/drei';
 import Interface from "./Interface"
-import Library from "./Library"
+import Library from "./components/library/Library.jsx"
+import {Ground} from "./Ground.jsx"
+
 export const socket = io("http://localhost:5000")
 function Scene() {
   const defaultY = -0.3
@@ -50,18 +51,16 @@ function Scene() {
         {/* <SocketManager /> */}
         <ambientLight/>
         <directionalLight intensity={5} position={[0, 5, 5]} />
+        <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
             {/*
               players.map((player) => (
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state}/>
               ))
-            } 
-            <DummyBall position={[0,0.2,-2]} args={[0.15]}/>
-            <DummyBox position={[1,0.2,-2]} args={[0.2,0.2,0.2]}/>
-            <DummyBox position={[-1,0.2,1.5]} args={[0.2,0.4,0.2]} type={"Static"}/>
-            <DummyWall position={[5,0.5,0]} args={[1,1,10]} />
-            <Ground rotation={[-Math.PI/2,0,0]}/>
+              */} 
+            <Library position={[40, 0, 0]}/>
+            <Castle/>
           </Debug>
         </Physics>
       </Canvas>

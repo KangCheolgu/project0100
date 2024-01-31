@@ -1,5 +1,5 @@
 import ColliderWall from './ColliderWall.jsx'
-import { Wall, Wall2, Floor3, Floor4, Floor5, Floor6, Floor7, BrickDoor } from '../components/Ruins/Castle.Ruin.jsx';
+import { Wall, Wall2, Floor3, Floor4, Floor5, Floor6, Floor7, BrickDoor } from './Ruins/Castle.Ruin.jsx';
 import { Torch, Torch2 } from './Object/Torch.jsx';
 import { Sign } from './Object/Sign.jsx';
 import { RedCarpet } from './Object/RedCarpet.jsx';

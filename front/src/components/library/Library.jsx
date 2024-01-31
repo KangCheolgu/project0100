@@ -1,12 +1,12 @@
-import XBasicAlley4 from "./library/components/Map/XBasicAlley4.jsx"
-import ZBasicAlley4 from "./library/components/Map/ZBasicAlley4.jsx"
-import ColliderWall from "./ColliderWall.jsx"
-import {C_Wall,C_Floor3, C_Floor2} from './library/components/Ruins/Library_C_Ruin.jsx'
-import {YellowWall} from './library/components/Map/YellowWall.jsx'
-import TownCenter from './library/components/object/TownCenter.jsx'
-import {StoneStep} from './library/components/Map/StoneStep.jsx'
-import {RedCarpet} from './library/components/object/RedCarpet.jsx'
-import {OvergrownWall} from './library/components/Ruins/Library_Ruins.jsx'
+import XBasicAlley4 from "./Map/XBasicAlley4.jsx"
+import ZBasicAlley4 from "./Map/ZBasicAlley4.jsx"
+import ColliderWall from "../../ColliderWall.jsx"
+import {C_Wall,C_Floor3, C_Floor2} from './Ruins/Library_C_Ruin.jsx'
+import {YellowWall} from './Map/YellowWall.jsx'
+import TownCenter from './object/TownCenter.jsx'
+import {StoneStep} from './Map/StoneStep.jsx'
+import {RedCarpet} from './object/RedCarpet.jsx'
+import {OvergrownWall} from './Ruins/Library_Ruins.jsx'
 export default function Map(props){
   const leftZoffset = Math.PI/2
   const rightZoffset = -Math.PI/2
@@ -40,12 +40,11 @@ export default function Map(props){
       const generateWallsZ = (startZ, endZ, offsetX, offset) => {
         const wallsZ = [];
         for (let z = startZ; z <= endZ; z += 4) {
-          wallsZ.push(<C_Wall key={`wall-${z}`} position={[offsetX, 0, z]} rotation={[0, offset, 0]} />);
+          wallsZ.push(<C_Wall key={`wall-${z}`} position={[offsetX, 0, z]}/>);
         }
         return wallsZ ;
       };
-    return(<group>
-        
+    return(<group {...props}>
       {/* Alley1 */}
       {generateXBasicAlley8(position[0]+0, position[0]+8, position[2])}
 
