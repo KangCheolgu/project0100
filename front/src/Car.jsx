@@ -1,7 +1,5 @@
-import { useBox, useCompoundBody, useRaycastVehicle } from "@react-three/cannon";
+import { useCompoundBody, useRaycastVehicle } from "@react-three/cannon";
 import { useEffect, useMemo, useRef, useState, forwardRef } from "react";
-import DummyCarBody from "./dummy/DummyCarBody";
-import DummyWheel from "./dummy/DummyWheel";
 import { useControls } from "leva";
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
@@ -11,6 +9,9 @@ import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import useGame from './stores/useGame.jsx'
 import { useKeyboardControls } from '@react-three/drei';
+import { useFrame } from "@react-three/fiber"
+import { CarModel } from "./components/CarModel.jsx";
+import { Wheel } from "./components/Wheel.jsx";
 
 
 const Car = (props) => {
@@ -24,7 +25,7 @@ const Car = (props) => {
     height: { value: 0.12, min: 0, max: 1, },
     front: { value: 0.17, min: 0, max: 1, },
   })
- 
+
   const [position, setPosition] = useState();
   const [quaternion, setQuaternion] = useState();
   // 위치 값
@@ -35,9 +36,9 @@ const Car = (props) => {
 
   let width, height, front, mass, wheelRadius;
 
-  width = 0.16;
+  width = 0.15;
   height = 0.12;
-  front = 0.17;
+  front = 0.14;
   wheelRadius = 0.05;
   mass = 150;
 
@@ -124,7 +125,7 @@ const Car = (props) => {
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.55, 0.65);
+      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
 
       // 카메라의 전역 위치 계산
       const cameraPosition = new THREE.Vector3();
@@ -263,12 +264,12 @@ const Car = (props) => {
   return (
       <group ref={vehicle}>
         <group ref={chassisBody}>
-          <DummyCarBody width={chassisBodyValue.width} height={chassisBodyValue.height} front={chassisBodyValue.front * 2} color={props.color} />
+            <CarModel />
         </group>
-        <DummyWheel wheelRef={wheels[0]} radius={wheelRadius} />
-        <DummyWheel wheelRef={wheels[1]} radius={wheelRadius} />
-        <DummyWheel wheelRef={wheels[2]} radius={wheelRadius} />
-        <DummyWheel wheelRef={wheels[3]} radius={wheelRadius} />
+        <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
+        <Wheel wheelRef={wheels[1]} radius={wheelRadius} />
+        <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
+        <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
         <Timer />
       </group>
   )
