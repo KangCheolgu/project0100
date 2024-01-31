@@ -8,7 +8,16 @@ import {StoneStep} from './Map/StoneStep.jsx'
 import {RedCarpet} from './object/RedCarpet.jsx'
 import {OvergrownWall} from './Ruins/Library_Ruins.jsx'
 import YBasicAlley4 from "./Map/ZBasicAlley4.jsx"
-export default function Map(props){
+import {Statue2} from "./object/Statue2.jsx"
+import {CheckedFloor} from "./Map/CheckedFloor.jsx"
+import {Bookcase} from "./object/Bookcase.jsx"
+import {Bookshelf} from "./object/Bookshelf.jsx"
+// import {Banner} from "./ojbect/Banner.jsx"
+import {CarpetRed} from "./object/CarpetRed.jsx"
+import {Rug} from "./object/Rug.jsx"
+import {StartLine} from "./object/StartLine.jsx"
+
+export default function Library(props){
   const leftZoffset = Math.PI/2
   const rightZoffset = -Math.PI/2
 
@@ -26,6 +35,13 @@ export default function Map(props){
         const floors = [];
         for (let x = startX; x <= endX; x += 4) {
           floors.push(<C_Floor2 key={`floor-${x}`} position={[x, 0, offsetY]} />);
+        }
+        return floors;
+      };
+      const generateCheckedFloor = (startX, endX, offsetY)=> {
+        const floors = [];
+        for (let x = startX; x <= endX; x += 4) {
+          floors.push(<CheckedFloor key={`floor-${x}`} position={[x, 0, offsetY]} scale={12.5} />);
         }
         return floors;
       };
@@ -48,10 +64,10 @@ export default function Map(props){
     return(<group>
         
       {/* Alley1 */}
-
+      <StartLine position={[position[0]+12, position[1]-0.09, position[2]+1]} rotation={[0, Math.PI/2, 0]} scale={[1, 1, 1]} />
       <ZBasicAlley4 position={[position[0]+12, position[1]+0, position[2]-4]}/>
       <ZBasicAlley4 position={[position[0]+12, position[1]+0, position[2]]}/>
-
+    
       {/* Lobby */ } 
       <TownCenter position={[position[0]+12, position[1], position[2]-18]} scale={[5, 5, 5]}/>
       <StoneStep position={[position[0]+18, position[1], position[2]-32]} scale={[1, 0.8, 2]} rotation={[0, Math.PI/2, 0]}/>
@@ -62,6 +78,9 @@ export default function Map(props){
       <RedCarpet position={[position[0]+20, position[1], position[2]-18]} scale={[0.75, 1, 1.2]} rotation={[0, Math.PI/2, 0]}/>
       <OvergrownWall position={[position[0]+12, position[1], position[2]-30]} scale={[1, 0.5, 1]}/>
       <OvergrownWall position={[position[0]+12, position[1], position[2]-34]} scale={[1, 0.5, 1]}/>
+      <Statue2 position={[position[0]+8, position[1]+2.1, position[2]-29]} scale={[2 ,2, 2]}/>
+      <Statue2 position={[position[0]+16, position[1]+2.1, position[2]-29]} scale={[2 ,2, 2]}/>
+
       {generateCFloor2(position[0]+0, position[0]+26, position[2]-8)}
       {generateCFloor2(position[0]+0, position[0]+26, position[2]-12)}
       {generateCFloor2(position[0]+0, position[0]+26, position[2]-16)}
@@ -98,13 +117,14 @@ export default function Map(props){
       <ZBasicAlley4 position={[position[0]+8, position[1]+0, position[2]-52]}/>
 
       {/* Art Room */}
-      {generateCFloor2(position[0]+0, position[0]+16, position[2]-56)}
-      {generateCFloor2(position[0]+0, position[0]+16, position[2]-60)}
-      {generateCFloor2(position[0]+0, position[0]+16, position[2]-64)}
-      {generateCFloor2(position[0]+0, position[0]+16, position[2]-68)}
-      {generateCFloor2(position[0]+0, position[0]+16, position[2]-72)}
-      {generateCFloor2(position[0]+0, position[0]+16, position[2]-76)}
-      {generateCFloor2(position[0]+0, position[0]+16, position[2]-80)}
+      {generateCFloor2(position[0]+0, position[0]+21, position[2]-57)}
+      {generateCFloor2(position[0]+0, position[0]+21, position[2]-61)}
+      {generateCFloor2(position[0]+0, position[0]+21, position[2]-65)}
+      {generateCFloor2(position[0]+0, position[0]+21, position[2]-69)}
+      {generateCFloor2(position[0]+0, position[0]+21, position[2]-73)}
+      {generateCFloor2(position[0]+0, position[0]+21, position[2]-77)}
+      {generateCFloor2(position[0]+0, position[0]+21, position[2]-81)}
+      {generateCFloor2(position[0]+0, position[0]+21, position[2]-85)}
 
       {generateWallsX(position[0]+0, position[0]+4, position[2]-55)}
       {generateWallsX(position[0]+12, position[0]+16, position[2]-55)}
@@ -120,6 +140,14 @@ export default function Map(props){
       {generateXBasicAlley8(position[0]+20, position[0]+24, position[2]-76)}
       
       {/* library */}
+      <Bookcase position={[position[0]+37, position[1], position[2]-80]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
+      <Bookcase position={[position[0]+37, position[1], position[2]-77]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
+      <Bookcase position={[position[0]+37, position[1], position[2]-74]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
+      <Bookcase position={[position[0]+37, position[1], position[2]-71]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
+      
+      <Bookshelf position={[position[0]+37, position[1]+1.9, position[2]-66.5]} rotation={[0, -Math.PI/2+0.2, 0]} scale={[1, 0.7, 1]}/>
+      <Rug position={[position[0]+32, position[1]+2, position[2]-68]} scale={[100, 0.1 , 80]} rotation={[0, Math.PI/2, 0]}/>
+      
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-80)}
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-76)}
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-72)}

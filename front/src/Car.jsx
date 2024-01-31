@@ -14,6 +14,21 @@ import { CarModel } from "./components/CarModel.jsx";
 import { Wheel } from "./components/Wheel.jsx";
 
 const Car = (props) => {
+  // 체크포인트 위치
+  const spot = [{x: -32, y: 0, z:-13},
+    {x: -1, y: 0, z:-17},
+    {x: 59, y: 0, z:12},
+    {x: 4, y: 0, z:41}]
+   // 시작 지점
+   const startSpot={x:-28, y:0.3, z:39}  
+   const reset = () =>
+   {
+     // 직접 position 속성을 이용하여 초기 위치로 설정
+     chassisApi.position.set(-28, 0.3, 39);
+     chassisApi.velocity.set(0, 0, 0);  // 필요에 따라 속도도 초기화
+     chassisApi.angularVelocity.set(0, 0, 0);  // 필요에 따라 각속도도 초기화
+   }
+
   // Quaternion, Position 인스턴스 생성
   const worldPosition = useMemo(() => new Vector3(), []);
   const worldQuaternion = useMemo(() => new THREE.Quaternion(), []);
@@ -24,8 +39,7 @@ const Car = (props) => {
     front: { value: 0.17, min: 0, max: 1, },
   })
 
-  // const [position, setPosition] = useState();
-  // const [quaternion, setQuaternion] = useState();
+
   let position = [0, 0.1 ,0];
   let rotation = null;
 
@@ -36,13 +50,13 @@ const Car = (props) => {
 
     if(playerNum === 0) {
       console.log("playerNum 0 맞습니다.");
-      chassisApi.position.set(0, 0.1, -0.5);
+      chassisApi.position.set(-28.5, 0.3, 39);
       rotation =  [0, -3.14, -3.14, 0]
     } 
     else if (playerNum === 1) {
       console.log("playerNum 1 맞습니다.");
 
-      chassisApi.position.set(0, 0.1, 0.5);
+      chassisApi.position.set(-27.5, 0.3, 39);
       rotation = props.rotation
     }
   },[])
@@ -70,7 +84,7 @@ const Car = (props) => {
   startQuaternion.setFromEuler(startEuler);
   const [chassisBody, chassisApi] = useCompoundBody(
     () => ({
-      position : [-40, 0, 39],
+      position : [0, 0, 0],
       mass: mass,
       rotation: [0, -Math.PI/2, 0],
       shapes: [
@@ -141,11 +155,25 @@ const Car = (props) => {
   // })
 
   // back-vie 카메라 수정중
+    /* 
+  *   About phase
+  */
+  const start = useGame((state) => state.start)
+  const end = useGame((state)=> state.end)
+  const restart = useGame((state)=> state.restart)
+  const phase = useGame((state)=> state.phase)
+  const around = useGame((state)=> state.around)
+  const inspot= useGame((state)=> state.inspot)
+  const outspot = useGame((state)=> state.outspot)
+  let isIn = useGame((state)=> state.isIn)
+  const lapse = useGame((state)=> state.lapse)
+
   useFrame((state, delta) => {
     if (socket.id === props.id) {
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
-
+      console.log(isIn)
+      console.log(bodyPosition)
       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
       const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
 
@@ -172,9 +200,56 @@ const Car = (props) => {
       cameraTarget.y += 0.25;
       state.camera.lookAt(cameraTarget);
     }
+     /* Phases*/
+  const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3());
+  /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
+  if(lapse===2
+    &&bodyPosition.x < startSpot.x + 3 && startSpot.x > startSpot.x - 3 
+    && bodyPosition.z < startSpot.z+ 3 && bodyPosition.z > startSpot.z-3){
+    end()
+    console.log("end")
+  }
+  /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
+  else if(isIn.every((elem)=>elem===true)
+          &&bodyPosition.x < startSpot.x + 3&& bodyPosition.x > startSpot.x - 3 
+          && bodyPosition.z < startSpot.z+ 3 && bodyPosition.z > startSpot.z-3){
+    around()
+    
+    console.log("around")
+  }
+  else{
+    /* 체크포인트 지날 때 */
+    const newisIn = [false, false, false, false]
+    for(let i=0;i<4;i++){
+      newisIn[i] = bodyPosition.x < spot[i].x + 3 && bodyPosition.x > spot[i].x - 3 && bodyPosition.z < spot[i].z+ 3 && bodyPosition.z > spot[i].z-3
+      if(newisIn[0]){
+        inspot(0)
+        break
+      }
+      
+      if(isIn[i-1]===true&&newisIn[i]){
+        inspot(i)
+      }
+    }
+  } 
+  /* outspot 구현 예정
+      체크 포인트를 잘못된 방향으로 벗어났을때 true-> false */
   });
 
   useEffect(() => {
+    const unsubscribeReset = useGame.subscribe(
+      (state) => state.phase,
+      (value) =>
+      {
+        if(value === 'ready')
+          reset()
+      }
+    )
+    return()=>
+    {
+      unsubscribeReset()
+    }
+
     let lastPosition = new THREE.Vector3(chassisApi.position.x, chassisApi.position.y, chassisApi.position.z);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
 

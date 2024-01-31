@@ -23,7 +23,7 @@ function Scene() {
   let count = useGame((state)=> state.count)
   let Countdown = useGame((state)=> state.Countdown)
   var countIntervalRef = useRef(null)
-  
+  const start = useGame((state) => state.start)
   //count값 바뀔 때마다 
   useEffect(()=>{
     if (count === 0){
@@ -31,6 +31,7 @@ function Scene() {
       //count 가 -2 가 되면 Start 문자가 사라지게
     } else if (count === -2) {
       clearInterval(countIntervalRef.current)
+      start()
     }
   },[count])
 
