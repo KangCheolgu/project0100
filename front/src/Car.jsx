@@ -119,25 +119,27 @@ const Car = (props) => {
   let isIn = useGame((state)=> state.isIn)
   const lapse = useGame((state)=> state.lapse)
 
-  useFrame((state, delta) => {
-    if (socket.id === props.id) {
+    // Back-View 카메라
+    useFrame((state, delta) => {
+     if (socket.id === props.id) {
 
-      const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-      const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
-      // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.4, 0.65);
+       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
-      // 카메라의 전역 위치 계산
-      const cameraPosition = new THREE.Vector3();
-      cameraPosition.copy(relativeCameraPosition);
-      cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
-      cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
+       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
+       const relativeCameraPosition = new THREE.Vector3(0, 0.4, 0.65);
 
-      // smooth camera 전환속도
-      smoothedCameraPosition.lerp(cameraPosition, 0.5);
+       // 카메라의 전역 위치 계산
+       const cameraPosition = new THREE.Vector3();
+       cameraPosition.copy(relativeCameraPosition);
+       cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
+       cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
 
-      // state.camera.position.copy(smoothedCameraPosition);
-      state.camera.position.copy(cameraPosition);
+       // smooth camera 전환속도
+       smoothedCameraPosition.lerp(cameraPosition, 0.5);
+
+       // state.camera.position.copy(smoothedCameraPosition);
+       state.camera.position.copy(cameraPosition);
 
       // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
       const cameraTarget = new THREE.Vector3();

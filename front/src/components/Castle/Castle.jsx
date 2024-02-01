@@ -1,8 +1,17 @@
 import ColliderWall from './ColliderWall.jsx'
 import { Wall, Wall2, Floor3, Floor4, Floor5, Floor6, Floor7, BrickDoor } from './Ruins/Castle.Ruin.jsx';
 import { Torch, Torch2 } from './Object/Torch.jsx';
-import { Sign } from './Object/Sign.jsx';
-import { RedCarpet } from './Object/RedCarpet.jsx';
+import { Sign, Sign2, Sign3, Sign4 } from './Object/Sign.jsx';
+import { RedCarpet, RedCarpet1 } from './Object/RedCarpet.jsx';
+import { Statue, Statue1, Statue2, Statue3, Statue4 } from './Object/Statue.jsx';
+import { Throne } from './Object/Throne.jsx';
+import { WhiteWall, WhiteWall1, WhiteWall2 } from './Map/WhiteWall.jsx';
+import { Columns } from './Object/Columns.jsx';
+import { Pedestal } from './Object/Pedestal.jsx';
+import { BigSizeRound, BigSizeRound1 } from './Object/BigSizeRound.jsx';
+import { SignRed } from './Object/SignRed.jsx';
+import { FirePlace } from './Object/FirePlace.jsx';
+import { OakBarrel, OakBarrel1 } from './Object/OakBarrel.jsx';
 
 export default function Map(props){
     
@@ -206,11 +215,36 @@ export default function Map(props){
 
         <Floor3 position={[8, 0, 3]}/>
         <Floor3 position={[8, 0, 7]}/>
-
+        <Floor3 position={[8, 0, 11]}/>
+        <Floor3 position={[8, 0, 15]}/>
+        <Floor3 position={[8, 0, 19]}/>
+        <Floor3 position={[8, 0, 23]}/>
+        <Floor3 position={[8, 0, 27]}/>
+        <Floor3 position={[8, 0, 31]}/>
+        <Floor3 position={[8, 0, 35]}/>
+        <Floor3 position={[8, 0, 39]}/>
+        
         <Floor3 position={[4, 0, 3]}/>
         <Floor3 position={[4, 0, 7]}/>
+        <Floor3 position={[4, 0, 11]}/>
+        <Floor3 position={[4, 0, 15]}/>
+        <Floor3 position={[4, 0, 19]}/>
+        <Floor3 position={[4, 0, 23]}/>
+        <Floor3 position={[4, 0, 27]}/>
+        <Floor3 position={[4, 0, 31]}/>
+        <Floor3 position={[4, 0, 35]}/>
+        <Floor3 position={[4, 0, 39]}/>
 
-        <Floor6 position={[4, 0, 25]}/>
+        <Floor3 position={[0, 0, 11]}/>
+        <Floor3 position={[0, 0, 15]}/>
+        <Floor3 position={[0, 0, 19]}/>
+        <Floor3 position={[0, 0, 23]}/>
+        <Floor3 position={[0, 0, 27]}/>
+        <Floor3 position={[0, 0, 31]}/>
+        <Floor3 position={[0, 0, 35]}/>
+        <Floor3 position={[0, 0, 39]}/>
+
+        {/* <Floor6 position={[4, 0, 25]}/> */}
 
         {/* <Floor7 position={[-2, 0, -2]}/> */}
 
@@ -271,23 +305,77 @@ export default function Map(props){
     
 
         <Floor5 position={[34, 0, 29]} />
+        <Floor5 position={[34, 12.5, 29]} />
 
         {/* <Floor7 position={[0, 1, 0]} /> */}
 
         {/* 오브젝트 */}
         <BrickDoor position={[-2, 0, -1]}/>
 
-        <Sign position={[21.45, 1.5, -1.3]}/>
+        <Sign position={[21.45, 1.3, -1.3]}/>
+        <Sign position={[61.3, 1.3, -1.3]}/>
+        <Sign position={[2.3, 1.3, 2.5]}/>
+        <Sign position={[-2.3, 1.3, -37.5]}/>
+        <Sign position={[-21.8, 1.3, -13.5]}/>
+        
+        <Sign2 position={[37.3, 1.3, 11]}/>
+        <Sign2 position={[-29.5, 1.3, 67]}/>
 
-        <RedCarpet position={[38, -0.01, 29]} />
+        <Sign3 position={[19.8, 1.3, 12.4]}/>
+        <Sign3 position={[35.7, 1.3, -2.6]}/>
+        <Sign3 position={[-40, 1.3, 1.6]}/>
+        <Sign3 position={[-25, 1.3, -42.2]}/>
+        <Sign3 position={[-5, 1.3, -15.6]}/>
+        <Sign3 position={[-20.5, 1.3, 0.5]}/>
 
-        {/* <Torch position={[1, 2, -2.7]}/>
-        <Torch position={[9, 2, -2.7]}/>
-        <Torch position={[17, 2, -2.7]}/>
 
-        <Torch2 position={[1, 2, 0.5]}/>
-        <Torch2 position={[9, 2, 0.5]}/>
-        <Torch2 position={[17, 2, 0.5]}/> */}
+        <Sign4 position={[60, 1.3, 32.3]}/>
+        <Sign4 position={[12, 1.3, 1.2]}/>
+        <Sign4 position={[4, 1.3, 68.3]}/>
+        <Sign4 position={[-16, 1.3, 1.6]}/>
+        <Sign4 position={[-28, 1.3, -10.8]}/>
+        <Sign4 position={[0, 1.3, -11.6]}/>
+
+        <RedCarpet position={[39, -0.05, 29]} />
+        <RedCarpet1 position={[3.8, -0.04, 25]} />
+
+        <Statue3 position={[50, 4, 39]} />
+        <Statue3 position={[40, 4, 39]} />
+        <Statue3 position={[30, 4, 39]} />
+
+        <Statue3 position={[0, 4, 39]} />
+        <Statue3 position={[8, 4, 39]} />
+
+        <Statue4 position={[50, 4, 21]} />
+        <Statue4 position={[40, 4, 21]} />
+        <Statue4 position={[30, 4, 21]} />
+
+        <Throne position={[25, 1.5, 29]} />
+
+        <WhiteWall position={[38, 12, 17.8]} />
+        <WhiteWall1 position={[32, 12, 40.45]} />
+        <WhiteWall2 position={[10.2, 12, 28]} />
+
+        <Columns position={[55, 10.5, 39]} />
+        <Columns position={[45, 10.5, 39]} />
+        <Columns position={[35, 10.5, 39]} />
+
+        <Columns position={[55, 10.5, 21]} />
+        <Columns position={[45, 10.5, 21]} />
+        <Columns position={[35, 10.5, 21]} />
+
+        <Pedestal position={[25, 0, 22]} />
+
+        <BigSizeRound position={[18, 1, 22]} />
+        <BigSizeRound1 position={[62, 0, 29]} />
+
+        <SignRed position={[11, 0, 37]} />
+
+        <FirePlace position={[28, 0, 16.5]} />
+        <FirePlace position={[55, 0, 12.5]} />
+
+        <OakBarrel position={[32, 0, 15]} />
+        <OakBarrel1 position={[33, 0, 7]} />
 
     </group>
     );
