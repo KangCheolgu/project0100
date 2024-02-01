@@ -148,31 +148,32 @@ const Car = (props) => {
       state.camera.lookAt(cameraTarget);
     
      /* Phases*/
-  /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
-  /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
-  if(isIn.every((elem)=>elem===true)
-    && bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
-    && bodyPosition.z < startSpot.z+ 1 && bodyPosition.z > startSpot.z-1){
-    around()
-    if(lapse==2){
-      end()
-    }
-  }
-  else{
+
+
+    /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
+    /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
+    if(isIn.every((elem)=>elem===true)
+      && bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
+      && bodyPosition.z < startSpot.z+ 1 && bodyPosition.z > startSpot.z-1){
+      around()
+      if(lapse==2){
+        end()
+      }
+    } else {
     /* 체크포인트 지날 때 */
-    const newisIn = [false, false, false, false]
-    for(let i=0;i<4;i++){
-      newisIn[i] = bodyPosition.x < spot[i].x + 3 && bodyPosition.x > spot[i].x - 3 && bodyPosition.z < spot[i].z+ 3 && bodyPosition.z > spot[i].z-3
-      if(newisIn[0]){
-        inspot(0)
-        break
+      const newisIn = [false, false, false, false]
+      for(let i=0;i<4;i++){
+        newisIn[i] = bodyPosition.x < spot[i].x + 3 && bodyPosition.x > spot[i].x - 3 && bodyPosition.z < spot[i].z+ 3 && bodyPosition.z > spot[i].z-3
+        if(newisIn[0]){
+          inspot(0)
+          break
+        }
+        
+        if(isIn[i-1]===true&&newisIn[i]){
+          inspot(i)
+        }
       }
-      
-      if(isIn[i-1]===true&&newisIn[i]){
-        inspot(i)
-      }
-    }
-  } 
+    } 
   /* outspot 구현 예정
       체크 포인트를 잘못된 방향으로 벗어났을때 true-> false */
 }
@@ -217,7 +218,8 @@ const Car = (props) => {
       }
     }
 
-    socket.on("updateAnotherPlayer", updateAnotherPlayer);
+    if(props.state === true)
+      socket.on("updateAnotherPlayer", updateAnotherPlayer);
 
     return () => {
       socket.off("updateAnotherPlayer", updateAnotherPlayer);

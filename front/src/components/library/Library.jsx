@@ -139,13 +139,13 @@ export default function Library(props){
       {generateXBasicAlley8(position[0]+20, position[0]+24, position[2]-76)}
       
       {/* library */}
-      <Bookcase position={[position[0]+37, position[1], position[2]-80]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
+      {/* <Bookcase position={[position[0]+37, position[1], position[2]-80]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
       <Bookcase position={[position[0]+37, position[1], position[2]-77]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
       <Bookcase position={[position[0]+37, position[1], position[2]-74]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
-      <Bookcase position={[position[0]+37, position[1], position[2]-71]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
+      <Bookcase position={[position[0]+37, position[1], position[2]-71]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/> */}
       
       <Bookshelf position={[position[0]+37, position[1]+1.9, position[2]-66.5]} rotation={[0, -Math.PI/2+0.2, 0]} scale={[1, 0.7, 1]}/>
-      <Rug position={[position[0]+32, position[1]+0.1, position[2]-68]} scale={[100, 0.1 , 80]} rotation={[0, Math.PI/2, 0]}/>
+      {/* <Rug position={[position[0]+32, position[1]+0.1, position[2]-68]} scale={[100, 0.1 , 80]} rotation={[0, Math.PI/2, 0]}/> */}
       
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-80)}
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-76)}
