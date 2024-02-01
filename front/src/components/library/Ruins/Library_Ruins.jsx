@@ -13,7 +13,7 @@ export function Wall(props) {
   const scale = props.scale || [0, 0, 0];
   return (
     <group dispose={null} >
-      <group rotation={[rotation[0]-Math.PI / 2, rotation[1], rotation[2]]} scale={[200+scale[0], 200+scale[1], 200+scale[2]]} position={[position[0], position[1], position[2]]}>
+      <group rotation={[rotation[0]-Math.PI / 2, rotation[1], rotation[2]]} scale={[200+scale[0], 200+scale[1], 200+scale[2]]} position={[position[0], position[1]-0.1, position[2]]}>
         <mesh geometry={nodes.Wall_1.geometry} material={materials.Highlights}/>
         <mesh geometry={nodes.Wall_2.geometry} material={materials.Main}/>
       </group>

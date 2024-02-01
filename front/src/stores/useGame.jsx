@@ -14,7 +14,7 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
         endTime: 0,
         
         // lap
-        lapse : 0,
+        lapse : 1,
         isIn : [false,false, false, false],
 
         // Phase
@@ -47,7 +47,7 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
             set((state)=>
             {  
                 if(state.phase === 'playing')
-                    return {phase: 'ended', endTime: Date.now(), lapse: 2}
+                    return {phase: 'ended', endTime: Date.now()}
                 return {}
             })
         },
@@ -74,7 +74,6 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
         {
             const updateIsIn = [...state.isIn]
             updateIsIn[index] = false
-            //set({isIn: updateIsIn})
             return { ...state, isIn: updateIsIn };
         },
 
