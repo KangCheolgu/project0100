@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.16 public\assets\models\Easel2.glb -o src/components/li
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model(props) {
+export function Easel2(props) {
   const { nodes, materials } = useGLTF('/assets/models/Easel2.glb')
   return (
     <group {...props} dispose={null}>

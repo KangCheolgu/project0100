@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.16 public\assets\models\Fence.glb -o src/components/lib
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model(props) {
+export function Fence(props) {
   const { nodes, materials } = useGLTF('/assets/models/Fence.glb')
   return (
     <group {...props} dispose={null}>

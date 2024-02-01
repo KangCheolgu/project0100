@@ -77,11 +77,11 @@ function Scene() {
             {/* <Ground /> */}
             <Library position={[-40, 0, 39]}/>
             <Castle/>
-            {/*
+            {
               players.map((player, index) => (
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
               ))
-              */} 
+            } 
           </Debug>
         </Physics>
       </Canvas>

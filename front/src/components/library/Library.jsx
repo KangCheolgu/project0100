@@ -17,6 +17,8 @@ import {CarpetRed} from "./object/CarpetRed.jsx"
 import {Rug} from "./object/Rug.jsx"
 import {StartLine} from "./object/StartLine.jsx"
 import ColliderBox from "../../ColliderBox.jsx"
+import {Art1, Art2, Art3, Art4, Art5, Fence, Paintbrush, Easel1, Easel2} from "./object/Arts.jsx"
+import {SquareRug} from "./object/SquareRug.jsx"
 
 export default function Library(props){
   const leftZoffset = Math.PI/2
@@ -117,6 +119,22 @@ export default function Library(props){
       <ZBasicAlley4 position={[position[0]+8, position[1]+0, position[2]-52]}/>
 
       {/* Art Room */}
+      <Art1 position={[-41.8, 2, -20]} scale={[5, 4, 5]} rotation={[0, -Math.PI/2, 0]}/>
+      <Art2 position={[-41.8, 2, -28]} scale={[5, 4, 5]} rotation={[0, -Math.PI/2, 0]}/>
+      <Art3 position={[-41.8, 2, -36]} scale={[5, 4, 5]} rotation={[0, -Math.PI/2, 0]}/>
+      <Art5 position={[-22.3, 0.2, -28]} scale={[0.3, 0.25, 0.3]} rotation={[0, Math.PI/2, 0]}/>
+      <Art4 position={[-22.3, 0.2, -20]} scale={[0.4, 0.35, 0.4]} rotation={[0, Math.PI, 0]}/>
+      <Fence position={[-41, 0, -16.5]} scale={[1.5, 1.5, 1.5]} rotation={[0, Math.PI/2, 0]}/>
+      <Fence position={[-41, 0, -24.5]} scale={[1.5, 1.5, 1.5]} rotation={[0, Math.PI/2, 0]}/>
+      <Fence position={[-41, 0, -32.5]} scale={[1.5, 1.5, 1.5]} rotation={[0, Math.PI/2, 0]}/>
+      <Fence position={[-23, 0, -16.5]} scale={[1.5, 1.5, 1.5]} rotation={[0, Math.PI/2, 0]}/>
+      <Fence position={[-23, 0, -24.5]} scale={[1.5, 1.5, 1.5]} rotation={[0, Math.PI/2, 0]}/>
+      <Fence position={[-23, 0, -32.5]} scale={[1.5, 1.5, 1.5]} rotation={[0, Math.PI/2, 0]}/>
+      <Easel1 position={[-29, 0, -16]} scale={[0.5, 0.5, 0.5]}/>
+      <Easel1 position={[-29, 0, -20]} scale={[0.5, 0.5, 0.5]}/>
+      <Easel1 position={[-29, 0, -24]} scale={[0.5, 0.5, 0.5]}/>
+      <Paintbrush position={[-35, 0, -38]} rotation={[0, Math.PI/4, 0]}/>
+      <SquareRug position={[-33, 0, -33]} scale={[5, 10, 10]}/>
       {generateCFloor2(position[0]+0, position[0]+16, position[2]-56)}
       {generateCFloor2(position[0]+0, position[0]+16, position[2]-60)}
       {generateCFloor2(position[0]+0, position[0]+16, position[2]-64)}
@@ -139,13 +157,14 @@ export default function Library(props){
       {generateXBasicAlley8(position[0]+20, position[0]+24, position[2]-76)}
       
       {/* library */}
-      <Bookcase position={[position[0]+37, position[1], position[2]-80]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
+      {/*<Bookcase position={[position[0]+37, position[1], position[2]-80]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
       <Bookcase position={[position[0]+37, position[1], position[2]-77]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
       <Bookcase position={[position[0]+37, position[1], position[2]-74]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
       <Bookcase position={[position[0]+37, position[1], position[2]-71]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
-      
-      <Bookshelf position={[position[0]+37, position[1]+1.9, position[2]-66.5]} rotation={[0, -Math.PI/2+0.2, 0]} scale={[1, 0.7, 1]}/>
       <Rug position={[position[0]+32, position[1]+0.1, position[2]-68]} scale={[100, 0.1 , 80]} rotation={[0, Math.PI/2, 0]}/>
+    */}
+      <Bookshelf position={[position[0]+37, position[1]+1.9, position[2]-66.5]} rotation={[0, -Math.PI/2+0.2, 0]} scale={[1, 0.7, 1]}/>
+      
       
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-80)}
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-76)}

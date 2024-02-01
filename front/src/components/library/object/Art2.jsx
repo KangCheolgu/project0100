@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.16 public\assets\models\Art2.glb -o src/components/libr
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model(props) {
+export function Art2(props) {
   const { nodes, materials } = useGLTF('/assets/models/Art2.glb')
   return (
     <group {...props} dispose={null}>
