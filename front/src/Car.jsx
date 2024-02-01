@@ -20,7 +20,7 @@ const Car = (props) => {
     {x: 59, y: 0, z:12},
     {x: 4, y: 0, z:41}]
    // 시작 지점
-   const startSpot={x:-28, y:0.3, z:39}  
+   const startSpot={x:-28, y:0, z:39}  
    const reset = () =>
    {
      // 직접 position 속성을 이용하여 초기 위치로 설정
@@ -33,33 +33,29 @@ const Car = (props) => {
   const worldPosition = useMemo(() => new Vector3(), []);
   const worldQuaternion = useMemo(() => new THREE.Quaternion(), []);
 
-  const chassisBodyValue = useControls('chassisBody', {
-    width: { value: 0.16, min: 0, max: 1, },
-    height: { value: 0.12, min: 0, max: 1, },
-    front: { value: 0.17, min: 0, max: 1, },
-  })
+  // const chassisBodyValue = useControls('chassisBody', {
+  //   width: { value: 0.16, min: 0, max: 1, },
+  //   height: { value: 0.12, min: 0, max: 1, },
+  //   front: { value: 0.17, min: 0, max: 1, },
+  // })
 
-
-  let position = [0, 0.1 ,0];
-  let rotation = null;
+  // const [position, setPosition] = useState();
+  // const [quaternion, setQuaternion] = useState();
+  let position = props.position;
+  let rotation = [0, 0, 0];
+  const playerNum = props.index
 
   // 위치 값
-  useEffect(() => {
-    const playerNum = props.index
-    // console.log(playerNum);
-
-    if(playerNum === 0) {
-      console.log("playerNum 0 맞습니다.");
-      chassisApi.position.set(-28.5, 0.3, 39);
-      rotation =  [0, -3.14, -3.14, 0]
-    } 
-    else if (playerNum === 1) {
-      console.log("playerNum 1 맞습니다.");
-
-      chassisApi.position.set(-27.5, 0.3, 39);
-      rotation = props.rotation
-    }
-  },[])
+  // useEffect(() => {
+  //   const playerNum = props.index
+  //   // console.log(playerNum);
+  //   if(playerNum === 0) {
+  //     let position = props.position;
+  //   } 
+  //   else if (playerNum === 1) {
+  //     let position = props.position;
+  //   }
+  // },[])
 
   let width, height, front, mass, wheelRadius;
 
@@ -69,24 +65,15 @@ const Car = (props) => {
   wheelRadius = 0.05;
   mass = 150;
 
-  // 랜덤 위치 생성 함수
-  const randomPosition = () => {
-    return [
-      Math.random() * 10 - 5, // X 축
-      0.1,                    // Y 축 (지면 위에 위치)
-      Math.random() * 10 - 5  // Z 축
-    ];
-  };
-
   const chassisBodyArgs = [width, height, front * 2];
   const startEuler = new THREE.Euler(0, -Math.PI/2, 0, 'XYZ');
   const startQuaternion = new THREE.Quaternion();
   startQuaternion.setFromEuler(startEuler);
   const [chassisBody, chassisApi] = useCompoundBody(
     () => ({
-      position : [0, 0, 0],
+      position,
       mass: mass,
-      rotation: [0, -Math.PI/2, 0],
+      rotation,
       shapes: [
         {
           args: chassisBodyArgs,
@@ -123,99 +110,51 @@ const Car = (props) => {
     () => new THREE.Quaternion()
   );
   const [carVelocity, setCarVelocity] = useState(new THREE.Vector3());
-
-  // // Back-View 카메라
-  // useFrame((state, delta) => {
-  //   if (socket.id === props.id) {
-
-  //     const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-  //     const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
-
-  //     // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-  //     const relativeCameraPosition = new THREE.Vector3(0, 0.7, 0.65);
-
-  //     // 카메라의 전역 위치 계산
-  //     const cameraPosition = new THREE.Vector3();
-  //     cameraPosition.copy(relativeCameraPosition);
-  //     cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
-  //     cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
-
-  //     // smooth camera 전환속도
-  //     smoothedCameraPosition.lerp(cameraPosition, 0.5);
-
-  //     state.camera.position.copy(smoothedCameraPosition);
-  //     // state.camera.position.copy(cameraPositin);
-
-  //     // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
-  //     const cameraTarget = new THREE.Vector3();
-  //     cameraTarget.copy(bodyPosition);
-  //     cameraTarget.y += 0.25;
-  //     state.camera.lookAt(cameraTarget);
-  //   }
-  // })
-
-  // back-vie 카메라 수정중
-    /* 
+  /* 
   *   About phase
   */
-  const start = useGame((state) => state.start)
   const end = useGame((state)=> state.end)
-  const restart = useGame((state)=> state.restart)
-  const phase = useGame((state)=> state.phase)
   const around = useGame((state)=> state.around)
   const inspot= useGame((state)=> state.inspot)
-  const outspot = useGame((state)=> state.outspot)
   let isIn = useGame((state)=> state.isIn)
   const lapse = useGame((state)=> state.lapse)
 
   useFrame((state, delta) => {
     if (socket.id === props.id) {
+
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
-      console.log(isIn)
-      console.log(bodyPosition)
       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
+      const relativeCameraPosition = new THREE.Vector3(0, 0.4, 0.65);
 
       // 카메라의 전역 위치 계산
-      // const relativeCameraPosition = new THREE.Vector3(0, 0.7, 0.65);
-
       const cameraPosition = new THREE.Vector3();
       cameraPosition.copy(relativeCameraPosition);
-      cameraPosition.applyQuaternion(bodyRotation);
-      cameraPosition.add(bodyPosition);
+      cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
+      cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
 
-      const dampingFactor = Math.min(Math.max(carVelocity.length() * 0.1, 0.5), 0.8);
+      // smooth camera 전환속도
+      smoothedCameraPosition.lerp(cameraPosition, 0.5);
 
-      const delta = 0.5;
-      smoothedCameraPosition.lerp(cameraPosition, dampingFactor * delta);
-      const desiredRotation = new THREE.Quaternion(); // 원하는 회전 계산 필요
-      smoothedCameraRotation.slerp(desiredRotation, dampingFactor * delta);
+      // state.camera.position.copy(smoothedCameraPosition);
+      state.camera.position.copy(cameraPosition);
 
-      state.camera.position.copy(smoothedCameraPosition);
-      state.camera.quaternion.copy(smoothedCameraRotation);
-
+      // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
       const cameraTarget = new THREE.Vector3();
       cameraTarget.copy(bodyPosition);
       cameraTarget.y += 0.25;
       state.camera.lookAt(cameraTarget);
-    }
-     /* Phases*/
-  const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3());
-  /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
-  if(lapse===2
-    &&bodyPosition.x < startSpot.x + 3 && startSpot.x > startSpot.x - 3 
-    && bodyPosition.z < startSpot.z+ 3 && bodyPosition.z > startSpot.z-3){
-    end()
-    console.log("end")
-  }
-  /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
-  else if(isIn.every((elem)=>elem===true)
-          &&bodyPosition.x < startSpot.x + 3&& bodyPosition.x > startSpot.x - 3 
-          && bodyPosition.z < startSpot.z+ 3 && bodyPosition.z > startSpot.z-3){
-    around()
     
-    console.log("around")
+     /* Phases*/
+  /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
+  /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
+  if(isIn.every((elem)=>elem===true)
+    && bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
+    && bodyPosition.z < startSpot.z+ 1 && bodyPosition.z > startSpot.z-1){
+    around()
+    if(lapse==2){
+      end()
+    }
   }
   else{
     /* 체크포인트 지날 때 */
@@ -234,6 +173,7 @@ const Car = (props) => {
   } 
   /* outspot 구현 예정
       체크 포인트를 잘못된 방향으로 벗어났을때 true-> false */
+}
   });
 
   useEffect(() => {
@@ -245,10 +185,6 @@ const Car = (props) => {
           reset()
       }
     )
-    return()=>
-    {
-      unsubscribeReset()
-    }
 
     let lastPosition = new THREE.Vector3(chassisApi.position.x, chassisApi.position.y, chassisApi.position.z);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
@@ -269,7 +205,7 @@ const Car = (props) => {
         extrapolatedPosition.add(targetAcceleration.clone().multiplyScalar(0.5 * Math.pow(adjustedDelta, 2)));
 
         // extrapolation을 한 포지션과 이전 위치를 interpolation
-        const lerpFactor = 0.6; // Interpolation strength
+        const lerpFactor = 0.4; // Interpolation strength
         lastPosition.lerp(extrapolatedPosition, lerpFactor);
         chassisApi.position.copy(lastPosition);
 
@@ -283,6 +219,7 @@ const Car = (props) => {
 
     return () => {
       socket.off("updateAnotherPlayer", updateAnotherPlayer);
+      unsubscribeReset()
     };
   });
 
@@ -314,10 +251,9 @@ const Car = (props) => {
 
     useInterval(() => {
       if (socket.id === props.id) {
-        const delta = 0.05; // 100ms expressed in seconds
+        const delta = 1; // 100ms expressed in seconds
         const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
         const bodyQuaternion = chassisBody.current.getWorldQuaternion(worldQuaternion);
-
         // 속도 계산
         const newVelocity = new THREE.Vector3();
         newVelocity.subVectors(bodyPosition, lastState.current.position).divideScalar(delta);
@@ -333,8 +269,6 @@ const Car = (props) => {
           acceleration: newAcceleration.clone(),
         };
 
-        setCarVelocity(newVelocity.clone()); // 속도 상태 업데이트
-
         const currentState = {
           id: socket.id,
           position: bodyPosition,
@@ -346,6 +280,7 @@ const Car = (props) => {
       }
     }, 30);
   };
+
 
   return (
       <group ref={vehicle}>

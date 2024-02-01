@@ -8,6 +8,7 @@ import Scene from './Scene'
 export default function Interface(){
     const lapse = useRef()
     const time = useRef()
+    const endtime = useRef()
     const forward = useKeyboardControls((state)=>state.forward) 
     const backward = useKeyboardControls((state)=>state.backward)
     const leftward = useKeyboardControls((state)=>state.leftward)
@@ -15,26 +16,28 @@ export default function Interface(){
     const restart = useGame((state)=> state.restart)
     const phase = useGame((state)=> state.phase)
     let count = useGame((state)=> state.count)
-
+    let elapsedTime=0
 
     useEffect(()=>
     {
         const unsubscribeEffect = addEffect(()=>
         {
             const state = useGame.getState()
-            let elapsedTime=0
+            
             let newLapse = state.lapse
             if(state.phase ==='playing')
                 elapsedTime = Date.now() - state.startTime
-            else if(state.phase==='ended')
+            else if(state.phase==='ended'){
                 elapsedTime = state.endTime-state.startTime
-
+            }
             elapsedTime /= 1000
             elapsedTime = elapsedTime.toFixed(2)
 
             if(time.current)
                 time.current.textContent = elapsedTime
+            if(lapse.current)
                 lapse.current.textContent = newLapse+"/2"
+                
         })
         return ()=>{
             unsubscribeEffect()
@@ -53,8 +56,9 @@ export default function Interface(){
         {/* raceStart */}
         {count <=0 && count > -2 && <div className="countdown" ><h1>Start</h1></div>}
         {/* Restart */}
+        
         {phase==='ended'?<div className="restart" onClick={restart}>Restart</div>:null}
-        {/*<div className="restart" onClick={restart}>Restart</div>*/}
+        {phase==='ended'?<div className="endtime"></div>:null}
 
         {/* Controls */}
         <div className="controls">

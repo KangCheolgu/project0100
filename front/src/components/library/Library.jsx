@@ -1,7 +1,7 @@
 import XBasicAlley4 from "./Map/XBasicAlley4.jsx"
 import ZBasicAlley4 from "./Map/ZBasicAlley4.jsx"
 import ColliderWall from "../../ColliderWall.jsx"
-import {C_Wall,C_Floor3, C_Floor2} from './Ruins/Library_C_Ruin.jsx'
+import {C_Wall,C_TopWall, C_LeftWall, C_Floor3, C_Floor2} from './Ruins/Library_C_Ruin.jsx'
 import {YellowWall} from './Map/YellowWall.jsx'
 import TownCenter from './object/TownCenter.jsx'
 import {StoneStep} from './Map/StoneStep.jsx'
@@ -16,6 +16,7 @@ import {Bookshelf} from "./object/Bookshelf.jsx"
 import {CarpetRed} from "./object/CarpetRed.jsx"
 import {Rug} from "./object/Rug.jsx"
 import {StartLine} from "./object/StartLine.jsx"
+import ColliderBox from "../../ColliderBox.jsx"
 
 export default function Library(props){
   const leftZoffset = Math.PI/2
@@ -101,30 +102,28 @@ export default function Library(props){
       {generateWallsZ(position[2]-37, position[2]-9, position[0]+26, rightZoffset)}
 
       {/*Alley2*/}
-      <ZBasicAlley4 position={[position[0]+12, position[1]+0, position[2]-40]}/>
-      <ZBasicAlley4 position={[position[0]+12, position[1]+0, position[2]-44]}/>
+      <ZBasicAlley4 position={[position[0]+12.2, position[1]+0, position[2]-40]}/>
+      <ZBasicAlley4 position={[position[0]+12.2, position[1]+0, position[2]-44]}/>
 
-      <C_Wall position={[position[0]+12, position[1]+0, position[2]-51.5]}/>
-      {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
-      <C_Wall position={[position[0]+13.5, position[1]+0, position[2]-49.5]} rotation={[0, -Math.PI/2, 0]}/>
+      <C_TopWall position={[position[0]+11.8, position[1]+0, position[2]-51.4]} rotation={[0, 0, 0]}/>
+      <C_LeftWall position={[position[0]+13.8, position[1]+0, position[2]-49.5]} rotation={[0, -Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+12, position[1]+0, position[2]-48]}/>
 
-      <C_Wall position={[position[0]+8, position[1]+0, position[2]-47.5]}/>
+      <C_TopWall position={[position[0]+8, position[1]+0, position[2]-47.5]}/>
       {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
-      <C_Wall position={[position[0]+5.8, position[1]+0, position[2]-49.5]} rotation={[0, -Math.PI/2, 0]}/>
+      <C_LeftWall position={[position[0]+5.8, position[1]+0, position[2]-49.5]} rotation={[0, -Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+8, position[1]+0, position[2]-48]}/>
 
       <ZBasicAlley4 position={[position[0]+8, position[1]+0, position[2]-52]}/>
 
       {/* Art Room */}
-      {generateCFloor2(position[0]+0, position[0]+21, position[2]-57)}
-      {generateCFloor2(position[0]+0, position[0]+21, position[2]-61)}
-      {generateCFloor2(position[0]+0, position[0]+21, position[2]-65)}
-      {generateCFloor2(position[0]+0, position[0]+21, position[2]-69)}
-      {generateCFloor2(position[0]+0, position[0]+21, position[2]-73)}
-      {generateCFloor2(position[0]+0, position[0]+21, position[2]-77)}
-      {generateCFloor2(position[0]+0, position[0]+21, position[2]-81)}
-      {generateCFloor2(position[0]+0, position[0]+21, position[2]-85)}
+      {generateCFloor2(position[0]+0, position[0]+16, position[2]-56)}
+      {generateCFloor2(position[0]+0, position[0]+16, position[2]-60)}
+      {generateCFloor2(position[0]+0, position[0]+16, position[2]-64)}
+      {generateCFloor2(position[0]+0, position[0]+16, position[2]-68)}
+      {generateCFloor2(position[0]+0, position[0]+16, position[2]-72)}
+      {generateCFloor2(position[0]+0, position[0]+16, position[2]-76)}
+      {generateCFloor2(position[0]+0, position[0]+16, position[2]-80)}
 
       {generateWallsX(position[0]+0, position[0]+4, position[2]-55)}
       {generateWallsX(position[0]+12, position[0]+16, position[2]-55)}
@@ -146,7 +145,7 @@ export default function Library(props){
       <Bookcase position={[position[0]+37, position[1], position[2]-71]} rotation={[0,-Math.PI/2, 0]} scale={[2, 1.2, 2]}/>
       
       <Bookshelf position={[position[0]+37, position[1]+1.9, position[2]-66.5]} rotation={[0, -Math.PI/2+0.2, 0]} scale={[1, 0.7, 1]}/>
-      <Rug position={[position[0]+32, position[1]+2, position[2]-68]} scale={[100, 0.1 , 80]} rotation={[0, Math.PI/2, 0]}/>
+      <Rug position={[position[0]+32, position[1]+0.1, position[2]-68]} scale={[100, 0.1 , 80]} rotation={[0, Math.PI/2, 0]}/>
       
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-80)}
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-76)}
@@ -157,7 +156,7 @@ export default function Library(props){
       {generateCFloor2(position[0]+28, position[0]+36, position[2]-56)}
 
       {generateWallsZ(position[2]-82,position[2]-79, position[0]+26, leftZoffset)}
-      {generateWallsZ(position[2]-74, position[2]-58, position[0]+26, leftZoffset)}
+      {generateWallsZ(position[2]-73.9, position[2]-57.9, position[0]+26, leftZoffset)}
       {generateWallsZ(position[2]-82, position[2]-62, position[0]+38, rightZoffset)}
 
       {generateWallsX(position[0]+28, position[0]+36, position[2]-83.5)}
@@ -165,34 +164,33 @@ export default function Library(props){
       {/* Alley 4*/}
       
 
-      <C_Wall position={[position[0]+40, position[1]+0, position[2]-59.5]}/>
+      <C_TopWall position={[position[0]+40, position[1]+0, position[2]-59.5]}/>
       {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
-      <C_Wall position={[position[0]+42, position[1]+0, position[2]-57.5]} rotation={[0, -Math.PI/2, 0]}/>
+      <C_LeftWall position={[position[0]+42, position[1]+0, position[2]-57.5]} rotation={[0, -Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+40, position[1]+0, position[2]-56]}/>
 
-      <C_Wall position={[position[0]+40, position[1]+0, position[2]-51.5]}/>
+      <C_TopWall position={[position[0]+40, position[1]+0, position[2]-51.5]}/>
       {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
-      <C_Wall position={[position[0]+42, position[1]+0, position[2]-53.5]} rotation={[0, -Math.PI/2, 0]}/>
+      <C_LeftWall position={[position[0]+42, position[1]+0, position[2]-53.5]} rotation={[0, -Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+40, position[1]+0, position[2]-52]}/>
       
       {generateXBasicAlley8(position[0]+24, position[0]+38, position[2]-52)}
 
-      <C_Wall position={[position[0]+20, position[1]+0, position[2]-55.5]}/>
+      <C_TopWall position={[position[0]+20, position[1]+0, position[2]-55.4]}/>
       {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
-      <C_Wall position={[position[0]+17.5, position[1]+0, position[2]-53.5]} rotation={[0, -Math.PI/2, 0]}/>
+      <C_LeftWall position={[position[0]+17.7, position[1]+0, position[2]-53.5]} rotation={[0, -Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+20, position[1]+0, position[2]-52]}/>
 
       <ZBasicAlley4 position={[position[0]+20, position[1]+0, position[2]-48]}/>
       <ZBasicAlley4 position={[position[0]+20, position[1]+0, position[2]-44]}/>
 
-      <C_Wall position={[position[0]+20, position[1]+0, position[2]-55.5]}/>
+      <C_TopWall position={[position[0]+20, position[1]+0, position[2]-55.5]}/>
       {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
-      <C_Wall position={[position[0]+17.5, position[1]+0, position[2]-53.5]} rotation={[0, -Math.PI/2, 0]}/>
+      <C_LeftWall position={[position[0]+17.5, position[1]+0, position[2]-53.5]} rotation={[0, -Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+20, position[1]+0, position[2]-52]}/>
 
-      <C_Wall position={[position[0]+20, position[1]+0, position[2]-39]}/>
-      {/*<C_Wall position={[14, 0, 0]} rotation={[0, Math.PI/4, 0]} scale={[2, 0, 0]}/>*/}
-      <C_Wall position={[position[0]+17.5, position[1]+0, position[2]-41.5]} rotation={[0, -Math.PI/2, 0]}/>
+      <C_TopWall position={[position[0]+20, position[1]+0, position[2]-39]}/>
+      <C_LeftWall position={[position[0]+17.5, position[1]+0, position[2]-41.5]} rotation={[0, -Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+20, position[1]+0, position[2]-40]}/>
 
       {generateXBasicAlley8(position[0]+24, position[0]+36, position[2]-40)}
@@ -205,14 +203,14 @@ export default function Library(props){
       <ZBasicAlley4 position={[position[0]+44, position[1], position[2]+24]}/>
      
       
-      <C_Wall position={[position[0]+44, position[1]+0, position[2]+28]} rotation={[0, Math.PI, 0]}/>
-      <C_Wall position={[position[0]+46, position[1]+0, position[2]+26]} rotation={[0, Math.PI/2, 0]}/>
+      <C_TopWall position={[position[0]+44, position[1]+0, position[2]+28]} rotation={[0, Math.PI, 0]}/>
+      <C_LeftWall position={[position[0]+46, position[1]+0, position[2]+26]} rotation={[0, Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+44, position[1]+0, position[2]+28]}/>
 
       {generateXBasicAlley8(position[0]+16, position[0]+40, position[2]+28)}
 
-      <C_Wall position={[position[0]+12, position[1]+0, position[2]+28]} rotation={[0, Math.PI, 0]}/>
-      <C_Wall position={[position[0]+10, position[1]+0, position[2]+26]} rotation={[0, Math.PI/2, 0]}/>
+      <C_TopWall position={[position[0]+12, position[1]+0, position[2]+28]} rotation={[0, Math.PI, 0]}/>
+      <C_LeftWall position={[position[0]+10, position[1]+0, position[2]+26]} rotation={[0, Math.PI/2, 0]}/>
       <C_Floor3 position={[position[0]+12, position[1]+0, position[2]+28]}/>
       
       <ZBasicAlley4 position={[-28, 0, 63]}/>

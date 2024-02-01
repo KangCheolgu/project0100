@@ -10,6 +10,7 @@ import Interface from "./Interface"
 import Library from "./components/library/Library.jsx"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
+// import BgmSound from "./sound/BgmSound.jsx";
 
 export const socket = io("http://localhost:5000")
 
@@ -66,21 +67,21 @@ function Scene() {
   return (
     <>
       <Interface/>
-
-      <Canvas camera={{ fov:75, position:[1.5, 8, 4]}}>
-        {/* <SocketManager /> */}
-        <ambientLight/>
-        <directionalLight intensity={5} position={[0, 5, 5]} />
+      {/* <BgmSound /> */}
+      <Canvas camera={{ fov:85, position:[1.5, 8, 4]}}>
+        <ambientLight intensity={3.2}/>
+        <directionalLight intensity={0.6} position={[0, 5, 5]} />
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
+            {/* <Ground /> */}
             <Library position={[-40, 0, 39]}/>
             <Castle/>
-            {
+            {/*
               players.map((player, index) => (
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
               ))
-            } 
+              */} 
           </Debug>
         </Physics>
       </Canvas>
