@@ -10,7 +10,7 @@ import Interface from "./Interface"
 import Library from "./components/library/Library.jsx"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
-import BgmSound from "./sound/BgmSound.jsx";
+// import BgmSound from "./sound/BgmSound.jsx";
 
 export const socket = io("http://localhost:5000")
 
@@ -24,7 +24,7 @@ function Scene() {
   let count = useGame((state)=> state.count)
   let Countdown = useGame((state)=> state.Countdown)
   var countIntervalRef = useRef(null)
-  
+  const start = useGame((state) => state.start)
   //count값 바뀔 때마다 
   useEffect(()=>{
     if (count === 0){
@@ -32,6 +32,7 @@ function Scene() {
       //count 가 -2 가 되면 Start 문자가 사라지게
     } else if (count === -2) {
       clearInterval(countIntervalRef.current)
+      start()
     }
   },[count])
 
@@ -66,22 +67,22 @@ function Scene() {
   return (
     <>
       <Interface/>
-      <BgmSound />
+      {/* <BgmSound /> */}
       <Canvas camera={{ fov:85, position:[1.5, 8, 4]}}>
         <ambientLight intensity={3.2}/>
         <directionalLight intensity={0.6} position={[0, 5, 5]} />
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
-          {/* <Debug> */}
+          <Debug>
             {/* <Ground /> */}
             <Library position={[-40, 0, 39]}/>
             <Castle/>
-            {
+            {/*
               players.map((player, index) => (
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
               ))
-            } 
-          {/* </Debug> */}
+              */} 
+          </Debug>
         </Physics>
       </Canvas>
     </>
