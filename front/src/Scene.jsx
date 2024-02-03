@@ -4,17 +4,17 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React } from "react";
-import Castle from "./components/Castle/Castle.jsx";
 import { OrbitControls } from '@react-three/drei';
 import Interface from "./Interface"
-import Library from "./components/library/Library.jsx"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
-// import BgmSound from "./sound/BgmSound.jsx";
+import Map1 from "./Map1.jsx";
+import Map2 from "./Map2.jsx";
+import * as THREE from "three";
 
 export const socket = io("http://localhost:5000")
 
-function Scene() {
+export default function Scene() {
   const defaultY = -0.3
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
@@ -64,24 +64,25 @@ function Scene() {
     })
   },[])
 
+  const Plane =new THREE.PlaneGeometry()
   return (
     <>
       <Interface/>
       {/* <BgmSound /> */}
       <Canvas camera={{ fov:85, position:[1.5, 8, 4]}}>
         <ambientLight intensity={3.2}/>
-        <directionalLight intensity={0.6} position={[0, 5, 5]} />
+        <directionalLight intensity={2} position={[0, 5, 5]} />
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
-            {/* <Ground /> */}
-            <Library position={[-40, 0, 39]}/>
-            <Castle/>
+            <Ground rotation={[-Math.PI/2, 0, 0]} />
             {
               players.map((player, index) => (
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
               ))
-            } 
+            }
+            <Map1 position={[0, 0, 0]}/>
+            {/*<Map2 position={[0, 0, -30]}/>*/}
           </Debug>
         </Physics>
       </Canvas>
@@ -89,4 +90,4 @@ function Scene() {
   );
 }
 
-export default Scene;
+
