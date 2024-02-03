@@ -4,7 +4,6 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
-import Castle from "./components/Castle/Castle.jsx";
 import { OrbitControls, useProgress } from '@react-three/drei';
 import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
@@ -13,7 +12,7 @@ import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
 
 import Map1 from "./Map1.jsx";
-import Map2 from "./Map2.jsx";
+import ColliderBox from "./ColliderBox.jsx";
 import * as THREE from "three";
 
 export const socket = io("http://localhost:5000")
@@ -91,17 +90,18 @@ export default function Scene() {
         <directionalLight intensity={0.4} position={[0, 5, 5]} castShadow />
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
-          {/* <Debug> */}
-            {/* <Ground /> */}
+          <Debug>
+          <ColliderBox scale={[300, 0.1, 300]} position={[0, 0, 0]}/>
             <Suspense fallback={<LoadingPage />}>
+              {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
             </Suspense>
-            {
+            {/*
               players.map((player, index) => (
-                <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
+                <Car id={player.id} key={player.id} position={[0, 0.3, -12]} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index}/>
               ))
-          }
-         {/* </Debug>*/}
+              */ }
+         </Debug>
         </Physics>
       </Canvas>
      
