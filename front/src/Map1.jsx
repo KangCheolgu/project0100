@@ -3,8 +3,8 @@ import { } from "@react-three/cannon";
 import { useEffect, useMemo, useRef, useState, forwardRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import {RoadLanes, RoadLanesHalf, RoadLeftBottomCurve, RoadPlain, CrossWalkHalf,Side, Side2, Side3, SideRightTopCurve, SideLeftBottom, SideRightTopInnerCurve,SideRightTopInnerCurve2,SideRightTopInnerCurve3, SideRightTopOutterCurve2, CurbLeftBottomCurve, SideRightTopOutterCurve1, SideRightTopCurveLong} from "./components/Road.jsx"
-import {Model, BuildingGreen, BuildingRed} from "./components/Object.jsx"
+import {RoadLanes, RoadLanesHalf, RoadLeftBottomCurve, RoadPlain, CrossWalkHalf,Side, Side2, Side3, SideRightTopCurve, SideLeftBottom, SideRightTopInnerCurve,SideRightTopInnerCurve2,SideRightTopInnerCurve3, SideRightTopOutterCurve2, CurbLeftBottomCurve, SideRightTopOutterCurve1, SideRightTopCurveLong} from "./components/resort/Road.jsx"
+import {Model, BuildingGreen, BuildingRed} from "./components/resort/Object.jsx"
  
 export default function Map1(props){
     const position = props.position
