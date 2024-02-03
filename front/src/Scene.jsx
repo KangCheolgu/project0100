@@ -4,19 +4,20 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
-import Castle from "./components/Castle/Castle.jsx";
 import { OrbitControls, useProgress } from '@react-three/drei';
 import Interface from "./Interface"
-import Library from "./components/library/Library.jsx"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
 
+import Map1 from "./Map1.jsx";
+import ColliderBox from "./ColliderBox.jsx";
+import * as THREE from "three";
 
 export const socket = io("http://localhost:5000")
 
-function Scene() {
+export default function Scene() {
   const defaultY = -0.3
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
@@ -78,6 +79,7 @@ function Scene() {
 
   // 로딩 관련 끝
 
+  const Plane =new THREE.PlaneGeometry()
   return (
     <>
       <Interface/>
@@ -85,26 +87,24 @@ function Scene() {
        
       <Canvas camera={{ fov:75, position:[1.5, 8, 4]}}>
         <ambientLight intensity={3}/>
-        <directionalLight intensity={0.4} position={[0, 5, 5]} />
+        <directionalLight intensity={0.4} position={[0, 5, 5]} castShadow />
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
-          {/* <Debug> */}
-            {/* <Ground /> */}
+          <Debug>
+          <ColliderBox scale={[300, 0.1, 300]} position={[0, 0, 0]}/>
             <Suspense fallback={<LoadingPage />}>
-            <Library position={[-40, 0, 39]}/>
-            <Castle/>
+              {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
+              <Map1 position={[0, 0, 0]}/>
             </Suspense>
-            {
+            {/*
               players.map((player, index) => (
-                <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
+                <Car id={player.id} key={player.id} position={[0, 0.3, -12]} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index}/>
               ))
-            }
-          {/* </Debug> */}
+              */ }
+         </Debug>
         </Physics>
       </Canvas>
      
     </>
   );
 }
-
-export default Scene;

@@ -21,20 +21,20 @@ const Car = (props) => {
   //   {x: 4, y: 0, z:41}]
   //  // 시작 지점
   //  const startSpot={x:-28, y:0, z:39}  
-   const reset = () =>
-   {
-     // 직접 position 속성을 이용하여 초기 위치로 설정
-     chassisApi.position.set(-28, 0.3, 39);
-     chassisApi.velocity.set(0, 0, 0);  // 필요에 따라 속도도 초기화
-     chassisApi.angularVelocity.set(0, 0, 0);  // 필요에 따라 각속도도 초기화
-   }
+  // const reset = () =>
+  // {
+  //   // 직접 position 속성을 이용하여 초기 위치로 설정
+  //   chassisApi.position.set(0, 0.3, -12);
+  //   chassisApi.velocity.set(0, 0, 0);  // 필요에 따라 속도도 초기화
+  //   chassisApi.angularVelocity.set(0, 0, 0);  // 필요에 따라 각속도도 초기화
+  // }
 
   // Quaternion, Position 인스턴스 생성
   const worldPosition = useMemo(() => new Vector3(), []);
   const worldQuaternion = useMemo(() => new THREE.Quaternion(), []);
 
   let position = props.position;
-  let rotation = [0, 0, 0];
+  let rotation = props.rotation;
   const playerNum = props.index
 
   let width, height, front, mass, wheelRadius;
@@ -274,7 +274,7 @@ const Car = (props) => {
   };
 
   return (
-      <group ref={vehicle}>
+      <group ref={vehicle} castShadow>
         <Suspense>
         <group ref={chassisBody}>
             <CarModel />
