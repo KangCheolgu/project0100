@@ -3,14 +3,16 @@ import { Canvas } from "@react-three/fiber";
 import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
-import { useState, useEffect, useRef, React } from "react";
+import { useState, useEffect, useRef, React, Suspense } from "react";
 import Castle from "./components/Castle/Castle.jsx";
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, useProgress } from '@react-three/drei';
 import Interface from "./Interface"
 import Library from "./components/library/Library.jsx"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
+import LoadingPage from "./utils/Loading.jsx";
+
 
 export const socket = io("http://localhost:5000")
 
@@ -18,13 +20,17 @@ function Scene() {
   const defaultY = -0.3
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
-
-  const [state, setState] = useState(false)
   let numPlayers = 2
+
+  // 상태 체크하여 
+  const [state, setState] = useState(false)
+ 
+  // 카운트 다운 관련
   let count = useGame((state)=> state.count)
   let Countdown = useGame((state)=> state.Countdown)
   var countIntervalRef = useRef(null)
   const start = useGame((state) => state.start)
+
   //count값 바뀔 때마다 
   useEffect(()=>{
     if (count === 0){
@@ -41,7 +47,9 @@ function Scene() {
       Countdown()
     }, 1000)
   }
-  
+  // 카운트 다운 관련 끝
+
+  // 유저 접속 관련
   useEffect(() => {
     // 접속한 유저 목록 갱신
     function onPlayers(backEndPlayers){ 
@@ -63,11 +71,18 @@ function Scene() {
       socket.off("updatePlayers", onPlayers);
     })
   },[])
+  // 유저 접속 관련 끝
+
+  // 로딩 관련
+
+
+  // 로딩 관련 끝
 
   return (
     <>
       <Interface/>
       <BgmSound />
+       
       <Canvas camera={{ fov:75, position:[1.5, 8, 4]}}>
         <ambientLight intensity={3}/>
         <directionalLight intensity={0.4} position={[0, 5, 5]} />
@@ -75,16 +90,19 @@ function Scene() {
         <Physics gravity={[0, -2.6, 0]}>
           {/* <Debug> */}
             {/* <Ground /> */}
+            <Suspense fallback={<LoadingPage />}>
             <Library position={[-40, 0, 39]}/>
             <Castle/>
+            </Suspense>
             {
               players.map((player, index) => (
-                  <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
+                <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
               ))
             }
           {/* </Debug> */}
         </Physics>
       </Canvas>
+     
     </>
   );
 }

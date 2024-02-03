@@ -1,5 +1,7 @@
 import { useCompoundBody, useRaycastVehicle } from "@react-three/cannon";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, forwardRef, Suspense } from "react";
+
+import { useControls } from "leva";
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
 import { Vector3 } from "three";
@@ -13,18 +15,19 @@ import collisionSound from './sound/car-hit/car-hit-1.wav';
 
 const Car = (props) => {
   // 체크포인트 위치
-  const spot = [{ x: -32, y: 0, z: -13 },
-  { x: -1, y: 0, z: -17 },
-  { x: 59, y: 0, z: 12 },
-  { x: 4, y: 0, z: 41 }]
-  // 시작 지점
-  const startSpot = { x: -28, y: 0, z: 39 }
-  const reset = () => {
-    // 직접 position 속성을 이용하여 초기 위치로 설정
-    chassisApi.position.set(-28, 0.3, 39);
-    chassisApi.velocity.set(0, 0, 0);  // 필요에 따라 속도도 초기화
-    chassisApi.angularVelocity.set(0, 0, 0);  // 필요에 따라 각속도도 초기화
-  }
+  // const spot = [{x: -32, y: 0, z:-13},
+  //   {x: -1, y: 0, z:-17},
+  //   {x: 59, y: 0, z:12},
+  //   {x: 4, y: 0, z:41}]
+  //  // 시작 지점
+  //  const startSpot={x:-28, y:0, z:39}  
+   const reset = () =>
+   {
+     // 직접 position 속성을 이용하여 초기 위치로 설정
+     chassisApi.position.set(-28, 0.3, 39);
+     chassisApi.velocity.set(0, 0, 0);  // 필요에 따라 속도도 초기화
+     chassisApi.angularVelocity.set(0, 0, 0);  // 필요에 따라 각속도도 초기화
+   }
 
   // Quaternion, Position 인스턴스 생성
   const worldPosition = useMemo(() => new Vector3(), []);
@@ -98,11 +101,11 @@ const Car = (props) => {
   /* 
   *   About phase
   */
-  const end = useGame((state) => state.end)
-  const around = useGame((state) => state.around)
-  const inspot = useGame((state) => state.inspot)
-  let isIn = useGame((state) => state.isIn)
-  const lapse = useGame((state) => state.lapse)
+  // const end = useGame((state)=> state.end)
+  // const around = useGame((state)=> state.around)
+  // const inspot= useGame((state)=> state.inspot)
+  // let isIn = useGame((state)=> state.isIn)
+  // const lapse = useGame((state)=> state.lapse)
 
   // Back-View 카메라
   useFrame((state, delta) => {
@@ -134,49 +137,50 @@ const Car = (props) => {
 
       /* Phases*/
 
-      /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
-      /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
-      if (isIn.every((elem) => elem === true)
-        && bodyPosition.x < startSpot.x + 1 && bodyPosition.x > startSpot.x - 1
-        && bodyPosition.z < startSpot.z + 1 && bodyPosition.z > startSpot.z - 1) {
-        around()
-        if (lapse == 2) {
-          end()
-        }
-      } else {
-        /* 체크포인트 지날 때 */
-        const newisIn = [false, false, false, false]
-        for (let i = 0; i < 4; i++) {
-          newisIn[i] = bodyPosition.x < spot[i].x + 3 && bodyPosition.x > spot[i].x - 3 && bodyPosition.z < spot[i].z + 3 && bodyPosition.z > spot[i].z - 3
-          if (newisIn[0]) {
-            inspot(0)
-            break
-          }
-
-          if (isIn[i - 1] === true && newisIn[i]) {
-            inspot(i)
-          }
-        }
-      }
-      /* outspot 구현 예정
-          체크 포인트를 잘못된 방향으로 벗어났을때 true-> false */
-    }
+    /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
+    /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
+    // if(isIn.every((elem)=>elem===true)
+    //   && bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
+    //   && bodyPosition.z < startSpot.z+ 1 && bodyPosition.z > startSpot.z-1){
+    //   around()
+    //   if(lapse==2){
+    //     end()
+    //   }
+    // } else {
+    // /* 체크포인트 지날 때 */
+    //   const newisIn = [false, false, false, false]
+    //   for(let i=0;i<4;i++){
+    //     newisIn[i] = bodyPosition.x < spot[i].x + 3 && bodyPosition.x > spot[i].x - 3 && bodyPosition.z < spot[i].z+ 3 && bodyPosition.z > spot[i].z-3
+    //     if(newisIn[0]){
+    //       inspot(0)
+    //       break
+    //     }
+        
+    //     if(isIn[i-1]===true&&newisIn[i]){
+    //       inspot(i)
+    //     }
+    //   }
+    // } 
+  /* outspot 구현 예정
+      체크 포인트를 잘못된 방향으로 벗어났을때 true-> false */
+}
   });
 
   useEffect(() => {
-    const unsubscribeReset = useGame.subscribe(
-      (state) => state.phase,
-      (value) => {
-        if (value === 'ready')
-          reset()
-      }
-    )
+    // const unsubscribeReset = useGame.subscribe(
+    //   (state) => state.phase,
+    //   (value) =>
+    //   {
+    //     if(value === 'ready')
+    //       reset()
+    //   }
+    // )
 
     let lastPosition = new THREE.Vector3(chassisApi.position.x, chassisApi.position.y, chassisApi.position.z);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
 
     function updateAnotherPlayer(updateData) {
-      if (updateData.id === props.id) {
+      if (updateData.id === props.id && socket.id !== props.id) {
         const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
         const targetQuaternion = new THREE.Quaternion(updateData.quaternion[0], updateData.quaternion[1], updateData.quaternion[2], updateData.quaternion[3]);
         const targetVelocity = new THREE.Vector3(updateData.velocity.x, updateData.velocity.y, updateData.velocity.z);
@@ -206,7 +210,7 @@ const Car = (props) => {
 
     return () => {
       socket.off("updateAnotherPlayer", updateAnotherPlayer);
-      unsubscribeReset()
+      // unsubscribeReset()
     };
   });
 
@@ -241,6 +245,7 @@ const Car = (props) => {
         const delta = 1; // 100ms expressed in seconds
         const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
         const bodyQuaternion = chassisBody.current.getWorldQuaternion(worldQuaternion);
+
         // 속도 계산
         const newVelocity = new THREE.Vector3();
         newVelocity.subVectors(bodyPosition, lastState.current.position).divideScalar(delta);
@@ -265,19 +270,21 @@ const Car = (props) => {
         };
         socket.emit("currentState", currentState);
       }
-    }, 30);
+    }, 15);
   };
 
   return (
-    <group ref={vehicle}>
-      <group ref={chassisBody}>
-        <CarModel />
-      </group>
-      <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
-      <Wheel wheelRef={wheels[1]} radius={wheelRadius} />
-      <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
-      <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
-      <Timer />
+      <group ref={vehicle}>
+        <Suspense>
+        <group ref={chassisBody}>
+            <CarModel />
+        </group>
+        </Suspense>
+          <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
+          <Wheel wheelRef={wheels[1]} radius={wheelRadius} />
+          <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
+          <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
+        <Timer />
     </group>
   )
 }
