@@ -285,7 +285,7 @@ const Car = (props) => {
 
 
   return (
-      <group ref={vehicle}>
+      <group ref={vehicle} castShadow>
         <group ref={chassisBody}>
             <CarModel />
         </group>

@@ -10,7 +10,7 @@ export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
     const scale = props.scale
-    return(<group>
+    return(<group receiveShadow >
         {/* [0, 0, 0]~[60, 0, 0]}
         {/* Curve 0, 0 ,0 */}
         <RoadLeftBottomCurve position={[position[0]+0, position[1]+0, position[2]+0]}/>

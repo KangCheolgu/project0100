@@ -71,7 +71,7 @@ export default function Scene() {
       {/* <BgmSound /> */}
       <Canvas camera={{ fov:85, position:[1.5, 8, 4]}}>
         <ambientLight intensity={3.2}/>
-        <directionalLight intensity={2} position={[0, 5, 5]} />
+        <directionalLight intensity={2} position={[0, 5, 5]} castShadow />
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
@@ -81,7 +81,7 @@ export default function Scene() {
                   <Car id={player.id} key={player.id} position={player.position} rotation={player.rotation} color={player.color} state={state} index={index}/>
               ))
             }
-            <Map1 position={[0, 0, 0]}/>
+            <Map1 position={[0, 0, 0]} />
             {/*<Map2 position={[0, 0, -30]}/>*/}
           </Debug>
         </Physics>
