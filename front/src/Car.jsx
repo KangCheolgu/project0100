@@ -7,11 +7,11 @@ import { useVehicleControls } from "./utils/useVehicleControls";
 import { Vector3 } from "three";
 import { socket } from "./Scene.jsx";
 import * as THREE from "three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import useGame from './stores/useGame.jsx'
-import { useKeyboardControls } from '@react-three/drei';
 import { CarModel } from "./components/CarModel.jsx";
 import { Wheel } from "./components/Wheel.jsx";
+import collisionSound from './sound/car-hit/car-hit-1.wav';
 
 const Car = (props) => {
   // 체크포인트 위치
@@ -33,29 +33,9 @@ const Car = (props) => {
   const worldPosition = useMemo(() => new Vector3(), []);
   const worldQuaternion = useMemo(() => new THREE.Quaternion(), []);
 
-  // const chassisBodyValue = useControls('chassisBody', {
-  //   width: { value: 0.16, min: 0, max: 1, },
-  //   height: { value: 0.12, min: 0, max: 1, },
-  //   front: { value: 0.17, min: 0, max: 1, },
-  // })
-
-  // const [position, setPosition] = useState();
-  // const [quaternion, setQuaternion] = useState();
   let position = props.position;
   let rotation = [0, 0, 0];
   const playerNum = props.index
-
-  // 위치 값
-  // useEffect(() => {
-  //   const playerNum = props.index
-  //   // console.log(playerNum);
-  //   if(playerNum === 0) {
-  //     let position = props.position;
-  //   } 
-  //   else if (playerNum === 1) {
-  //     let position = props.position;
-  //   }
-  // },[])
 
   let width, height, front, mass, wheelRadius;
 
@@ -66,14 +46,16 @@ const Car = (props) => {
   mass = 150;
 
   const chassisBodyArgs = [width, height, front * 2];
-  const startEuler = new THREE.Euler(0, -Math.PI/2, 0, 'XYZ');
+  const startEuler = new THREE.Euler(0, -Math.PI / 2, 0, 'XYZ');
   const startQuaternion = new THREE.Quaternion();
   startQuaternion.setFromEuler(startEuler);
   const [chassisBody, chassisApi] = useCompoundBody(
     () => ({
       position,
       mass: mass,
+      allowSleep: false,
       rotation,
+      onCollide: (e) => handleCollision(e),
       shapes: [
         {
           args: chassisBodyArgs,
@@ -89,6 +71,12 @@ const Car = (props) => {
     }),
     useRef(null)
   );
+
+  // 자동차 충돌 관리
+  const handleCollision = () => {
+    const sound = new Audio(collisionSound);
+    sound.play().catch(error => console.error("오디오 재생 실패:", error));
+};
 
   const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
@@ -119,36 +107,35 @@ const Car = (props) => {
   // let isIn = useGame((state)=> state.isIn)
   // const lapse = useGame((state)=> state.lapse)
 
-    // Back-View 카메라
-    useFrame((state, delta) => {
-     if (socket.id === props.id) {
+  // Back-View 카메라
+  useFrame((state, delta) => {
+    if (socket.id === props.id) {
 
-       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
+      const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+      const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
-       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-       const relativeCameraPosition = new THREE.Vector3(0, 0.4, 0.65);
+      // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
+      const relativeCameraPosition = new THREE.Vector3(0, 0.4, 0.65);
 
-       // 카메라의 전역 위치 계산
-       const cameraPosition = new THREE.Vector3();
-       cameraPosition.copy(relativeCameraPosition);
-       cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
-       cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
+      // 카메라의 전역 위치 계산
+      const cameraPosition = new THREE.Vector3();
+      cameraPosition.copy(relativeCameraPosition);
+      cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
+      cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
 
-       // smooth camera 전환속도
-       smoothedCameraPosition.lerp(cameraPosition, 0.5);
+      // smooth camera 전환속도
+      smoothedCameraPosition.lerp(cameraPosition, 0.5);
 
-       // state.camera.position.copy(smoothedCameraPosition);
-       state.camera.position.copy(cameraPosition);
+      // state.camera.position.copy(smoothedCameraPosition);
+      state.camera.position.copy(cameraPosition);
 
       // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
       const cameraTarget = new THREE.Vector3();
       cameraTarget.copy(bodyPosition);
       cameraTarget.y += 0.25;
       state.camera.lookAt(cameraTarget);
-    
-     /* Phases*/
 
+      /* Phases*/
 
     /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
     /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
@@ -217,8 +204,8 @@ const Car = (props) => {
         chassisApi.quaternion.copy(lastQuaternion);
       }
     }
-    
-    if(props.state === true)
+
+    if (props.state === true)
       socket.on("updateAnotherPlayer", updateAnotherPlayer);
 
     return () => {
@@ -285,7 +272,6 @@ const Car = (props) => {
       }
     }, 15);
   };
-
 
   return (
       <group ref={vehicle}>
