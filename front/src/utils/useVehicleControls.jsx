@@ -3,7 +3,7 @@ import { socket } from "../Scene.jsx";
 
 export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     const [controls, setControls] = useState({});
-    const engineForce = 100;
+    const engineForce = 120;
     
     const KeDownPressHandler = (e) => {
         if(!controls[e.key]) {
