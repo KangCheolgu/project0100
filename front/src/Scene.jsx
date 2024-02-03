@@ -92,15 +92,23 @@ export default function Scene() {
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
           <ColliderBox scale={[300, 0.1, 300]} position={[0, 0, 0]}/>
+          <ColliderBox scale={[11, 10, 15]} position={[12, 5, -15]}/>
+          <ColliderBox scale={[5, 10, 15]} position={[33,  5, -15]}/>
+          <ColliderBox scale={[5, 10, 15]} position={[51, 5, -15]}/>
+
+          <ColliderBox scale={[76, 20, 0.1]} position={[29, 10, 6]}/>
+          <ColliderBox scale={[55, 20, 0.1]} position={[29, 10, -36]}/>
+          <ColliderBox scale={[0.1, 20, 44]} position={[-6, 10, -16]}/>
+          <ColliderBox scale={[0.1, 20, 44]} position={[65, 10, -16]}/>
             <Suspense fallback={<LoadingPage />}>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
             </Suspense>
             {/*
               players.map((player, index) => (
-                <Car id={player.id} key={player.id} position={[0, 0.3, -12]} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index}/>
+                <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index}/>
               ))
-              */ }
+              */}
          </Debug>
         </Physics>
       </Canvas>
