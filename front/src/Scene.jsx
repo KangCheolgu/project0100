@@ -18,6 +18,9 @@ import * as THREE from "three";
 import {CameraHelper} from "three";
 import ColliderWall from "./ColliderWall.jsx"
 
+//import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx";
+
 
 export const socket = io("http://localhost:5000")
 
@@ -196,6 +199,11 @@ export default function Scene() {
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
               }
+            {/* <Ground /> */}
+            {/* <Library position={[-40, 0, 39]}/> */}
+            {/* 물음표박스 장애물 */}
+            <SpinObstacle/>
+            <LeftAndRightObstacle/>
          </Debug>
         </Physics>
       </Canvas>

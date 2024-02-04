@@ -10,6 +10,7 @@ io.listen(5000)
 
 const backEndPlayers = {}
 var numClients = 2
+const currentTime = new Date().getTime()
 let clientReadyCount = 0;
 const allPings = {}
 
