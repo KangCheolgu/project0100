@@ -39,14 +39,14 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     let currentEngineForce = controls.boost ? engineForce * 2 : engineForce; // boost 상태에 따라 엔진 힘 조정
 
     if (controls.ArrowUp || controls.w) {
-      vehicleApi.applyEngineForce(currentEngineForce, 2);
-      vehicleApi.applyEngineForce(currentEngineForce, 3);
+      vehicleApi.applyEngineForce(currentEngineForce, 0);
+      vehicleApi.applyEngineForce(currentEngineForce, 1);
     } else if (controls.ArrowDown || controls.s) {
-      vehicleApi.applyEngineForce(-currentEngineForce, 2);
-      vehicleApi.applyEngineForce(-currentEngineForce, 3);
+      vehicleApi.applyEngineForce(-currentEngineForce, 0);
+      vehicleApi.applyEngineForce(-currentEngineForce, 1);
     } else {
-      vehicleApi.applyEngineForce(0, 2);
-      vehicleApi.applyEngineForce(0, 3);
+      vehicleApi.applyEngineForce(0, 0);
+      vehicleApi.applyEngineForce(0, 1);
     }
 
     if (controls.ArrowLeft || controls.a) {

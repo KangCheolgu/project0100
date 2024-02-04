@@ -23,9 +23,9 @@ io.on("connection", (socket)=>{
 
   // 접속시 socket.id
   if(Object.keys(backEndPlayers).length === 0){
-    position = [-0.5, 0.3, 0]
+    position = [-2, 0.3, -12]
   } else {
-    position = [0.5, 0.3, 0]
+    position = [2, 0.3, -12]
   }
   
   backEndPlayers[socket.id] = {
