@@ -7,14 +7,6 @@ useGLTF.preload('/assets/models/Rover.glb')
 export function CarModel() {
   const { nodes, materials } = useGLTF('/assets/models/Rover.glb')
 
-  useMemo(() => {
-    if (nodes instanceof THREE.Object3D) {
-      nodes.traverse(obj => {
-        obj.receiveShadow = true;
-        obj.castShadow = true;
-      });
-    }
-  }, [nodes]);
 
   return (
     <group scale={[0.34, 0.32, 0.46]} position={[0, -0.13, -0.02]} rotation-y={Math.PI}>

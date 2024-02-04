@@ -92,40 +92,16 @@ export default function Scene() {
         {/*position={[0, 5, 5]}*/}
         <directionalLight
     castShadow
-    intensity={2}
-    shadow-camera-top={10}
-    shadow-camera-bottom={-10}
-    shadow-camera-left={-10}
-    shadow-camera-right={10}
+    intensity={4}
+    shadow-camera-top={100}
+    shadow-camera-bottom={-100}
+    shadow-camera-left={-100}
+    shadow-camera-right={100}
     shadow-mapSize-height={512*4}
     shadow-mapSize-width={512*4}
-    position={[2, 5, -2]}
-    color="white"
+    position={[30, 20, -30]}
+    color="#ffffff"
   />
-        <mesh receiveShadow castShadow position={[0,1.7,-10]}>
-          <torusKnotGeometry args={[1, 0.2, 128, 32]}/>
-          <meshStandardMaterial
-            color="#ffffff"
-            roughness={0.1}
-            metalness={0.2}
-          />
-        </mesh>
-        <mesh receiveShadow castShadow position={[0,1.7, 0]}>
-          <torusKnotGeometry args={[1, 0.2, 128, 32]}/>
-          <meshStandardMaterial
-            color="#ffffff"
-            roughness={0.1}
-            metalness={0.2}
-          />
-        </mesh>
-        <mesh receiveShadow castShadow position={[0,1.7,-5]}>
-          <torusKnotGeometry args={[1, 0.2, 128, 32]}/>
-          <meshStandardMaterial
-            color="#ffffff"
-            roughness={0.1}
-            metalness={0.2}
-          />
-        </mesh>
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>

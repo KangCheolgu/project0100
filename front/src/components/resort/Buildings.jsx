@@ -9,8 +9,8 @@ import { useGLTF } from '@react-three/drei'
 export function BuildingSmallOrange(props) {
   const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
   return (
-    <group castShadow receiveShadow {...props} dispose={null}>
-      <group castShadow receiveShadow position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+    <group receiveShadow {...props} dispose={null}>
+      <group receiveShadow position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
         <mesh castShadow receiveShadow geometry={nodes.Airing_3__1_.geometry} material={materials.Airing} position={[200, -150, -850]} />
         <mesh castShadow receiveShadow geometry={nodes.Airing_3__2_.geometry} material={materials.Airing} position={[200, -50, -850]} />
         <mesh castShadow receiveShadow geometry={nodes.Building_1_Decor_1.geometry} material={materials.Walls_1} />

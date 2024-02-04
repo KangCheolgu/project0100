@@ -95,7 +95,7 @@ export function RoadLanes (props) {
   
   return (
     <group {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.Road_1.geometry} material={materials.Asphalt} position={[0, 0, 0]} rotation={[Math.PI/2, 0, 0]} scale={0.01}  castShadow receiveShadow/>
+      <mesh receiveShadow geometry={nodes.Road_1.geometry} material={materials.Asphalt} position={[0, 0, 0]} rotation={[Math.PI/2, 0, 0]} scale={0.01} />
     </group>
   )
 }
