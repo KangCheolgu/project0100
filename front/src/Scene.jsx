@@ -12,6 +12,7 @@ import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
 
 import Map1 from "./Map1.jsx";
+import Map2 from "./Map2.jsx"
 import ColliderBox from "./ColliderBox.jsx";
 import * as THREE from "three";
 
@@ -95,12 +96,13 @@ export default function Scene() {
             <Suspense fallback={<LoadingPage />}>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
+              <Map2 position={[0, 0, 60]}/>
             </Suspense>
-            {/*
+            {
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={[0, 0.3, -12]} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index}/>
               ))
-              */ }
+              }
          </Debug>
         </Physics>
       </Canvas>
