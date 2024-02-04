@@ -110,7 +110,7 @@ export function Floor3(props) { // 큰바닥
   return (
     <group {...props} dispose={null}>
       
-      <ColliderBox {...props} scale={[4, 0.01, 4]}/>
+      <ColliderBox {...props} scale={[20, 0.01, 20]}/>
       <group rotation={[Math.PI / 2, 0, 0]} scale={[0.01, 0.01, 0.01]}>
         <mesh geometry={nodes.FloorTIle.geometry} material={materials['Stone_Floor.003']} />
       </group>
