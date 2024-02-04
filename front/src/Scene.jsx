@@ -1,4 +1,4 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree, extend } from "@react-three/fiber";
 
 import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
@@ -14,11 +14,14 @@ import LoadingPage from "./utils/Loading.jsx";
 import Map1 from "./Map1.jsx";
 import ColliderBox from "./ColliderBox.jsx";
 import * as THREE from "three";
+import {CameraHelper} from "three";
+import ColliderWall from "./ColliderWall.jsx"
+
 
 export const socket = io("http://localhost:5000")
 
 export default function Scene() {
-  const defaultY = -0.3
+
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
   let numPlayers = 2
@@ -76,39 +79,67 @@ export default function Scene() {
 
   // 로딩 관련
 
-
   // 로딩 관련 끝
-
-  const Plane =new THREE.PlaneGeometry()
+  
   return (
     <>
       <Interface/>
       <BgmSound />
-       
-      <Canvas camera={{ fov:75, position:[1.5, 8, 4]}}>
+       {/*{ fov:75, position:[1.5, 8, 4]}*/}
+      <Canvas camera={{ fov:75, position:[1.5, 8, 4]}} shadows>
+      
         <ambientLight intensity={3}/>
-        <directionalLight intensity={0.4} position={[0, 5, 5]} castShadow />
+        {/*position={[0, 5, 5]}*/}
+        <directionalLight
+    castShadow
+    intensity={2}
+    shadow-camera-top={10}
+    shadow-camera-bottom={-10}
+    shadow-camera-left={-10}
+    shadow-camera-right={10}
+    shadow-mapSize-height={512*4}
+    shadow-mapSize-width={512*4}
+    position={[2, 5, -2]}
+    color="white"
+  />
+        <mesh receiveShadow castShadow position={[0,1.7,-10]}>
+          <torusKnotGeometry args={[1, 0.2, 128, 32]}/>
+          <meshStandardMaterial
+            color="#ffffff"
+            roughness={0.1}
+            metalness={0.2}
+          />
+        </mesh>
+        <mesh receiveShadow castShadow position={[0,1.7, 0]}>
+          <torusKnotGeometry args={[1, 0.2, 128, 32]}/>
+          <meshStandardMaterial
+            color="#ffffff"
+            roughness={0.1}
+            metalness={0.2}
+          />
+        </mesh>
+        <mesh receiveShadow castShadow position={[0,1.7,-5]}>
+          <torusKnotGeometry args={[1, 0.2, 128, 32]}/>
+          <meshStandardMaterial
+            color="#ffffff"
+            roughness={0.1}
+            metalness={0.2}
+          />
+        </mesh>
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
-          <ColliderBox scale={[300, 0.1, 300]} position={[0, 0, 0]}/>
-          <ColliderBox scale={[11, 10, 15]} position={[12, 5, -15]}/>
-          <ColliderBox scale={[5, 10, 15]} position={[33,  5, -15]}/>
-          <ColliderBox scale={[5, 10, 15]} position={[51, 5, -15]}/>
-
-          <ColliderBox scale={[76, 20, 0.1]} position={[29, 10, 6]}/>
-          <ColliderBox scale={[55, 20, 0.1]} position={[29, 10, -36]}/>
-          <ColliderBox scale={[0.1, 20, 44]} position={[-6, 10, -16]}/>
-          <ColliderBox scale={[0.1, 20, 44]} position={[65, 10, -16]}/>
+          <ColliderWall/>
+          
             <Suspense fallback={<LoadingPage />}>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
-              <Map1 position={[0, 0, 0]}/>
+              <Map1 position={[0, 0, 0]} receiveShadow castShadow/>
             </Suspense>
-            {/*
+            {
               players.map((player, index) => (
-                <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index}/>
+                <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-              */}
+            }
          </Debug>
         </Physics>
       </Canvas>

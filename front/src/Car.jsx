@@ -274,10 +274,10 @@ const Car = (props) => {
   };
 
   return (
-      <group ref={vehicle} castShadow>
+      <group ref={vehicle} castShadow receiveShadow>
         <Suspense>
-        <group ref={chassisBody}>
-            <CarModel />
+        <group ref={chassisBody} castShadow>
+            <CarModel castShadow/>
         </group>
         </Suspense>
           <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
