@@ -31,7 +31,7 @@ export default function Interface(){
                 elapsedTime = state.endTime-state.startTime
             }
             elapsedTime /= 1000
-            elapsedTime = elapsedTime.toFixed(2)
+            elapsedTime = elapsedTime.toFixed(3)
 
             if(time.current)
                 time.current.textContent = elapsedTime
