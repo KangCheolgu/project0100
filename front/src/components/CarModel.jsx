@@ -5,6 +5,9 @@ Command: npx gltfjsx@6.2.16 public/assets/models/porchelow.glb -o src/components
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
+
+useGLTF.preload('/assets/models/Rover.glb')
 
 export function CarModel(props) {
   const { nodes, materials } = useGLTF('/assets/models/porchelow.glb')

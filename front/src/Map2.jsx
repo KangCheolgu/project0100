@@ -4,8 +4,7 @@ import { useEffect, useMemo, useRef, useState, forwardRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import {GrassPlain, RoadLanes, RoadLanesHalf, RoadLeftBottomCurve, RoadPlain, CrossWalkHalf,Side, Side2, Side3, SideRightTopCurve, SideLeftBottom, SideRightTopInnerCurve,SideRightTopInnerCurve2,SideRightTopInnerCurve3, SideRightTopOutterCurve2, CurbLeftBottomCurve, SideRightTopOutterCurve1, SideRightTopCurveLong} from "./components/resort/Road.jsx"
-import {Model, BuildingGreen, BuildingRed} from "./components/resort/Object.jsx"
-import { Startline } from "./components/Startline.jsx";
+{/*import {Model, BuildingGreen, BuildingRed} from "./components/resort/Object.jsx"*/}
  
 export default function Map2(props){
     const position = props.position
@@ -14,7 +13,6 @@ export default function Map2(props){
     return(<group receiveShadow >
         {/* [0, 0, 0]~[60, 0, 0]*/}
 
-        <Startline position={[position[0]+1.45, position[1]+0, position[2]-10]} scale={[1.3, 1, 1.15]} rotation={[0, Math.PI/2, 0]}/>
         <RoadLeftBottomCurve position={[position[0]+0, position[1]+0, position[2]+0]}/>
         <RoadLanes position={[position[0]+6, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>
         <RoadLanes position={[position[0]+12, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>

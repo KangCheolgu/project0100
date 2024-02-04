@@ -11,10 +11,10 @@ export function Startline(props) {
   return (
     <group {...props} dispose={null}>
       <group position={[0, 0, 0]} scale={[4, 1, 4]}>
-        <mesh geometry={nodes.mesh7783894.geometry} material={materials.mat21} />
-        <mesh geometry={nodes.mesh7783894_1.geometry} material={materials.mat23} />
-        <mesh geometry={nodes.mesh7783894_2.geometry} material={materials['mat21.001']} />
-        <mesh geometry={nodes.mesh7783894_3.geometry} material={materials['mat23.001']} />
+        <mesh geometry={nodes.mesh7783894.geometry} material={materials.mat21} castShadow receiveShadow/>
+        <mesh geometry={nodes.mesh7783894_1.geometry} material={materials.mat23} castShadow receiveShadow/>
+        <mesh geometry={nodes.mesh7783894_2.geometry} material={materials['mat21.001']} castShadow receiveShadow/>
+        <mesh geometry={nodes.mesh7783894_3.geometry} material={materials['mat23.001']} castShadow receiveShadow/>
       </group>
     </group>
   )

@@ -27,4 +27,4 @@ export const Wheel = ({ wheelRef, radius, lefSide }) => {
       </group>
     </group>
   );
-};
+}

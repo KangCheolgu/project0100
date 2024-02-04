@@ -1,4 +1,4 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree, extend } from "@react-three/fiber";
 
 import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
@@ -15,11 +15,14 @@ import Map1 from "./Map1.jsx";
 import Map2 from "./Map2.jsx"
 import ColliderBox from "./ColliderBox.jsx";
 import * as THREE from "three";
+import {CameraHelper} from "three";
+import ColliderWall from "./ColliderWall.jsx"
+
 
 export const socket = io("http://localhost:5000")
 
 export default function Scene() {
-  const defaultY = -0.3
+
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
 
@@ -157,21 +160,32 @@ export default function Scene() {
 
   // console.log(averagePing !== null ? averagePing : "Average ping not available")
 
-
   // 로딩 관련 끝
-
-  const Plane =new THREE.PlaneGeometry()
+  
   return (
     <>
       <Interface/>
       {/* <BgmSound /> */}
       <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}}>
         <ambientLight intensity={3}/>
-        <directionalLight intensity={0.4} position={[0, 5, 5]} castShadow />
+        {/*position={[0, 5, 5]}*/}
+        <directionalLight
+    castShadow
+    intensity={4}
+    shadow-camera-top={100}
+    shadow-camera-bottom={-100}
+    shadow-camera-left={-100}
+    shadow-camera-right={100}
+    shadow-mapSize-height={512*4}
+    shadow-mapSize-width={512*4}
+    position={[30, 20, -30]}
+    color="#ffffff"
+  />
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
-          <ColliderBox scale={[300, 0.1, 300]} position={[0, 0, 0]}/>
+          <ColliderWall/>
+          
             <Suspense fallback={<LoadingPage />}>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
@@ -179,7 +193,7 @@ export default function Scene() {
             </Suspense>
             {
               players.map((player, index) => (
-                <Car id={player.id} key={player.id} position={[0, 0.3, -12]} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index}/>
+                <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
               }
          </Debug>
