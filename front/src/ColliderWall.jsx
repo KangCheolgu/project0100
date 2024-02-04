@@ -11,15 +11,8 @@ export default function Wall(props){
     //  )
     return (
     <group rotation={props.rotation}>
-        {/* 동 */}
-        <ColliderBox position = {[0, 0, 0]} scale = {[40, 0.1, 40]} rotation={[Math.PI/2, 0, 0]}></ColliderBox>
-        {/* 서 */}
-        <ColliderBox position = {[-28, 10, 36.5]} scale = {[100, 1, 20]} rotation={[Math.PI/2, 0, 0]}></ColliderBox>
-        
-        {/* 북 */}
-        <ColliderBox position = {[-84, 10, 20]} scale = {[50, 1, 20]} rotation={[Math.PI/2, 0, Math.PI/2]}></ColliderBox>
-        {/* 남 */}
-        <ColliderBox position = {[22, 10, 20]} scale = {[34, 1, 20]} rotation={[Math.PI/2, 0, Math.PI/2]}></ColliderBox>
+        {/* 바닥 */}
+        <ColliderBox position = {[0, 0, 0]} scale = {[40, 0.1, 40]} ></ColliderBox>
     </group>
     )
 }
