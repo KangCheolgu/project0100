@@ -39,10 +39,10 @@ const Car = (props) => {
 
   let width, height, front, mass, wheelRadius;
 
-  width = 0.15;
-  height = 0.12;
-  front = 0.14;
-  wheelRadius = 0.05;
+  width = 0.26;
+  height = 0.09;
+  front = 0.207;
+  wheelRadius = 0.035;
   mass = 150;
 
   const chassisBodyArgs = [width, height, front * 2];
@@ -115,7 +115,7 @@ const Car = (props) => {
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.4, 0.65);
+      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 1);
 
       // 카메라의 전역 위치 계산
       const cameraPosition = new THREE.Vector3();
@@ -124,15 +124,15 @@ const Car = (props) => {
       cameraPosition.add(bodyPosition); // 카메라 위치를 자동차 위치에 더함
 
       // smooth camera 전환속도
-      smoothedCameraPosition.lerp(cameraPosition, 0.5);
+      smoothedCameraPosition.lerp(cameraPosition, 0.4);
 
-      // state.camera.position.copy(smoothedCameraPosition);
-      state.camera.position.copy(cameraPosition);
+      state.camera.position.copy(smoothedCameraPosition);
+      // state.camera.position.copy(cameraPosition);
 
       // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
       const cameraTarget = new THREE.Vector3();
       cameraTarget.copy(bodyPosition);
-      cameraTarget.y += 0.25;
+      cameraTarget.y += 0.35;
       state.camera.lookAt(cameraTarget);
 
       /* Phases*/

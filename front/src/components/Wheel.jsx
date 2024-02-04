@@ -1,28 +1,29 @@
-import { useGLTF} from "@react-three/drei";
-import { useLayoutEffect, useMemo } from "react";
-import * as THREE from 'three'
+// Wheel.jsx
 
-useGLTF.preload(`/assets/models/Rover.glb`)
+import { useGLTF } from "@react-three/drei";
+
+useGLTF.preload(`/assets/models/porche.glb`)
 
 export const Wheel = ({ wheelRef, radius, lefSide }) => {
-  const { nodes, materials } = useGLTF(`/assets/models/Rover.glb`)
-  {/*useLayoutEffect(()=>nodes.traverse(o=> o.isMesh&&(o.castShadow = o.receiveShadow=true)), [])*/}
-  useMemo(() => {
-    if (nodes instanceof THREE.Object3D) {
-      nodes.traverse(obj => {
-        obj.receiveShadow = true;
-        obj.castShadow = true;
-      });
-    }
-  }, [nodes]);
-  
+  const { nodes, materials } = useGLTF(`/assets/models/porchelow.glb`)
+
   return(
-    <group ref={wheelRef} scale={0.5}>
+    <group ref={wheelRef} scale={[0.003, 0.0025, 0.0025]}>
       <group rotation={lefSide ? [0, -Math.PI, 0 ] :[ 0, 0, 0] }>
-        <mesh castShadow receiveShadow geometry={nodes.Wheel_4001.geometry} material={materials.Atlas} rotation={[-Math.PI / 2, 0, 0]} scale={20}/>
-        <mesh castShadow receiveShadow geometry={nodes.Wheel_5.geometry} material={materials.Atlas}rotation={[-Math.PI / 2, 0, 0]} scale={20}/>
-        <mesh castShadow receiveShadow geometry={nodes.Wheel_1002.geometry} material={materials.Atlas}  rotation={[-Math.PI / 2, 0, 0]} scale={20}/>
-        <mesh castShadow receiveShadow geometry={nodes.Wheel_4002.geometry} material={materials.Atlas}  rotation={[-Math.PI / 2, 0, 0]} scale={20}/>
+        <group rotation={[Math.PI / 2, 0, 0]} scale={1}>
+          <mesh geometry={nodes.brakes003_1.geometry} material={materials.CARRERA_4096}>
+            <mesh geometry={nodes.tyre003_1.geometry} material={materials.CARRERA_4096} />
+          </mesh>
+          <mesh geometry={nodes.brakes004_1.geometry} material={materials.CARRERA_4096}>
+            <mesh geometry={nodes.tyre004_1.geometry} material={materials.CARRERA_4096}/>
+          </mesh>
+          <mesh geometry={nodes.brakes1_1.geometry} material={materials.CARRERA_4096}>
+            <mesh geometry={nodes.tyre1_1.geometry} material={materials.CARRERA_4096}/>
+          </mesh>
+          <mesh geometry={nodes.brakes2_1.geometry} material={materials.CARRERA_4096}>
+            <mesh geometry={nodes.tyre2_1.geometry} material={materials.CARRERA_4096}/>
+          </mesh>
+        </group>
       </group>
     </group>
   );
