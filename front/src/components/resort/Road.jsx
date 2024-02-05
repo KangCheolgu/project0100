@@ -85,7 +85,7 @@ export function GrassPlain(props) {
   const { nodes, materials } = useGLTF('/assets/models/resort-roads.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Grass.geometry} material={materials.Grass} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh receiveShadow geometry={nodes.Grass.geometry} material={materials.Grass} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
       
   )
@@ -110,20 +110,11 @@ export function CrossWalkTop(props) {
 }
 export function RoadPlain(props) {
   const { nodes, materials } = useGLTF('/assets/models/resort-roads.glb')
-
-  if (nodes) {
-    if(nodes.children){
-      nodes.children.forEach((mesh) => {
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-      });
-    }
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Road_3.geometry} material={materials.Asphalt_3} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh receiveShadow geometry={nodes.Road_3.geometry} material={materials.Asphalt_3} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
-}
 }
 
 export function RoadLeftBottomCurve(props) {
@@ -131,7 +122,7 @@ export function RoadLeftBottomCurve(props) {
   
   return (
     <group {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.Road_4.geometry} material={materials.Asphalt_4} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh receiveShadow geometry={nodes.Road_4.geometry} material={materials.Asphalt_4} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -166,7 +157,7 @@ export function SideLeftBottom(props) {
   const { nodes, materials } = useGLTF('/assets/models/resort-roads.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Road_half_3.geometry} material={materials.Asphalt_3} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh receiveShadow geometry={nodes.Road_half_3.geometry} material={materials.Asphalt_3} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -174,7 +165,7 @@ export function Side2(props) {
   const { nodes, materials } = useGLTF('/assets/models/resort-roads.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Sidewalk.geometry} material={materials.Sidewalk} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh receiveShadow geometry={nodes.Sidewalk.geometry} material={materials.Sidewalk} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
 
     </group>
   )
@@ -242,7 +233,7 @@ export function SideRightTopInnerCurve3(props) {
   const { nodes, materials } = useGLTF('/assets/models/resort-roads.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Sidewalk_corner_7.geometry} material={materials.Sidewalk} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh receiveShadow geometry={nodes.Sidewalk_corner_7.geometry} material={materials.Sidewalk} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
 
     </group>
   )

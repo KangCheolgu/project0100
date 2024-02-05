@@ -187,23 +187,25 @@ export default function Scene() {
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
-          <ColliderWall/>
+          
           
             <Suspense fallback={<LoadingPage />}>
+              <ColliderWall/>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
-              <Map2 position={[0, 0, 60]}/>
-            </Suspense>
+              <Map2 position={[0, 0, -60]}/>
+            
             {
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-              }
+            }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
             {/* 물음표박스 장애물 */}
             <SpinObstacle/>
             <LeftAndRightObstacle/>
+            </Suspense>
          </Debug>
         </Physics>
       </Canvas>
