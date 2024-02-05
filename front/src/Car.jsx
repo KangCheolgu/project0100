@@ -126,8 +126,8 @@ const Car = (props) => {
       // smooth camera 전환속도
       smoothedCameraPosition.lerp(cameraPosition, 0.4);
 
-      state.camera.position.copy(smoothedCameraPosition);
-      // state.camera.position.copy(cameraPosition);
+      // state.camera.position.copy(smoothedCameraPosition);
+      state.camera.position.copy(cameraPosition);
 
       // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
       const cameraTarget = new THREE.Vector3();
