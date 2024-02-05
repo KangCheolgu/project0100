@@ -1,10 +1,9 @@
 import { Canvas, useThree, extend } from "@react-three/fiber";
-
 import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
-import { OrbitControls, useProgress } from '@react-three/drei';
+import { OrbitControls, useProgress, Stats } from '@react-three/drei';
 import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
@@ -19,7 +18,7 @@ import {CameraHelper} from "three";
 import ColliderWall from "./ColliderWall.jsx"
 
 //import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
-import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle} from "./components/MoveObstacle.jsx";
 
 
 export const socket = io("http://localhost:5000")
@@ -185,9 +184,12 @@ export default function Scene() {
     color="#ffffff"
   />
         <OrbitControls />
+        <Stats/>
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
+            <axesHelper/>
           <ColliderWall/>
+          
           
             <Suspense fallback={<LoadingPage />}>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
@@ -201,9 +203,10 @@ export default function Scene() {
               }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
-            {/* 물음표박스 장애물 */}
+            {/* 장애물 배치 */}
             <SpinObstacle/>
             <LeftAndRightObstacle/>
+            <UpDownObstacle/>
          </Debug>
         </Physics>
       </Canvas>

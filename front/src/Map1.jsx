@@ -13,7 +13,7 @@ export default function Map1(props){
     const scale = props.scale
     return(<group castShadow receiveShadow >
         {/* [0, 0, 0]~[60, 0, 0]*/}
-        <BuildingSmallOrange position = {[0, 0, 0]} />
+        {/* <BuildingSmallOrange position = {[0, 0, 0]} /> */}
         <Startline position={[position[0]+1.45, position[1]+0, position[2]-10]} scale={[1.3, 1, 1.15]} rotation={[0, Math.PI/2, 0]} castShadow receiveShadow/>
         <RoadLeftBottomCurve position={[position[0]+0, position[1]+0, position[2]+0]}/>
         <RoadLanes position={[position[0]+6, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>
