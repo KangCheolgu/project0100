@@ -14,11 +14,11 @@ export function CarModel(props) {
   return (
     <group {...props} dispose={null}>
       <group position={[0, -0.1, 0.035]} rotation={[Math.PI/2, 0, Math.PI]} scale={0.002}>
-        <mesh geometry={nodes.CARRERA_LOW.geometry} material={materials.CARRERA_4096}>
-          <mesh geometry={nodes.front_lamps_1.geometry} material={materials.CARRERA_4096} />
-          <mesh geometry={nodes.rear_lamps_1.geometry} material={materials.CARRERA_4096} />
-          <mesh geometry={nodes.spoiler1_1.geometry} material={materials.CARRERA_4096}>
-          <mesh geometry={nodes.spoiler2_1.geometry} material={materials.CARRERA_4096} />
+        <mesh castShadow receiveShadow geometry={nodes.CARRERA_LOW.geometry} material={materials.CARRERA_4096}>
+          <mesh castShadow receiveShadow geometry={nodes.front_lamps_1.geometry} material={materials.CARRERA_4096} />
+          <mesh castShadow receiveShadow geometry={nodes.rear_lamps_1.geometry} material={materials.CARRERA_4096} />
+          <mesh castShadow receiveShadow geometry={nodes.spoiler1_1.geometry} material={materials.CARRERA_4096}>
+          <mesh castShadow receiveShadow geometry={nodes.spoiler2_1.geometry} material={materials.CARRERA_4096} />
          </mesh>
         </mesh>
       </group>
