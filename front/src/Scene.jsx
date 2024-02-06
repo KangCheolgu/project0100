@@ -3,8 +3,8 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
-import { OrbitControls, useProgress } from '@react-three/drei';
-import Interface from "./Interface.jsx"
+import { OrbitControls, useProgress, Stats } from '@react-three/drei';
+import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
@@ -12,7 +12,9 @@ import LoadingPage from "./utils/Loading.jsx";
 import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
-import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx";
+
+//import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle} from "./components/MoveObstacle.jsx";
 
 
 export const socket = io("http://localhost:5000")
@@ -123,7 +125,7 @@ export default function Scene() {
 
       return () => clearTimeout(startSignal)
     })
- 
+    
     // // 서버 시간 검증
     // socket.on("timeCheck", (serverTimeStart)=>{
     //   console.log("in time check");
@@ -159,6 +161,19 @@ export default function Scene() {
   // console.log(averagePing !== null ? averagePing : "Average ping not available")
 
   // 로딩 관련 끝
+
+  ////////// 장애물관련 서버시간받아서 서버시간 5초 후에 장애물 동작 
+  //장애물 상태변수
+  const [isObstacleStarted, setIsObstacleStarted] = useState(false)
+
+  socket.on("clientCount",(serverTimeStart)=>{
+    //서버시간 받으면
+    const timeoutDuration = 5000
+    //5초 뒤에 장애물 시작
+    setTimeout(()=>{
+      setIsObstacleStarted(true)
+    }, timeoutDuration)
+  })
   
   return (
     <>
@@ -180,9 +195,12 @@ export default function Scene() {
     color="#ffffff"
   />
         <OrbitControls />
+        <Stats/>
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
-          <axesHelper scale={50}/>
+            <axesHelper/>
+          <ColliderWall/>
+          
           
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
@@ -197,9 +215,17 @@ export default function Scene() {
             }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
-            {/* 물음표박스 장애물 */}
+            {isObstacleStarted && (
+            <>
+            {/* 장애물 배치 */}
             <SpinObstacle/>
             <LeftAndRightObstacle/>
+            <LeftRightObstacle/>
+            <UpDownObstacle/>
+            {/* <ShutterObstacle/> */}
+            </>
+            )}
+            
             </Suspense>
          </Debug>
         </Physics>
