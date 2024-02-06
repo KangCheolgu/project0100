@@ -1,16 +1,16 @@
 import { Canvas, useThree, extend } from "@react-three/fiber";
 import { Physics, Debug } from "@react-three/cannon";
-import Car from "./Car";
+import Car from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
 import { OrbitControls, useProgress } from '@react-three/drei';
-import Interface from "./Interface"
+import Interface from "./Interface.jsx"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
-import Map2 from "./Map2.jsx"
-import Map1 from "./Map1.jsx"
+import Map2 from "./Map2/Map2.jsx"
+import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
 import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx";
 
@@ -18,6 +18,8 @@ import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx"
 export const socket = io("http://localhost:5000")
 
 export default function Scene() {
+
+
 
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
@@ -180,7 +182,7 @@ export default function Scene() {
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
-          
+          <axesHelper scale={50}/>
           
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
@@ -188,11 +190,11 @@ export default function Scene() {
               <Map1 position={[0, 0, 0]}/>
               <Map2 position={[0, 0, -60]}/>
             
-            {/*
+            {
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-              */}
+            }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
             {/* 물음표박스 장애물 */}

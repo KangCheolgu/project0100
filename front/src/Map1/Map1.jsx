@@ -1,14 +1,14 @@
 
 import { } from "@react-three/cannon";
 import * as THREE from "three";
-import {Grass, Road_1, Road_4, Road_3,Sidewalk_2, Sidewalk, Sidewalk_half, Road_half_3, Sidewalk_corner_3,Sidewalk_corner_7} from "./components/resort/Roads.jsx"
-import { Startline } from "./components/Startline.jsx";
+import {Grass, Road_1, Road_4, Road_3,Sidewalk_2, Sidewalk, Sidewalk_half, Road_half_3, Sidewalk_corner_3,Sidewalk_corner_7} from "../components/resort/Roads.jsx"
+import { Startline } from "../components/Startline.jsx";
 import Section1 from "./Section1.jsx";
 import Section2 from "./Section2.jsx";
 import Section3 from "./Section3.jsx";
 import Section4 from "./Section4.jsx";
 import Section5 from "./Section5.jsx";
-import ColliderBox from "./ColliderBox.jsx";
+import ColliderBox from "../ColliderBox.jsx";
 export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
@@ -27,8 +27,9 @@ export default function Map1(props){
         {/* 남쪽 외곽 */}
         <Section5 position={position}/>
         
-        <mesh geometry={boxGeometry} material={material} position={[60, 9.5, -28]} scale={[6, 0.1, 42]} rotation={[Math.PI/9, 0, 0]}/>
-        <ColliderBox position={[60, 2, -28]} scale={[6, 0.1, 42]} rotation={[Math.PI/9, 0, 0]}/>
+        {/*<mesh geometry={boxGeometry} material={material} position={[60, 9.5, -28]} scale={[6, 0.1, 42]} rotation={[Math.PI/9, 0, 0]}/>
+        <ColliderBox position={[60, 2, -28]} scale={[6, 0.1, 42]} rotation={[Math.PI/9, 0, 0]}/>*/}
+        
         <Startline position={[position[0]+1.45, position[1]+0, position[2]-10]} scale={[1.3, 1, 1.15]} rotation={[0, Math.PI/2, 0]} castShadow receiveShadow/>
         <Road_4 position={[position[0]+0, position[1]+0, position[2]+0]}/>
         <Road_1 position={[position[0]+6, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>

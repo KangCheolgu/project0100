@@ -7,8 +7,8 @@ export const useWheels = (width, height, front, radius) => {
     const wheels = [useRef(null), useRef(null), useRef(null), useRef(null)];
 
     const wheelPosition = height * 0.3
-    const wheelDampingRelaxation = 1;
-    const wheelDampingCompression = 1;
+    const wheelDampingRelaxation = 3;
+    const wheelDampingCompression = 3;
 
     const wheelInfo = {
         radius,
