@@ -82,7 +82,6 @@ const Car = (props) => {
 
   // 자동차 충돌 관리///////////////////////////////////////////
   const [isCollision, setIsCollision] = useState(false)
-  console.log(isCollision)
   const handleCollision = () => {
     const sound = new Audio(collisionSound);
     sound.play().catch(error => console.error("오디오 재생 실패:", error));
@@ -91,8 +90,6 @@ const Car = (props) => {
       setIsCollision(true)
       setImagePosition(getRandomPosition())
     }
-    console.log(imagePosition)
-
 };
   if(isCollision === true){
     setTimeout(()=>{
@@ -171,7 +168,7 @@ const Car = (props) => {
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
+      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.8);
 
       // 카메라의 전역 위치 계산
       const cameraPosition = new THREE.Vector3();
@@ -220,9 +217,7 @@ const Car = (props) => {
 
       // 체크 포인트 인덱스 갱신 
       // 지정된 위치를 지나면 checkpointIndex를 올림
-      // console.log(checkPointIndex%(CheckPoint.length));
       if(CheckPoint[checkPointIndex%(CheckPoint.length)].axis === 'x') {
-        // console.log("sdfsdfsdf");
         if(CheckPoint[checkPointIndex%(CheckPoint.length)].x - 10 < bodyPosition.x && bodyPosition.x <  CheckPoint[checkPointIndex%(CheckPoint.length)].x + 10 
           && CheckPoint[checkPointIndex%(CheckPoint.length)].z - 0.5 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex%(CheckPoint.length)].z + 0.5) {
           checkPointIndex++

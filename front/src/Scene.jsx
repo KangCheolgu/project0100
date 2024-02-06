@@ -113,9 +113,7 @@ export default function Scene() {
       const allPingsArray = Object.values(allPings);
       const opponentPingData = allPingsArray.find(ping => ping.id !== socket.id);
       const myPingData = allPingsArray.find(ping => ping.id === socket.id);
-      console.log(allPingsArray);
       // const myPing = allPingsArray.find(ping => ping.id === socket.id);
-      console.log(opponentPingData.ping/2);
       const startSignal = setTimeout(() => {
         if(count > -3) startCountdown()
       }, opponentPingData.ping/2)
@@ -220,16 +218,10 @@ export default function Scene() {
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -2.6, 0]}>
-          <Debug>
+          {/* <Debug> */}
             <axesHelper/>
-            <axesHelper/>
-          <ColliderWall/>
-          
-          
           <axesHelper/>
           <ColliderWall/>
-          
-          
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
@@ -255,7 +247,7 @@ export default function Scene() {
             )}
             
             </Suspense>
-         </Debug>
+         {/* </Debug> */}
         </Physics>
       </Canvas>
     </>
