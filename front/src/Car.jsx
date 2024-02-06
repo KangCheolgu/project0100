@@ -1,17 +1,15 @@
 import { useCompoundBody, useRaycastVehicle } from "@react-three/cannon";
-import { useEffect, useMemo, useRef, useState, forwardRef, Suspense } from "react";
-
-import { useControls } from "leva";
+import { useEffect, useMemo, useRef, useState, Suspense } from "react";
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
 import { Vector3 } from "three";
 import { socket } from "./Scene.jsx";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import useGame from './stores/useGame.jsx'
 import { CarModel } from "./components/CarModel.jsx";
 import { Wheel } from "./components/Wheel.jsx";
-import collisionSound from './sound/car-hit/car-hit-1.wav';
+import collisionSound from './sound/car-hit/car-hit-2.wav';
+import klaxonSoundFile from './sound/car-horn/car-horn-1.wav';
 
 const Car = (props) => {
   // 체크포인트 위치
@@ -72,11 +70,16 @@ const Car = (props) => {
     useRef(null)
   );
 
-  // 자동차 충돌 관리
+  // 자동차 충돌 관리///////////////////////////////////////////
   const handleCollision = () => {
     const sound = new Audio(collisionSound);
     sound.play().catch(error => console.error("오디오 재생 실패:", error));
-};
+  };
+  ////////////////////////////////////////////////////////////////
+
+  // 클락션 소리 /////////////////////////////////////////////////////////
+  const klaxonDuration = 500; // 1초
+  ///////////////////////////////////////////////////////////////////////
 
   const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
@@ -89,7 +92,7 @@ const Car = (props) => {
     useRef(null),
   );
 
-  useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
+  useVehicleControls(vehicleApi, chassisApi, props.id, props.state, klaxonDuration, klaxonSoundFile);
 
   const [smoothedCameraPosition] = useState(
     () => new THREE.Vector3(10, 10, 10)
@@ -137,33 +140,33 @@ const Car = (props) => {
 
       /* Phases*/
 
-    /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
-    /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
-    // if(isIn.every((elem)=>elem===true)
-    //   && bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
-    //   && bodyPosition.z < startSpot.z+ 1 && bodyPosition.z > startSpot.z-1){
-    //   around()
-    //   if(lapse==2){
-    //     end()
-    //   }
-    // } else {
-    // /* 체크포인트 지날 때 */
-    //   const newisIn = [false, false, false, false]
-    //   for(let i=0;i<4;i++){
-    //     newisIn[i] = bodyPosition.x < spot[i].x + 3 && bodyPosition.x > spot[i].x - 3 && bodyPosition.z < spot[i].z+ 3 && bodyPosition.z > spot[i].z-3
-    //     if(newisIn[0]){
-    //       inspot(0)
-    //       break
-    //     }
-        
-    //     if(isIn[i-1]===true&&newisIn[i]){
-    //       inspot(i)
-    //     }
-    //   }
-    // } 
-  /* outspot 구현 예정
-      체크 포인트를 잘못된 방향으로 벗어났을때 true-> false */
-}
+      /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
+      /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
+      // if(isIn.every((elem)=>elem===true)
+      //   && bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
+      //   && bodyPosition.z < startSpot.z+ 1 && bodyPosition.z > startSpot.z-1){
+      //   around()
+      //   if(lapse==2){
+      //     end()
+      //   }
+      // } else {
+      // /* 체크포인트 지날 때 */
+      //   const newisIn = [false, false, false, false]
+      //   for(let i=0;i<4;i++){
+      //     newisIn[i] = bodyPosition.x < spot[i].x + 3 && bodyPosition.x > spot[i].x - 3 && bodyPosition.z < spot[i].z+ 3 && bodyPosition.z > spot[i].z-3
+      //     if(newisIn[0]){
+      //       inspot(0)
+      //       break
+      //     }
+
+      //     if(isIn[i-1]===true&&newisIn[i]){
+      //       inspot(i)
+      //     }
+      //   }
+      // } 
+      /* outspot 구현 예정
+          체크 포인트를 잘못된 방향으로 벗어났을때 true-> false */
+    }
   });
 
   useEffect(() => {
@@ -274,17 +277,17 @@ const Car = (props) => {
   };
 
   return (
-      <group ref={vehicle} castShadow receiveShadow>
-        <Suspense>
+    <group ref={vehicle} castShadow receiveShadow>
+      <Suspense>
         <group ref={chassisBody} castShadow>
-            <CarModel castShadow/>
+          <CarModel castShadow />
         </group>
-        </Suspense>
-          <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
-          <Wheel wheelRef={wheels[1]} radius={wheelRadius} />
-          <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
-          <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
-        <Timer />
+      </Suspense>
+      <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
+      <Wheel wheelRef={wheels[1]} radius={wheelRadius} />
+      <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
+      <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
+      <Timer />
     </group>
   )
 }
