@@ -12,10 +12,13 @@ export default function Wall(props){
     return (
     <group rotation={props.rotation}>
         <ColliderBox scale={[300, 0.1, 300]} position={[0, 0, 0]} />
-        <ColliderBox scale={[11, 10, 15]} position={[12, 5, -15]}/>
-        <ColliderBox scale={[5, 10, 15]} position={[33,  5, -15]}/>
-        <ColliderBox scale={[5, 10, 15]} position={[51, 5, -15]}/>
-
+        <ColliderBox scale={[7.2, 10, 7.5]} position={[33,  5, -9.85]}/>
+        <ColliderBox scale={[7.2, 10, 7.5]} position={[33,  5, -19.8]}/>
+        
+        <ColliderBox scale={[12, 10, 12]} position={[51, 5, -15]}/>
+        {/* Section1 */}
+        <ColliderBox scale={[12, 10, 18]} position={[12, 5, -15]}/>
+        
         <ColliderBox scale={[76, 20, 0.1]} position={[29, 10, 6]}/>
         <ColliderBox scale={[55, 20, 0.1]} position={[29, 10, -36]}/>
         <ColliderBox scale={[0.1, 20, 44]} position={[-6, 10, -16]}/>
@@ -25,6 +28,11 @@ export default function Wall(props){
         <ColliderBox scale={[52, 20, 0.1]} position={[30, 10, -55]}/>
         <ColliderBox scale={[0.1, 20, 44]} position={[-6, 10, -75]}/>
         <ColliderBox scale={[0.1, 20, 44]} position={[65, 10, -75]}/>
+
+        {/* Block*/ }
+        <ColliderBox scale={[18, 10, 12]} position={[12, 5, -30]}/>
+        <ColliderBox scale={[12, 10, 12]} position={[33, 5, -0.1]}/>
+        <ColliderBox scale={[12, 10, 15]} position={[51, 5, -28.5]}/>
         
     </group>
     )
