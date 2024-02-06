@@ -10,12 +10,12 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { CarModel } from "./components/CarModel.jsx";
 import { Wheel } from "./components/Wheel.jsx";
-import collisionSound from './sound/car-hit/car-hit-1.wav';
 import { CheckPoint } from "./utils/CheckPoint.jsx";
-
-let checkPointIndex = 0
 import collisionSound from './sound/car-hit/car-hit-2.wav';
 import klaxonSoundFile from './sound/car-horn/car-horn-1.wav';
+
+let checkPointIndex = 0
+
 
 const Car = (props) => {
   // 체크포인트 위치
