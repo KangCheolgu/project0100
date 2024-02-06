@@ -1,24 +1,17 @@
 import { Canvas, useThree, extend } from "@react-three/fiber";
-
 import { Physics, Debug } from "@react-three/cannon";
-import Car from "./Car";
+import Car from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
 import { OrbitControls, useProgress } from '@react-three/drei';
-import Interface from "./Interface"
+import Interface from "./Interface.jsx"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
-
-import Map1 from "./Map1.jsx";
 import Map2 from "./Map2/Map2.jsx"
-import ColliderBox from "./ColliderBox.jsx";
-import * as THREE from "three";
-import {CameraHelper} from "three";
+import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
-
-//import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
 import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx";
 
 
@@ -189,7 +182,7 @@ export default function Scene() {
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
-          <axesHelper/>
+          <axesHelper scale={50}/>
           
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
