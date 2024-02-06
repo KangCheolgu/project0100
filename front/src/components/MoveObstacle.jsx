@@ -12,7 +12,7 @@ export function SpinObstacle() {
   const [ref, api] = useCompoundBody(
     () => ({
       mass: 10000,
-      position: [3,0.5,0],
+      position: [3,0.55,0],
       shapes: [
         { args: [1,1,1], position: [1.75, 0, 0], type: 'Box' },
         { args: [0.5], position: [0, 0, 0], type: 'Sphere' },
