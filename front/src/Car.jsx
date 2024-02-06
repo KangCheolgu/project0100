@@ -81,7 +81,7 @@ const Car = (props) => {
 
   // 자동차 충돌 관리///////////////////////////////////////////
   const [isCollision, setIsCollision] = useState(false)
-  console.log(isCollision)
+  // console.log(isCollision)
   const handleCollision = () => {
     const sound = new Audio(collisionSound);
     sound.play().catch(error => console.error("오디오 재생 실패:", error));
@@ -90,7 +90,7 @@ const Car = (props) => {
       setIsCollision(true)
       setImagePosition(getRandomPosition())
     }
-    console.log(imagePosition)
+    // console.log(imagePosition)
 
 };
   if(isCollision === true){
@@ -246,10 +246,10 @@ const Car = (props) => {
     //       reset()
     //   }
     // )
-
-    let lastPosition = new THREE.Vector3(chassisApi.position.x, chassisApi.position.y, chassisApi.position.z);
+    console.log(props.position);
+    let lastPosition = new THREE.Vector3(props.position[0],props.position[1],props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
-
+    
     function updateAnotherPlayer(updateData) {
       const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
