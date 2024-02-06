@@ -80,16 +80,40 @@ const Car = (props) => {
     //Boom 관련 시작
     if (socket.id === props.id){
       setIsCollision(true)
+      setImagePosition(getRandomPosition())
     }
+    console.log(imagePosition)
 
 };
   if(isCollision === true){
     setTimeout(()=>{
       setIsCollision(false)
     }, 350)
-    console.log("조건문 안",isCollision)
   }
-////-------붐관련 끝------/////
+
+
+  
+  const getRandomPosition=() =>{
+    
+    const cellWidth = window.innerWidth / 3
+    const cellHeight = window.innerHeight / 3
+    
+    const startX = cellWidth
+    const startY = cellHeight * 2
+    
+    
+    const randomX = startX + Math.random() * cellWidth
+    const randomY = startY + Math.random() * cellHeight
+    return {x: randomX, y: randomY}
+  }
+  
+  const [imagePosition, setImagePosition] = useState(getRandomPosition())
+
+  // useEffect(()=>{
+  //   setImagePosition(getRandomPosition())
+  // }, [imagePosition])
+
+////-------crash 말풍선 관련 끝------/////
 
   const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
@@ -299,7 +323,8 @@ const Car = (props) => {
           <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
         <Timer />
         <Html>
-          {isCollision && <img className="boom" src="/assets/images/crash.png" alt="Boom"/>}
+          {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash"/>}
+          {/* style={{position: "absolute", top: imagePosition.y, left: imagePosition.x}}/>} */}
         </Html>
     </group>
     

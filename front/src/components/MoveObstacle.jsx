@@ -12,11 +12,11 @@ function lerp(from, to, speed) {
   return Math.abs(from - to) < 0.001 ? to : r
 }
 //////////// 회전 장애물 ///////////////////
-export function SpinObstacle() {
+export function SpinObstacle(props) {
   const [ref, api] = useCompoundBody(
     () => ({
       
-      position: [10,0.5,0],
+      position: [19,0.5,-4],
       shapes: [
         { args: [0.9,1,1.5], position: [1.75, 0, 0], type: 'Box' },
         
@@ -47,11 +47,11 @@ export function SpinObstacle() {
   )
 }
 //////////// 좌우로 장애물 //////////////
-export function LeftAndRightObstacle(){
+export function LeftAndRightObstacle(props){
   
   const [box, {position}] = useBox(()=>({
     mass: 0,
-    position: [5, 0.7, 0],
+    position: [23, 0.7, -15],
     material: 'object',
     args: [1.1,1,1]
   }),
@@ -71,8 +71,8 @@ export function LeftAndRightObstacle(){
 
   useFrame((_, delta) => {
     targetPosition.current += direction.current * delta * 5
-    if (targetPosition.current > 8) direction.current = -1
-    if (targetPosition.current < 2) direction.current = 1
+    if (targetPosition.current > 28) direction.current = -1
+    if (targetPosition.current < 18) direction.current = 1
   })
 
   return (
@@ -83,11 +83,11 @@ export function LeftAndRightObstacle(){
   )
 }
 //////////////// 위아래 장애물 ////////////////////
-export function UpDownObstacle(){
+export function UpDownObstacle(props){
   
   const [box, {position}] = useBox(()=>({
     mass: 0,
-    position: [2, 0.5, 2],
+    position: [20, 0.5, -20],
     material: 'object',
     args: [1.1,1,1]
   }),
@@ -121,7 +121,7 @@ export function UpDownObstacle(){
 
 /////////////셔터 장애물 /////////////////////
 
-export function ShutterObstacle() {
+export function ShutterObstacle(props) {
   const [ref, api] = useCompoundBody(
     () => ({
       
@@ -150,6 +150,43 @@ export function ShutterObstacle() {
     <mesh ref={ref} castShadow receiveShadow>
       {/* 가운데 기둥 */}
       <meshStandardMaterial />
+    </mesh>
+  )
+}
+
+//////////// 좌우로 장애물 //////////////
+export function LeftRightObstacle(props){
+  
+  const [box, {position}] = useBox(()=>({
+    mass: 0,
+    position: [40, 0.7, -15],
+    material: 'object',
+    args: [1.1,1,1]
+  }),
+  useRef()
+  )  
+  
+  const targetPosition = useRef(5)
+  const direction = useRef(1)
+
+  useEffect(() => {
+    const unsubscribe = position.subscribe((v) => {
+      position.set(lerp(v[0], targetPosition.current, 0.1), v[1], v[2]) //lerp(from,to,speed)
+    })
+    return unsubscribe
+  }, [])
+
+
+  useFrame((_, delta) => {
+    targetPosition.current += direction.current * delta * 5
+    if (targetPosition.current > 45) direction.current = -1
+    if (targetPosition.current < 36) direction.current = 1
+  })
+
+  return (
+    <mesh ref={box} castShadow>
+      <StreetVendorCart scale={[0.3,0.3,0.3]} position={[0, -0.1, 0]}/>
+      <meshStandardMaterial/>
     </mesh>
   )
 }

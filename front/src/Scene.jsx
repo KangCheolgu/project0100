@@ -18,7 +18,7 @@ import {CameraHelper} from "three";
 import ColliderWall from "./ColliderWall.jsx"
 
 //import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle} from "./components/MoveObstacle.jsx";
 
 
 export const socket = io("http://localhost:5000")
@@ -221,6 +221,7 @@ export default function Scene() {
             {/* 장애물 배치 */}
             <SpinObstacle/>
             <LeftAndRightObstacle/>
+            <LeftRightObstacle/>
             <UpDownObstacle/>
             <ShutterObstacle/>
             </>
