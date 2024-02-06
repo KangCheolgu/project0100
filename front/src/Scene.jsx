@@ -3,7 +3,11 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
+<<<<<<< HEAD
+import { OrbitControls } from '@react-three/drei';
+=======
 import { OrbitControls, useProgress, Stats } from '@react-three/drei';
+>>>>>>> 8415f33a75bc4db10fe8aa4f4e623eda6a0d4f03
 import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
@@ -15,12 +19,9 @@ import ColliderWall from "./ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
 import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle} from "./components/MoveObstacle.jsx";
 
-
 export const socket = io("http://localhost:5000")
 
 export default function Scene() {
-
-
 
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
@@ -88,7 +89,7 @@ export default function Scene() {
   // 유저 접속 관련
   useEffect(() => {
     // 접속한 유저 목록 갱신
-    function onPlayers(backEndPlayers){ 
+    async function onPlayers(backEndPlayers){ 
       const playersArray = Object.values(backEndPlayers);
       setPlayers(playersArray)
     }
@@ -159,6 +160,8 @@ export default function Scene() {
 
   // console.log(averagePing !== null ? averagePing : "Average ping not available")
 
+<<<<<<< HEAD
+=======
   // 로딩 관련 끝
 
   ////////// 장애물관련 서버시간받아서 서버시간 5초 후에 장애물 동작 
@@ -174,9 +177,10 @@ export default function Scene() {
     }, timeoutDuration)
   })
   
+>>>>>>> 8415f33a75bc4db10fe8aa4f4e623eda6a0d4f03
   return (
     <>
-      <Interface/>
+      <Interface players={players}/>
       {/* <BgmSound /> */}
       <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}}>
         <ambientLight intensity={3} color="#fff7e6"/>
@@ -185,6 +189,16 @@ export default function Scene() {
           castShadow
           intensity={4}
           shadow-camera-top={100}
+<<<<<<< HEAD
+          shadow-camera-bottom={-100}
+          shadow-camera-left={-100}
+          shadow-camera-right={100}
+          shadow-mapSize-height={512*4}
+          shadow-mapSize-width={512*4}
+          position={[30, 20, -30]}
+          color="#ffffff"
+        />
+=======
           shadow-camera-bottom={-400}
           shadow-camera-left={-100}
           shadow-camera-right={400}
@@ -207,6 +221,7 @@ export default function Scene() {
     color="#ffffff" */}
         <SkyCube scale={100} position={[30, 0, -50]}/>
         
+>>>>>>> 8415f33a75bc4db10fe8aa4f4e623eda6a0d4f03
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -2.6, 0]}>
