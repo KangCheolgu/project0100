@@ -183,7 +183,7 @@ export default function Scene() {
     shadow-camera-right={100}
     shadow-mapSize-height={512*4}
     shadow-mapSize-width={512*4}
-    position={[30, 20, -30]}
+    position={[50, 20, -80]}
     color="#ffffff"
   />
         <OrbitControls />

@@ -3,7 +3,7 @@ import { socket } from "../Scene.jsx";
 
 export const useVehicleControls = (vehicleApi, chassisApi, id, state, klaxonDuration, klaxonSoundFile) => {
   const [controls, setControls] = useState({});
-  const engineForce = 120;
+  const engineForce = 80;
 
   // 클락션 상태와 타이머 관련 상태 추가
   const [klaxon, setKlaxon] = useState(false);

@@ -37,10 +37,10 @@ const Car = (props) => {
 
   let width, height, front, mass, wheelRadius;
 
-  width = 0.26;
-  height = 0.09;
-  front = 0.207;
-  wheelRadius = 0.035;
+  width = 0.2;
+  height = 0.065;
+  front = 0.15;
+  wheelRadius = 0.05;
   mass = 150;
 
   const chassisBodyArgs = [width, height, front * 2];
@@ -118,7 +118,7 @@ const Car = (props) => {
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 1);
+      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
 
       // 카메라의 전역 위치 계산
       const cameraPosition = new THREE.Vector3();

@@ -7,7 +7,7 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
     return {
         
         //Countdown
-        count: 5,
+        count: 1,
 
         // Time        
         startTime: 0, 
