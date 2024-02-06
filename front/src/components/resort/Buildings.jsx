@@ -6,12 +6,11 @@ Command: npx gltfjsx@6.2.16 public/assets/models/Buildings.glb -o src/components
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Building(props) {
+export function Building_1_Red(props) {
   const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
   return (
     <group {...props} dispose={null}>
-      <group position={[-31.766, -10.928, -8.053]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <group position={[2180.894, -427.264, -478.081]}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
           <mesh castShadow receiveShadow geometry={nodes.Scene407.geometry} material={materials['Brick_walls_2_1.004']} />
           <mesh castShadow receiveShadow geometry={nodes.Scene407_1.geometry} material={materials['Walls_1.005']} />
           <mesh castShadow receiveShadow geometry={nodes.Scene407_2.geometry} material={materials['Doors.005']} />
@@ -23,9 +22,107 @@ export function Building(props) {
           <mesh castShadow receiveShadow geometry={nodes.Scene407_8.geometry} material={materials['Walls_2_3.004']} />
           <mesh castShadow receiveShadow geometry={nodes.Scene407_9.geometry} material={materials['Windows.005']} />
           <mesh castShadow receiveShadow geometry={nodes.Scene407_10.geometry} material={materials['Airing.005']} />
+      </group>
+    </group>
+  )
+}
+
+export function Building_5_Red(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
+          <mesh castShadow receiveShadow geometry={nodes.Scene411.geometry} material={materials['Roof.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_1.geometry} material={materials['Parts.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_2.geometry} material={materials['Walls_4.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_3.geometry} material={materials['Doors.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_4.geometry} material={materials['Plinth_3.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_5.geometry} material={materials['Stairs.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_6.geometry} material={materials['Brick_walls_2_1.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_7.geometry} material={materials['Brick_walls_1.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_8.geometry} material={materials['Walls_1_3.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_9.geometry} material={materials['Windows.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_10.geometry} material={materials['Airing.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_11.geometry} material={materials['Solar_panel.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene411_12.geometry} material={materials['Wall_clumb.004']} />
+      </group>
+    </group>
+  )
+}
+
+export function Building_9_Red(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
+        <group position={[0, 0, 0]}>
+          <mesh castShadow receiveShadow geometry={nodes.Scene416.geometry} material={materials['Roof.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene416_1.geometry} material={materials['Walls_1.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene416_2.geometry} material={materials['Doors.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene416_3.geometry} material={materials['Plinth_3.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene416_4.geometry} material={materials['Stairs.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene416_5.geometry} material={materials['Brick_walls_2_1.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene416_6.geometry} material={materials['Brick_walls_2.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene416_7.geometry} material={materials['Windows.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene416_8.geometry} material={materials['Airing.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene416_9.geometry} material={materials['Awnings_2.005']} />
         </group>
       </group>
-      <group position={[-4.064, -3.848, -19.335]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+    </group>
+  )
+}
+
+export function Building_8_Red(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
+        <mesh castShadow receiveShadow geometry={nodes.Scene419.geometry} material={materials['Roof.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_1.geometry} material={materials['Shutters.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_2.geometry} material={materials['Windows.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_3.geometry} material={materials['Walls_4_2.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_4.geometry} material={materials['Brick_walls_1.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_5.geometry} material={materials['Walls_2.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_6.geometry} material={materials['Stairs.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_7.geometry} material={materials['Plinth_1.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_8.geometry} material={materials['Doors.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_9.geometry} material={materials['Walls_3.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_10.geometry} material={materials['Parts.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_11.geometry} material={materials['Awnings_2.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene419_12.geometry} material={materials['Airing.006']} />
+      </group>
+    </group>
+  )
+}
+
+export function Building_10_Red(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
+          <mesh castShadow receiveShadow geometry={nodes.Scene421.geometry} material={materials['Brick_walls_1_1.006']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_1.geometry} material={materials['Shutters.008']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_2.geometry} material={materials['Walls_2.007']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_3.geometry} material={materials['Windows.008']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_4.geometry} material={materials['Walls_2_2.006']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_5.geometry} material={materials['Stairs.008']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_6.geometry} material={materials['Roof.008']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_7.geometry} material={materials['Plinth_3.007']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_8.geometry} material={materials['Doors.008']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_9.geometry} material={materials['Walls_4.007']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_10.geometry} material={materials['Walls_3.007']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_11.geometry} material={materials['Awnings_2.008']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene421_12.geometry} material={materials['Airing.008']} />
+      </group>
+    </group>
+  )
+}
+
+export function Building_2(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
         <mesh castShadow receiveShadow geometry={nodes.Scene408.geometry} material={materials['Roof.005']} />
         <mesh castShadow receiveShadow geometry={nodes.Scene408_1.geometry} material={materials['Walls_3.005']} />
         <mesh castShadow receiveShadow geometry={nodes.Scene408_2.geometry} material={materials['Walls_1.005']} />
@@ -40,7 +137,15 @@ export function Building(props) {
         <mesh castShadow receiveShadow geometry={nodes.Scene408_11.geometry} material={materials['Parts.004']} />
         <mesh castShadow receiveShadow geometry={nodes.Scene408_12.geometry} material={materials['Awnings_2.005']} />
       </group>
-      <group position={[4.122, -8.705, -9.058]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+    </group>
+  )
+}
+
+export function Building_3_Red(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
         <mesh castShadow receiveShadow geometry={nodes.Scene409.geometry} material={materials['Parts.004']} />
         <mesh castShadow receiveShadow geometry={nodes.Scene409_1.geometry} material={materials['Walls_3.005']} />
         <mesh castShadow receiveShadow geometry={nodes.Scene409_2.geometry} material={materials['Walls_4.005']} />
@@ -57,8 +162,15 @@ export function Building(props) {
         <mesh castShadow receiveShadow geometry={nodes.Scene409_13.geometry} material={materials['Shutters.005']} />
         <mesh castShadow receiveShadow geometry={nodes.Scene409_14.geometry} material={materials['Wall_clumb.004']} />
       </group>
-      <group position={[1.522, -10.928, -9.562]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <group position={[471.953, -1296.376, -1167.742]}>
+    </group>
+  )
+}
+
+export function Building_4_Red(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
           <mesh castShadow receiveShadow geometry={nodes.Scene410.geometry} material={materials['Walls_2_3.004']} />
           <mesh castShadow receiveShadow geometry={nodes.Scene410_1.geometry} material={materials['Walls_3.005']} />
           <mesh castShadow receiveShadow geometry={nodes.Scene410_2.geometry} material={materials['Walls_4.005']} />
@@ -73,111 +185,16 @@ export function Building(props) {
           <mesh castShadow receiveShadow geometry={nodes.Scene410_11.geometry} material={materials['Airing.005']} />
           <mesh castShadow receiveShadow geometry={nodes.Scene410_12.geometry} material={materials['Wall_clumb.004']} />
           <mesh castShadow receiveShadow geometry={nodes.Scene410_13.geometry} material={materials['Walls_3_2.004']} />
-        </group>
       </group>
-      <group position={[-31.236, -10.928, 5.103]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <group position={[4753.53, -1898.513, -1853.891]}>
-          <mesh castShadow receiveShadow geometry={nodes.Scene411.geometry} material={materials['Roof.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_1.geometry} material={materials['Parts.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_2.geometry} material={materials['Walls_4.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_3.geometry} material={materials['Doors.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_4.geometry} material={materials['Plinth_3.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_5.geometry} material={materials['Stairs.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_6.geometry} material={materials['Brick_walls_2_1.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_7.geometry} material={materials['Brick_walls_1.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_8.geometry} material={materials['Walls_1_3.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_9.geometry} material={materials['Windows.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_10.geometry} material={materials['Airing.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_11.geometry} material={materials['Solar_panel.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene411_12.geometry} material={materials['Wall_clumb.004']} />
-        </group>
-      </group>
-      <group position={[19.022, 0.341, -5.772]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <group rotation={[-Math.PI / 2, 0, 0]}>
-          <mesh castShadow receiveShadow geometry={nodes.Scene412.geometry} material={materials['Walls_2.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_1.geometry} material={materials['Walls_3.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_2.geometry} material={materials['Walls_1.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_3.geometry} material={materials['Walls_4.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_4.geometry} material={materials['Doors.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_5.geometry} material={materials['Plinth_3.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_6.geometry} material={materials['Roof.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_7.geometry} material={materials['Walls_6.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_8.geometry} material={materials['Plinth_1.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_9.geometry} material={materials['Stairs.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_10.geometry} material={materials['Walls_5_2.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_11.geometry} material={materials['Walls_1_2.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_12.geometry} material={materials['Walls_5.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_13.geometry} material={materials['Walls_2_2.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_14.geometry} material={materials['Windows.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_15.geometry} material={materials['Airing.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_16.geometry} material={materials['Wall_clumb.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_17.geometry} material={materials['Shutters.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_18.geometry} material={materials['Brick_walls_2_1.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_19.geometry} material={materials['Brick_walls_1_1.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene412_20.geometry} material={materials['Brick_walls_2.004']} />
-        </group>
-      </group>
-      <group position={[25.371, -10.928, -16.511]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <group position={[2398.335, -219.852, -375.099]}>
-          <mesh castShadow receiveShadow geometry={nodes.Scene413.geometry} material={materials['Roof.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_1.geometry} material={materials['Walls_4.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_2.geometry} material={materials['Walls_1.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_3.geometry} material={materials['Doors.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_4.geometry} material={materials['Plinth_2.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_5.geometry} material={materials['Stairs.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_6.geometry} material={materials['Walls_2_2.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_7.geometry} material={materials['Walls_6.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_8.geometry} material={materials['Windows.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_9.geometry} material={materials['Awnings.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene413_10.geometry} material={materials['Airing.005']} />
-        </group>
-      </group>
-      <group position={[-31.429, -10.928, -21.711]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh castShadow receiveShadow geometry={nodes.Airing_4__1__3.geometry} material={materials['Airing.005']} position={[-600, -200, -1750]} rotation={[0, 0, 1.571]} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415.geometry} material={materials['Roof.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_1.geometry} material={materials['Walls_4.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_2.geometry} material={materials['Walls_1.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_3.geometry} material={materials['Doors.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_4.geometry} material={materials['Plinth_3.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_5.geometry} material={materials['Stairs.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_6.geometry} material={materials['Walls_6.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_7.geometry} material={materials['Walls_1_3.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_8.geometry} material={materials['Windows.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_9.geometry} material={materials['Airing.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_10.geometry} material={materials['Awnings.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene415_11.geometry} material={materials['Shutters.005']} />
-      </group>
-      <group position={[7.921, -10.928, 8.479]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <group position={[4352.74, -4427.855, -649.16]}>
-          <mesh castShadow receiveShadow geometry={nodes.Scene416.geometry} material={materials['Roof.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene416_1.geometry} material={materials['Walls_1.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene416_2.geometry} material={materials['Doors.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene416_3.geometry} material={materials['Plinth_3.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene416_4.geometry} material={materials['Stairs.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene416_5.geometry} material={materials['Brick_walls_2_1.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene416_6.geometry} material={materials['Brick_walls_2.004']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene416_7.geometry} material={materials['Windows.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene416_8.geometry} material={materials['Airing.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene416_9.geometry} material={materials['Awnings_2.005']} />
-        </group>
-      </group>
-      <group position={[12.471, -10.928, 27.289]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh castShadow receiveShadow geometry={nodes.Scene417.geometry} material={materials['Roof.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_1.geometry} material={materials['Walls_6.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_2.geometry} material={materials['Doors.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_3.geometry} material={materials['Parts.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_4.geometry} material={materials['Tile_1.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_5.geometry} material={materials['Plinth_3.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_6.geometry} material={materials['Stairs.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_7.geometry} material={materials['Brick_walls_1_1.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_8.geometry} material={materials['Walls_6_2.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_9.geometry} material={materials['Walls_2_3.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_10.geometry} material={materials['Windows.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_11.geometry} material={materials['Airing.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_12.geometry} material={materials['Awnings.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene417_13.geometry} material={materials['Wall_clumb.004']} />
-      </group>
-      <group position={[32.771, -10.928, 25.589]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+    </group>
+  )
+}
+
+export function Building_6_Green(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
           <mesh castShadow receiveShadow geometry={nodes.Scene418.geometry} material={materials['Roof.005']} />
           <mesh castShadow receiveShadow geometry={nodes.Scene418_1.geometry} material={materials['Walls_6.004']} />
@@ -196,69 +213,15 @@ export function Building(props) {
           <mesh castShadow receiveShadow geometry={nodes.Scene418_14.geometry} material={materials['Shutters.005']} />
         </group>
       </group>
-      <group position={[-31.029, -10.928, 23.089]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh castShadow receiveShadow geometry={nodes.Scene419.geometry} material={materials['Roof.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_1.geometry} material={materials['Shutters.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_2.geometry} material={materials['Windows.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_3.geometry} material={materials['Walls_4_2.004']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_4.geometry} material={materials['Brick_walls_1.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_5.geometry} material={materials['Walls_2.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_6.geometry} material={materials['Stairs.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_7.geometry} material={materials['Plinth_1.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_8.geometry} material={materials['Doors.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_9.geometry} material={materials['Walls_3.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_10.geometry} material={materials['Parts.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_11.geometry} material={materials['Awnings_2.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene419_12.geometry} material={materials['Airing.006']} />
-      </group>
-      <group position={[-11.409, -10.928, 23.439]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh castShadow receiveShadow geometry={nodes.Scene420.geometry} material={materials['Walls_4.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_1.geometry} material={materials['Parts.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_2.geometry} material={materials['Doors.007']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_3.geometry} material={materials['Plinth_3.006']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_4.geometry} material={materials['Roof.007']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_5.geometry} material={materials['Stairs.007']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_6.geometry} material={materials['Walls_2_3.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_7.geometry} material={materials['Walls_5.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_8.geometry} material={materials['Walls_5_2.005']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_9.geometry} material={materials['Windows.007']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_10.geometry} material={materials['Airing.007']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_11.geometry} material={materials['Awnings_2.007']} />
-        <mesh castShadow receiveShadow geometry={nodes.Scene420_12.geometry} material={materials['Shutters.007']} />
-      </group>
-      <group position={[-10.729, -10.928, -28.411]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <group position={[-1132.235, -795.555, -263.67]}>
-          <mesh castShadow receiveShadow geometry={nodes.Scene421.geometry} material={materials['Brick_walls_1_1.006']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_1.geometry} material={materials['Shutters.008']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_2.geometry} material={materials['Walls_2.007']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_3.geometry} material={materials['Windows.008']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_4.geometry} material={materials['Walls_2_2.006']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_5.geometry} material={materials['Stairs.008']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_6.geometry} material={materials['Roof.008']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_7.geometry} material={materials['Plinth_3.007']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_8.geometry} material={materials['Doors.008']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_9.geometry} material={materials['Walls_4.007']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_10.geometry} material={materials['Walls_3.007']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_11.geometry} material={materials['Awnings_2.008']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene421_12.geometry} material={materials['Airing.008']} />
-        </group>
-      </group>
-      <group position={[8.371, -10.928, -23.211]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <group position={[4337.851, 836.356, 406.814]} rotation={[0, 0, 1.571]}>
-          <mesh castShadow receiveShadow geometry={nodes.Scene422.geometry} material={materials['Airing.009']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_1.geometry} material={materials['Windows.009']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_2.geometry} material={materials['Brick_walls_1.006']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_3.geometry} material={materials['Walls_6.005']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_4.geometry} material={materials['Walls_2_2.007']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_5.geometry} material={materials['Stairs.009']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_6.geometry} material={materials['Roof.009']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_7.geometry} material={materials['Plinth_3.008']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_8.geometry} material={materials['Doors.009']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_9.geometry} material={materials['Walls_4.008']} />
-          <mesh castShadow receiveShadow geometry={nodes.Scene422_10.geometry} material={materials['Awnings_2.009']} />
-        </group>
-      </group>
-      <group position={[21.407, -19.467, 0.024]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+    </group>
+  )
+}
+
+export function Building_5_Green(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
         <mesh castShadow receiveShadow geometry={nodes.Scene423.geometry} material={materials['Walls_1.006']} />
         <mesh castShadow receiveShadow geometry={nodes.Scene423_1.geometry} material={materials['Wall_clumb.005']} />
         <mesh castShadow receiveShadow geometry={nodes.Scene423_2.geometry} material={materials['Solar_panel.005']} />
@@ -291,5 +254,120 @@ export function Building(props) {
     </group>
   )
 }
+
+export function Building_8_Green(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
+        <mesh castShadow receiveShadow geometry={nodes.Scene420.geometry} material={materials['Walls_4.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_1.geometry} material={materials['Parts.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_2.geometry} material={materials['Doors.007']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_3.geometry} material={materials['Plinth_3.006']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_4.geometry} material={materials['Roof.007']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_5.geometry} material={materials['Stairs.007']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_6.geometry} material={materials['Walls_2_3.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_7.geometry} material={materials['Walls_5.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_8.geometry} material={materials['Walls_5_2.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_9.geometry} material={materials['Windows.007']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_10.geometry} material={materials['Airing.007']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_11.geometry} material={materials['Awnings_2.007']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene420_12.geometry} material={materials['Shutters.007']} />
+      </group>
+    </group>
+  )
+}
+
+export function Building_10_1_Blue(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
+        <group position={[0, 0, 0]}>
+          <mesh castShadow receiveShadow geometry={nodes.Scene413.geometry} material={materials['Roof.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_1.geometry} material={materials['Walls_4.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_2.geometry} material={materials['Walls_1.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_3.geometry} material={materials['Doors.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_4.geometry} material={materials['Plinth_2.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_5.geometry} material={materials['Stairs.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_6.geometry} material={materials['Walls_2_2.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_7.geometry} material={materials['Walls_6.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_8.geometry} material={materials['Windows.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_9.geometry} material={materials['Awnings.004']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene413_10.geometry} material={materials['Airing.005']} />
+        </group>
+      </group>
+    </group>
+  )
+}
+
+export function Building_10_Blue(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
+        <mesh castShadow receiveShadow geometry={nodes.Airing_4__1__3.geometry} material={materials['Airing.005']} rotation={[0, 0, 1.571]} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415.geometry} material={materials['Roof.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_1.geometry} material={materials['Walls_4.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_2.geometry} material={materials['Walls_1.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_3.geometry} material={materials['Doors.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_4.geometry} material={materials['Plinth_3.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_5.geometry} material={materials['Stairs.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_6.geometry} material={materials['Walls_6.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_7.geometry} material={materials['Walls_1_3.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_8.geometry} material={materials['Windows.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_9.geometry} material={materials['Airing.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_10.geometry} material={materials['Awnings.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene415_11.geometry} material={materials['Shutters.005']} />
+      </group>
+    </group>
+  )
+}
+
+export function Building_9_Blue(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 10.3, 0]} rotation={[Math.PI / 2, 0, Math.PI / 2]} scale={0.005}>
+          <mesh castShadow receiveShadow geometry={nodes.Scene422.geometry} material={materials['Airing.009']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_1.geometry} material={materials['Windows.009']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_2.geometry} material={materials['Brick_walls_1.006']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_3.geometry} material={materials['Walls_6.005']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_4.geometry} material={materials['Walls_2_2.007']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_5.geometry} material={materials['Stairs.009']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_6.geometry} material={materials['Roof.009']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_7.geometry} material={materials['Plinth_3.008']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_8.geometry} material={materials['Doors.009']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_9.geometry} material={materials['Walls_4.008']} />
+          <mesh castShadow receiveShadow geometry={nodes.Scene422_10.geometry} material={materials['Awnings_2.009']} />
+      </group>
+    </group>
+  )
+}
+
+export function Building_7_Blue(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Buildings.glb')
+  return (
+    <group {...props} dispose={null}>
+      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
+        <mesh castShadow receiveShadow geometry={nodes.Scene417.geometry} material={materials['Roof.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_1.geometry} material={materials['Walls_6.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_2.geometry} material={materials['Doors.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_3.geometry} material={materials['Parts.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_4.geometry} material={materials['Tile_1.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_5.geometry} material={materials['Plinth_3.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_6.geometry} material={materials['Stairs.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_7.geometry} material={materials['Brick_walls_1_1.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_8.geometry} material={materials['Walls_6_2.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_9.geometry} material={materials['Walls_2_3.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_10.geometry} material={materials['Windows.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_11.geometry} material={materials['Airing.005']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_12.geometry} material={materials['Awnings.004']} />
+        <mesh castShadow receiveShadow geometry={nodes.Scene417_13.geometry} material={materials['Wall_clumb.004']} />
+      </group>
+    </group>
+  )
+}
+
 
 useGLTF.preload('/assets/models/Buildings.glb')
