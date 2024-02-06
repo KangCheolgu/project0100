@@ -32,14 +32,15 @@ export default function Scene() {
   var countIntervalRef = useRef(null)
   const start = useGame((state) => state.start)
 
+
   //count값 바뀔 때마다 
   useEffect(()=>{
     if (count === 0){
       setState(true)
-      //count 가 -2 가 되면 Start 문자가 사라지게
+      start()
+    //count 가 -2 가 되면 Start 문자가 사라지게
     } else if (count === -2) {
       clearInterval(countIntervalRef.current)
-      start()
     }
   },[count])
 
@@ -147,15 +148,6 @@ export default function Scene() {
     }
   },[averagePing])
 
-  // 유저 접속 관련 끝
-  // 접속 로직 수정해야함
-  // 처음에 두명이 모두 들어왔을때 핑체크를 해야함
-  // 핑체크한후 각 클라이언트에게 상대핑을 가르쳐줌
-  // 그 후 서버시간을 받아서 저장한후 서버시간에 핑 시간을 더해서
-
-  // console.log(averagePing !== null ? averagePing : "Average ping not available")
-
-
   // 로딩 관련 끝
 
   ////////// 장애물관련 서버시간받아서 서버시간 5초 후에 장애물 동작 
@@ -173,8 +165,8 @@ export default function Scene() {
   
   return (
     <>
-      <Interface players={players} id={socket.id}/>
-      {/* <BgmSound /> */}
+      <Interface players={players}/>
+      <BgmSound />
       <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}}>
         <ambientLight intensity={3} color="#fff7e6"/>
         {/*position={[0, 5, 5]}*/}
