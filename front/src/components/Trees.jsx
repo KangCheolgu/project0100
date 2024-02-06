@@ -6,43 +6,156 @@ Command: npx gltfjsx@6.2.16 public/assets/models/Trees.glb -o src/components/Tre
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Trees(props) {
+export function Palm_5(props) {
   const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Palm_5.geometry} material={materials.Palms} position={[5.806, -5.145, -0.625]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-      <mesh geometry={nodes.Palm_4.geometry} material={materials.Palms} position={[8.476, -5.146, 6.225]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-      <mesh geometry={nodes.Palm_3.geometry} material={materials.Palms} position={[-2.934, -5.146, -5.985]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-      <mesh geometry={nodes.Palm_2.geometry} material={materials.Palms} position={[-11.464, -5.145, -5.975]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-      <mesh geometry={nodes.Palm_1.geometry} material={materials.Palms} position={[0.706, -5.146, 6.355]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-      <mesh geometry={nodes.Grass.geometry} material={materials.Plants} position={[-4.714, -5.116, -1.105]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-      <mesh geometry={nodes.Clumb_8.geometry} material={materials.Clumbs} position={[13.326, -5.146, 0.615]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Bush_1.geometry} material={materials.Plants} position={[0, 0, -76.4]} scale={[1.335, 1.35, 1.35]} />
+          <mesh geometry={nodes.Palm_5.geometry} material={materials.Palms} rotation={[Math.PI / 2, 0, 0]} scale={0.005} />
+    </group>
+  )
+}
+
+export function Palm_4(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Palm_4.geometry} material={materials.Palms} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    </group>
+  )
+}
+
+export function Palm_3(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+        <mesh geometry={nodes.Palm_3.geometry} material={materials.Palms} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    </group>
+  )
+}
+
+export function Palm_2(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+        <mesh geometry={nodes.Palm_2.geometry} material={materials.Palms} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    </group>
+  )
+}
+
+export function Palm_1(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Palm_1.geometry} material={materials.Palms} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    </group>
+  )
+}
+
+export function Grass(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Grass.geometry} material={materials.Plants} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    </group>
+  )
+}
+
+export function Clumb_8(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Clumb_8.geometry} material={materials.Clumbs} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+      <mesh geometry={nodes.Bush_1.geometry} material={materials.Plants} scale={[1.335, 1.35, 1.35]} />
       </mesh>
-      <mesh geometry={nodes.Clumb_7.geometry} material={materials.Clumbs} position={[-8.404, -5.146, -1.155]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Bush_2.geometry} material={materials.Plants} position={[0, 0, -70.2]} scale={1.3} />
+    </group>
+  )
+}
+
+export function Clumb_7(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Clumb_7.geometry} material={materials.Clumbs} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh geometry={nodes.Bush_2.geometry} material={materials.Plants} scale={1.3} />
       </mesh>
-      <mesh geometry={nodes.Clumb_6.geometry} material={materials.Clumbs} position={[-0.034, -5.146, -6.555]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Bush_3.geometry} material={materials.Plants} position={[0, 0, -27.6]} />
+    </group>
+  )
+}
+
+export function Clumb_6(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Clumb_6.geometry} material={materials.Clumbs} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh geometry={nodes.Bush_3.geometry} material={materials.Plants} />
       </mesh>
-      <mesh geometry={nodes.Clumb_5.geometry} material={materials.Clumbs} position={[1.406, -5.146, -1.005]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Palm_5_1.geometry} material={materials.Palms} position={[0, 0, -32]} />
+    </group>
+  )
+}
+
+export function Clumb_5(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Clumb_5.geometry} material={materials.Clumbs} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh geometry={nodes.Palm_5_1.geometry} material={materials.Palms} />
       </mesh>
-      <mesh geometry={nodes.Clumb_4.geometry} material={materials.Clumbs} position={[4.246, -5.146, 6.385]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Palm_4_1.geometry} material={materials.Palms} position={[0, 0, -27.4]} />
+    </group>
+  )
+}
+
+export function Clumb_4(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Clumb_4.geometry} material={materials.Clumbs} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh geometry={nodes.Palm_4_1.geometry} material={materials.Palms} />
       </mesh>
-      <mesh geometry={nodes.Clumb_3.geometry} material={materials.Clumbs} position={[-6.294, -5.146, -6.005]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Palm_3_1.geometry} material={materials.Palms} position={[8.2, 4.8, -36.2]} />
+    </group>
+  )
+}
+
+export function Clumb_3(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Clumb_3.geometry} material={materials.Clumbs} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh geometry={nodes.Palm_3_1.geometry} material={materials.Palms} />
       </mesh>
-      <mesh geometry={nodes.Clumb_2.geometry} material={materials.Clumbs} position={[-10.254, -5.146, 4.375]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Palm_2_1.geometry} material={materials.Palms} position={[-6, 4, -36.2]} />
+    </group>
+  )
+}
+
+export function Clumb_2(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Clumb_2.geometry} material={materials.Clumbs} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh geometry={nodes.Palm_2_1.geometry} material={materials.Palms} />
       </mesh>
-      <mesh geometry={nodes.Clumb_1.geometry} material={materials.Clumbs} position={[9.726, -5.146, -0.265]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Palm_1_1.geometry} material={materials.Palms} position={[0, 0, -34.7]} />
+    </group>
+  )
+}
+
+export function Clumb_1(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Clumb_1.geometry} material={materials.Clumbs} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh geometry={nodes.Palm_1_1.geometry} material={materials.Palms} />
       </mesh>
-      <mesh geometry={nodes.Bush_3_1.geometry} material={materials.Plants} position={[4.136, -5.176, -5.665]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-      <mesh geometry={nodes.Bush_2_1.geometry} material={materials.Plants} position={[-4.164, -5.126, 4.825]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-      <mesh geometry={nodes.Bush_1_1.geometry} material={materials.Plants} position={[-7.074, -5.146, 4.805]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    </group>
+  )
+}
+
+
+export function Bushs(props) {
+  const { nodes, materials } = useGLTF('/assets/models/Trees.glb')
+  return (
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Bush_3_1.geometry} material={materials.Plants} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh geometry={nodes.Bush_2_1.geometry} material={materials.Plants} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh geometry={nodes.Bush_1_1.geometry} material={materials.Plants} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
