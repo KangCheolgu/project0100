@@ -336,7 +336,7 @@ export function Block(props) {
   const { nodes, materials } = useGLTF('/assets/models/objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Block.geometry} material={materials.Border_road_props} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Block.geometry} material={materials.Border_road_props} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }

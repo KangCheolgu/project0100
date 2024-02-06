@@ -1,25 +1,23 @@
 import { Canvas, useThree, extend } from "@react-three/fiber";
-
 import { Physics, Debug } from "@react-three/cannon";
-import Car from "./Car";
+import Car from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
+<<<<<<< HEAD
 import { OrbitControls } from '@react-three/drei';
+=======
+import { OrbitControls, useProgress, Stats } from '@react-three/drei';
+>>>>>>> 8415f33a75bc4db10fe8aa4f4e623eda6a0d4f03
 import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
-
-import Map1 from "./Map1.jsx";
 import Map2 from "./Map2/Map2.jsx"
-import ColliderBox from "./ColliderBox.jsx";
-import * as THREE from "three";
-import {CameraHelper} from "three";
+import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
-
-//import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
-import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx";
+import { SkyCube } from "./components/SkyCube.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle} from "./components/MoveObstacle.jsx";
 
 export const socket = io("http://localhost:5000")
 
@@ -127,7 +125,7 @@ export default function Scene() {
 
       return () => clearTimeout(startSignal)
     })
- 
+    
     // // 서버 시간 검증
     // socket.on("timeCheck", (serverTimeStart)=>{
     //   console.log("in time check");
@@ -162,17 +160,36 @@ export default function Scene() {
 
   // console.log(averagePing !== null ? averagePing : "Average ping not available")
 
+<<<<<<< HEAD
+=======
+  // 로딩 관련 끝
+
+  ////////// 장애물관련 서버시간받아서 서버시간 5초 후에 장애물 동작 
+  //장애물 상태변수
+  const [isObstacleStarted, setIsObstacleStarted] = useState(false)
+
+  socket.on("clientCount",(serverTimeStart)=>{
+    //서버시간 받으면
+    const timeoutDuration = 5000
+    //5초 뒤에 장애물 시작
+    setTimeout(()=>{
+      setIsObstacleStarted(true)
+    }, timeoutDuration)
+  })
+  
+>>>>>>> 8415f33a75bc4db10fe8aa4f4e623eda6a0d4f03
   return (
     <>
       <Interface players={players}/>
       {/* <BgmSound /> */}
       <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}}>
-        <ambientLight intensity={3}/>
+        <ambientLight intensity={3} color="#fff7e6"/>
         {/*position={[0, 5, 5]}*/}
         <directionalLight
           castShadow
           intensity={4}
           shadow-camera-top={100}
+<<<<<<< HEAD
           shadow-camera-bottom={-100}
           shadow-camera-left={-100}
           shadow-camera-right={100}
@@ -181,16 +198,43 @@ export default function Scene() {
           position={[30, 20, -30]}
           color="#ffffff"
         />
+=======
+          shadow-camera-bottom={-400}
+          shadow-camera-left={-100}
+          shadow-camera-right={400}
+          shadow-mapSize-height={512*4}
+          shadow-mapSize-width={512*4}
+          shadow-camera-bias={-0.002}
+          position={[30, 60, -30]}
+          color="#edd59e"
+        >
+        </directionalLight>
+  {/*castShadow
+    intensity={4}
+    shadow-camera-top={1000}
+    shadow-camera-xbottom={-1000}
+    shadow-camera-left={-100}
+    shadow-camera-right={100}
+    shadow-mapSize-height={512*4}
+    shadow-mapSize-width={512*4}
+    position={[30, 20, -30]}
+    color="#ffffff" */}
+        <SkyCube scale={100} position={[30, 0, -50]}/>
+        
+>>>>>>> 8415f33a75bc4db10fe8aa4f4e623eda6a0d4f03
         <OrbitControls />
+        <Stats/>
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
-          <axesHelper/>
+            <axesHelper/>
+          <ColliderWall/>
+          
           
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
-              <Map2 position={[0, 0, -60]}/>
+              <Map2 position={[0, 0, -40]}/>
             
             {
               players.map((player, index) => (
@@ -199,9 +243,17 @@ export default function Scene() {
             }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
-            {/* 물음표박스 장애물 */}
+            {isObstacleStarted && (
+            <>
+            {/* 장애물 배치 */}
             <SpinObstacle/>
             <LeftAndRightObstacle/>
+            <LeftRightObstacle/>
+            <UpDownObstacle/>
+            {/* <ShutterObstacle/> */}
+            </>
+            )}
+            
             </Suspense>
          </Debug>
         </Physics>

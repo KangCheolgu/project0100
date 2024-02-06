@@ -19,7 +19,7 @@ export const useWheels = (width, height, front, radius) => {
         frictionSlip: 10, // 마찰력
         dampingRelaxation: wheelDampingRelaxation,
         dampingCompression: wheelDampingCompression, // 댐핑 관련 매개변수 (낮을수록 진동이 심하게, 높을수록 안정적)
-        maxSuspensionForce: 1000000, // 최대 서스펜션 힘 (넘어지지 않도록 하는데 사용)
+        maxSuspensionForce: 500, // 최대 서스펜션 힘 (넘어지지 않도록 하는데 사용)
         rollInfluence: 0.01, // 차량의 기울기에 따른 바퀴의 롤링 영향 (낮을수록 안정적, 높을수록 미끄러움)
         maxSuspensionTravel: 0.3, // 최대 서스펜션 이동 거리 (미터)
         customSlidingRotationalSpeed: -30, // 사용자 정의 슬라이딩 회전 속도 (라디안/초, 음수 값은 반시계 방향 회전)

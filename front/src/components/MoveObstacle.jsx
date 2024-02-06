@@ -2,27 +2,32 @@ import { useEffect, useMemo, useRef } from 'react'
 import { useCompoundBody, useBox } from '@react-three/cannon'
 import { useFrame } from '@react-three/fiber'
 import { BoxGeometry, Vector3 } from 'three'
+import { StreetVendorCart } from './StreetVendorCart'
+import { PoliceCar } from './PoliceCar'
+import { BananaCar } from './BananaCar'
+import * as THREE from "three";
 
 function lerp(from, to, speed) {
   const r = (1 - speed) * from + speed * to
   return Math.abs(from - to) < 0.001 ? to : r
 }
-
-export function SpinObstacle() {
+//////////// 회전 장애물 ///////////////////
+export function SpinObstacle(props) {
   const [ref, api] = useCompoundBody(
     () => ({
-      mass: 10000,
-      position: [3,0.5,0],
+      
+      position: [19,0.5,-4],
       shapes: [
-        { args: [1,1,1], position: [1.75, 0, 0], type: 'Box' },
-        { args: [0.5], position: [0, 0, 0], type: 'Sphere' },
-        { args: [1,1,1], position: [-1.75, 0, 0], type: 'Box' }
-      ]
+        { args: [0.9,1,1.5], position: [1.75, 0, 0], type: 'Box' },
+        
+        { args: [0.6,1,1.4], position: [-1.75, 0, 0], type: 'Box' }
+      ],
+      type: 'Kinematic'
     }),
 
     useRef()
   )
-  // sapi.position.set([0, 0.7, 0])
+
   useEffect(() => {
     api.angularFactor.set(0, 0.5, 0) // causes the obstacles to remain upright in case of collision
     api.linearFactor.set(0, 0, 0) // locks it in place so it doesnt slide when bumped
@@ -35,43 +40,153 @@ export function SpinObstacle() {
   return (
     <mesh ref={ref} castShadow receiveShadow>
       {/* 가운데 기둥 */}
-     
+      <PoliceCar scale={[0.07,0.07,0.07]} position={[1.8,-0.5,0]}/>
+      <BananaCar scale={[0.002, 0.002, 0.002]} position={[-1.8, -0.1, 0]}/>
       <meshStandardMaterial />
-      
     </mesh>
   )
 }
-
-export function LeftAndRightObstacle(){
+//////////// 좌우로 장애물 //////////////
+export function LeftAndRightObstacle(props){
   
   const [box, {position}] = useBox(()=>({
     mass: 0,
-    position: [-3, 0.5, 0],
+    position: [23, 0.7, -15],
     material: 'object',
-    args: [1,1,1]
+    args: [1.1,1,1]
   }),
   useRef()
   )  
   
-  const targetPosition = useRef(0)
+  const targetPosition = useRef(5)
   const direction = useRef(1)
-  
+
   useEffect(() => {
     const unsubscribe = position.subscribe((v) => {
-      position.set(lerp(v[0], targetPosition.current, 0.1), v[1], v[2])
+      position.set(lerp(v[0], targetPosition.current, 0.1), v[1], v[2]) //lerp(from,to,speed)
     })
     return unsubscribe
   }, [])
 
+
   useFrame((_, delta) => {
-    targetPosition.current += direction.current * delta
-    if (targetPosition.current > 2) direction.current = -1
+    targetPosition.current += direction.current * delta * 5
+    if (targetPosition.current > 28) direction.current = -1
+    if (targetPosition.current < 18) direction.current = 1
+  })
+
+  return (
+    <mesh ref={box} castShadow>
+      <StreetVendorCart scale={[0.3,0.3,0.3]} position={[0, -0.1, 0]}/>
+      <meshStandardMaterial/>
+    </mesh>
+  )
+}
+//////////////// 위아래 장애물 ////////////////////
+export function UpDownObstacle(props){
+  
+  const [box, {position}] = useBox(()=>({
+    mass: 0,
+    position: [20, 0.5, -20],
+    material: 'object',
+    args: [1.1,1,1]
+  }),
+  useRef()
+  )  
+  
+  const targetPosition = useRef(5)
+  const direction = useRef(1)
+
+  useEffect(() => {
+    const unsubscribe = position.subscribe((v) => {
+      position.set(v[0], lerp(v[1], targetPosition.current, 0.1), v[2]) //lerp(from,to,speed)
+    })
+    return unsubscribe
+  }, [])
+
+
+  useFrame((_, delta) => {
+    targetPosition.current += direction.current * delta * 2
+    if (targetPosition.current > 4) direction.current = -1
     if (targetPosition.current < -2) direction.current = 1
   })
 
   return (
     <mesh ref={box} castShadow>
+      <StreetVendorCart scale={[0.3,0.3,0.3]}/>
+      <meshStandardMaterial/>
+    </mesh>
+  )
+}
+
+/////////////셔터 장애물 /////////////////////
+
+export function ShutterObstacle(props) {
+  const [ref, api] = useCompoundBody(
+    () => ({
+      
+      position: [0,1,-5],
+      shapes: [
+        { args: [0.3,0.3,3.5], position: [0, 0, 1.75], type: 'Box' },
+      ],
+      type: 'Kinematic',
+      rotation: [Math.PI/2,0,Math.PI/2]
+    }),
+
+    useRef()
+  )
+  
+
+  useEffect(() => {
+    api.angularFactor.set(0, 0.5, 0.5) // causes the obstacles to remain upright in case of collision
+    api.linearFactor.set(0, 0, 0) // locks it in place so it doesnt slide when bumped
+  }, [api.angularFactor, api.linearFactor])
+
+  useFrame((_, delta) => {
+    api.angularVelocity.set(0, 0, 100*delta)
+  })
+
+  return (
+    <mesh ref={ref} castShadow receiveShadow>
+      {/* 가운데 기둥 */}
       <meshStandardMaterial />
+    </mesh>
+  )
+}
+
+//////////// 좌우로 장애물 //////////////
+export function LeftRightObstacle(props){
+  
+  const [box, {position}] = useBox(()=>({
+    mass: 0,
+    position: [40, 0.7, -15],
+    material: 'object',
+    args: [1.1,1,1]
+  }),
+  useRef()
+  )  
+  
+  const targetPosition = useRef(5)
+  const direction = useRef(1)
+
+  useEffect(() => {
+    const unsubscribe = position.subscribe((v) => {
+      position.set(lerp(v[0], targetPosition.current, 0.1), v[1], v[2]) //lerp(from,to,speed)
+    })
+    return unsubscribe
+  }, [])
+
+
+  useFrame((_, delta) => {
+    targetPosition.current += direction.current * delta * 5
+    if (targetPosition.current > 45) direction.current = -1
+    if (targetPosition.current < 36) direction.current = 1
+  })
+
+  return (
+    <mesh ref={box} castShadow>
+      <StreetVendorCart scale={[0.3,0.3,0.3]} position={[0, -0.1, 0]}/>
+      <meshStandardMaterial/>
     </mesh>
   )
 }

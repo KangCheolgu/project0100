@@ -10,7 +10,6 @@ io.listen(5000)
 
 const backEndPlayers = {}
 var numClients = 2
-const currentTime = new Date().getTime()
 let clientReadyCount = 0;
 const allPings = {}
 
@@ -39,7 +38,7 @@ io.on("connection", (socket)=>{
   // 원하는 클라이언트 수와 배열 수 같으면 서버 시간을 보냄
   if(Object.keys(backEndPlayers).length === numClients){
     const serverTimeStart = Date.now()
-    // console.log(serverTimeStart);
+    console.log("server Time: ",serverTimeStart);
     io.emit("clientCount", serverTimeStart)
   }
 

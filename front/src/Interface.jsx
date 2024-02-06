@@ -22,6 +22,7 @@ export default function Interface(props){
     // 유저 목록을 받아서 목록에 추가해줌
     const [players, setPlayers] = useState([])
 
+
     useEffect(()=>
     {
         function onPlayers(backEndPlayers){ 
@@ -86,7 +87,6 @@ export default function Interface(props){
         {/* raceStart */}
         {count <=0 && count > -2 && <div className="countdown" ><h1>Start</h1></div>}
         {/* Restart */}
-        
         {phase==='ended'?<div className="restart" onClick={restart}>Restart</div>:null}
         {phase==='ended'?<div className="endtime"></div>:null}
 

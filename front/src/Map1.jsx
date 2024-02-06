@@ -4,27 +4,16 @@ import { useEffect, useMemo, useRef, useState, forwardRef } from "react";
 import * as THREE from "three";
 import { useFrame} from "@react-three/fiber";
 import {GrassPlain, RoadLanes, RoadLanesHalf, RoadLeftBottomCurve, RoadPlain, CrossWalkHalf,Side, Side2, Side3, SideRightTopCurve, SideLeftBottom, SideRightTopInnerCurve,SideRightTopInnerCurve2,SideRightTopInnerCurve3, SideRightTopOutterCurve2, CurbLeftBottomCurve, SideRightTopOutterCurve1, SideRightTopCurveLong} from "./components/resort/Road.jsx"
-import { BuildingSmallOrange, BuildingSmallRed,BuildingSmallRedPalnt,BuildingSmallSide,Building5, Building5_1, Building6, Building_6_1, Building_7, Building_8, Building_8_1, Building_9, Building_9_1, Building_10, Building_10_1, Building_10_1_1, Building_10_1_2} from "./components/resort/Buildings.jsx"
+import { BuildingSmallOrange, BuildingSmallRed, Building5, Building5_1} from "./components/resort/Buildings.jsx"
 import { Startline } from "./components/Startline.jsx";
-import Section1 from "./Section1.jsx";
-import Section2 from "./Section2.jsx";
-import Section3 from "./Section3.jsx"
-import Section4 from "./Section4.jsx"
+
 export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
     const scale = props.scale
     return(<group castShadow receiveShadow >
         {/* [0, 0, 0]~[60, 0, 0]*/}
-        {/*첫번째 블럭 */}
-        <Section1/>
-        {/*두번째 블럭*/}
-        <Section2/>
-        {/* 세번째 블럭 */}
-        <Section3/>
-        {/* 서쪽 외곽 */}
-        <Section4/>
-
+        {/* <BuildingSmallOrange position = {[0, 0, 0]} /> */}
         <Startline position={[position[0]+1.45, position[1]+0, position[2]-10]} scale={[1.3, 1, 1.15]} rotation={[0, Math.PI/2, 0]} castShadow receiveShadow/>
         <RoadLeftBottomCurve position={[position[0]+0, position[1]+0, position[2]+0]}/>
         <RoadLanes position={[position[0]+6, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>
@@ -110,19 +99,18 @@ export default function Map1(props){
         <Side2 position={[position[0]+37.5, position[1]+0.01, position[2]-18]} rotation={[0, Math.PI/2, 0]}/>
         <Side2 position={[position[0]+37.5, position[1]+0.01, position[2]-12]} rotation={[0, Math.PI/2, 0]}/>
 
+        <SideRightTopInnerCurve3 position={[position[0]+51, position[1]+0.01, position[2]-21]} rotation={[0, Math.PI/2 ,0]}/>
         <SideLeftBottom position={[position[0]+48, position[1]+0, position[2]-24]} rotation={[0, -Math.PI/2, 0]}/>
+        <SideRightTopInnerCurve3 position={[position[0]+51, position[1]+0.01, position[2]-21]} rotation={[0, 0 ,0]}/>
         <SideLeftBottom position={[position[0]+54, position[1]+0, position[2]-24]} rotation={[0, Math.PI, 0]}/>
+        <SideRightTopInnerCurve3 position={[position[0]+51, position[1]+0.01, position[2]-9]} rotation={[0, Math.PI ,0]}/>
         <SideLeftBottom position={[position[0]+48, position[1]+0, position[2]-6]} rotation={[0, 0, 0]}/>
+        <SideRightTopInnerCurve3 position={[position[0]+51, position[1]+0.01, position[2]-9]} rotation={[0, -Math.PI/2 ,0]}/>
         <SideLeftBottom position={[position[0]+54, position[1]+0, position[2]-6]} rotation={[0, Math.PI/2, 0]}/>
-        <GrassPlain position={[position[0]+48, position[1]-0.05, position[2]-24]}/>
-        <GrassPlain position={[position[0]+48, position[1]-0.05, position[2]-18]}/>
-        <GrassPlain position={[position[0]+48, position[1]-0.05, position[2]-12]}/>
-        <GrassPlain position={[position[0]+48, position[1]-0.05, position[2]-6]}/>
-        <GrassPlain position={[position[0]+54, position[1]-0.05, position[2]-24]}/>
-        <GrassPlain position={[position[0]+54, position[1]-0.05, position[2]-18]}/>
-        <GrassPlain position={[position[0]+54, position[1]-0.05, position[2]-12]}/>
-        <GrassPlain position={[position[0]+54, position[1]-0.05, position[2]-6]}/>
-        
+        <Side2 position={[position[0]+46.5, position[1]+0.01, position[2]-18]} rotation={[0, Math.PI/2, 0]}/>
+        <Side2 position={[position[0]+46.5, position[1]+0.01, position[2]-12]} rotation={[0, Math.PI/2, 0]}/>
+        <Side2 position={[position[0]+55.5, position[1]+0.01, position[2]-18]} rotation={[0, Math.PI/2, 0]}/>
+        <Side2 position={[position[0]+55.5, position[1]+0.01, position[2]-12]} rotation={[0, Math.PI/2, 0]}/>
         
         <GrassPlain position={[position[0]+8, position[1]+0, position[2]-6]}/>
         <GrassPlain position={[position[0]+8, position[1]+0, position[2]-12]}/>  
@@ -139,13 +127,15 @@ export default function Map1(props){
         <GrassPlain position={[position[0]+16, position[1]+0, position[2]-18]}/>
         <GrassPlain position={[position[0]+16, position[1]+0, position[2]-24]}/> 
 
-        <GrassPlain position={[position[0]+33, position[1]-0.01, position[2]-6]}/>
-        <GrassPlain position={[position[0]+33, position[1]-0.01, position[2]-12]}/>
-        <GrassPlain position={[position[0]+33, position[1]-0.01, position[2]-18]}/>
-        <GrassPlain position={[position[0]+33, position[1]-0.01, position[2]-24]}/>  
-        <Side2 position={[position[0]+33, position[1]+0, position[2]-15]}/>
-        
-         
+        <GrassPlain position={[position[0]+33, position[1]+0, position[2]-6]}/>
+        <GrassPlain position={[position[0]+33, position[1]+0, position[2]-12]}/>  
+        <GrassPlain position={[position[0]+33, position[1]+0, position[2]-18]}/>
+        <GrassPlain position={[position[0]+33, position[1]+0, position[2]-24]}/>  
+
+        <GrassPlain position={[position[0]+51, position[1]+0, position[2]-6]}/>
+        <GrassPlain position={[position[0]+51, position[1]+0, position[2]-12]}/>  
+        <GrassPlain position={[position[0]+51, position[1]+0, position[2]-18]}/>
+        <GrassPlain position={[position[0]+51, position[1]+0, position[2]-24]}/>  
 
         <SideRightTopInnerCurve position={[position[0]+0, position[1]+0.01, position[2]]} rotation={[0, Math.PI ,0]}/>
         <SideRightTopInnerCurve position={[position[0]+0, position[1]+0.01, position[2]-30]} rotation={[0, Math.PI/2 ,0]}/>
@@ -158,67 +148,6 @@ export default function Map1(props){
         <Side2 position={[position[0]-4.5, position[1]+0.01, position[2]-15]} rotation={[0, Math.PI/2, 0]}/>
         <Side2 position={[position[0]-4.5, position[1]+0.01, position[2]-21]} rotation={[0, Math.PI/2, 0]}/>
         <Side2 position={[position[0]-4.5, position[1]+0.01, position[2]-27]} rotation={[0, Math.PI/2, 0]}/>
-
-        <Side3 position={[position[0]-7.5, position[1]+0.01, position[2]+3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-7.5, position[1]+0.01, position[2]-0]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-7.5, position[1]+0.01, position[2]-3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-7.5, position[1]+0.01, position[2]-9]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-7.5, position[1]+0.01, position[2]-15]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-7.5, position[1]+0.01, position[2]-21]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-7.5, position[1]+0.01, position[2]-27]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-7.5, position[1]+0.01, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
-        <Side position={[position[0]-7.5, position[1]+0.01, position[2]-34]} rotation={[0, Math.PI/2, 0]}/>
-
-        <Side3 position={[position[0]-10.5, position[1]+0.01, position[2]+3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-10.5, position[1]+0.01, position[2]-0]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-10.5, position[1]+0.01, position[2]-3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-10.5, position[1]+0.01, position[2]-9]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-10.5, position[1]+0.01, position[2]-15]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-10.5, position[1]+0.01, position[2]-21]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-10.5, position[1]+0.01, position[2]-27]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-10.5, position[1]+0.01, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
-        <Side position={ [position[0]-10.5, position[1]+0.01, position[2]-34]} rotation={[0, Math.PI/2, 0]}/>
-
-        <Side3 position={[position[0]-13.5, position[1]+0.01, position[2]+3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-13.5, position[1]+0.01, position[2]-0]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-13.5, position[1]+0.01, position[2]-3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-13.5, position[1]+0.01, position[2]-9]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-13.5, position[1]+0.01, position[2]-15]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-13.5, position[1]+0.01, position[2]-21]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-13.5, position[1]+0.01, position[2]-27]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-13.5, position[1]+0.01, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
-        <Side position={ [position[0]-13.5, position[1]+0.01, position[2]-34]} rotation={[0, Math.PI/2, 0]}/>
-
-        <Side3 position={[position[0]-16.5, position[1]+0.01, position[2]+3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-16.5, position[1]+0.01, position[2]-0]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-16.5, position[1]+0.01, position[2]-3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-16.5, position[1]+0.01, position[2]-9]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-16.5, position[1]+0.01, position[2]-15]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-16.5, position[1]+0.01, position[2]-21]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-16.5, position[1]+0.01, position[2]-27]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-16.5, position[1]+0.01, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
-        <Side position={ [position[0]-16.5, position[1]+0.01, position[2]-34]} rotation={[0, Math.PI/2, 0]}/>
-
-        <Side3 position={[position[0]-19.5, position[1]+0.01, position[2]+3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-19.5, position[1]+0.01, position[2]-0]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-19.5, position[1]+0.01, position[2]-3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-19.5, position[1]+0.01, position[2]-9]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-19.5, position[1]+0.01, position[2]-15]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-19.5, position[1]+0.01, position[2]-21]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-19.5, position[1]+0.01, position[2]-27]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-19.5, position[1]+0.01, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
-        <Side position={ [position[0]-19.5, position[1]+0.01, position[2]-34]} rotation={[0, Math.PI/2, 0]}/>
-
-        <Side3 position={[position[0]-22.5, position[1]+0.01, position[2]+3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-22.5, position[1]+0.01, position[2]-0]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-22.5, position[1]+0.01, position[2]-3]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-22.5, position[1]+0.01, position[2]-9]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-22.5, position[1]+0.01, position[2]-15]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-22.5, position[1]+0.01, position[2]-21]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-22.5, position[1]+0.01, position[2]-27]} rotation={[0, Math.PI/2, 0]}/>
-        <Side2 position={[position[0]-22.5, position[1]+0.01, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
-        <Side position={ [position[0]-22.5, position[1]+0.01, position[2]-34]} rotation={[0, Math.PI/2, 0]}/>
-        
 
         {/* 동쪽 인도 */}
         <Side2 position={[position[0]+64.5, position[1]+0.01, position[2]-3]} rotation={[0, Math.PI/2, 0]}/>
@@ -250,34 +179,6 @@ export default function Map1(props){
         <Side2 position={[position[0]+45, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         <Side2 position={[position[0]+51, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         <Side2 position={[position[0]+57, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
-
-        <Side2 position={[position[0]-9, position[1]+0.01, position[2]+6]} rotation={[0, 0, 0]}/>
-        <Side2 position={[position[0]-15, position[1]+0.01, position[2]+6]} rotation={[0, 0, 0]}/>
-        <Side2 position={[position[0]-21, position[1]+0.01, position[2]+6]} rotation={[0, 0, 0]}/>
-        <Side2 position={[position[0]-9, position[1]+0.01, position[2]+9]} rotation={[0, 0, 0]}/>
-        <Side2 position={[position[0]-15, position[1]+0.01, position[2]+9]} rotation={[0, 0, 0]}/>
-        <Side2 position={[position[0]-21, position[1]+0.01, position[2]+9]} rotation={[0, 0, 0]}/>
-        <GrassPlain position={[position[0]-3, position[1], position[2]+9]}/>
-        <GrassPlain position={[position[0]+3, position[1], position[2]+9]}/>
-        <GrassPlain position={[position[0]+9, position[1], position[2]+9]}/>
-
-        <Side2 position={[position[0]-3, position[1]+0.01, position[2]+13.5]} rotation={[0, 0, 0]}/>
-        <Side2 position={[position[0]+3, position[1]+0.01, position[2]+13.5]} rotation={[0, 0, 0]}/>
-        <Side2 position={[position[0]+9, position[1]+0.01, position[2]+13.5]} rotation={[0, 0, 0]}/>
-        <Side2 position={[position[0]+12, position[1]+0.01, position[2]+13.5]} rotation={[0, 0, 0]}/>
-        <Side position={[position[0]+13.5, position[1]+0.01, position[2]+10.5]} rotation={[0, 0, 0]}/>
-
-        <Side3 position={[position[0]+15, position[1]+0.01, position[2]+7.5]}/>
-        <Side2 position={[position[0]+18, position[1]+0.01, position[2]+7.5]}/>
-        <Side2 position={[position[0]+24, position[1]+0.01, position[2]+7.5]}/>
-        <Side2 position={[position[0]+30, position[1]+0.01, position[2]+7.5]}/>
-        <Side2 position={[position[0]+36, position[1]+0.01, position[2]+7.5]}/>
-        <Side2 position={[position[0]+42, position[1]+0.01, position[2]+7.5]}/>
-        <Side2 position={[position[0]+48, position[1]+0.01, position[2]+7.5]}/>
-        <Side2 position={[position[0]+54, position[1]+0.01, position[2]+7.5]}/>
-        <Side2 position={[position[0]+60, position[1]+0.01, position[2]+7.5]}/>
-        <Side3 position={[position[0]+66, position[1]+0.01, position[2]+7.5]}/>
-
         
         
     </group>

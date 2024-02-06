@@ -13,7 +13,7 @@ export function CarModel(props) {
   const { nodes, materials } = useGLTF('/assets/models/porchelow.glb')
   return (
     <group {...props} dispose={null}>
-      <group position={[0, -0.1, 0.035]} rotation={[Math.PI/2, 0, Math.PI]} scale={0.002}>
+      <group position={[0, -0.088, 0.029]} rotation={[Math.PI/2, 0, Math.PI]} scale={0.0015}>
         <mesh castShadow receiveShadow geometry={nodes.CARRERA_LOW.geometry} material={materials.CARRERA_4096}>
           <mesh castShadow receiveShadow geometry={nodes.front_lamps_1.geometry} material={materials.CARRERA_4096} />
           <mesh castShadow receiveShadow geometry={nodes.rear_lamps_1.geometry} material={materials.CARRERA_4096} />

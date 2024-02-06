@@ -10,7 +10,7 @@ export const Wheel = ({ wheelRef, radius, lefSide }) => {
   return(
     <group ref={wheelRef} scale={[0.003, 0.0025, 0.0025]}>
       <group rotation={lefSide ? [0, -Math.PI, 0 ] :[ 0, 0, 0] }>
-        <group rotation={[Math.PI / 2, 0, 0]} scale={1}>
+        <group rotation={[Math.PI / 2, 0, 0]} scale={0.68}>
           <mesh castShadow receiveShadow geometry={nodes.brakes003_1.geometry} material={materials.CARRERA_4096}>
             <mesh castShadow receiveShadow geometry={nodes.tyre003_1.geometry} material={materials.CARRERA_4096} />
           </mesh>
