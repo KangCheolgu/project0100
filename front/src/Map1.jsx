@@ -1,17 +1,14 @@
 
 import { } from "@react-three/cannon";
-import { useEffect, useMemo, useRef, useState, forwardRef } from "react";
 import * as THREE from "three";
-import { useFrame} from "@react-three/fiber";
-import {Grass, Road_1, Road_4, Road_3,Sidewalk_2, Sidewalk, Sidewalk_half, Road_half_3, Sidewalk_corner_3,Sidewalk_corner_7} from "./components/resort/comp-resort-roads.jsx"
-import { BuildingSmallOrange, BuildingSmallRed,BuildingSmallRedPalnt,BuildingSmallSide,Building5, Building5_1, Building6, Building_6_1, Building_7, Building_8, Building_8_1, Building_9, Building_9_1, Building_10, Building_10_1, Building_10_1_1, Building_10_1_2} from "./components/resort/Buildings.jsx"
+import {Grass, Road_1, Road_4, Road_3,Sidewalk_2, Sidewalk, Sidewalk_half, Road_half_3, Sidewalk_corner_3,Sidewalk_corner_7} from "./components/resort/Roads.jsx"
 import { Startline } from "./components/Startline.jsx";
 import Section1 from "./Section1.jsx";
 import Section2 from "./Section2.jsx";
-import Section3 from "./Section3.jsx"
-import Section4 from "./Section4.jsx"
+import Section3 from "./Section3.jsx";
+import Section4 from "./Section4.jsx";
+import Section5 from "./Section5.jsx";
 import ColliderBox from "./ColliderBox.jsx";
-import { Buildings } from "./components/resort/comp-resort-buildings.jsx";
 export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
@@ -27,6 +24,8 @@ export default function Map1(props){
         <Section3/>
         {/* 서쪽 외곽 */}
         <Section4/>
+        {/* 남쪽 외곽 */}
+        <Section5 position={position}/>
         
         <mesh geometry={boxGeometry} material={material} position={[60, 9.5, -28]} scale={[6, 0.1, 42]} rotation={[Math.PI/9, 0, 0]}/>
         <ColliderBox position={[60, 2, -28]} scale={[6, 0.1, 42]} rotation={[Math.PI/9, 0, 0]}/>
