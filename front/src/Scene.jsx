@@ -3,7 +3,7 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
-import { OrbitControls, useProgress } from '@react-three/drei';
+import { OrbitControls, useHelper } from '@react-three/drei';
 import Interface from "./Interface.jsx"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
@@ -13,6 +13,9 @@ import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
 import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx";
+import { SkyCube } from "./components/SkyCube.jsx";
+import * as THREE from "three"
+import { DirectionalLightHelper } from "three";
 
 
 export const socket = io("http://localhost:5000")
@@ -159,26 +162,44 @@ export default function Scene() {
   // console.log(averagePing !== null ? averagePing : "Average ping not available")
 
   // 로딩 관련 끝
-  
+  const light = useRef()
+  const MyLight = () =>{
+    useHelper(light, DirectionalLightHelper)
+  }
   return (
     <>
       <Interface/>
       {/* <BgmSound /> */}
       <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}}>
-        <ambientLight intensity={3}/>
+        <ambientLight intensity={3} color="#fff7e6"/>
         {/*position={[0, 5, 5]}*/}
         <directionalLight
-    castShadow
+          ref={light}
+          castShadow
+          intensity={4}
+          shadow-camera-top={100}
+          shadow-camera-bottom={-400}
+          shadow-camera-left={-100}
+          shadow-camera-right={400}
+          shadow-mapSize-height={512*4}
+          shadow-mapSize-width={512*4}
+          shadow-camera-bias={-0.002}
+          position={[30, 60, -30]}
+          color="#edd59e"
+        >
+        </directionalLight>
+  {/*castShadow
     intensity={4}
-    shadow-camera-top={100}
-    shadow-camera-bottom={-100}
+    shadow-camera-top={1000}
+    shadow-camera-xbottom={-1000}
     shadow-camera-left={-100}
     shadow-camera-right={100}
     shadow-mapSize-height={512*4}
     shadow-mapSize-width={512*4}
     position={[30, 20, -30]}
-    color="#ffffff"
-  />
+    color="#ffffff" */}
+        <SkyCube scale={100} position={[30, 0, -50]}/>
+        
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
