@@ -10,8 +10,8 @@ export function Surfboard(props) {
   const { nodes, materials } = useGLTF('/assets/models/Surfboard.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Surfboard_Cube027_1.geometry} material={materials.FFFFFF} />
-      <mesh geometry={nodes.Surfboard_Cube027_1_1.geometry} material={materials.F44336} />
+      <mesh castShadow receiveShadow geometry={nodes.Surfboard_Cube027_1.geometry} material={materials.FFFFFF} />
+      <mesh castShadow receiveShadow geometry={nodes.Surfboard_Cube027_1_1.geometry} material={materials.F44336} />
     </group>
   )
 }

@@ -5,6 +5,7 @@ import { useKeyboardControls } from '@react-three/drei'
 import {addEffect} from '@react-three/fiber'
 import useGame from './stores/useGame'
 import Scene from './Scene'
+
 export default function Interface(){
     const lapse = useRef()
     const time = useRef()
@@ -17,6 +18,7 @@ export default function Interface(){
     const phase = useGame((state)=> state.phase)
     let count = useGame((state)=> state.count)
     let elapsedTime=0
+
 
     useEffect(()=>
     {
@@ -56,7 +58,6 @@ export default function Interface(){
         {/* raceStart */}
         {count <=0 && count > -2 && <div className="countdown" ><h1>Start</h1></div>}
         {/* Restart */}
-        
         {phase==='ended'?<div className="restart" onClick={restart}>Restart</div>:null}
         {phase==='ended'?<div className="endtime"></div>:null}
 
