@@ -23,9 +23,9 @@ io.on("connection", (socket)=>{
 
   // 접속시 socket.id
   if(Object.keys(backEndPlayers).length === 0){
-    position = [-2, 0.3, -12]
+    position = [-1, 0.3, -12]
   } else {
-    position = [2, 0.3, -12]
+    position = [1, 0.3, -12]
   }
   
   backEndPlayers[socket.id] = {
@@ -79,7 +79,14 @@ io.on("connection", (socket)=>{
       io.emit("startSignal", allPings)
     }
   })
-
+  // host user가 역전시
+  socket.on("overtaking", () => {
+    io.emit("rankingChange","호스트가1등")
+  })
+  // host user가 역전 당할시
+  socket.on("overtaken", () => {
+    io.emit("rankingChange","호스트가2등")
+  })
   // 접속 해제시 
   socket.on('disconnect', (reason) => {
     console.log(reason)

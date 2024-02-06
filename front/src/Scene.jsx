@@ -4,7 +4,7 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
-import { OrbitControls, useProgress } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
@@ -21,12 +21,9 @@ import ColliderWall from "./ColliderWall.jsx"
 //import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
 import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx";
 
-
 export const socket = io("http://localhost:5000")
 
 export default function Scene() {
-
-
 
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
@@ -94,7 +91,7 @@ export default function Scene() {
   // 유저 접속 관련
   useEffect(() => {
     // 접속한 유저 목록 갱신
-    function onPlayers(backEndPlayers){ 
+    async function onPlayers(backEndPlayers){ 
       const playersArray = Object.values(backEndPlayers);
       setPlayers(playersArray)
     }
@@ -165,27 +162,25 @@ export default function Scene() {
 
   // console.log(averagePing !== null ? averagePing : "Average ping not available")
 
-  // 로딩 관련 끝
-  
   return (
     <>
-      <Interface/>
+      <Interface players={players}/>
       {/* <BgmSound /> */}
       <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}}>
         <ambientLight intensity={3}/>
         {/*position={[0, 5, 5]}*/}
         <directionalLight
-    castShadow
-    intensity={4}
-    shadow-camera-top={100}
-    shadow-camera-bottom={-100}
-    shadow-camera-left={-100}
-    shadow-camera-right={100}
-    shadow-mapSize-height={512*4}
-    shadow-mapSize-width={512*4}
-    position={[30, 20, -30]}
-    color="#ffffff"
-  />
+          castShadow
+          intensity={4}
+          shadow-camera-top={100}
+          shadow-camera-bottom={-100}
+          shadow-camera-left={-100}
+          shadow-camera-right={100}
+          shadow-mapSize-height={512*4}
+          shadow-mapSize-width={512*4}
+          position={[30, 20, -30]}
+          color="#ffffff"
+        />
         <OrbitControls />
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
@@ -197,11 +192,11 @@ export default function Scene() {
               <Map1 position={[0, 0, 0]}/>
               <Map2 position={[0, 0, -60]}/>
             
-            {/* {
+            {
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-            } */}
+            }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
             {/* 물음표박스 장애물 */}
