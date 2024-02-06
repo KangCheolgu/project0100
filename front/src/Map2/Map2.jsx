@@ -18,7 +18,7 @@ export default function Map2(props){
     return(<group receiveShadow >
         {/* [0, 0, 0]~[60, 0, 0]*/}
         {/*첫번째 블럭 */}
-        <Section1/>
+        <Section1 position={[60, 0, -40]} />
         {/*두번째 블럭*/}
         <Section2/>
         {/* 세번째 블럭 */}
@@ -26,7 +26,6 @@ export default function Map2(props){
         {/* 서쪽 외곽 */}
         <Section4/>
 
-        <Startline position={[position[0]+1.45, position[1]+0, position[2]-10]} scale={[1.3, 1, 1.15]} rotation={[0, Math.PI/2, 0]}/>
         {/* <Road_4 position={[position[0]+0, position[1]+0, position[2]+0]}/>
         <Road_1 position={[position[0]+6, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>
         <Road_1 position={[position[0]+12, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>
@@ -329,97 +328,13 @@ export default function Map2(props){
         <Sidewalk position={[position[0]+45, position[1]+0.01, position[2]+7.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+51, position[1]+0.01, position[2]+7.5]} rotation={[0, 0, 0]}/>
         {/* <Sidewalk position={[position[0]+57, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/> */}
+
+        <Sidewalk_corner_7 position={[position[0]+51, position[1]+0.02, position[2]]} rotation={[0, -Math.PI / 2, 0]}/>
+        <Sidewalk_corner_7 position={[position[0]+51, position[1]+0.02, position[2]]} rotation={[0, Math.PI, 0]}/>
+
+        <Sidewalk_corner_7 position={[position[0]+15, position[1]+0.02, position[2]]} rotation={[0, -Math.PI / 2, 0]}/>
+        <Sidewalk_corner_7 position={[position[0]+9, position[1]+0.02, position[2]]} rotation={[0, Math.PI, 0]}/>
         
-
-
-        {/* 보더라인 */}
-        <Border_1 position={[63.1, 0, -60]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[63.1, 0, -66]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[63.1, 0, -72]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[63.1, 0, -78]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[63.1, 0, -84]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_1 position={[56.9, 0, -60]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[56.9, 0, -66]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[56.9, 0, -72]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[56.9, 0, -78]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_1 position={[45.1, 0, -66]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[45.1, 0, -72]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[45.1, 0, -78]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_1 position={[38.9, 0, -72]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[38.9, 0, -78]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[38.9, 0, -84]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[38.9, 0, -90]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_1 position={[27.1, 0, -72]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[27.1, 0, -78]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[27.1, 0, -84]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_1 position={[20.9, 0, -66]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[20.9, 0, -72]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[20.9, 0, -78]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_1 position={[3.1, 0, -60]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[3.1, 0, -66]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[3.1, 0, -72]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[3.1, 0, -78]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_1 position={[-3.1, 0, -60]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[-3.1, 0, -66]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[-3.1, 0, -72]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[-3.1, 0, -78]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_1 position={[-3.1, 0, -84]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_2 position={[60.1, 0, -90]} rotation={[0, 0, 0]} />
-        <Border_2 position={[53.9, 0, -84]} rotation={[0, 0, 0]} />
-        <Border_2 position={[48.1, 0, -84]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_2 position={[24.1, 0, -90]} rotation={[0, 0, 0]} />
-        <Border_2 position={[-0.1, 0, -90]} rotation={[0, Math.PI / 2, 0]} />
-        <Border_2 position={[17.9, 0, -84]} rotation={[0, 0, 0]} />
-        <Border_2 position={[6.1, 0, -84]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Border_1 position={[54.1, 0, -93]} rotation={[0, 0, 0]} />
-        <Border_1 position={[48.1, 0, -93]} rotation={[0, 0, 0]} />
-        <Border_1 position={[42.1, 0, -93]} rotation={[0, 0, 0]} />
-        <Border_1 position={[18.1, 0, -93]} rotation={[0, 0, 0]} />
-        <Border_1 position={[12.1, 0, -93]} rotation={[0, 0, 0]} />
-        <Border_1 position={[6.1, 0, -93]} rotation={[0, 0, 0]} />
-
-        <Border_1 position={[12.1, 0, -87]} rotation={[0, 0, 0]} />
-
-        <Border_1 position={[36.1, 0, -57]} rotation={[0, 0, 0]} />
-        <Border_1 position={[30.1, 0, -57]} rotation={[0, 0, 0]} />
-
-        <Border_2 position={[42.1, 0, -60]} rotation={[0, -Math.PI / 2, 0]} />
-        <Border_2 position={[35.9, 0, -66]} rotation={[0, -Math.PI / 2, 0]} />
-
-        <Border_2 position={[30.1, 0, -66]} rotation={[0, Math.PI, 0]} />
-        <Border_2 position={[23.9, 0, -60]} rotation={[0, Math.PI, 0]} />
-
-        <Fence2 position={[72.5, 0, -61]} rotation={[0, Math.PI / 2, 0]} />
-        <Fence2 position={[72.5, 0, -65]} rotation={[0, Math.PI / 2, 0]} />
-        <Fence2 position={[69, 0, -90]} rotation={[0, Math.PI / 2, 0]} />
-        <Fence2 position={[69, 0, -94]} rotation={[0, Math.PI / 2, 0]} />
-        <Fence2 position={[69, 0, -98]} rotation={[0, Math.PI / 2, 0]} />
-
-        <Fence2 position={[59.5, 0, -100]} rotation={[0, 0, 0]} />
-        <Fence2 position={[63.5, 0, -100]} rotation={[0, 0, 0]} />
-        <Fence2 position={[67, 0, -100]} rotation={[0, 0, 0]} />
-
-        <Fence2 position={[50.5, 0, -100.5]} rotation={[0, 0, 0]} />
-        <Fence2 position={[54.5, 0, -100.5]} rotation={[0, 0, 0]} />
-
-        <Fence2 position={[36, 0, -100.5]} rotation={[0, 0, 0]} />
-
-        <Fence2 position={[26.3, 0, -100.5]} rotation={[0, 0, 0]} />
-        <Fence2 position={[15, 0, -100.5]} rotation={[0, 0, 0]} />
-        <Fence2 position={[7, 0, -100.5]} rotation={[0, 0, 0]} />
-        <Fence2 position={[-4, 0, -100.5]} rotation={[0, 0, 0]} />
-
-
     </group>
     );
 } 

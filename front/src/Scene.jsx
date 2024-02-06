@@ -188,7 +188,7 @@ export default function Scene() {
               <ColliderWall/>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
-              <Map2 position={[0, 0, -60]}/>
+              <Map2 position={[0, 0, -40]}/>
             
             {
               players.map((player, index) => (
