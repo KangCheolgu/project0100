@@ -9,8 +9,6 @@ import Section2 from "./Section2.jsx";
 import Section3 from "./Section3.jsx";
 import Section4 from "./Section4.jsx";
 import Section5 from "./Section5.jsx";
-import ColliderBox from "../ColliderBox.jsx";
-import { Resort_trees_ref } from "../components/Resort-trees_ref.jsx";
 export default function Map1(props){
     const position = props.position
     const rotation = props.rotation

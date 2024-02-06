@@ -1,5 +1,7 @@
 import { useCompoundBody, useRaycastVehicle } from "@react-three/cannon";
 import { useEffect, useMemo, useRef, useState, Suspense } from "react";
+import {Html} from '@react-three/drei'
+import { useControls } from "leva";
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
 import { Vector3 } from "three";
@@ -33,7 +35,6 @@ const Car = (props) => {
 
   let position = props.position;
   let rotation = props.rotation;
-  const playerNum = props.index
 
   let width, height, front, mass, wheelRadius;
 
@@ -71,10 +72,49 @@ const Car = (props) => {
   );
 
   // 자동차 충돌 관리///////////////////////////////////////////
+  const [isCollision, setIsCollision] = useState(false)
+  console.log(isCollision)
   const handleCollision = () => {
     const sound = new Audio(collisionSound);
     sound.play().catch(error => console.error("오디오 재생 실패:", error));
-  };
+    //Boom 관련 시작
+    if (socket.id === props.id){
+      setIsCollision(true)
+      setImagePosition(getRandomPosition())
+    }
+    console.log(imagePosition)
+
+};
+  if(isCollision === true){
+    setTimeout(()=>{
+      setIsCollision(false)
+    }, 350)
+  }
+
+
+  
+  const getRandomPosition=() =>{
+    
+    const cellWidth = window.innerWidth / 3
+    const cellHeight = window.innerHeight / 3
+    
+    const startX = cellWidth
+    const startY = cellHeight * 2
+    
+    
+    const randomX = startX + Math.random() * cellWidth
+    const randomY = startY + Math.random() * cellHeight
+    return {x: randomX, y: randomY}
+  }
+  
+  const [imagePosition, setImagePosition] = useState(getRandomPosition())
+
+  // useEffect(()=>{
+  //   setImagePosition(getRandomPosition())
+  // }, [imagePosition])
+
+////-------crash 말풍선 관련 끝------/////
+
   ////////////////////////////////////////////////////////////////
 
   // 클락션 소리 /////////////////////////////////////////////////////////
@@ -288,7 +328,12 @@ const Car = (props) => {
       <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
       <Timer />
+        <Html>
+          {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash"/>}
+          {/* style={{position: "absolute", top: imagePosition.y, left: imagePosition.x}}/>} */}
+        </Html>
     </group>
+    
   )
 }
 
