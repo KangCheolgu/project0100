@@ -1,5 +1,4 @@
 import { Canvas, useThree, extend } from "@react-three/fiber";
-
 import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car";
 import io from "socket.io-client"
@@ -10,15 +9,9 @@ import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
-
-import Map1 from "./Map1.jsx";
 import Map2 from "./Map2.jsx"
-import ColliderBox from "./ColliderBox.jsx";
-import * as THREE from "three";
-import {CameraHelper} from "three";
+import Map1 from "./Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
-
-//import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
 import {LeftAndRightObstacle, SpinObstacle} from "./components/MoveObstacle.jsx";
 
 
@@ -195,11 +188,11 @@ export default function Scene() {
               <Map1 position={[0, 0, 0]}/>
               <Map2 position={[0, 0, -60]}/>
             
-            {
+            {/*
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-            }
+              */}
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
             {/* 물음표박스 장애물 */}

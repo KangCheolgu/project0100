@@ -6,21 +6,13 @@ import { Bamboo, FlowerBush } from "./components/Plants.jsx";
 
 export default function Section4(props){
     return(<group castShadow receiveShadow >
-        <Building_9_1 position={[-11, 0, -1.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Building_9_1 position={[-11, 0, -6.5]} rotation={[0, Math.PI/2, 0]}/>
         <Fence2 position={[-8, 0, -11]}/>
         <Fence2 position={[-11, 0, -11]}/>
         <Fence2 position={[-14, 0, -11]}/>
-        <Building_10_1_2 position={[-11.5, 0, -17.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Building_10_1_2 position={[-11.5, 0, -22.5]} rotation={[0, Math.PI/2, 0]}/>
 
-        <Bamboo position={[-2, 4, 9]} scale={4}/>
-        <Bamboo position={[-1, 4, 10]} scale={4}/>
-        <Bamboo position={[0, 4, 9]} scale={4}/>
-        <Bamboo position={[2, 4, 9]} scale={4}/>
-        <Bamboo position={[3, 4, 10]} scale={4}/>
-        <Bamboo position={[4, 4, 9]} scale={4}/>
-        <Bamboo position={[6, 4, 9]} scale={4}/>
-        <Bamboo position={[7, 4, 10]} scale={4}/>
-        <Bamboo position={[8, 4, 9]} scale={4}/>
+        
 
         <Building_9 position={[-11, 0, 14.5]} rotation={[0, Math.PI/2, 0]}/>
         <FlowerBush position={[0, 0, 0]}/>
