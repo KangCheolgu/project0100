@@ -5,12 +5,13 @@ import { BoxGeometry, Vector3 } from 'three'
 import { StreetVendorCart } from './StreetVendorCart'
 import { PoliceCar } from './PoliceCar'
 import { BananaCar } from './BananaCar'
+import * as THREE from "three";
 
 function lerp(from, to, speed) {
   const r = (1 - speed) * from + speed * to
   return Math.abs(from - to) < 0.001 ? to : r
 }
-
+//////////// 회전 장애물 ///////////////////
 export function SpinObstacle() {
   const [ref, api] = useCompoundBody(
     () => ({
@@ -26,7 +27,7 @@ export function SpinObstacle() {
 
     useRef()
   )
-  // sapi.position.set([0, 0.7, 0])
+
   useEffect(() => {
     api.angularFactor.set(0, 0.5, 0) // causes the obstacles to remain upright in case of collision
     api.linearFactor.set(0, 0, 0) // locks it in place so it doesnt slide when bumped
@@ -45,7 +46,7 @@ export function SpinObstacle() {
     </mesh>
   )
 }
-
+//////////// 좌우로 장애물 //////////////
 export function LeftAndRightObstacle(){
   
   const [box, {position}] = useBox(()=>({
@@ -81,7 +82,7 @@ export function LeftAndRightObstacle(){
     </mesh>
   )
 }
-
+//////////////// 위아래 장애물 ////////////////////
 export function UpDownObstacle(){
   
   const [box, {position}] = useBox(()=>({
@@ -114,6 +115,41 @@ export function UpDownObstacle(){
     <mesh ref={box} castShadow>
       <StreetVendorCart scale={[0.3,0.3,0.3]}/>
       <meshStandardMaterial/>
+    </mesh>
+  )
+}
+
+/////////////셔터 장애물 /////////////////////
+
+export function ShutterObstacle() {
+  const [ref, api] = useCompoundBody(
+    () => ({
+      
+      position: [0,1,-5],
+      shapes: [
+        { args: [0.3,0.3,3.5], position: [0, 0, 1.75], type: 'Box' },
+      ],
+      type: 'Kinematic',
+      rotation: [Math.PI/2,0,Math.PI/2]
+    }),
+
+    useRef()
+  )
+  
+
+  useEffect(() => {
+    api.angularFactor.set(0, 0.5, 0.5) // causes the obstacles to remain upright in case of collision
+    api.linearFactor.set(0, 0, 0) // locks it in place so it doesnt slide when bumped
+  }, [api.angularFactor, api.linearFactor])
+
+  useFrame((_, delta) => {
+    api.angularVelocity.set(0, 0, 100*delta)
+  })
+
+  return (
+    <mesh ref={ref} castShadow receiveShadow>
+      {/* 가운데 기둥 */}
+      <meshStandardMaterial />
     </mesh>
   )
 }

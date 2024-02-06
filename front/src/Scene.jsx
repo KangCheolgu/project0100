@@ -18,7 +18,7 @@ import {CameraHelper} from "three";
 import ColliderWall from "./ColliderWall.jsx"
 
 //import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle} from "./components/MoveObstacle.jsx";
 
 
 export const socket = io("http://localhost:5000")
@@ -127,7 +127,7 @@ export default function Scene() {
 
       return () => clearTimeout(startSignal)
     })
- 
+    
     // // 서버 시간 검증
     // socket.on("timeCheck", (serverTimeStart)=>{
     //   console.log("in time check");
@@ -163,6 +163,19 @@ export default function Scene() {
   // console.log(averagePing !== null ? averagePing : "Average ping not available")
 
   // 로딩 관련 끝
+
+  ////////// 장애물관련 서버시간받아서 서버시간 5초 후에 장애물 동작 
+  //서버시간 상태 변수
+  const [isObstacleStarted, setIsObstacleStarted] = useState(false)
+
+  socket.on("clientCount",(serverTimeStart)=>{
+    //서버시간 받으면
+    const timeoutDuration = 5000
+    //5초 뒤에 장애물 시작
+    setTimeout(()=>{
+      setIsObstacleStarted(true)
+    }, timeoutDuration)
+  })
   
   return (
     <>
@@ -203,10 +216,16 @@ export default function Scene() {
               }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
+            {isObstacleStarted && (
+            <>
             {/* 장애물 배치 */}
             <SpinObstacle/>
             <LeftAndRightObstacle/>
             <UpDownObstacle/>
+            <ShutterObstacle/>
+            </>
+            )}
+            
          </Debug>
         </Physics>
       </Canvas>
