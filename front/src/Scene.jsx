@@ -1,6 +1,6 @@
 import { Canvas, useThree, extend } from "@react-three/fiber";
 import { Physics, Debug } from "@react-three/cannon";
-import Car from "./Car";
+import Car from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense } from "react";
 import { OrbitControls, useProgress, Stats } from '@react-three/drei';
@@ -9,12 +9,8 @@ import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
-
-import Map1 from "./Map1.jsx";
-import Map2 from "./Map2.jsx"
-import ColliderBox from "./ColliderBox.jsx";
-import * as THREE from "three";
-import {CameraHelper} from "three";
+import Map2 from "./Map2/Map2.jsx"
+import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
 
 //import { QuestionObstacle } from "./components/QuestionObstacle.jsx";
@@ -24,6 +20,8 @@ import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, Lef
 export const socket = io("http://localhost:5000")
 
 export default function Scene() {
+
+
 
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
@@ -205,15 +203,16 @@ export default function Scene() {
           
           
             <Suspense fallback={<LoadingPage />}>
+              <ColliderWall/>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
-              <Map2 position={[0, 0, 60]}/>
-            </Suspense>
+              <Map2 position={[0, 0, -60]}/>
+            
             {
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-              }
+            }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
             {isObstacleStarted && (
@@ -223,10 +222,11 @@ export default function Scene() {
             <LeftAndRightObstacle/>
             <LeftRightObstacle/>
             <UpDownObstacle/>
-            <ShutterObstacle/>
+            {/* <ShutterObstacle/> */}
             </>
             )}
             
+            </Suspense>
          </Debug>
         </Physics>
       </Canvas>
