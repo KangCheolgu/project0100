@@ -1,6 +1,6 @@
 import { useCompoundBody, useRaycastVehicle } from "@react-three/cannon";
 import { useEffect, useMemo, useRef, useState, forwardRef, Suspense } from "react";
-
+import {Html} from '@react-three/drei'
 import { useControls } from "leva";
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
@@ -35,7 +35,6 @@ const Car = (props) => {
 
   let position = props.position;
   let rotation = props.rotation;
-  const playerNum = props.index
 
   let width, height, front, mass, wheelRadius;
 
@@ -73,10 +72,24 @@ const Car = (props) => {
   );
 
   // 자동차 충돌 관리
+  const [isCollision, setIsCollision] = useState(false)
+  console.log(isCollision)
   const handleCollision = () => {
     const sound = new Audio(collisionSound);
     sound.play().catch(error => console.error("오디오 재생 실패:", error));
+    //Boom 관련 시작
+    if (socket.id === props.id){
+      setIsCollision(true)
+    }
+
 };
+  if(isCollision === true){
+    setTimeout(()=>{
+      setIsCollision(false)
+    }, 350)
+    console.log("조건문 안",isCollision)
+  }
+////-------붐관련 끝------/////
 
   const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
@@ -285,7 +298,11 @@ const Car = (props) => {
           <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
           <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
         <Timer />
+        <Html>
+          {isCollision && <img className="boom" src="/assets/images/crash.png" alt="Boom"/>}
+        </Html>
     </group>
+    
   )
 }
 

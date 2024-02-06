@@ -165,7 +165,7 @@ export default function Scene() {
   // 로딩 관련 끝
 
   ////////// 장애물관련 서버시간받아서 서버시간 5초 후에 장애물 동작 
-  //서버시간 상태 변수
+  //장애물 상태변수
   const [isObstacleStarted, setIsObstacleStarted] = useState(false)
 
   socket.on("clientCount",(serverTimeStart)=>{
