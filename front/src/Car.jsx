@@ -222,13 +222,13 @@ const Car = (props) => {
       if(CheckPoint[checkPointIndex%(CheckPoint.length)].axis === 'x') {
         if(CheckPoint[checkPointIndex%(CheckPoint.length)].x - 10 < bodyPosition.x && bodyPosition.x <  CheckPoint[checkPointIndex%(CheckPoint.length)].x + 10 
           && CheckPoint[checkPointIndex%(CheckPoint.length)].z - 0.5 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex%(CheckPoint.length)].z + 0.5) {
-          checkPointIndex++
+          // checkPointIndex++
         }
 
       } else if (CheckPoint[checkPointIndex%(CheckPoint.length)].axis === 'z') {
         if(CheckPoint[checkPointIndex%(CheckPoint.length)].z - 10 < bodyPosition.z && bodyPosition.z <  CheckPoint[checkPointIndex%(CheckPoint.length)].z + 10 
           && CheckPoint[checkPointIndex%(CheckPoint.length)].x - 0.5 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex%(CheckPoint.length)].x + 0.5) {
-          checkPointIndex++
+          // checkPointIndex++
         }
       }
     }

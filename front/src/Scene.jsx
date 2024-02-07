@@ -114,7 +114,7 @@ export default function Scene() {
     }
 
     // 내가 설정한 최대 인원 숫자와 현재 인원이 같으면 핑체크 시작
-    socket.on("clientCount", ()=>{
+    socket.on("clientCount", () => {
 
         const pingCheck = setTimeout(() => {
           startPingCheck()
