@@ -15,6 +15,11 @@ import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
 import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle} from "./components/MoveObstacle.jsx";
+import Countdown from "./sound/CountDown.jsx";
+import StartSound from "./sound/StartSound.jsx";
+import { Howl, Howler } from 'howler';
+import countDown from './sound/countdown/CountDownSoundEffect.mp3'
+import Start from './sound/countdown/StartSoundEffect.mp3'
 
 export const socket = io("http://localhost:5000")
 
@@ -32,15 +37,31 @@ export default function Scene() {
   var countIntervalRef = useRef(null)
   const start = useGame((state) => state.start)
 
-
   //count값 바뀔 때마다 
   useEffect(()=>{
+    const countDownSound = new Howl({
+      src: [countDown],
+      loop: false, // 오디오 반복 재생 여부
+      autoplay: false // 자동 재생 여부
+    });
+
+    const startSound = new Howl({
+      src: [Start],
+      loop: false, // 오디오 반복 재생 여부
+      autoplay: false // 자동 재생 여부
+    });
+
     if (count === 0){
       setState(true)
+      startSound.play();
       start()
     //count 가 -2 가 되면 Start 문자가 사라지게
     } else if (count === -2) {
       clearInterval(countIntervalRef.current)
+      countDownSound.unload()
+      startSound.unload()
+    } else if (count > 0 && count < 4){
+      countDownSound.play();
     }
   },[count])
 

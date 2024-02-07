@@ -16,10 +16,6 @@ import klaxonSoundFile from './sound/car-horn/car-horn-1.wav';
 
 let checkPointIndex = 0
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 718b3ee18a61c0f20d929a5ebddf952a06904f44
 const Car = (props) => {
   // 체크포인트 위치
   // const spot = [{x: -32, y: 0, z:-13},
@@ -85,10 +81,7 @@ const Car = (props) => {
 
   // 자동차 충돌 관리///////////////////////////////////////////
   const [isCollision, setIsCollision] = useState(false)
-<<<<<<< HEAD
-=======
   // console.log(isCollision)
->>>>>>> 718b3ee18a61c0f20d929a5ebddf952a06904f44
   const handleCollision = () => {
     const sound = new Audio(collisionSound);
     sound.play().catch(error => console.error("오디오 재생 실패:", error));
@@ -97,11 +90,8 @@ const Car = (props) => {
       setIsCollision(true)
       setImagePosition(getRandomPosition())
     }
-<<<<<<< HEAD
-=======
     // console.log(imagePosition)
 
->>>>>>> 718b3ee18a61c0f20d929a5ebddf952a06904f44
 };
   if(isCollision === true){
     setTimeout(()=>{
