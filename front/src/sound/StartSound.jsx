@@ -1,8 +1,8 @@
 import { Howl, Howler } from 'howler';
-import countDown from './countdown/CountDownSoundEffect.mp3'
+import Start from './countdown/StartSoundEffect.mp3'
 import { useEffect } from 'react';
 
-const Countdown = () => {
+const StartSound = () => {
     // 오디오 파일 경로 설정
     // const sound = new Howl({
     //     src: ['sound.mp3', 'sound.ogg'], // 지원하는 형식으로 여러 파일을 제공할 수 있습니다.
@@ -13,21 +13,21 @@ const Countdown = () => {
 
     useEffect(() => {
         // 오디오 파일 경로
-        const sound = new Howl({
-            src: [countDown],
+        const startSound = new Howl({
+            src: [Start],
             loop: false, // 오디오 반복 재생 여부
             autoplay: true // 자동 재생 여부
         });
     
         // 오디오 재생
-        sound.play();
+        startSound.play();
 
         return () => {
-            sound.unload();
+            startSound.unload();
         };
     
       }, []);
 }
 
-export default Countdown;
+export default StartSound;
 
