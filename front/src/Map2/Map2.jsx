@@ -18,7 +18,7 @@ export default function Map2(props){
     return(<group receiveShadow >
         {/* [0, 0, 0]~[60, 0, 0]*/}
         {/*첫번째 블럭 */}
-        <Section1 position={[60, 0, -40]} />
+        <Section1 position={[position[0]+60, position[1]+0, position[2]]} />
         {/*두번째 블럭*/}
         <Section2/>
         {/* 세번째 블럭 */}
