@@ -14,7 +14,7 @@ import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump} from "./components/MoveObstacle.jsx";
 import Countdown from "./sound/CountDown.jsx";
 import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
@@ -231,8 +231,8 @@ export default function Scene() {
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -2.6, 0]}>
-          {/* <Debug> */}
-            <axesHelper/>
+          <Debug>
+            <axesHelper scale={50}/>
           <axesHelper/>
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
@@ -247,19 +247,21 @@ export default function Scene() {
               }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
+            <Bump position={[0,-0.6,-70]}/>
             {isObstacleStarted && (
             <>
             {/* 장애물 배치 */}
             <SpinObstacle/>
             <LeftAndRightObstacle/>
-            <LeftRightObstacle/>
+            {/* <LeftRightObstacle/> */}
             <UpDownObstacle/>
             {/* <ShutterObstacle/> */}
+            <SpinObstacle/>
             </>
             )}
             
             </Suspense>
-         {/* </Debug> */}
+         </Debug>
         </Physics>
       </Canvas>
     </>

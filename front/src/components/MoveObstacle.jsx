@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { useCompoundBody, useBox } from '@react-three/cannon'
+import { useCompoundBody, useBox, useSphere } from '@react-three/cannon'
 import { useFrame } from '@react-three/fiber'
 import { BoxGeometry, Vector3 } from 'three'
 import { StreetVendorCart } from './StreetVendorCart'
@@ -188,5 +188,170 @@ export function LeftRightObstacle(props){
       <StreetVendorCart scale={[0.3,0.3,0.3]} position={[0, -0.1, 0]}/>
       <meshStandardMaterial/>
     </mesh>
+  )
+}
+
+export function Bump(props){
+
+  const [bump1] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0],props.position[1],props.position[2]]
+  })
+  )
+
+  const [bump2] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+1,props.position[1],props.position[2]+1]
+  })
+  )
+
+  const [bump3] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-1,props.position[1],props.position[2]+1]
+  })
+  )
+
+  const [bump4] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-2,props.position[1],props.position[2]]
+  })
+  )
+
+  const [bump5] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+2,props.position[1],props.position[2]]
+  })
+  )
+
+  const [bump6] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-1,props.position[1],props.position[2]-1]
+  })
+  )
+
+  const [bump7] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+1,props.position[1],props.position[2]-1]
+  })
+  )
+
+  const [bump8] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0],props.position[1],props.position[2]-2]
+  })
+  )
+
+  const [bump9] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0],props.position[1],props.position[2]+2]
+  })
+  )
+
+  const [bump10] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+1,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump11] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+2,props.position[1],props.position[2]-2]
+  })
+  )
+  const [bump12] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-2,props.position[1],props.position[2]-2]
+  })
+  )
+  const [bump13] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-1,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump14] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+1,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump15] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+2,props.position[1],props.position[2]+2]
+  })
+  )
+  const [bump16] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-2,props.position[1],props.position[2]+2]
+  })
+  )
+  const [bump17] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-3,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump18] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+3,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump19] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+3,props.position[1],props.position[2]+1]
+  })
+  )
+  const [bump20] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+3,props.position[1],props.position[2]-1]
+  })
+  )
+  const [bump21] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-3,props.position[1],props.position[2]+1]
+  })
+  )
+  const [bump22] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-3,props.position[1],props.position[2]-1]
+  })
+  )
+
+  return(
+    <group>
+
+    <mesh ref={bump1}>
+    </mesh>
+    <mesh ref={bump2}>
+    </mesh>
+    <mesh ref={bump3}>
+    </mesh>
+    <mesh ref={bump4}>
+    </mesh>
+    <mesh ref={bump5}>
+    </mesh>
+    <mesh ref={bump6}>
+    </mesh>
+    <mesh ref={bump7}>
+    </mesh>
+    <mesh ref={bump8}>
+    </mesh>
+    <mesh ref={bump9}>
+    </mesh>
+    <mesh ref={bump10}>
+    </mesh>
+    <mesh ref={bump11}>
+    </mesh>
+    <mesh ref={bump12}>
+    </mesh>
+    <mesh ref={bump13}>
+    </mesh>
+    <mesh ref={bump14}>
+    </mesh>
+    <mesh ref={bump15}>
+    </mesh>
+    <mesh ref={bump16}>
+    </mesh>
+    <mesh ref={bump17}>
+    </mesh>
+    <mesh ref={bump18}>
+    </mesh>
+    </group>
   )
 }
