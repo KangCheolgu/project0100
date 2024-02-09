@@ -125,17 +125,21 @@ export function ShutterObstacle(props) {
   const [ref, api] = useCompoundBody(
     () => ({
       
-      position: [0,1,-5],
+      position: [0,-0,-6],
       shapes: [
-        { args: [0.3,0.3,3.5], position: [0, 0, 1.75], type: 'Box' },
+        { args: [2,0.3,3.5], position: [0, 0, 1.75], type: 'Box' },
       ],
       type: 'Kinematic',
-      rotation: [Math.PI/2,0,Math.PI/2]
+      rotation: [-Math.PI/2,0,-Math.PI/2]
     }),
 
     useRef()
   )
   
+  const isClockwise = useRef(true)
+  const elapsedTime = useRef(0)
+  const isStopping = useRef(false)
+  const angularVelocity = useRef()
 
   useEffect(() => {
     api.angularFactor.set(0, 0.5, 0.5) // causes the obstacles to remain upright in case of collision
@@ -143,13 +147,33 @@ export function ShutterObstacle(props) {
   }, [api.angularFactor, api.linearFactor])
 
   useFrame((_, delta) => {
-    api.angularVelocity.set(0, 0, 100*delta)
+    elapsedTime.current += delta
+    //console.log(elapsedTime.current)
+    
+    if(elapsedTime.current >= 1.95){
+      isClockwise.current = !isClockwise.current //방향전환
+      elapsedTime.current = 0 // 초기화
+      isStopping.current = true // 정지시킴
+    }
+
+    //장애물 멈추면 
+    if(isStopping.current){
+      api.angularVelocity.set(0,0,0) // 잠깐 정지
+      if(elapsedTime.current >= 1.9){
+        isStopping.current = false // 정지 종료
+        elapsedTime.current = 0 // 초기화
+      }
+    } else{
+      angularVelocity.current = isClockwise.current ? -100 : 100
+
+      api.angularVelocity.set(0,0, angularVelocity.current * delta)
+    }
   })
 
   return (
     <mesh ref={ref} castShadow receiveShadow>
       {/* 가운데 기둥 */}
-      <meshStandardMaterial />
+      <meshStandardMaterial position={[0,-1,0]}/>
     </mesh>
   )
 }
@@ -191,6 +215,7 @@ export function LeftRightObstacle(props){
   )
 }
 
+//////////////////// 울퉁불퉁 장애물 ////////////////////////
 export function Bump(props){
 
   const [bump1] = useSphere(()=>({
