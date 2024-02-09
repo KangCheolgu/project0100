@@ -20,11 +20,16 @@ import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
+import Water from "./Water.jsx";
+import * as THREE from "three";
+import { Speed } from "./Speeds.jsx";
+import Interaface2 from "./Interface2.jsx";
+import Sand from "./Sand.jsx";
 
 export const socket = io("http://localhost:5000")
 
 export default function Scene() {
-
+  const ocean = useRef();
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
 
@@ -186,10 +191,14 @@ export default function Scene() {
   
   return (
     <>
+      
       <Interface players={players}/>
       <BgmSound />
       <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}}>
-        <ambientLight intensity={3} color="#fff7e6"/>
+        <Interaface2/>
+        <Sand/>
+        <Speed/>
+        <ambientLight intensity={2} color="#fff7e6"/>
         {/*position={[0, 5, 5]}*/}
         <directionalLight
           castShadow
@@ -200,7 +209,7 @@ export default function Scene() {
           shadow-camera-right={100}
           shadow-mapSize-height={512*4}
           shadow-mapSize-width={512*4}
-          position={[30, 20, -30]}
+          position={[30, 60, -30]}
           color="#ffffff"
         />
           {/* castShadow
@@ -239,7 +248,8 @@ export default function Scene() {
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
               <Map2 position={[0, 0, -60]}/>
-            
+              <Water position={[-30, -1, -29]} /> 
+              <Water position={[91, -1, -29]} />            
             {/*
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>

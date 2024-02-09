@@ -9,6 +9,7 @@ import Section2 from "./Section2.jsx";
 import Section3 from "./Section3.jsx";
 import Section4 from "./Section4.jsx";
 import Section5 from "./Section5.jsx";
+import { MeshDistortMaterial, MeshWobbleMaterial } from "@react-three/drei";
 export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
@@ -16,9 +17,8 @@ export default function Map1(props){
     const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     return(<group castShadow receiveShadow >   
-
+        
         <Startline position={[position[0]+1.45, position[1]+0, position[2]-10]} scale={[1.3, 1, 1.15]} rotation={[0, Math.PI/2, 0]} castShadow receiveShadow/>
-
         <Block position={[position[0]+5, position[1], position[2]-31.5]} rotation={[0, Math.PI/2, 0]}/>
         <Block position={[position[0]+5, position[1], position[2]-28.5]} rotation={[0, Math.PI/2, 0]}/>
         <Block position={[position[0]+20, position[1], position[2]-31.5]} rotation={[0, Math.PI/2, 0]}/>
@@ -151,7 +151,7 @@ export default function Map1(props){
         <Border_1 position={[position[0]+27, position[1]+0, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+27, position[1]+0, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
 
-        {/* 화단 연석 */}
+        {/* 화단 연석 */}{/*}
         <Border_2 position={[position[0]-3, position[1]+0, position[2]+9]} rotation={[0,Math.PI/2, 0]}/>
         <Border_2 position={[position[0]-3, position[1]+0, position[2]+9]} rotation={[0,Math.PI, 0]}/>
         <Border_1 position={[position[0]+3, position[1]+0, position[2]+6]} rotation={[0, 0, 0]} />
@@ -160,7 +160,7 @@ export default function Map1(props){
         <Border_1 position={[position[0]+9, position[1]+0, position[2]+12]} rotation={[0, 0, 0]} />
         <Border_2 position={[position[0]+15, position[1]+0, position[2]+9]} rotation={[0,-Math.PI/2, 0]}/>
         <Border_2 position={[position[0]+15, position[1]+0, position[2]+9]} rotation={[0,0, 0]}/>
-
+    */}
         {/*Section3 연석 */}
         <Border_1 position={[position[0]+48, position[1]+0, position[2]-6]} rotation={[0, -Math.PI/4, 0]} scale={[1.45, 1, 1]} />
         <Border_1 position={[position[0]+54, position[1]+0, position[2]-6]} rotation={[0, Math.PI/4, 0]} scale={[1.4, 1, 1]} />
@@ -238,7 +238,7 @@ export default function Map1(props){
         <Road_1 position={[position[0]+18, position[1]+0, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
         <Road_3 position={[position[0]+42, position[1]+0, position[2]-30]} rotation={[0, 0, 0]}/>
 
-        <Road_1 position={[position[0]+36, position[1]+0, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
+        {/*<Road_1 position={[position[0]+36, position[1]+0, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>*/}
         <Road_1 position={[position[0]+48, position[1]+0, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
         <Road_1 position={[position[0]+54, position[1]+0, position[2]-30]} rotation={[0, Math.PI/2, 0]}/>
 
@@ -292,7 +292,7 @@ export default function Map1(props){
         
          
 
-        <Sidewalk_corner_3 position={[position[0]+0, position[1]+0.01, position[2]]} rotation={[0, Math.PI ,0]}/>
+        {/*<Sidewalk_corner_3 position={[position[0]+0, position[1]+0.01, position[2]]} rotation={[0, Math.PI ,0]}/>*/}
         <Sidewalk_corner_3 position={[position[0]+0, position[1]+0.01, position[2]-30]} rotation={[0, Math.PI/2 ,0]}/>
         <Sidewalk_corner_3 position={[position[0]+60, position[1]+0.01, position[2]-30]} rotation={[0, 0 ,0]}/>
         <Sidewalk_corner_3 position={[position[0]+60, position[1]+0.01, position[2]+0]} rotation={[0, -Math.PI/2 ,0]}/>
@@ -385,7 +385,7 @@ export default function Map1(props){
         <Sidewalk position={[position[0]+57, position[1]+0.01, position[2]-34.5]} rotation={[0, 0, 0]}/>
 
         {/* 남쪽 인도 */}
-        <Sidewalk position={[position[0]+3, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
+        {/*<Sidewalk position={[position[0]+3, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>*/}
         <Sidewalk position={[position[0]+9, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+15, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+21, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
@@ -396,7 +396,7 @@ export default function Map1(props){
         <Sidewalk position={[position[0]+51, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+57, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
 
-        <Sidewalk position={[position[0]-9, position[1]+0.01, position[2]+6]} rotation={[0, 0, 0]}/>
+        {/*<Sidewalk position={[position[0]-9, position[1]+0.01, position[2]+6]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]-15, position[1]+0.01, position[2]+6]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]-21, position[1]+0.01, position[2]+6]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]-9, position[1]+0.01, position[2]+9]} rotation={[0, 0, 0]}/>
@@ -406,8 +406,8 @@ export default function Map1(props){
         <Grass position={[position[0]+3, position[1], position[2]+9]}/>
         <Grass position={[position[0]+9, position[1], position[2]+9]}/>
         <Grass position={[position[0]+15, position[1], position[2]+9]}/>
-
-        <Sidewalk position={[position[0]-3, position[1]+0.01, position[2]+13.5]} rotation={[0, 0, 0]}/>
+    */}
+        {/*<Sidewalk position={[position[0]-3, position[1]+0.01, position[2]+13.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+3, position[1]+0.01, position[2]+13.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+9, position[1]+0.01, position[2]+13.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+12, position[1]+0.01, position[2]+13.5]} rotation={[0, 0, 0]}/>
@@ -418,8 +418,8 @@ export default function Map1(props){
         <Sidewalk_corner_7 position={[position[0]+15, position[1]+0.01, position[2]+9]} rotation={[0, -Math.PI/2, 0]}/>
         <Sidewalk_corner_7 position={[position[0]-3, position[1]+0.01, position[2]+9]} rotation={[0, Math.PI, 0]}/>
         <Sidewalk_corner_7 position={[position[0]-3, position[1]+0.01, position[2]+9]} rotation={[0, Math.PI/2, 0]}/>
-
-        <Sidewalk position={[position[0]-6, position[1]+0.01, position[2]+16]} rotation={[0, 0, 0]}/>
+    */}
+        {/*<Sidewalk position={[position[0]-6, position[1]+0.01, position[2]+16]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]-0, position[1]+0.01, position[2]+16]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+6, position[1]+0.01, position[2]+16]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+12, position[1]+0.01, position[2]+16]} rotation={[0, 0, 0]}/>
@@ -505,9 +505,9 @@ export default function Map1(props){
         <Sidewalk position={[position[0]+48, position[1]+0.01, position[2]+13]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+54, position[1]+0.01, position[2]+13]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+60, position[1]+0.01, position[2]+13]} rotation={[0, 0, 0]}/>
-        <Sidewalk_half position={[position[0]+66, position[1]+0.01, position[2]+13]} rotation={[0, 0, 0]}/>
+    <Sidewalk_half position={[position[0]+66, position[1]+0.01, position[2]+13]} rotation={[0, 0, 0]}/>*/}
 
-        <Sidewalk_half position={[position[0]+21, position[1]+0.01, position[2]+7.5]}/>
+        {/*<Sidewalk_half position={[position[0]+21, position[1]+0.01, position[2]+7.5]}/>
         <Sidewalk position={[position[0]+24, position[1]+0.01, position[2]+7.5]}/>
         <Sidewalk position={[position[0]+30, position[1]+0.01, position[2]+7.5]}/>
         <Sidewalk position={[position[0]+36, position[1]+0.01, position[2]+7.5]}/>
@@ -516,7 +516,7 @@ export default function Map1(props){
         <Sidewalk position={[position[0]+54, position[1]+0.01, position[2]+7.5]}/>
         <Sidewalk position={[position[0]+60, position[1]+0.01, position[2]+7.5]}/>
         <Sidewalk_half position={[position[0]+66, position[1]+0.01, position[2]+7.5]}/>
-
+*/}
         
         
     </group>

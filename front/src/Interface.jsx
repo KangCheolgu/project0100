@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {useRef, useEffect} from 'react'
 import * as THREE from 'three'
-import { useKeyboardControls } from '@react-three/drei'
+import { useKeyboardControls, Text } from '@react-three/drei'
 import {addEffect} from '@react-three/fiber'
 import useGame from './stores/useGame'
 import Scene, { socket } from './Scene'
@@ -84,6 +84,7 @@ export default function Interface(props){
         </div>
         {/* Countdown */}
         {count > 0 && count < 4 && <div className="countdown" >{count}</div>}
+        
         {/* raceStart */}
         {count <=0 && count > -2 && <div className="countdown" ><h1>Start</h1></div>}
         {/* Restart */}
