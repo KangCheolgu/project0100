@@ -47,9 +47,9 @@ const Car = (props) => {
 
   let width, height, front, mass, wheelRadius;
 
-  width = 0.2;
-  height = 0.065;
-  front = 0.15;
+  width = 0.18;
+  height = 0.06;
+  front = 0.2;
   wheelRadius = 0.05;
   mass = 150;
 
