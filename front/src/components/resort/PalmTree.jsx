@@ -19,7 +19,7 @@ export function PalmTree2(props) {
   const { nodes, materials } = useGLTF('/assets/models/PalmTree2.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Environment_PalmTree_2.geometry} material={materials.Atlas} scale={1} />
+      <mesh geometry={nodes.Environment_PalmTree_2.geometry} material={materials.Atlas} scale={200} />
     </group>
   )
 }

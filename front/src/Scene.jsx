@@ -231,7 +231,7 @@ export default function Scene() {
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -2.6, 0]}>
-          {/* <Debug> */}
+          <Debug>
             <axesHelper/>
           <axesHelper/>
             <Suspense fallback={<LoadingPage />}>
@@ -259,7 +259,7 @@ export default function Scene() {
             )}
             
             </Suspense>
-         {/* </Debug> */}
+         </Debug>
         </Physics>
       </Canvas>
     </>

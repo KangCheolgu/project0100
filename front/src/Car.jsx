@@ -389,7 +389,7 @@ const Car = (props) => {
 
     useInterval(() => {
       if (socket.id === props.id) {
-        const delta = 1; // 100ms expressed in seconds
+        const delta = 0.15; // 100ms expressed in seconds
         const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
         const bodyQuaternion = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
