@@ -29,6 +29,7 @@ import { ResortOcean } from "./components/ResortOcean.jsx";
 import { ResortOceanSmall } from "./components/ResortOceanSmall.jsx";
 import { Background } from "./components/Background.jsx";
 import { gsap } from "gsap";
+import Wall from "./Map2/ColliderWall_Map2.jsx";
 
 export const socket = io("http://localhost:5000")
 
@@ -247,7 +248,7 @@ export default function Scene() {
         
         <OrbitControls />
         <Stats/>
-        <Physics gravity={[0, -2.6, 0]}>
+        <Physics gravity={[0, -3, 0]}>
           {/*<Debug>*/}
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
@@ -257,12 +258,13 @@ export default function Scene() {
               <ResortOcean scale={[0.2,0.2, 0.2]} position={[30,3, 100]}/>
               <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>
               <Map2 position={[0, 0, -60]}/>
+              <Wall />
             
-            {/*
+            {
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-              */}
+            }
   
             {isObstacleStarted && (
             <>
