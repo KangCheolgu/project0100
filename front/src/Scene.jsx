@@ -233,7 +233,6 @@ export default function Scene() {
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
             <axesHelper scale={50}/>
-          <axesHelper/>
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
