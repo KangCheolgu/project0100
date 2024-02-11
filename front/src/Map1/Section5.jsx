@@ -23,18 +23,39 @@ import { Surfboard2 } from "../components/Surfboard2";
 import { Seagull1 } from "../components/Seagull1";
 import { Seagull2 } from "../components/Seagull2";
 import { Duck } from "../components/Duck";
-
+import { Crab1 } from "../components/Crab1";
+import { Crab2 } from "../components/Crab2";
+import { useLoader } from '@react-three/fiber'
+import { RepeatWrapping } from 'three'
+import * as THREE from 'three'
 
 export default function Section5(props){
+
+    const texture = useLoader(THREE.TextureLoader, '/sand.webp')
+    texture.wrapS = texture.wrapT = RepeatWrapping
+    texture.repeat.set(12, 12)
+
     const position = props.position
     return(<group castShadow receiveShadow >
-        <Duck position={[position[0]+37,position[1]-0.5,position[2]+13]} rotation={[0, Math.PI/2, 0]}/>
+        {/*<Seagull1 position={[position[0]+16,position[1]-0.5,position[2]+12]} scale={0.09} rotation={[0, Math.PI/3, 0]}/>
+        <Seagull2 position={[position[0]+11,position[1]+2.2,position[2]+12]} rotation={[0, -Math.PI/3, 0]} scale={0.09}/>*/}
+        <Bush_1_1 position={[position[0]+18,position[1]-0.6,position[2]+10]}/>
+        <Bush_1_1 position={[position[0]+10,position[1]-0.6,position[2]+10]}/>
+        <Bush_2_1 position={[position[0]+12,position[1]-0.6,position[2]+10]}/>
+        <Bush_2_1 position={[position[0]+6,position[1]-0.6,position[2]+10]}/>
+        <Bush_3_1 position={[position[0]+14,position[1]-0.6,position[2]+10]}/>
+        <Bush_3_1 position={[position[0]+20,position[1]-0.6,position[2]+10]}/>
+        <Bush_3_1 position={[position[0]+8,position[1]-0.6,position[2]+10.5]}/>
+        <Palm_5 position={[position[0]+16,position[1]-0.5,position[2]+10]} rotation={[0, Math.PI/3, 0]}/>
+        <Palm_2 position={[position[0]+11,position[1]-0.5,position[2]+10]} rotation={[0, -Math.PI/3, 0]}/>
+        <Duck position={[position[0]+33,position[1]-0.5,position[2]+18]} rotation={[0, Math.PI/2, 0]}/>
+        <BeachBall position={[position[0]+22,position[1]+2,position[2]+14]} scale={10}/>
         <Chair1 scale={7} position={[position[0]+43,position[1]-0.1,position[2]+30]} rotation={[0, Math.PI/3, 0]}/>
-        <Chair2 scale={20} position={[position[0]+47,position[1]-0.1,position[2]+50]} />
+        <Chair2 scale={20} position={[position[0]+47,position[1]-0.1,position[2]+50]} rotation={[0, -Math.PI/3, 0]}/>
         <Chair2 scale={20} position={[position[0]+15,position[1]-0.1,position[2]+50]} rotation={[0, -Math.PI/3, 0]}/> 
         <Seagull1 position={[position[0]+49,position[1]-0.5,position[2]+42]} scale={0.09} rotation={[0, Math.PI/3, 0]}/>
         <Seagull2 position={[position[0]+55,position[1]+2.2,position[2]+40]} rotation={[0, -Math.PI/3, 0]} scale={0.09}/>
-        <SandCastle scale={0.08} position={[position[0]+20,position[1]-0.5,position[2]+22]}/>
+        <SandCastle scale={0.08} position={[position[0]+48,position[1]-1,position[2]+24]}/>
         <BlueUmbrella scale={10} position={[position[0]+10,position[1]+2,position[2]+30]}/>
         <RedUmbrella scale={10} position={[position[0]+14,position[1]+2,position[2]+50]}/>
         <BlueUmbrella scale={10} position={[position[0]+28,position[1]+2,position[2]+50]}/>
@@ -43,7 +64,7 @@ export default function Section5(props){
         <Palm_1 position={[position[0]-5,position[1]-1,position[2]+43]}/>
         <Palm_1 position={[position[0]+60,position[1]-1,position[2]+43]}/>
         <Palm_2 position={[position[0]+10,position[1]-0.5,position[2]+40]}/>
-        <Palm_2 position={[position[0]+35,position[1]-0.5,position[2]+20]}/>
+        <Palm_2 position={[position[0]+35,position[1]-0.5,position[2]+23]}/>
         <Palm_3 position={[position[0]+20,position[1]-0.5,position[2]+43]}/>
         <Palm_3 position={[position[0]+30,position[1]-0.5,position[2]+30]}/>
         <Palm_4 position={[position[0]+30,position[1]-0.5,position[2]+40]}/>
@@ -56,74 +77,86 @@ export default function Section5(props){
         <Palm_3 position={[position[0]-4,position[1]-0.5,position[2]+10]}/>
         <Palm_4 position={[position[0]-5,position[1]-0.5,position[2]+12]} rotation = {[0, Math.PI/2, 0]}/>
         <Palm_2 position={[position[0]-4,position[1]-0.5,position[2]+14]}/>
-        <Tent position={[position[0]+52,position[1]+0,position[2]+16]} scale={4} rotation = {[0, Math.PI/6, 0]}/>
-        <Tent position={[position[0]+52,position[1],position[2]+24]} scale={4} rotation = {[0, Math.PI/6, 0]}/>
-        <BeachBall position={[position[0]+6,position[1]+2,position[2]+18]} scale={10}/>
         <BeachBall position={[position[0]+6,position[1]+2,position[2]+18]} scale={10}/>
         <Surfboard position={[position[0]+6,position[1]+3,position[2]+25]} scale = {0.2} rotation = {[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+0, position[1]-0.26, position[2]+6]} rotation={[Math.PI/36, 0, 0]}/>
-        {/*<mesh geometry={boxGeometry} material={material} position={[0, -0.4, 6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>*/}
-        <ColliderBox position={[position[0]+0, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
         
-        <mesh position={[position[0]+6, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <mesh position={[position[0]-18, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+6, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
+        <ColliderBox position={[position[0]-18, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <mesh position={[position[0]-12, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
+        </mesh>
+        <ColliderBox position={[position[0]-12, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <mesh position={[position[0]-6, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
+        </mesh>
+        <ColliderBox position={[position[0]-6, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <mesh position={[position[0]+6, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
+        </mesh>
+        <ColliderBox position={[position[0]+6, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
         
-        <mesh position={[position[0]+12, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <mesh position={[position[0]+12, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+12, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
+        <ColliderBox position={[position[0]+12, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        <mesh position={[position[0]+12, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <mesh position={[position[0]+18, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+12, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
+        <ColliderBox position={[position[0]+18, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        <mesh position={[position[0]+18, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <mesh position={[position[0]+30, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+18, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
+        <ColliderBox position={[position[0]+30, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        <mesh position={[position[0]+24, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <mesh position={[position[0]+36, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+24, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
+        <ColliderBox position={[position[0]+36, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        <mesh position={[position[0]+30, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <mesh position={[position[0]+42, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+30, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
+        <ColliderBox position={[position[0]+42, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        <mesh position={[position[0]+36, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <mesh position={[position[0]+48, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+36, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
+        <ColliderBox position={[position[0]+48, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        <mesh position={[position[0]+42, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <mesh position={[position[0]+54, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+42, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
-
-        <mesh position={[position[0]+48, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <ColliderBox position={[position[0]+54, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <mesh position={[position[0]+60, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+48, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
-
-        <mesh position={[position[0]+54, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/36, 0, 0]}>
-            <planeGeometry args={[6, 6]}/>
-            <meshBasicMaterial color="#929292"/>
+        <ColliderBox position={[position[0]+60, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <mesh position={[position[0]+66, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+54, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
+        <ColliderBox position={[position[0]+66, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <mesh position={[position[0]+72, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+            <planeGeometry args={[6, 6.1]}/>
+            <meshLambertMaterial map={texture} color="#EDC9AF" />
+        </mesh>
+        <ColliderBox position={[position[0]+72, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
         <Road_1 position={[position[0]+0, position[1]-0.49, position[2]+11.5]} rotation={[0, 0, 0]}/>
         <Road_1 position={[position[0]+0, position[1]-0.49, position[2]+17.5]} rotation={[0, 0, 0]}/>
@@ -143,14 +176,20 @@ export default function Section5(props){
         <Road_1 position={[position[0]+60, position[1]-0.49, position[2]+29.5]} rotation={[0, 0, 0]}/>
         <Road_1 position={[position[0]+60, position[1]-0.49, position[2]+23.5]} rotation={[0, 0, 0]}/>
         <Road_1 position={[position[0]+60, position[1]-0.49, position[2]+17.5]} rotation={[0, 0, 0]}/>
-        <Road_1 position={[position[0]+60, position[1]-0.49, position[2]+11.5]} rotation={[0, 0, 0]}/>
 
-        <Road_1 position={[position[0]+60, position[1]-0.26, position[2]+6]} rotation={[Math.PI/36, 0, 0]}/>
-        <ColliderBox position={[position[0]+60, position[1]-0.26, position[0]+6]} scale={[6, 0.1, 6]} rotation={[Math.PI/36, 0, 0]}/>
+        {/* 해변 출입구*/}
+        <Road_1 scale={[1, 1, 1.1]} position={[position[0]+24, position[1]-0.26, position[2]+6]} rotation={[Math.PI/41, 0, 0]}/>
+        <ColliderBox position={[position[0]+24, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <Road_1 scale={[1, 1, 1.1]} position={[position[0]+0, position[1]-0.26, position[2]+6]} rotation={[Math.PI/41, 0, 0]}/>
+        <ColliderBox position={[position[0]+0, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        
-
-        
+        <Road_4 position={[position[0]+24, position[1]-0.49, position[2]+12]}/>
+        <Road_1 position={[position[0]+30, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+36, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+42, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+48, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+54, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_4 position={[position[0]+60, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI, 0]}/>
     </group>
     );
 }

@@ -22,13 +22,15 @@ export default function Wall(props){
         
         {/*<ColliderBox scale={[76, 20, 0.1]} position={[29, 10, 6]}/>*/}
         <ColliderBox scale={[55, 20, 0.1]} position={[29, 10, -36]}/>
-        <ColliderBox scale={[0.1, 20, 44]} position={[-6, 10, -16]}/>
-        <ColliderBox scale={[0.1, 20, 44]} position={[65, 10, -16]}/>
+        <ColliderBox scale={[0.1, 20, 120]} position={[-6, 10, +20]}/>
+        <ColliderBox scale={[0.1, 20, 120]} position={[65, 10, +20]}/>
 
         <ColliderBox scale={[76, 20, 0.1]} position={[29, 10, -95]}/>
         <ColliderBox scale={[52, 20, 0.1]} position={[30, 10, -55]}/>
         <ColliderBox scale={[0.1, 20, 44]} position={[-6, 10, -75]}/>
         <ColliderBox scale={[0.1, 20, 44]} position={[65, 10, -75]}/>
+
+        <ColliderBox scale={[80, 20, 0.1]} position={[29, 10, +65]}/>
 
         {/* Block*/ }
         <ColliderBox scale={[18, 10, 12]} position={[12, 5, -30]}/>

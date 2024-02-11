@@ -248,30 +248,6 @@ export default function Scene() {
           position={[30, 60, -30]}
           color="#ffffff"
         />
-          {/* castShadow
-          intensity={4}
-          shadow-camera-top={100}
-          shadow-camera-bottom={-400}
-          shadow-camera-left={-100}
-          shadow-camera-right={400}
-          shadow-mapSize-height={512*4}
-          shadow-mapSize-width={512*4}
-          shadow-camera-bias={-0.002}
-          position={[30, 60, -30]}
-          color="#edd59e"
-        >
-        </directionalLight> */}
-  {/*castShadow
-    intensity={4}
-    shadow-camera-top={1000}
-    shadow-camera-xbottom={-1000}
-    shadow-camera-left={-100}
-    shadow-camera-right={100}
-    shadow-mapSize-height={512*4}
-    shadow-mapSize-width={512*4}
-    position={[30, 20, -30]}
-    color="#ffffff" */}
-        {/*<SkyCube scale={100} position={[30, 0, -50]}/>*/}
         
         <OrbitControls />
         <Stats/>

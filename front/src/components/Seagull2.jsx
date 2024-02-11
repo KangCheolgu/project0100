@@ -5,12 +5,15 @@ Command: npx gltfjsx@6.2.16 public/assets/models/Seagull2.glb -o src/components/
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-
+import ColliderBox from '../ColliderBox'
 export function Seagull2(props) {
   const { nodes, materials } = useGLTF('/assets/models/Seagull2.glb')
+  const position=props.position
+  const rotation= props.rotation
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Geo_Seagull.geometry} material={materials.lambert2SG} />
+      <ColliderBox scale={[1.7, 5, 1]} position={[position[0]-0.5, position[1], position[2]+0.5]} rotation={rotation}/>
+      <mesh castShadow geometry={nodes.Geo_Seagull.geometry} material={materials.lambert2SG} />
     </group>
   )
 }

@@ -5,28 +5,31 @@ Command: npx gltfjsx@6.2.16 public/assets/models/Chair1.glb -o src/components/Ch
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import ColliderBox from '../ColliderBox'
 
 export function Chair1(props) {
   const { nodes, materials } = useGLTF('/assets/models/Chair1.glb')
+  const position = props.position
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.group876641566.geometry} material={materials.mat11} />
-      <mesh geometry={nodes.group1077511786.geometry} material={materials.mat11} />
-      <mesh geometry={nodes.group246137678.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group1715630603.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group606963836.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group2073482490.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group1369897654.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group1618073040.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group391391758.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group1499209735.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group1200778842.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group1846827902.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group833733614.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group853096989.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group796161815.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group746867740.geometry} material={materials.mat22} />
-      <mesh geometry={nodes.group183318368.geometry} material={materials.mat22} />
+      <ColliderBox scale={[5.5, 3, 2]} position={position} rotation={[0, Math.PI/3-Math.PI/12, 0]}/>
+      <mesh castShadow geometry={nodes.group876641566.geometry} material={materials.mat11} />
+      <mesh castShadow geometry={nodes.group1077511786.geometry} material={materials.mat11} />
+      <mesh castShadow geometry={nodes.group246137678.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group1715630603.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group606963836.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group2073482490.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group1369897654.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group1618073040.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group391391758.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group1499209735.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group1200778842.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group1846827902.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group833733614.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group853096989.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group796161815.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group746867740.geometry} material={materials.mat22} />
+      <mesh castShadow geometry={nodes.group183318368.geometry} material={materials.mat22} />
     </group>
   )
 }

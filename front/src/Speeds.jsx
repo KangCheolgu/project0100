@@ -35,7 +35,7 @@ const SpeedShape=()=>{
     return (
     <Instance
         ref={ref} 
-        color="white" 
+        color="black" 
         position={[randomPosition.x, randomPosition.y, randomPosition.z]}
         rotation-y={Math.PI/2}
         />
@@ -46,11 +46,11 @@ export const Speed = () =>{
     return(
         <group>
             <Instances>
-                <planeGeometry args={[1, 0.004]}/>
+                <planeGeometry args={[1, 0.01]}/>
                 <meshBasicMaterial
                     side={DoubleSide}
                     blending={'AdditiveBlending'}
-                    opacity={0.1}
+                    opacity={1}
                     transparent
                     ref={speedMaterial}
                 />

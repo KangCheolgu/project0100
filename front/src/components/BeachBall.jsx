@@ -8,12 +8,14 @@ import { useGLTF } from '@react-three/drei'
 import { useTrimesh } from "@react-three/cannon";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import ColliderBox from '../ColliderBox';
 
 export function BeachBall(props) {
   const { nodes, materials } = useGLTF('/assets/models/BeachBall.glb')
-
+  const position=props.position
   return (
     <group {...props} dispose={null}>
+      <ColliderBox scale={[4, 4, 4]} position={position}/>
       <mesh castShadow receiveShadow geometry={nodes.mesh1945116984.geometry} material={materials.mat21} />
       <mesh castShadow receiveShadow geometry={nodes.mesh1945116984_1.geometry} material={materials.mat12} />
       <mesh castShadow receiveShadow geometry={nodes.mesh1945116984_2.geometry} material={materials.mat8} />

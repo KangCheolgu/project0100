@@ -5,16 +5,19 @@ Command: npx gltfjsx@6.2.16 public/assets/models/SandCastle.glb -o src/component
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import ColliderBox from '../ColliderBox'
 
 export function SandCastle(props) {
   const { nodes, materials } = useGLTF('/assets/models/SandCastle.glb')
+  const position=props.position
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Sphere001.geometry} material={materials['01___Default']} />
-      <mesh geometry={nodes.Cylinder009.geometry} material={materials['02___Default']} />
-      <mesh geometry={nodes.Box002_1.geometry} material={materials['01___Default']} />
-      <mesh geometry={nodes.Box002_1_1.geometry} material={materials['02___Default']} />
-      <mesh geometry={nodes.Box002_1_2.geometry} material={materials['03___Default']} />
+      <ColliderBox scale={[12, 5, 11]} position={[position[0]+0.5, position[1], position[2]-1.5]}/>
+      <mesh castShadow geometry={nodes.Sphere001.geometry} material={materials['01___Default']} />
+      <mesh castShadow geometry={nodes.Cylinder009.geometry} material={materials['02___Default']} />
+      <mesh castShadow geometry={nodes.Box002_1.geometry} material={materials['01___Default']} />
+      <mesh castShadow geometry={nodes.Box002_1_1.geometry} material={materials['02___Default']} />
+      <mesh castShadow geometry={nodes.Box002_1_2.geometry} material={materials['03___Default']} />
     </group>
   )
 }

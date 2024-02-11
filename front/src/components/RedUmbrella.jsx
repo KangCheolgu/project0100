@@ -5,16 +5,19 @@ Command: npx gltfjsx@6.2.16 public/assets/models/RedUmbrella.glb -o src/componen
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import ColliderBox from '../ColliderBox'
 
 export function RedUmbrella(props) {
   const { nodes, materials } = useGLTF('/assets/models/RedUmbrella.glb')
+  const position = props.position
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.group1776344293.geometry} material={materials.mat21} />
-      <mesh geometry={nodes.mesh822346014.geometry} material={materials.mat21} />
-      <mesh geometry={nodes.mesh822346014_1.geometry} material={materials.mat8} />
-      <mesh geometry={nodes.mesh822346014_2.geometry} material={materials.mat16} />
-      <mesh geometry={nodes.mesh822346014_3.geometry} material={materials.mat22} />
+      <ColliderBox scale={[0.3, 5, 0.3]} position={position}/>
+      <mesh castShadow geometry={nodes.group1776344293.geometry} material={materials.mat21} />
+      <mesh castShadow geometry={nodes.mesh822346014.geometry} material={materials.mat21} />
+      <mesh castShadow geometry={nodes.mesh822346014_1.geometry} material={materials.mat8} />
+      <mesh castShadow geometry={nodes.mesh822346014_2.geometry} material={materials.mat16} />
+      <mesh castShadow geometry={nodes.mesh822346014_3.geometry} material={materials.mat22} />
     </group>
   )
 }
