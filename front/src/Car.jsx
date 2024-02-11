@@ -47,7 +47,7 @@ const Car = (props) => {
 
   let width, height, front, mass, wheelRadius;
 
-  width = 0.18;
+  width = 0.25;
   height = 0.06;
   front = 0.2;
   wheelRadius = 0.05;
@@ -67,7 +67,7 @@ const Car = (props) => {
       shapes: [
         {
           args: chassisBodyArgs,
-          position: [0, 0, 0],
+          position: [0, 0.04, 0],
           type: "Box"
         },
         {
