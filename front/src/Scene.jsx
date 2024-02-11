@@ -20,6 +20,7 @@ import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
+import Wall from "./Map2/ColliderWall_Map2.jsx";
 
 export const socket = io("http://localhost:5000")
 
@@ -230,7 +231,7 @@ export default function Scene() {
         
         <OrbitControls />
         <Stats/>
-        <Physics gravity={[0, -2.6, 0]}>
+        <Physics gravity={[0, -3, 0]}>
           <Debug>
             <axesHelper/>
           <axesHelper/>
@@ -239,6 +240,7 @@ export default function Scene() {
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
               <Map2 position={[0, 0, -60]}/>
+              <Wall />
             
             {
               players.map((player, index) => (
