@@ -1,5 +1,4 @@
 import { Tent } from "../components/Tent";
-import { Hut } from "../components/Hut";
 import { Cabin } from "../components/Cabin";
 import { BeachBall } from "../components/BeachBall";
 import { Surfboard } from "../components/Surfboard";
@@ -11,20 +10,14 @@ import { RockLarge2 } from "../components/RockLarge2";
 import { RockLarge3 } from "../components/RockLarge3";
 import ColliderBox from "../ColliderBox";
 import { Cliff } from "../components/Cliff";
-import { Umbrella } from "../components/resort/Objects";
 import { RedUmbrella } from "../components/RedUmbrella";
 import { BlueUmbrella } from "../components/BlueUmbrella";
-import { RainbowUmbrella } from "../components/RainbowUmbrella";
-import { DarkUmbrella } from "../components/DarkUmbrella";
 import { Chair1 } from "../components/Chair1";
 import { Chair2 } from "../components/Chair2";
 import { SandCastle } from "../components/SandCastle";
-import { Surfboard2 } from "../components/Surfboard2";
 import { Seagull1 } from "../components/Seagull1";
 import { Seagull2 } from "../components/Seagull2";
 import { Duck } from "../components/Duck";
-import { Crab1 } from "../components/Crab1";
-import { Crab2 } from "../components/Crab2";
 import { useLoader } from '@react-three/fiber'
 import { RepeatWrapping } from 'three'
 import * as THREE from 'three'

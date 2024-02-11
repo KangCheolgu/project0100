@@ -258,11 +258,11 @@ export default function Scene() {
               <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>
               <Map2 position={[0, 0, -60]}/>
             
-            {
+            {/*
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-            }
+              */}
   
             {isObstacleStarted && (
             <>

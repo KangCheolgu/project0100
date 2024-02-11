@@ -14,7 +14,7 @@ export function Duck(props) {
     
     <group {...props} dispose={null}>
       <ColliderBox scale={[5.5, 5, 3.8]} position={position}/>
-      <mesh geometry={nodes.RubberDuck_mesh.geometry} material={materials.RubberDuck_mat1} />
+      <mesh castShadow geometry={nodes.RubberDuck_mesh.geometry} material={materials.RubberDuck_mat1} />
     </group>
   )
 }
