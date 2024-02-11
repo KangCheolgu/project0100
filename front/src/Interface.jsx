@@ -21,7 +21,7 @@ export default function Interface(props){
 
     // 유저 목록을 받아서 목록에 추가해줌
     const [players, setPlayers] = useState([])
-
+    const [ranking, setRanking] = useState("");
 
     useEffect(()=>
     {
@@ -54,14 +54,15 @@ export default function Interface(props){
         
         socket.on("rankingChange", (rankingData) => {
             if(rankingData === "호스트가1등") {
-                console.log("1등 ~");
+                setRanking("1등")
             } else {
-                console.log("2등 ㅜ");
+                setRanking("2등")
             }
         })
 
         return ()=>{
             unsubscribeEffect()
+            socket.off("rankingChange");
         }
     }, [])
 
@@ -73,10 +74,14 @@ export default function Interface(props){
         {/* Time */}
         <div ref = { time } className="time">0.00</div>
         {/* Ranking */}
-        <div id='rankingSpace'>
+        <div id='rankingSpace' style={{paddingTop:"100px", backgroundColor:"#ffffff", opacity:"30%"}}>
         {
             players.map((player, index) => (
-                <div id={player.id} key={player.id}>
+                <div 
+                id={player.id} 
+                key={player.id}
+                className={ ranking === "1등" ? 'first-place' : 'other-places'}
+                >
                     {player.id} 
                 </div>
             ))

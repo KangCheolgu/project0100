@@ -52,6 +52,7 @@ export const Speed = () =>{
                     blending={'AdditiveBlending'}
                     opacity={0.1}
                     transparent
+                    ref={speedMaterial}
                 />
                 {Array(INSTANCES)
                     .fill()

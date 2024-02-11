@@ -5,9 +5,13 @@ Command: npx gltfjsx@6.2.16 public\assets\models\BeachBall.glb -o src/components
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useTrimesh } from "@react-three/cannon";
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export function BeachBall(props) {
   const { nodes, materials } = useGLTF('/assets/models/BeachBall.glb')
+
   return (
     <group {...props} dispose={null}>
       <mesh castShadow receiveShadow geometry={nodes.mesh1945116984.geometry} material={materials.mat21} />

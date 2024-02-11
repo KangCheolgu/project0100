@@ -3,6 +3,9 @@ import { createNoise2D } from 'simplex-noise'
 import { useLoader } from '@react-three/fiber'
 import { RepeatWrapping } from 'three'
 import seedrandom from 'seedrandom'
+import { useTrimesh } from "@react-three/cannon";
+import { useRef } from "react";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 function Sand(props) {
   const texture = useLoader(THREE.TextureLoader, '/sand.webp')
@@ -43,7 +46,7 @@ function Sand(props) {
 
   const geometry = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments)
 
-  const positionAttribute = geometry.getAttribute('position')
+  {/*const positionAttribute = geometry.getAttribute('position')
 
   for (let i = 0; i < positionAttribute.count; i++) {
     const x = positionAttribute.getX(i) + width / 2
@@ -55,13 +58,14 @@ function Sand(props) {
 
   positionAttribute.needsUpdate = true
 
-  geometry.computeVertexNormals()
+geometry.computeVertexNormals()*/}
 
   return (
     <group>
       <group position={[30, -0.5, 56]}>
         <mesh geometry={geometry} rotation={[-Math.PI / 2, 0, 0]}>
-          <meshLambertMaterial attach="material" map={texture} color="#EDC9AF" />
+          <meshLambertMaterial map={texture} color="#EDC9AF" />
+          {/*<meshLambertMaterial attach="material" map={texture} color="#EDC9AF" />*/}
         </mesh>
       </group>
     </group>
