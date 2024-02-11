@@ -19,12 +19,12 @@ export const Background = ({backgroundColors})=>{
         gradientRef.current.colorB=new THREE.Color(
             backgroundColors.current.colorB
         );
-        gradientEnvRef.current.colorA=new THREE.Color(
+        {/*gradientEnvRef.current.colorA=new THREE.Color(
             backgroundColors.current.colorA
         );
-        gradientEnvRef.current.colorA=new THREE.Color(
+        gradientEnvRef.current.colorB=new THREE.Color(
             backgroundColors.current.colorB
-        );
+        );*/}
     })
     return <>
         <Sphere scale={[500, 500, 500]} rotation-y={Math.PI/2}>

@@ -223,19 +223,15 @@ export default function Scene() {
   return (
     <>
       
-      {/*<Interface players={players}/>*/}
+      <Interface players={players}/>
       <BgmSound />
-      {/* camera={{ fov:75, position:[1.5, 8, 4]}} */}
       <Canvas shadows>
         <group ref={cameraGroup}>
           <PerspectiveCamera position={[1.5, 8, 4]} fov={75} makeDefault/>
         </group>
-        <Interaface2/>
         <Background backgroundColors={backgroundColors}/>
         <Sand/>
-        {/*<Speed/>*/}
         <ambientLight intensity={2} color="#fff7e6"/>
-        {/*position={[0, 5, 5]}*/}
         <directionalLight
           castShadow
           intensity={4}
@@ -252,7 +248,7 @@ export default function Scene() {
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -2.6, 0]}>
-          <Debug>
+          {/*<Debug>*/}
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
@@ -260,15 +256,14 @@ export default function Scene() {
               <Map1 position={[0, 0, 0]}/>
               <ResortOcean scale={[0.2,0.2, 0.2]} position={[30,3, 100]}/>
               <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>
-              {/*<Map2 position={[0, 0, -60]}/>*/}
+              <Map2 position={[0, 0, -60]}/>
             
-            {/*
+            {
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-              */}
-            {/* <Ground /> */}
-            {/* <Library position={[-40, 0, 39]}/> */}
+            }
+  
             {isObstacleStarted && (
             <>
             {/* 장애물 배치 */}
@@ -276,12 +271,11 @@ export default function Scene() {
             <LeftAndRightObstacle/>
             <LeftRightObstacle/>
             <UpDownObstacle/>
-            {/* <ShutterObstacle/> */}
             </>
             )}
             
             </Suspense>
-         </Debug>
+         {/*</Debug>*/}
         </Physics>
       </Canvas>
     </>
