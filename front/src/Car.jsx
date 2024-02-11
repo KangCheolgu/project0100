@@ -47,9 +47,9 @@ const Car = (props) => {
 
   let width, height, front, mass, wheelRadius;
 
-  width = 0.2;
-  height = 0.065;
-  front = 0.15;
+  width = 0.18;
+  height = 0.06;
+  front = 0.2;
   wheelRadius = 0.05;
   mass = 150;
 
@@ -389,7 +389,7 @@ const Car = (props) => {
 
     useInterval(() => {
       if (socket.id === props.id) {
-        const delta = 1; // 100ms expressed in seconds
+        const delta = 0.15; // 100ms expressed in seconds
         const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
         const bodyQuaternion = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
