@@ -190,3 +190,42 @@ export function LeftRightObstacle(props){
     </mesh>
   )
 }
+
+//////////// 회전 장애물 ///////////////////
+export function CarObstacle(props) {
+  const [ref, api] = useCompoundBody(
+    () => ({
+      position: [61.5,0.5,-70],
+      shapes: [
+        { args: [0.9,1,1.5], position: [0, 0, 0], type: 'Box' },
+        //{ args: [0.6,1,1.4], position: [-1.75, 0, 0], type: 'Box' }
+      ],
+      type: 'Kinematic'
+    }),
+    useRef()
+  )
+  const anglePoint = useRef(0)
+  useEffect(() => {
+    api.angularFactor.set(0, 0.5, 0) // causes the obstacles to remain upright in case of collision
+    api.linearFactor.set(0, 0, 0) // locks it in place so it doesnt slide when bumped
+  }, [api.angularFactor, api.linearFactor])
+  useFrame((_, delta) => {
+    // const time = performance.now() * 0.001; // 초 단위로 변환
+    // //console.log(time)
+    // const angleZ = time * Math.PI * 2 * 0.05; // z 축 회전 속도, 적절히 조절하여 타원 모양을 만듦
+    // const angleX = Math.sin(time * Math.PI * 2 * 0.05) * 10; // x 축 회전 각도, 타원 모양을 만듦
+    // const x = 5 * Math.cos(angleX); // x 좌표 계산
+    // const z = 40 * Math.sin(angleZ); // z 좌표 계산
+    // api.position.set(55 + x, 0.5, - 30 +z); // 위치 업데이트
+    // // 장애물이 회전하도록 각속도 설정
+    anglePoint.current += delta +0.1
+    api.velocity.set(0, 0, 0);
+    //api.angularVelocity.set(0, 100*delta, 0)
+  })
+  return (
+    <mesh ref={ref} castShadow receiveShadow>
+      {/* 가운데 기둥 */}
+      <meshStandardMaterial />
+    </mesh>
+  )
+}

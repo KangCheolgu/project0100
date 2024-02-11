@@ -167,3 +167,4 @@ export function Bush_3(props) {
 }
 
 useGLTF.preload('/assets/models/bushs.glb')
+
