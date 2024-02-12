@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { useCompoundBody, useBox } from '@react-three/cannon'
+import { useCompoundBody, useBox, useSphere } from '@react-three/cannon'
 import { useFrame } from '@react-three/fiber'
 import { BoxGeometry, Vector3 } from 'three'
 import { StreetVendorCart } from './StreetVendorCart'
 import { PoliceCar } from './PoliceCar'
 import { BananaCar } from './BananaCar'
 import * as THREE from "three";
+import { CarRed, CarGreen, MotorbikeYellow } from './resort/Vehicles'
 
 function lerp(from, to, speed) {
   const r = (1 - speed) * from + speed * to
@@ -125,17 +126,21 @@ export function ShutterObstacle(props) {
   const [ref, api] = useCompoundBody(
     () => ({
       
-      position: [0,1,-5],
+      position: [63,0.5,-37],
       shapes: [
-        { args: [0.3,0.3,3.5], position: [0, 0, 1.75], type: 'Box' },
+        { args: [2,0.3,3.5], position: [0, 0, 1.75], type: 'Box' },
       ],
       type: 'Kinematic',
-      rotation: [Math.PI/2,0,Math.PI/2]
+      rotation: [-Math.PI/2,0,-Math.PI/2]
     }),
 
     useRef()
   )
   
+  const isClockwise = useRef(true)
+  const elapsedTime = useRef(0)
+  const isStopping = useRef(false)
+  const angularVelocity = useRef()
 
   useEffect(() => {
     api.angularFactor.set(0, 0.5, 0.5) // causes the obstacles to remain upright in case of collision
@@ -143,13 +148,33 @@ export function ShutterObstacle(props) {
   }, [api.angularFactor, api.linearFactor])
 
   useFrame((_, delta) => {
-    api.angularVelocity.set(0, 0, 100*delta)
+    elapsedTime.current += delta
+    //console.log(elapsedTime.current)
+    
+    if(elapsedTime.current >= 1.95){
+      isClockwise.current = !isClockwise.current //방향전환
+      elapsedTime.current = 0 // 초기화
+      isStopping.current = true // 정지시킴
+    }
+
+    //장애물 멈추면 
+    if(isStopping.current){
+      api.angularVelocity.set(0,0,0) // 잠깐 정지
+      if(elapsedTime.current >= 1.9){
+        isStopping.current = false // 정지 종료
+        elapsedTime.current = 0 // 초기화
+      }
+    } else{
+      angularVelocity.current = isClockwise.current ? -100 : 100
+
+      api.angularVelocity.set(0,0, angularVelocity.current * delta)
+    }
   })
 
   return (
     <mesh ref={ref} castShadow receiveShadow>
       {/* 가운데 기둥 */}
-      <meshStandardMaterial />
+      <meshStandardMaterial position={[0,-1,0]}/>
     </mesh>
   )
 }
@@ -191,40 +216,315 @@ export function LeftRightObstacle(props){
   )
 }
 
-//////////// 회전 장애물 ///////////////////
-export function CarObstacle(props) {
+//////////////////// 울퉁불퉁 장애물 ////////////////////////
+export function Bump(props){
+
+  const [bump1] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0],props.position[1],props.position[2]]
+  })
+  )
+
+  const [bump2] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+1,props.position[1],props.position[2]+1]
+  })
+  )
+
+  const [bump3] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-1,props.position[1],props.position[2]+1]
+  })
+  )
+
+  const [bump4] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-2,props.position[1],props.position[2]]
+  })
+  )
+
+  const [bump5] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+2,props.position[1],props.position[2]]
+  })
+  )
+
+  const [bump6] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-1,props.position[1],props.position[2]-1]
+  })
+  )
+
+  const [bump7] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+1,props.position[1],props.position[2]-1]
+  })
+  )
+
+  const [bump8] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0],props.position[1],props.position[2]-2]
+  })
+  )
+
+  const [bump9] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0],props.position[1],props.position[2]+2]
+  })
+  )
+
+  const [bump10] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+1,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump11] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+2,props.position[1],props.position[2]-2]
+  })
+  )
+  const [bump12] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-2,props.position[1],props.position[2]-2]
+  })
+  )
+  const [bump13] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-1,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump14] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+1,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump15] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+2,props.position[1],props.position[2]+2]
+  })
+  )
+  const [bump16] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-2,props.position[1],props.position[2]+2]
+  })
+  )
+  const [bump17] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-3,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump18] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+3,props.position[1],props.position[2]-3]
+  })
+  )
+  const [bump19] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+3,props.position[1],props.position[2]+1]
+  })
+  )
+  const [bump20] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]+3,props.position[1],props.position[2]-1]
+  })
+  )
+  const [bump21] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-3,props.position[1],props.position[2]+1]
+  })
+  )
+  const [bump22] = useSphere(()=>({
+    args: [0.7],
+    position: [props.position[0]-3,props.position[1],props.position[2]-1]
+  })
+  )
+
+  return(
+    <group>
+
+    <mesh ref={bump1}>
+    </mesh>
+    <mesh ref={bump2}>
+    </mesh>
+    <mesh ref={bump3}>
+    </mesh>
+    <mesh ref={bump4}>
+    </mesh>
+    <mesh ref={bump5}>
+    </mesh>
+    <mesh ref={bump6}>
+    </mesh>
+    <mesh ref={bump7}>
+    </mesh>
+    <mesh ref={bump8}>
+    </mesh>
+    <mesh ref={bump9}>
+    </mesh>
+    <mesh ref={bump10}>
+    </mesh>
+    <mesh ref={bump11}>
+    </mesh>
+    <mesh ref={bump12}>
+    </mesh>
+    <mesh ref={bump13}>
+    </mesh>
+    <mesh ref={bump14}>
+    </mesh>
+    <mesh ref={bump15}>
+    </mesh>
+    <mesh ref={bump16}>
+    </mesh>
+    <mesh ref={bump17}>
+    </mesh>
+    <mesh ref={bump18}>
+    </mesh>
+    </group>
+  )
+}
+
+//////////// 빨간색 차 장애물 //////////////
+export function CarRedObstacle(props){
+  
+  const [box, {position}] = useBox(()=>({
+    mass: 0,
+    position: [61.8, 0.7, -90],
+    material: 'object',
+    args: [1.5,1,3.5]
+  }),
+  useRef()
+  )  
+  
+  const targetPosition = useRef(-60)
+  const direction = useRef(1)
+
+  useEffect(() => {
+    const unsubscribe = position.subscribe((v) => {
+      position.set(v[0], v[1], lerp(v[2], targetPosition.current, 0.4)) //lerp(from,to,speed)
+    })
+    return unsubscribe
+  }, [])
+
+
+  useFrame((_, delta) => {
+    targetPosition.current += direction.current * delta * 5
+    if (targetPosition.current > -40) direction.current = -1
+    if (targetPosition.current < -85) direction.current = 1
+  })
+
+  return (
+    <mesh ref={box} castShadow>
+      <CarRed rotation={[0,Math.PI,0]} position={[0,-0.7,0]}/>
+      <meshStandardMaterial/>
+    </mesh>
+  )
+}
+
+//////////// 초록색 차 장애물 //////////////
+export function CarGreenObstacle(props){
+  
+  const [box, {position}] = useBox(()=>({
+    mass: 0,
+    position: [58.7, 0.7, -90],
+    material: 'object',
+    args: [1.5,1,3.5]
+  }),
+  useRef()
+  )  
+  
+  const targetPosition = useRef(-10)
+  const direction = useRef(1)
+
+  useEffect(() => {
+    const unsubscribe = position.subscribe((v) => {
+      position.set(v[0], v[1], lerp(v[2], targetPosition.current, 0.004)) //lerp(from,to,speed)
+    })
+    return unsubscribe
+  }, [])
+
+
+  useFrame((_, delta) => {
+    targetPosition.current += direction.current * delta * 5
+    if (targetPosition.current > -40) direction.current = -1
+    if (targetPosition.current < -85) direction.current = 1
+  })
+
+  return (
+    <mesh ref={box} castShadow>
+      <CarGreen position={[0,-0.7,0]}/>
+      <meshStandardMaterial/>
+    </mesh>
+  )
+}
+
+//////////// 오토바이 골목막는 장애물 //////////////
+export function MotorObstacle(props){
+  
+  const [box, {position}] = useBox(()=>({
+    mass: 0,
+    position: [36, 0.5, -90],
+    material: 'object',
+    args: [0.5,1,2]
+  }),
+  useRef()
+  )  
+  
+  const targetPosition = useRef(-95)
+  const direction = useRef(1)
+
+  useEffect(() => {
+    const unsubscribe = position.subscribe((v) => {
+      position.set(v[0], v[1], lerp(v[2], targetPosition.current, 0.008)) //lerp(from,to,speed)
+    })
+    return unsubscribe
+  }, [])
+
+
+  useFrame((_, delta) => {
+    targetPosition.current += direction.current * delta * 5
+    //console.log(targetPosition.current)
+    if (targetPosition.current > -89) direction.current = -1
+    if (targetPosition.current < -103) direction.current = 1
+  })
+
+  return (
+    <mesh ref={box} castShadow>
+      <MotorbikeYellow position={[0,-0.5,0]}/>
+      <meshStandardMaterial/>
+    </mesh>
+  )
+}
+
+//////////// 게 장애물 ///////////////////
+export function CrabObstacle(props) {
   const [ref, api] = useCompoundBody(
     () => ({
-      position: [61.5,0.5,-70],
+      
+      position: [19,0.5,-4],
       shapes: [
-        { args: [0.9,1,1.5], position: [0, 0, 0], type: 'Box' },
-        //{ args: [0.6,1,1.4], position: [-1.75, 0, 0], type: 'Box' }
+        { args: [0.9,1,1.5], position: [1.75, 0, 0], type: 'Box' },
+        
+        { args: [0.6,1,1.4], position: [-1.75, 0, 0], type: 'Box' }
       ],
       type: 'Kinematic'
     }),
+
     useRef()
   )
-  const anglePoint = useRef(0)
+
   useEffect(() => {
     api.angularFactor.set(0, 0.5, 0) // causes the obstacles to remain upright in case of collision
     api.linearFactor.set(0, 0, 0) // locks it in place so it doesnt slide when bumped
   }, [api.angularFactor, api.linearFactor])
+
   useFrame((_, delta) => {
-    // const time = performance.now() * 0.001; // 초 단위로 변환
-    // //console.log(time)
-    // const angleZ = time * Math.PI * 2 * 0.05; // z 축 회전 속도, 적절히 조절하여 타원 모양을 만듦
-    // const angleX = Math.sin(time * Math.PI * 2 * 0.05) * 10; // x 축 회전 각도, 타원 모양을 만듦
-    // const x = 5 * Math.cos(angleX); // x 좌표 계산
-    // const z = 40 * Math.sin(angleZ); // z 좌표 계산
-    // api.position.set(55 + x, 0.5, - 30 +z); // 위치 업데이트
-    // // 장애물이 회전하도록 각속도 설정
-    anglePoint.current += delta +0.1
-    api.velocity.set(0, 0, 0);
-    //api.angularVelocity.set(0, 100*delta, 0)
+    api.angularVelocity.set(0, 100*delta, 0)
   })
+
   return (
     <mesh ref={ref} castShadow receiveShadow>
       {/* 가운데 기둥 */}
+      <PoliceCar scale={[0.07,0.07,0.07]} position={[1.8,-0.5,0]}/>
+      <BananaCar scale={[0.002, 0.002, 0.002]} position={[-1.8, -0.1, 0]}/>
       <meshStandardMaterial />
     </mesh>
   )
