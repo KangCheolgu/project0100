@@ -254,7 +254,7 @@ const Car = (props) => {
     //       reset()
     //   }
     // )
-    console.log(props.position);
+    //console.log(props.position);
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
 

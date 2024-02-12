@@ -14,7 +14,7 @@ import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle} from "./components/MoveObstacle.jsx";
 import Countdown from "./sound/CountDown.jsx";
 import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
@@ -177,11 +177,15 @@ export default function Scene() {
 
   socket.on("clientCount",(serverTimeStart)=>{
     //서버시간 받으면
-    const timeoutDuration = 5000
-    //5초 뒤에 장애물 시작
+    const serverTimeNow = new Date(serverTimeStart).getTime() //서버로부터 시간 가져옴
+    const ClientTime = new Date().getTime() //현재 클라이언트 시간 가져옴
+    const timeDifference = serverTimeNow - ClientTime
+    
+    const ObstacleStart = 5000 + timeDifference
+
     setTimeout(()=>{
       setIsObstacleStarted(true)
-    }, timeoutDuration)
+    }, ObstacleStart)
   })
   
   return (
@@ -254,8 +258,11 @@ export default function Scene() {
             <LeftAndRightObstacle/>
             {/* <LeftRightObstacle/> */}
             <UpDownObstacle/>
-            {/* <ShutterObstacle/> */}
+            <ShutterObstacle/>
             <SpinObstacle/>
+            <CarRedObstacle/>
+            <CarGreenObstacle/>
+            <MotorObstacle/>
             </>
             )}
             
