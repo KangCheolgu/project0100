@@ -5,6 +5,9 @@ Command: npx gltfjsx@6.2.16 public\assets\models\comp-resort-roads.glb -o src/co
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useTrimesh } from "@react-three/cannon";
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export function Border_half(props) {
   const { nodes, materials } = useGLTF('/assets/models/comp-resort-roads.glb')
@@ -72,6 +75,7 @@ export function Grass(props) {
 }
 export function Road_1(props) {
   const { nodes, materials } = useGLTF('/assets/models/comp-resort-roads.glb')
+
   return (
     <group {...props} dispose={null}>
       <mesh receiveShadow geometry={nodes.Road_1.geometry} material={materials.Asphalt} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />

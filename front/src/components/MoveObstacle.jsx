@@ -126,7 +126,7 @@ export function ShutterObstacle(props) {
   const [ref, api] = useCompoundBody(
     () => ({
       
-      position: [0,-0,-6],
+      position: [63,0.5,-37],
       shapes: [
         { args: [2,0.3,3.5], position: [0, 0, 1.75], type: 'Box' },
       ],

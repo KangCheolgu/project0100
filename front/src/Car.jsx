@@ -14,10 +14,10 @@ import { CheckPoint } from "./utils/CheckPoint.jsx";
 import collisionSound from './sound/car-hit/car-hit-2.wav';
 import klaxonSoundFile from './sound/car-horn/car-horn-1.wav';
 import engineSoundFile from './sound/engines/1/low_on.wav';
-
+import { Speed } from "./Speeds.jsx";
 let checkPointIndex = 0
 
-const Car = (props) => {
+const Car = ({cameraGroup, ...props}) => {
   // 체크포인트 위치
   // const spot = [{x: -32, y: 0, z:-13},
   //   {x: -1, y: 0, z:-17},
@@ -47,7 +47,7 @@ const Car = (props) => {
 
   let width, height, front, mass, wheelRadius;
 
-  width = 0.18;
+  width = 0.25;
   height = 0.06;
   front = 0.2;
   wheelRadius = 0.05;
@@ -67,7 +67,7 @@ const Car = (props) => {
       shapes: [
         {
           args: chassisBodyArgs,
-          position: [0, 0, 0],
+          position: [0, 0.04, 0],
           type: "Box"
         },
         {
@@ -140,7 +140,7 @@ const Car = (props) => {
   }, []);
 
   const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
-
+  
   const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
       chassisBody,
@@ -167,7 +167,7 @@ const Car = (props) => {
   // const inspot= useGame((state)=> state.inspot)
   // let isIn = useGame((state)=> state.isIn)
   // const lapse = useGame((state)=> state.lapse)
-
+    
   // Back-View 카메라
   useFrame((state, delta) => {
     const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
@@ -187,7 +187,11 @@ const Car = (props) => {
       cameraPosition.copy(relativeCameraPosition);
       cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
       cameraPosition.add({ x: cpX, y: cpY, z: cpZ }); // 카메라 위치를 자동차 위치에 더함
-
+      
+      // 부스터 이펙트 위치 및 방향 지정.
+      cameraGroup.current.quaternion.copy(bodyRotation);
+      cameraGroup.current.position.lerp(new THREE.Vector3(cpX, cpY, cpZ), delta*24);
+      
       // smooth camera 전환속도
       smoothedCameraPosition.lerp(cameraPosition, 0.2);
 
@@ -420,8 +424,10 @@ const Car = (props) => {
       }
     }, 15);
   };
-
-  return (
+  return (<>
+    <group ref={cameraGroup}>
+      <Speed/>
+    </group>
     <group ref={vehicle} castShadow receiveShadow>
       <Suspense>
         <group ref={chassisBody} castShadow>
@@ -438,8 +444,12 @@ const Car = (props) => {
         {/* style={{position: "absolute", top: imagePosition.y, left: imagePosition.x}}/>} */}
       </Html>
     </group>
+    </>
 
   )
 }
-
-export default Car
+const Car_App = (props) => {
+  const cameraGroup = useRef();
+  return <Car {...props} cameraGroup={cameraGroup} />;
+};
+export default Car_App;

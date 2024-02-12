@@ -6,9 +6,6 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { Grass, Road_1, Road_4, Road_3, Sidewalk, Road_half_3, Sidewalk_corner_3, Sidewalk_corner_7, Border_1, Border_2, Border_3, Border_4, Border_4_1, Border_5, Border_half} from "../components/resort/Road.jsx"
 import { Startline } from "../components/Startline.jsx";
 import Section1 from "./Section1.jsx";
-import Section2 from "./Section2.jsx";
-import Section3 from "./Section3.jsx";
-import Section4 from "./Section4.jsx";
 import { Fence1, Fence2 } from "../components/resort/Objects.jsx";
  
 export default function Map2(props){
@@ -16,15 +13,7 @@ export default function Map2(props){
     const rotation = props.rotation
     const scale = props.scale
     return(<group receiveShadow >
-        {/* [0, 0, 0]~[60, 0, 0]*/}
-        {/*첫번째 블럭 */}
         <Section1 position={[position[0]+60, position[1]+0, position[2]]} />
-        {/*두번째 블럭*/}
-        <Section2/>
-        {/* 세번째 블럭 */}
-        <Section3/>
-        {/* 서쪽 외곽 */}
-        <Section4/>
 
         {/* <Road_4 position={[position[0]+0, position[1]+0, position[2]+0]}/>
         <Road_1 position={[position[0]+6, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>
