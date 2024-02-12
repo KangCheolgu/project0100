@@ -253,9 +253,8 @@ export default function Scene() {
         
         <OrbitControls />
         <Stats/>
-        <Physics gravity={[0, -2.6, 0]}>
+        <Physics gravity={[0, -3, 0]}>
           <Debug>
-            <axesHelper scale={50}/>
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
