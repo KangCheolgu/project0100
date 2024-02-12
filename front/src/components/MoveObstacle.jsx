@@ -6,7 +6,7 @@ import { StreetVendorCart } from './StreetVendorCart'
 import { PoliceCar } from './PoliceCar'
 import { BananaCar } from './BananaCar'
 import * as THREE from "three";
-import { CarRed, CarGreen, MotorbikeYellow } from './resort/Vehicles'
+import { CarRed, CarGreen, MotorbikeYellow, MotorbikeOrange, MotorbikePizza } from './resort/Vehicles'
 import { Crab } from './Crab'
 import { Rock } from './Rock'
 import { RockLarge } from './RockLarge'
@@ -25,9 +25,9 @@ export function SpinObstacle(props) {
       
       position: [position[0],position[1],position[2]],
       shapes: [
-        { args: [0.9,1,1.5], position: [offset, 0, 0], type: 'Box' },
+        { args: [0.6,1,1.7], position: [offset, 0, 0], type: 'Box' },
         
-        { args: [0.6,1,1.4], position: [-offset, 0, 0], type: 'Box' }
+        { args: [0.6,1,1.7], position: [-offset, 0, 0], type: 'Box' }
       ],
       type: 'Kinematic'
     }),
@@ -47,8 +47,8 @@ export function SpinObstacle(props) {
   return (
     <mesh ref={ref} castShadow receiveShadow>
       {/* 가운데 기둥 */}
-      <PoliceCar scale={[0.07,0.07,0.07]} position={[offset,-0.5,0]}/>
-      <BananaCar scale={[0.002, 0.002, 0.002]} position={[-offset, -0.1, 0]}/>
+      <MotorbikeOrange position={[offset, -0.5, 0]} rotation={[0,Math.PI,0]}/>
+      <MotorbikePizza position={[-offset, -0.5,0]}/>
       <meshStandardMaterial />
     </mesh>
   )

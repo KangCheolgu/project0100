@@ -263,11 +263,11 @@ export default function Scene() {
               <Map2 position={[0, 0, -94]}/>
               <Wall />
             
-            {
+            {/* {
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-            }
+            } */}
   
               
             {/* <Ground /> */}
@@ -277,11 +277,9 @@ export default function Scene() {
             <>
             {/* 장애물 배치 */}
             <SpinObstacle position={[25,0.5,-28]} offset={3}/>
+            <SpinObstacle position={[27,0.5,-97]} offset={4}/>
             <LeftAndRightObstacle/>
-            {/* <LeftRightObstacle/> */}
-            {/* <UpDownObstacle/> */}
             <ShutterObstacle/>
-            {/* <SpinObstacle/> */}
             <CarRedObstacle/>
             <CarGreenObstacle/>
             <MotorObstacle/>
