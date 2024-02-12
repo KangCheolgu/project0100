@@ -507,7 +507,6 @@ export function CrabObstacle(props) {
       ],
       type: 'Kinematic'
     }),
-
     useRef()
   )
 
