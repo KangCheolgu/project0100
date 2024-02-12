@@ -133,11 +133,11 @@ export default function Section5(props){
             <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
         <ColliderBox position={[position[0]+54, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
-        <mesh position={[position[0]+60, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/30, 0, 0]}>
+        <mesh position={[position[0]+60, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
             <planeGeometry args={[6, 6.1]}/>
             <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+60, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/30, 0, 0]}/>
+        <ColliderBox position={[position[0]+60, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
         <mesh position={[position[0]+66, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
             <planeGeometry args={[6, 6.1]}/>
             <meshLambertMaterial map={texture} color="#EDC9AF" />

@@ -67,12 +67,12 @@ const Car = ({cameraGroup, ...props}) => {
       shapes: [
         {
           args: chassisBodyArgs,
-          position: [0, 0.04, 0],
+          position: [0, 0, 0],
           type: "Box"
         },
         {
           args: [width, height, front],
-          position: [0, height+0.04, 0],
+          position: [0, height, 0],
           type: "Box",
         },
       ],
