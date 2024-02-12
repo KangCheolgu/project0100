@@ -12,56 +12,15 @@ export default function Wall(props){
     //  )
     return (
     <group rotation={props.rotation}>
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] + 5, position[1]+0.06, position[2] + 6]}/>
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] + 5, position[1]+0.06, position[2]]} />
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] + 5, position[1]+0.06, position[2] - 6]} />
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] + 5, position[1]+0.06, position[2] - 12]} />
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] + 5, position[1]+0.06, position[2] - 18]} />
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] + 5, position[1]+0.06, position[2] - 24]} />
+        <ColliderBox scale={[12, 0.1, 50]} position={[position[0] + 9, position[1]+0.05, position[2] - 16]}/>
+        <ColliderBox scale={[12, 0.1, 50]} position={[position[0] - 69, position[1]+0.05, position[2] - 16]}/>
 
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] - 5, position[1]+0.06, position[2] + 6]} />
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] - 5, position[1]+0.06, position[2]]} />
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] - 5, position[1]+0.06, position[2] - 6]} />
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] - 5, position[1]+0.06, position[2] - 12]} />
-        <ColliderBox scale={[4, 0.1, 6]} position={[position[0] - 5, position[1]+0.06, position[2] - 18]} />
+        <ColliderBox scale={[12, 0.1, 34]} position={[position[0] - 9, position[1]+0.05, position[2] - 8]} />
+        <ColliderBox scale={[12, 0.1, 34]} position={[position[0] - 27, position[1]+0.05, position[2] - 22]} />
+        <ColliderBox scale={[18, 0.1, 34]} position={[position[0] - 48, position[1]+0.05, position[2] - 8]} />
 
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 14.9, position[1]+0.05, position[2] - 6]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 14.9, position[1]+0.05, position[2] - 12]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 14.9, position[1]+0.05, position[2] - 18]} />
+        <ColliderBox scale={[100, 0.1, 12]} position={[position[0] - 30, position[1]+0.05, position[2] - 38.9]} />
 
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 21.1, position[1]+0.05, position[2] - 12]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 21.1, position[1]+0.05, position[2] - 18]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 21.1, position[1]+0.05, position[2] - 24]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 21.1, position[1]+0.05, position[2] - 30]} />
-
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 32.9, position[1]+0.05, position[2] - 12]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 32.9, position[1]+0.05, position[2] - 18]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 32.9, position[1]+0.05, position[2] - 24]} />
-
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 39.1, position[1]+0.05, position[2] - 6]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 39.1, position[1]+0.05, position[2] - 12]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 39.1, position[1]+0.05, position[2] - 18]} />
-
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 56.9, position[1]+0.05, position[2]]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 56.9, position[1]+0.05, position[2] - 6]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 56.9, position[1]+0.05, position[2] - 12]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 56.9, position[1]+0.05, position[2] - 18]} />
-
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 63.1, position[1]+0.05, position[2]]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 63.1, position[1]+0.05, position[2] - 6]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 63.1, position[1]+0.05, position[2] - 12]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 63.1, position[1]+0.05, position[2] - 18]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 63.1, position[1]+0.05, position[2] - 24]} />
-
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 6, position[1]+0.05, position[2] - 3]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 6, position[1]+0.05, position[2] - 9]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 6, position[1]+0.05, position[2] - 15]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 6, position[1]+0.05, position[2] - 18]} />
-
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 12, position[1]+0.05, position[2] - 3]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 12, position[1]+0.05, position[2] - 9]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 12, position[1]+0.05, position[2] - 15]} />
-        <ColliderBox scale={[0.2, 0.1, 6]} position={[position[0] - 12, position[1]+0.05, position[2] - 18]} />
         
     </group>
     )
