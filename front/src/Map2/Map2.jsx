@@ -39,6 +39,16 @@ export default function Map2(props){
         <Road_half_3 position={[position[0]+18, position[1]-0.01, position[2]-6]} rotation={[0, Math.PI/2, 0]}/>
         <Sidewalk position={[position[0]+12, position[1]+0.09, position[2]-25.5]}/>
         {/* [60, 0, -6]~[60, 0, -30]*/}
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+60]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+54]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+48]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+42]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+36]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+30]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+24]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+18]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+12]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]+6]}/>
         <Road_1 position={[position[0]+60, position[1]+0, position[2]]}/>
         <Road_1 position={[position[0]+60, position[1]+0, position[2]-6]}/>
         <Road_1 position={[position[0]+60, position[1]+0, position[2]-12]}/>
@@ -47,6 +57,16 @@ export default function Map2(props){
         <Road_3 position={[position[0]+60, position[1]+0, position[2]-30]}/>
 
         {/* [0, 0, -6]~[0, 0, -36]*/}
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+60]}/>
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+54]}/>
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+48]}/>
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+42]}/>
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+36]}/>
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+30]}/>
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+24]}/>
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+18]}/>
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+12]}/>
+        <Road_1 position={[position[0]+0, position[1]+0, position[2]+6]}/>
         <Road_1 position={[position[0]+0, position[1]+0, position[2]]}/>
         <Road_1 position={[position[0]+0, position[1]+0, position[2]-6]}/>
         <Road_1 position={[position[0]+0, position[1]+0, position[2]-12]}/>

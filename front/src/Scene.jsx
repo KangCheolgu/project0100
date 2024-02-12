@@ -257,7 +257,7 @@ export default function Scene() {
               <Map1 position={[0, 0, 0]}/>
               <ResortOcean scale={[0.2,0.2, 0.2]} position={[30,3, 100]}/>
               <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>
-              <Map2 position={[0, 0, -60]}/>
+              <Map2 position={[0, 0, -94]}/>
               <Wall />
             
             {

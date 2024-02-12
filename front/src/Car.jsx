@@ -72,7 +72,7 @@ const Car = (props) => {
         },
         {
           args: [width, height, front],
-          position: [0, height, 0],
+          position: [0, height+0.04, 0],
           type: "Box",
         },
       ],
