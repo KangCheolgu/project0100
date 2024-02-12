@@ -69,10 +69,7 @@ export default function Section1(props){
     <TrafficLight position={[position[0] - 4, position[1] - 0.09, position[2] - 6]} rotation={[0, Math.PI / 2, 0]}/>
     <TrafficLight position={[position[0] - 33, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
 
-    <CarRed position={[position[0] + 2, position[1] - 0.09, position[2] - 10]} />
-    <CarGreen position={[position[0] + 2, position[1] - 0.09, position[2] - 18]} />
     <IceCreamCart position={[position[0] + 5.5, position[1] , position[2] - 1]} rotation={[0, -Math.PI / 4, 0]}/>
-    <MotorbikeYellow position={[position[0] - 23, position[1], position[2] - 32]} />
 
     <Palm_5 position={[position[0] + 9, position[1] - 0.09, position[2] - 1]} rotation={[0, Math.PI / 2, 0]}/>
     <Palm_2 position={[position[0] - 7, position[1] - 0.09, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />

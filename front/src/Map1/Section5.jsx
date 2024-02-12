@@ -30,8 +30,6 @@ export default function Section5(props){
 
     const position = props.position
     return(<group castShadow receiveShadow >
-        {/*<Seagull1 position={[position[0]+16,position[1]-0.5,position[2]+12]} scale={0.09} rotation={[0, Math.PI/3, 0]}/>
-        <Seagull2 position={[position[0]+11,position[1]+2.2,position[2]+12]} rotation={[0, -Math.PI/3, 0]} scale={0.09}/>*/}
         <Bush_1_1 position={[position[0]+18,position[1]-0.6,position[2]+10]}/>
         <Bush_1_1 position={[position[0]+10,position[1]-0.6,position[2]+10]}/>
         <Bush_2_1 position={[position[0]+12,position[1]-0.6,position[2]+10]}/>

@@ -11,13 +11,11 @@ import Section4 from "./Section4.jsx";
 import Section5 from "./Section5.jsx";
 import { MeshDistortMaterial, MeshWobbleMaterial } from "@react-three/drei";
 import ColliderBox from "../ColliderBox.jsx";
+import Water from "../Water.jsx";
 export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
     const scale = props.scale
-    const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-    const planeGeometry = new THREE.PlaneGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 'balck' });
     return(<group castShadow receiveShadow >   
         <Startline position={[position[0]+1.45, position[1]+0, position[2]-10]} scale={[1.3, 1, 1.15]} rotation={[0, Math.PI/2, 0]} castShadow receiveShadow/>
         
@@ -102,16 +100,14 @@ export default function Map1(props){
         <Border_1 position={[position[0]+6, position[1]+0, position[2]+3]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+12, position[1]+0, position[2]+3]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+18, position[1]+0, position[2]+3]} rotation={[0, 0, 0]} />
-        <Border_1 position={[position[0]+24, position[1]+0, position[2]+3]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+30, position[1]+0, position[2]+3]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+36, position[1]+0, position[2]+3]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+42, position[1]+0, position[2]+3]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+48, position[1]+0, position[2]+3]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+54, position[1]+0, position[2]+3]} rotation={[0, 0, 0]} />
-        
+        <Border_2 position={[position[0]+60, position[1]+0, position[2]+0]} rotation={[0, -Math.PI/2, 0]}/>
 
         {/* 동쪽 연석 */}
-        <Border_1 position={[position[0]+63, position[1]+0, position[2]]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+63, position[1]+0, position[2]-6]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+63, position[1]+0, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+63, position[1]+0, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
@@ -389,7 +385,6 @@ export default function Map1(props){
         {/* 남쪽 인도 */}
         {/*<Sidewalk position={[position[0]+3, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>*/}
         <Sidewalk position={[position[0]-4.5, position[1]+0.01, position[2]+3]} rotation={[0, Math.PI/2, 0]}/>
-        <Sidewalk_2 position={[position[0]+4.5, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         {/*<Sidewalk position={[position[0]+9, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+15, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+21, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
@@ -398,8 +393,6 @@ export default function Map1(props){
         <Sidewalk position={[position[0]+39, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         <Sidewalk position={[position[0]+45, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
 <Sidewalk position={[position[0]+51, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>*/}
-        <Sidewalk_2 position={[position[0]+55.5, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
-        <Sidewalk_2 position={[position[0]+64.5, position[1]+0.01, position[2]+4.5]} rotation={[0, 0, 0]}/>
         <Sidewalk_2 position={[position[0]+64.5, position[1]+0.01, position[2]+1.5]} rotation={[0, 0, 0]}/>
 
         {/*<Sidewalk position={[position[0]-9, position[1]+0.01, position[2]+6]} rotation={[0, 0, 0]}/>
