@@ -12,7 +12,7 @@ import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
 import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
-import ColliderWall from "./ColliderWall.jsx"
+import ColliderWall from "./Map1/ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
 import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle} from "./components/MoveObstacle.jsx";
 import Countdown from "./sound/CountDown.jsx";
@@ -250,7 +250,7 @@ export default function Scene() {
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -3, 0]}>
-          {/*<Debug>*/}
+          <Debug>
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
@@ -259,11 +259,11 @@ export default function Scene() {
               <Map2 position={[0, 0, -60]}/>
               <Wall />
             
-            {
+            {/*
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-            }
+              */}
   
             {isObstacleStarted && (
             <>
@@ -276,7 +276,7 @@ export default function Scene() {
             )}
             
             </Suspense>
-         {/*</Debug>*/}
+         </Debug>
         </Physics>
       </Canvas>
     </>
