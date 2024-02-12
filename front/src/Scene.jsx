@@ -271,8 +271,7 @@ export default function Scene() {
   
               
             {/* <Ground /> */}
-            {/* <Library position={[-40, 0, 39]}/> */}
-            <Bump position={[60,-1.16,25]}/>
+
             {isObstacleStarted && (
             <>
             {/* 장애물 배치 */}

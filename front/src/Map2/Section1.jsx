@@ -66,6 +66,12 @@ export default function Section1(props){
 
     <Building_7_Blue position={[position[0]-32, position[1], position[2]+6]} rotation={[0, Math.PI, 0]} />
 
+    <Building_9_Red position={[position[0]-67.5, position[1], position[2]+1]} rotation={[0, Math.PI/2, 0]} />
+
+    <Building_9_Blue position={[position[0]-48, position[1], position[2]+4.5]} rotation={[0, 0, 0]} />
+
+    <Building_5_Red position={[position[0]-41, position[1], position[2]+5.5]} rotation={[0, Math.PI, 0]}/>
+
     <TrafficLight position={[position[0] - 4, position[1] - 0.09, position[2] - 6]} rotation={[0, Math.PI / 2, 0]}/>
     <TrafficLight position={[position[0] - 33, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
 
@@ -165,10 +171,10 @@ export default function Section1(props){
     <Metalfence position={[position[0] - 42.7, position[1] - 0.09, position[2]-6]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
     <Metalfence position={[position[0] - 42.7, position[1] - 0.09, position[2]-2.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
 
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-16.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-13]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-9.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-6]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-19.2]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-15.7]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-12.2]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-8.7]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
     <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-2.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
 
     {/* 보더라인 */}
@@ -202,11 +208,13 @@ export default function Section1(props){
     <Border_1 position={[position[0] - 39.1, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 39.1, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
 
+    <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
 
+    <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
@@ -264,6 +272,46 @@ export default function Section1(props){
     <Border_5 position={[position[0] - 51, position[1]-0.14, position[2]]} rotation={[0, Math.PI, 0]}/>
     <Border_5 position={[position[0] - 45, position[1]-0.14, position[2]]} rotation={[0, -Math.PI / 2, 0]}/>
 
+    <Fence2 position={[position[0] - 6.5, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 10, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 13.5, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 17, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 20.5, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 24, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 27.5, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 31, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 34.5, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 37, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 39.5, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 43, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 46.5, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 50, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 53.5, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 65.3, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 68.8, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] + 6.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] + 3.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] + 0.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 2.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 5.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 8.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 11.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 14.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 17.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 20.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 23.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 26.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 29.5]} rotation={[0, Math.PI/2 , 0]} />
+    <Fence2 position={[position[0] - 72.1, position[1], position[2] - 32.5]} rotation={[0, Math.PI/2 , 0]} />
+
+    <Fence2 position={[position[0] + 5.15, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] + 8.6, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+    <Fence2 position={[position[0] + 12.1, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
+
+    <Fence2 position={[position[0] + 12.5, position[1], position[2] + 7]} rotation={[0, Math.PI / 2, 0]} />
+    <Fence2 position={[position[0] + 12.5, position[1], position[2] + 3]} rotation={[0, Math.PI / 2, 0]} />
     <Fence2 position={[position[0] + 12.5, position[1], position[2] - 1]} rotation={[0, Math.PI / 2, 0]} />
     <Fence2 position={[position[0] + 12.5, position[1], position[2] - 5]} rotation={[0, Math.PI / 2, 0]} />
     <Fence2 position={[position[0] + 9, position[1], position[2] - 30]} rotation={[0, Math.PI / 2, 0]} />
@@ -283,26 +331,6 @@ export default function Section1(props){
     <Fence2 position={[position[0] - 45, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
     <Fence2 position={[position[0] - 53, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
     <Fence2 position={[position[0] - 64, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
-    {/* <Fence2 position={[72.5, 0, -61]} rotation={[0, Math.PI / 2, 0]} />
-    <Fence2 position={[72.5, 0, -65]} rotation={[0, Math.PI / 2, 0]} />
-    <Fence2 position={[69, 0, -90]} rotation={[0, Math.PI / 2, 0]} />
-    <Fence2 position={[69, 0, -94]} rotation={[0, Math.PI / 2, 0]} />
-    <Fence2 position={[69, 0, -98]} rotation={[0, Math.PI / 2, 0]} />
-
-    <Fence2 position={[59.5, 0, -100]} rotation={[0, 0, 0]} />
-    <Fence2 position={[63.5, 0, -100]} rotation={[0, 0, 0]} />
-    <Fence2 position={[67, 0, -100]} rotation={[0, 0, 0]} />
-
-    <Fence2 position={[50.5, 0, -100.5]} rotation={[0, 0, 0]} />
-    <Fence2 position={[54.5, 0, -100.5]} rotation={[0, 0, 0]} />
-
-    <Fence2 position={[36, 0, -100.5]} rotation={[0, 0, 0]} />
-
-    <Fence2 position={[26.3, 0, -100.5]} rotation={[0, 0, 0]} />
-    <Fence2 position={[15, 0, -100.5]} rotation={[0, 0, 0]} />
-    <Fence2 position={[7, 0, -100.5]} rotation={[0, 0, 0]} />
-    <Fence2 position={[-4, 0, -100.5]} rotation={[0, 0, 0]} /> */}
-
 
     </group>
     );

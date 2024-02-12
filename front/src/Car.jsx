@@ -51,7 +51,7 @@ const Car = ({ cameraGroup, ...props }) => {
 
   width = 0.25;
   height = 0.06;
-  front = 0.2;
+  front = 0.25;
   wheelRadius = 0.05;
   mass = 150;
 
@@ -69,12 +69,12 @@ const Car = ({ cameraGroup, ...props }) => {
       shapes: [
         {
           args: chassisBodyArgs,
-          position: [0, 0.04, 0],
+          position: [0, 0, 0],
           type: "Box"
         },
         {
           args: [width, height, front],
-          position: [0, height+0.04, 0],
+          position: [0, height, 0],
           type: "Box",
         },
       ],
@@ -129,15 +129,15 @@ const Car = ({ cameraGroup, ...props }) => {
   useEffect(() => {
     const updateSpeed = () => {
       const now = Date.now();
-      const deltaTime = (now - lastUpdateTime.current) / 300; // Convert to seconds
+      const deltaTime = (now - lastUpdateTime.current) / 1000; // Convert to seconds
       const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
       // Use the utility function to calculate speed
       const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
       // Check if the speed has changed significantly (by 10 km/h or more)
-      if (Math.abs(speed - lastSpeed.current) >= 10) {
+      // if (Math.abs(speed - lastSpeed.current) >= 10) {
         setCurrentSpeed(speed); // Update the state only if the change is significant
         lastSpeed.current = speed; // Update the last speed reference
-      }
+      // }
 
       // Always update the last position and time, regardless of whether the speed was updated
       lastPosition.current.copy(currentPosition);
@@ -401,7 +401,7 @@ const Car = ({ cameraGroup, ...props }) => {
       <Timer />
       <Html>
         {socket.id === props.id && ( // 속도를 출력하는 조건 추가
-          <div style={{ position: 'fixed', top: '400px', left: '800px', color: 'white', fontSize: '160px', fontFamily: 'Arial', zIndex: 999 }}>
+          <div style={{ position: 'fixed', top: '200px', left:'600px', color: 'white', fontSize: '160px', fontFamily: 'Arial', zIndex: 999 }}>
             {currentSpeed}
           </div>
         )}
