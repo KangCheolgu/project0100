@@ -171,10 +171,10 @@ export default function Section1(props){
     <Metalfence position={[position[0] - 42.7, position[1] - 0.09, position[2]-6]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
     <Metalfence position={[position[0] - 42.7, position[1] - 0.09, position[2]-2.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
 
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-16.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-13]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-9.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-6]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-19.2]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-15.7]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-12.2]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-8.7]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
     <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-2.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
 
     {/* 보더라인 */}
@@ -208,11 +208,13 @@ export default function Section1(props){
     <Border_1 position={[position[0] - 39.1, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 39.1, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
 
+    <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
 
+    <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
     <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />

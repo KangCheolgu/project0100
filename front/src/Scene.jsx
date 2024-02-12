@@ -268,11 +268,8 @@ export default function Scene() {
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
             }
-  
               
             {/* <Ground /> */}
-            {/* <Library position={[-40, 0, 39]}/> */}
-            <Bump position={[0,-0.6,-70]}/>
             {isObstacleStarted && (
             <>
             {/* 장애물 배치 */}
