@@ -5,9 +5,13 @@ Command: npx gltfjsx@6.2.16 public/assets/models/bushs.glb -o src/components/Tre
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useTrimesh } from "@react-three/cannon";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useLoader } from "@react-three/fiber";
 
 export function Palm_1(props) {
   const { nodes, materials } = useGLTF('/assets/models/bushs.glb')
+  
   return (
     <group {...props} dispose={null}>   
       <mesh castShadow geometry={nodes.Palm_1.geometry} material={materials.Palms} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />

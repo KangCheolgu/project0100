@@ -196,7 +196,7 @@ export default function Scene() {
 
   const tl = useRef();
   const backgroundColors = useRef({
-    colorA: "#3535cc",
+    colorA: "#00d5ff",
     colorB: "#abaadd",
   })
   useLayoutEffect(()=>{
@@ -209,7 +209,7 @@ export default function Scene() {
     });
     tl.current.to(backgroundColors.current, {
       duration: 20,
-      colorA: "#424242",
+      colorA: "#f25235",
       colorB: "#ffcc00",
     });
     tl.current.to(backgroundColors.current, {
@@ -231,7 +231,8 @@ export default function Scene() {
         <Background backgroundColors={backgroundColors}/>
         <Sand/>
         <ambientLight intensity={2} color="#fff7e6"/>
-        {/*<directionalLight
+        
+        <directionalLight
           castShadow
           intensity={4}
           shadow-camera-top={100}
@@ -242,8 +243,9 @@ export default function Scene() {
           shadow-mapSize-width={512*4}
           position={[30, 60, -30]}
           color="#ffffff"
-  />*/}
-        <Light/>
+        />
+        {/*DirectionalLight & Camera Helper*/}
+        {/*<Light/>*/}
         
         <OrbitControls />
         <Stats/>

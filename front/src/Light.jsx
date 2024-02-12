@@ -7,7 +7,7 @@ const Light = () => {
   const { scene } = useThree();
 
   // Create a DirectionalLight
-  const light = new THREE.DirectionalLight(0xffffff, 1);
+  const light = new THREE.DirectionalLight(0xffffff, 0.7);
   light.position.set(30, 60, -30); // Set light position
   light.castShadow = true; // Enable shadow casting
   light.shadow.camera.top = 100;
