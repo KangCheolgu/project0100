@@ -7,6 +7,9 @@ import { PoliceCar } from './PoliceCar'
 import { BananaCar } from './BananaCar'
 import * as THREE from "three";
 import { CarRed, CarGreen, MotorbikeYellow } from './resort/Vehicles'
+import { Crab } from './Crab'
+import { Rock } from './Rock'
+import { RockLarge } from './RockLarge'
 
 function lerp(from, to, speed) {
   const r = (1 - speed) * from + speed * to
@@ -14,14 +17,17 @@ function lerp(from, to, speed) {
 }
 //////////// 회전 장애물 ///////////////////
 export function SpinObstacle(props) {
+  const position = props.position
+  const offset = props.offset
+
   const [ref, api] = useCompoundBody(
     () => ({
       
-      position: [19,0.5,-4],
+      position: [position[0],position[1],position[2]],
       shapes: [
-        { args: [0.9,1,1.5], position: [1.75, 0, 0], type: 'Box' },
+        { args: [0.9,1,1.5], position: [offset, 0, 0], type: 'Box' },
         
-        { args: [0.6,1,1.4], position: [-1.75, 0, 0], type: 'Box' }
+        { args: [0.6,1,1.4], position: [-offset, 0, 0], type: 'Box' }
       ],
       type: 'Kinematic'
     }),
@@ -41,8 +47,8 @@ export function SpinObstacle(props) {
   return (
     <mesh ref={ref} castShadow receiveShadow>
       {/* 가운데 기둥 */}
-      <PoliceCar scale={[0.07,0.07,0.07]} position={[1.8,-0.5,0]}/>
-      <BananaCar scale={[0.002, 0.002, 0.002]} position={[-1.8, -0.1, 0]}/>
+      <PoliceCar scale={[0.07,0.07,0.07]} position={[offset,-0.5,0]}/>
+      <BananaCar scale={[0.002, 0.002, 0.002]} position={[-offset, -0.1, 0]}/>
       <meshStandardMaterial />
     </mesh>
   )
@@ -126,9 +132,9 @@ export function ShutterObstacle(props) {
   const [ref, api] = useCompoundBody(
     () => ({
       
-      position: [63,0.5,-37],
+      position: [57,1.2,-37],
       shapes: [
-        { args: [2,0.3,3.5], position: [0, 0, 1.75], type: 'Box' },
+        { args: [2,0.3,5], position: [0, 0, 1.75], type: 'Box' },
       ],
       type: 'Kinematic',
       rotation: [-Math.PI/2,0,-Math.PI/2]
@@ -151,7 +157,7 @@ export function ShutterObstacle(props) {
     elapsedTime.current += delta
     //console.log(elapsedTime.current)
     
-    if(elapsedTime.current >= 1.95){
+    if(elapsedTime.current >= 1.4){
       isClockwise.current = !isClockwise.current //방향전환
       elapsedTime.current = 0 // 초기화
       isStopping.current = true // 정지시킴
@@ -160,7 +166,7 @@ export function ShutterObstacle(props) {
     //장애물 멈추면 
     if(isStopping.current){
       api.angularVelocity.set(0,0,0) // 잠깐 정지
-      if(elapsedTime.current >= 1.9){
+      if(elapsedTime.current >= 1.38){
         isStopping.current = false // 정지 종료
         elapsedTime.current = 0 // 초기화
       }
@@ -341,7 +347,6 @@ export function Bump(props){
 
   return(
     <group>
-
     <mesh ref={bump1}>
     </mesh>
     <mesh ref={bump2}>
@@ -378,6 +383,15 @@ export function Bump(props){
     </mesh>
     <mesh ref={bump18}>
     </mesh>
+    <mesh ref={bump19}>
+    </mesh>
+    <mesh ref={bump20}>
+    </mesh>
+    <mesh ref={bump21}>
+    </mesh>
+    <mesh ref={bump22}>
+    </mesh>
+
     </group>
   )
 }
@@ -494,37 +508,41 @@ export function MotorObstacle(props){
   )
 }
 
-//////////// 게 장애물 ///////////////////
-export function CrabObstacle(props) {
-  const [ref, api] = useCompoundBody(
-    () => ({
-      
-      position: [19,0.5,-4],
-      shapes: [
-        { args: [0.9,1,1.5], position: [1.75, 0, 0], type: 'Box' },
-        
-        { args: [0.6,1,1.4], position: [-1.75, 0, 0], type: 'Box' }
-      ],
-      type: 'Kinematic'
-    }),
-    useRef()
-  )
+//////////// 게 장애물 //////////////
+export function CrabObstacle(props){
+  const position1=props.position;
+  const offset= props.offset;
+
+  const [box, {position}] = useBox(()=>({
+    mass: 0,
+    position: [position1[0]+32, position1[1]-0.05, position1[2]-50],
+    material: 'object',
+    args: [1,1,1.5]
+  }),
+  useRef()
+  )  
+  
+  const targetPosition = useRef(offset)
+  const direction = useRef(1)
 
   useEffect(() => {
-    api.angularFactor.set(0, 0.5, 0) // causes the obstacles to remain upright in case of collision
-    api.linearFactor.set(0, 0, 0) // locks it in place so it doesnt slide when bumped
-  }, [api.angularFactor, api.linearFactor])
+    const unsubscribe = position.subscribe((v) => {
+      position.set(v[0], v[1], lerp(v[2], targetPosition.current, 0.06)) //lerp(from,to,speed)
+    })
+    return unsubscribe
+  }, [])
+
 
   useFrame((_, delta) => {
-    api.angularVelocity.set(0, 100*delta, 0)
+    targetPosition.current += direction.current * delta * 5
+    if (targetPosition.current > offset+4) direction.current = -1 //targetPosition 보다 큰거 넣기
+    if (targetPosition.current < offset-4) direction.current = 1 //작은거 넣기
   })
 
   return (
-    <mesh ref={ref} castShadow receiveShadow>
-      {/* 가운데 기둥 */}
-      <PoliceCar scale={[0.07,0.07,0.07]} position={[1.8,-0.5,0]}/>
-      <BananaCar scale={[0.002, 0.002, 0.002]} position={[-1.8, -0.1, 0]}/>
-      <meshStandardMaterial />
+    <mesh ref={box} castShadow>
+      <Crab scale={0.1} position={[0,position1[1]-0.3,0]} rotation={[0,Math.PI,0]}/>
+      <meshStandardMaterial/>
     </mesh>
   )
 }

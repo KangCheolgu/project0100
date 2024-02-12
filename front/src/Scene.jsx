@@ -14,7 +14,7 @@ import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle, CrabObstacle} from "./components/MoveObstacle.jsx";
 import Countdown from "./sound/CountDown.jsx";
 import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
@@ -267,16 +267,16 @@ export default function Scene() {
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-            } */}
-  
+            }
+   */}
               
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
-            <Bump position={[0,-0.6,-70]}/>
+            <Bump position={[60,-1.16,25]}/>
             {isObstacleStarted && (
             <>
             {/* 장애물 배치 */}
-            {/* <SpinObstacle/> */}
+            <SpinObstacle position={[25,0.5,-28]} offset={3}/>
             <LeftAndRightObstacle/>
             {/* <LeftRightObstacle/> */}
             {/* <UpDownObstacle/> */}
@@ -285,6 +285,9 @@ export default function Scene() {
             <CarRedObstacle/>
             <CarGreenObstacle/>
             <MotorObstacle/>
+            <CrabObstacle position ={[7,0,0]} offset={32} />
+            <CrabObstacle position={[-7,0,0]} offset={32}/>
+            <CrabObstacle position={[0,0,0]} offset={38}/>
             </>
             )}
             
