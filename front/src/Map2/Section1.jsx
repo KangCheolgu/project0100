@@ -6,11 +6,18 @@ import { Lighter, TrafficLight, Bench, Clumb_empty_1, Fence1, Fence2, TrashBag, 
 import { Palm_1, Palm_2, Palm_3, Palm_4, Palm_5, Clumb_1, Clumb_2, Clumb_3, Clumb_4, Clumb_5, Clumb_6, Clumb_7, Clumb_8, Bush_1, Bush_2, Bush_3 } from "../components/Trees.jsx";
 import { BasketballCourt } from "../components/resort/Basketball.jsx";
 import { Metalfence } from "../components/resort/Metalfence.jsx";
+import { Bridge } from "../components/resort/Bridge.jsx";
 
 export default function Section1(props){
     const position = props.position || [60, 0, -60]
 
     return(<group castShadow receiveShadow >
+
+    <Bridge position={[position[0], position[1]-6, position[2] + 43]} rotation={[0, -Math.PI/2 , 0]} />
+    <Bridge position={[position[0], position[1]-6, position[2] + 18]} rotation={[0, -Math.PI/2 , 0]} />
+
+    <Bridge position={[position[0]-60, position[1]-6, position[2] + 48]} rotation={[0, Math.PI/2 , 0]} />
+    <Bridge position={[position[0]-60, position[1]-6, position[2] + 23]} rotation={[0, Math.PI/2 , 0]} />
 
     <Building_10_Blue position={[position[0]+10, position[1], position[2]-9.5]} />
     {/* <Building_10_Blue position={[70, 0, -69.5]} /> */}
