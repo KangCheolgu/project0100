@@ -21,6 +21,7 @@ export default function Water(props) {
     smallWavesSpeed,
     smallIterations,
   } = useControls({
+    precison: 'lowp',
     animate: true,
     colors: folder({ surfaceColor: '#c1e4fe', depthColor: '#87cbff', colorOffset: 0.08, colorMultiplier: 1.4 }),
     bigWaves: folder({ bigWavesElevation: 0.8, bigWavesFrequency: [0.2, 0.7], bigWaveSpeed: 0.75 }),
@@ -53,16 +54,16 @@ const RagingSeaMaterial = new shaderMaterial(
   {
     uTime: 1,
     uBigWavesElevation: 0.8,
-    uBigWavesFrequency: [0.2, 0.7],
-    uBigWavesSpeed: 0.75,
+    uBigWavesFrequency: [0.1, 0.3],
+    uBigWavesSpeed: 0.3,
     uSurfaceColor: new THREE.Color('#c1e4fe'),
     uDepthColor: new THREE.Color('#0066b3'),
     uColorOffset: 0.08,
     uColorMultiplier: 1.4,
     uSmallWavesElevation: 0.15,
-    uSmallWavesFrequency: 3,
-    uSmallWavesSpeed: 0.2,
-    uSmallIterations: 4,
+    uSmallWavesFrequency: 0.5,
+    uSmallWavesSpeed: 0.1,
+    uSmallIterations: 0,
   },
   glsl/* glsl */ `
   #pragma glslify: cnoise2 = require(glsl-noise/classic/2d.glsl)
