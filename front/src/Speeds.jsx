@@ -2,8 +2,7 @@ import {Instances, Instance} from "@react-three/drei";
 import {useFrame, useThree} from "@react-three/fiber";
 import {useRef, useState, useEffect} from "react";
 import {AdditiveBlending, DoubleSide, MathUtils} from "three";
-const INSTANCES = 240;
-const MAX_OPACITY=0.1;
+const INSTANCES = 80;
 
 const SpeedShape=()=>{
     const ref = useRef();
@@ -16,17 +15,17 @@ const SpeedShape=()=>{
 
     const resetRandom = ()=>{
         randomPosition = {
-            x: MathUtils.randFloatSpread(8),
-            y:MathUtils.randFloatSpread(5),
-            z: MathUtils.randFloatSpread(8),
+            x: MathUtils.randFloatSpread(7),
+            y:MathUtils.randFloatSpread(6),
+            z: MathUtils.randFloatSpread(7),
         }
-        randomSpeed=MathUtils.randFloat(16, 20);
+        randomSpeed=MathUtils.randFloat(7, 10);
     }
     resetRandom();
     useFrame((_state, delta)=>{
         if(ref.current){
-            ref.current.position.z+=randomSpeed*delta;
-            if(ref.current.position.z>5){
+            ref.current.position.z+=10*delta;
+            if(ref.current.position.z>1){
                 resetRandom();
                 ref.current.position.z = randomPosition.z;
             }
@@ -66,7 +65,7 @@ export const Speed = () => {
     return showSpeed ? (
       <group>
         <Instances>
-          <planeGeometry args={[1, 0.01]} />
+          <planeGeometry args={[1, 0.005]} />
           <meshBasicMaterial
             side={DoubleSide}
             blending={AdditiveBlending}
