@@ -261,7 +261,7 @@ export default function Scene() {
               <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>*/}
               <Map2 position={[0, 0, -94]}/>
               <Wall />
-              {/*<Water/>*/}
+            
             {
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
@@ -275,11 +275,11 @@ export default function Scene() {
             {/* 장애물 배치 */}
             <SpinObstacle position={[25,0.5,-28]} offset={3}/>
             <SpinObstacle position={[27,0.5,-97]} offset={4}/>
-            {/*<LeftAndRightObstacle/>*/}
-            {/*<ShutterObstacle/>*/}
-            <CarRedObstacle/>
+            {/* <LeftAndRightObstacle/> */}
+            <ShutterObstacle/>
+            <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
             <CarGreenObstacle/>
-            {/*<MotorObstacle/>*/}
+            {/* <MotorObstacle/> */}
             <CrabObstacle position ={[7,0,0]} offset={32} />
             <CrabObstacle position={[-7,0,0]} offset={32}/>
             <CrabObstacle position={[0,0,0]} offset={38}/>
