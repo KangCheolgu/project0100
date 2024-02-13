@@ -19,6 +19,7 @@ const FollowCamera = ({ chassisBody, socket, vehicleId }) => {
             cameraPosition.copy(relativeCameraPosition).applyQuaternion(bodyRotation).add(bodyPosition);
 
             // Use a more direct approach for smoothing camera movement.
+
             smoothedCameraPosition.lerp(cameraPosition, 0.2);
 
             state.camera.position.copy(smoothedCameraPosition);
