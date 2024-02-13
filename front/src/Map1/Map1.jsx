@@ -13,14 +13,12 @@ import { MeshDistortMaterial, MeshWobbleMaterial } from "@react-three/drei";
 import ColliderBox from "../ColliderBox.jsx";
 import Water from "../Water.jsx";
 import { BasketballCourt } from "../components/resort/Basketball.jsx";
-import { Basketball} from "../components/Basketball.jsx";
 
 export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
     const scale = props.scale
     return(<group castShadow receiveShadow >   
-        <Basketball position={[0, 0, 0]}/> 
 
         <Startline position={[position[0]+1.45, position[1]+0, position[2]-10]} scale={[1.3, 1, 1.15]} rotation={[0, Math.PI/2, 0]} castShadow receiveShadow/>
         
