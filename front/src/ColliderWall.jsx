@@ -11,7 +11,7 @@ export default function Wall(props){
     //  )
     return (
     <group rotation={props.rotation}>
-        <ColliderBox scale={[100, 0.1, 120]} position={[30, 0, -57]} />
+        <ColliderBox scale={[100, 0.1, 150]} position={[30, -0.02, -72]} />
         <ColliderBox scale={[100, 0.01, 60]} position={[30, -0.51, 39]} />
         <ColliderBox scale={[7.2, 10, 7.5]} position={[33,  5, -9.85]}/>
         <ColliderBox scale={[7.2, 10, 7.5]} position={[33,  5, -19.8]}/>

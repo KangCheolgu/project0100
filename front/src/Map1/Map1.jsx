@@ -51,14 +51,14 @@ export default function Map1(props){
     
         
         {/* 연결다리*/}
-        <Road_1 position={[position[0], position[1]+0, position[2]-36]}/>
+        {/* <Road_1 position={[position[0], position[1]+0, position[2]-36]}/>
         <Road_1 position={[position[0], position[1]+0, position[2]-42]}/>
         <Road_1 position={[position[0], position[1]+0, position[2]-48]}/>
         <Road_1 position={[position[0], position[1]+0, position[2]-54]}/>
         <Road_1 position={[position[0]+60, position[1]+0, position[2]-36]}/>
         <Road_1 position={[position[0]+60, position[1]+0, position[2]-42]}/>
         <Road_1 position={[position[0]+60, position[1]+0, position[2]-48]}/>
-        <Road_1 position={[position[0]+60, position[1]+0, position[2]-54]}/>
+        <Road_1 position={[position[0]+60, position[1]+0, position[2]-54]}/> */}
 
         <Grass position={[position[0]+6, position[1]+0.01, position[2]-48]}/>
         <Grass position={[position[0]+12, position[1]+0.01, position[2]-48]}/>

@@ -6,7 +6,7 @@ import ColliderBox from '../ColliderBox';
 export default function Wall(props){
     const wallGeometry = new THREE.BoxGeometry(1, 1, 1)
     const wallMaterial = new THREE.MeshStandardMaterial({color: "brown"})
-    const position = props.position || [60, 0, -60]
+    const position = props.position || [60, 0, -94]
     // const [meshRef] = useBox(
     //     () => ({ mass: 1, type: 'Static'}),
     //  )
