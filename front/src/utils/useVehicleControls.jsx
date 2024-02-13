@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { socket } from "../Scene.jsx";
 import klaxonSoundFile from '../sound/car-horn/car-horn-1.wav';
+import * as THREE from 'three';
 
 export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
   const [controls, setControls] = useState({});
@@ -24,10 +25,21 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     }));
 
     // for brake lights
-    if (e.key === ' ' ) {
+    if (e.key === ' ') {
       setBrake(true);
       setBrakeLightsOn(true);  // Turn on brake lights
     }
+
+    // 'R' 키 입력 시 자동차 위치 y 좌표 증가 및 쿼터니언 초기화
+if (e.key === 'r') {
+  chassisApi.position.subscribe((position) => {
+    const newPosition = [position[0], position[1] + 0.005, position[2]]; // Slightly raise the y-coordinate
+    chassisApi.position.set(...newPosition);
+  });
+  chassisApi.quaternion.set(0, 1, 0, 0); // Reset quaternion to upright orientation
+  chassisApi.velocity.set(0, 0, 0); // Optionally reset velocity
+  chassisApi.angularVelocity.set(0, 0, 0); // Optionally reset angular velocity
+}
 
     // 클락션 소리 및 쉬프트 키와 함께 'h' 키 처리
     if (e.key.toLowerCase() === 'h') {

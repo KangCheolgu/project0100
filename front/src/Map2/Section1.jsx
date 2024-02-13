@@ -75,31 +75,31 @@ export default function Section1(props){
     <TrafficLight position={[position[0] - 4, position[1] - 0.09, position[2] - 6]} rotation={[0, Math.PI / 2, 0]}/>
     <TrafficLight position={[position[0] - 33, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
 
-    <Block position={[position[0]-4, position[1] , position[2] + 7]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-4, position[1] , position[2] + 5]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-5, position[1] , position[2] + 3]} rotation={[0, -Math.PI / 4, 0]}/>
-    <Block position={[position[0]-12, position[1] , position[2] + 3]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-24, position[1] , position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-30, position[1] , position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-43, position[1] , position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-53, position[1] , position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-58.5, position[1] , position[2] + 20]} rotation={[0, 0, 0]}/>
-    <Block position={[position[0]-61.5, position[1] , position[2] + 30]} rotation={[0, 0, 0]}/>
-    <Block position={[position[0]-58.5, position[1] , position[2] + 40]} rotation={[0, 0, 0]}/>
-    <Block position={[position[0]-61.5, position[1] , position[2] + 50]} rotation={[0, 0, 0]}/>
+    <Block position={[position[0]-4, position[1] -0.1, position[2] + 7]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block position={[position[0]-4, position[1] -0.1, position[2] + 5]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block position={[position[0]-5, position[1] -0.1, position[2] + 3]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Block position={[position[0]-12, position[1] -0.1, position[2] + 3]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block position={[position[0]-24, position[1] -0.1, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block position={[position[0]-30, position[1] -0.1, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block position={[position[0]-43, position[1] -0.1, position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block position={[position[0]-53, position[1] -0.1, position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block position={[position[0]-58.5, position[1] -0.1, position[2] + 20]} rotation={[0, 0, 0]}/>
+    <Block position={[position[0]-61.5, position[1] -0.1, position[2] + 30]} rotation={[0, 0, 0]}/>
+    <Block position={[position[0]-58.5, position[1] -0.1, position[2] + 40]} rotation={[0, 0, 0]}/>
+    <Block position={[position[0]-61.5, position[1] -0.1, position[2] + 50]} rotation={[0, 0, 0]}/>
 
-    <Cone position={[position[0] + 1, position[1] , position[2] - 29.5]} rotation={[0, -Math.PI / 4, 0]}/>
-    <Cone position={[position[0] + 2.2, position[1] , position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
-    <Cone position={[position[0] - 0.2, position[1] , position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
-    <Cone position={[position[0] + 1, position[1] , position[2] - 32.5]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Cone position={[position[0] + 1, position[1] -0.1, position[2] - 29.5]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Cone position={[position[0] + 2.2, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Cone position={[position[0] - 0.2, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Cone position={[position[0] + 1, position[1] -0.1, position[2] - 32.5]} rotation={[0, -Math.PI / 4, 0]}/>
 
-    <Cone position={[position[0] -60, position[1] , position[2] - 29.5]} rotation={[0, -Math.PI / 4, 0]}/>
-    <Cone position={[position[0] -62.2, position[1] , position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
-    <Cone position={[position[0] -57.8, position[1] , position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
-    <Cone position={[position[0] -60, position[1] , position[2] - 32.5]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Cone position={[position[0] -60, position[1] -0.1, position[2] - 29.5]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Cone position={[position[0] -62.2, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Cone position={[position[0] -57.8, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Cone position={[position[0] -60, position[1] -0.1, position[2] - 32.5]} rotation={[0, -Math.PI / 4, 0]}/>
 
-    <Hatch position={[position[0] + 1, position[1] , position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
-    <Hatch position={[position[0] -60, position[1] , position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Hatch position={[position[0] + 1, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Hatch position={[position[0] -60, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
 
     <IceCreamCart position={[position[0] + 5.5, position[1] , position[2] - 1]} rotation={[0, -Math.PI / 4, 0]}/>
 
