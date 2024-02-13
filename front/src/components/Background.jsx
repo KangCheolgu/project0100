@@ -11,6 +11,7 @@ export const Background = ({backgroundColors})=>{
     
     const gradientRef = useRef();
     const gradientEnvRef= useRef();
+    
 
     useFrame(()=>{
         gradientRef.current.colorA=new THREE.Color(

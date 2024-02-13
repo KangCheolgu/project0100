@@ -62,7 +62,7 @@ geometry.computeVertexNormals()*/}
 
   return (
     <group>
-      <group position={[30, -0.5, 56]}>
+      <group position={[30, -0.52, 56]}>
         <mesh receiveShadow geometry={geometry} rotation={[-Math.PI / 2, 0, 0]}>
           <meshLambertMaterial map={texture} color="#EDC9AF" />
           {/*<meshLambertMaterial attach="material" map={texture} color="#EDC9AF" />*/}

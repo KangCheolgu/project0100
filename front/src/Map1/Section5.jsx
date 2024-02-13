@@ -29,6 +29,8 @@ export default function Section5(props){
 
     const position = props.position
     return(<group castShadow receiveShadow >
+        <ColliderBox scale={[50, 10, 25.5]} position={[position[0]+30,position[1]+4,position[2]+15.745]}/>
+
         <Bush_1_1 position={[position[0]+18,position[1]-0.6,position[2]+10]}/>
         <Bush_1_1 position={[position[0]+10,position[1]-0.6,position[2]+10]}/>
         <Bush_2_1 position={[position[0]+12,position[1]-0.6,position[2]+10]}/>
@@ -132,13 +134,11 @@ export default function Section5(props){
             <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
         <ColliderBox position={[position[0]+54, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
-
-        <mesh position={[position[0]+60, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
+        <mesh position={[position[0]+24, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
             <planeGeometry args={[6, 6.1]}/>
             <meshLambertMaterial map={texture} color="#EDC9AF" />
         </mesh>
-        <ColliderBox position={[position[0]+60, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
-
+        <ColliderBox position={[position[0]+24, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
         <mesh position={[position[0]+66, position[1]-0.26, position[2]+6]} rotation={[-Math.PI/2+Math.PI/41, 0, 0]}>
             <planeGeometry args={[6, 6.1]}/>
             <meshLambertMaterial map={texture} color="#EDC9AF" />
@@ -150,38 +150,39 @@ export default function Section5(props){
         </mesh>
         <ColliderBox position={[position[0]+72, position[1]-0.31, position[0]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        {/* <Road_1 position={[position[0]+0, position[1]-0.49, position[2]+11.5]} rotation={[0, 0, 0]}/>
-        <Road_1 position={[position[0]+0, position[1]-0.49, position[2]+17.5]} rotation={[0, 0, 0]}/>
-        <Road_1 position={[position[0]+0, position[1]-0.49, position[2]+23.5]} rotation={[0, 0, 0]}/>
-        <Road_1 position={[position[0]+0, position[1]-0.49, position[2]+29.5]} rotation={[0, 0, 0]}/>
-        <Road_4 position={[position[0]+0, position[1]-0.49, position[2]+35.5]}/>
-        <Road_1 position={[position[0]+6, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+12, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+18, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+24, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+30, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+36, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+42, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+48, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+54, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_4 position={[position[0]+60, position[1]-0.49, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>   */}
-        {/* <Road_1 position={[position[0]+60, position[1]-0.49, position[2]+29.5]} rotation={[0, 0, 0]}/>
-        <Road_1 position={[position[0]+60, position[1]-0.49, position[2]+23.5]} rotation={[0, 0, 0]}/>
-        <Road_1 position={[position[0]+60, position[1]-0.49, position[2]+17.5]} rotation={[0, 0, 0]}/> */}
+        <Road_1 position={[position[0]+0, position[1]-0.519, position[2]+11.5]} rotation={[0, 0, 0]}/>
+        <Road_1 position={[position[0]+0, position[1]-0.519, position[2]+17.5]} rotation={[0, 0, 0]}/>
+        <Road_1 position={[position[0]+0, position[1]-0.519, position[2]+23.5]} rotation={[0, 0, 0]}/>
+        <Road_1 position={[position[0]+0, position[1]-0.519, position[2]+29.5]} rotation={[0, 0, 0]}/>
+        <Road_4 position={[position[0]+0, position[1]-0.519, position[2]+35.5]}/>
+        <Road_1 position={[position[0]+6, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+12, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+18, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+24, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+30, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+36, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+42, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+48, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_1 position={[position[0]+54, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>
+        <Road_4 position={[position[0]+60, position[1]-0.519, position[2]+35.5]} rotation={[0, Math.PI/2, 0]}/>  
+        <Road_1 position={[position[0]+60, position[1]-0.519, position[2]+29.5]} rotation={[0, 0, 0]}/>
+        <Road_1 position={[position[0]+60, position[1]-0.519, position[2]+23.5]} rotation={[0, 0, 0]}/>
+        <Road_1 position={[position[0]+60, position[1]-0.519, position[2]+17.5]} rotation={[0, 0, 0]}/>
+        <Road_1 position={[position[0]+60, position[1]-0.519, position[2]+12]} rotation={[0, 0, 0]}/>
 
         {/* 해변 출입구*/}
         <Road_1 scale={[1, 1, 1.1]} position={[position[0]+60, position[1]-0.26, position[2]+6]} rotation={[Math.PI/41, 0, 0]}/>
-        <ColliderBox position={[position[0]+24, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <ColliderBox position={[position[0]+60, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
         <Road_1 scale={[1, 1, 1.1]} position={[position[0]+0, position[1]-0.26, position[2]+6]} rotation={[Math.PI/41, 0, 0]}/>
         <ColliderBox position={[position[0]+0, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        {/* <Road_4 position={[position[0]+24, position[1]-0.49, position[2]+12]}/>
+        {/*<Road_4 position={[position[0]+24, position[1]-0.49, position[2]+12]}/>
         <Road_1 position={[position[0]+30, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
         <Road_1 position={[position[0]+36, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
         <Road_1 position={[position[0]+42, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
         <Road_1 position={[position[0]+48, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
         <Road_1 position={[position[0]+54, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_4 position={[position[0]+60, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI, 0]}/> */}
+    <Road_4 position={[position[0]+60, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI, 0]}/>*/}
     </group>
     );
 }

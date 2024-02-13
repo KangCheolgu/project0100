@@ -15,7 +15,7 @@ export function BeachBall(props) {
   const position=props.position
   return (
     <group {...props} dispose={null}>
-      <ColliderBox scale={[4, 4, 4]} position={position}/>
+      <ColliderBox scale={[4, 6, 4]} position={position}/>
       <mesh castShadow receiveShadow geometry={nodes.mesh1945116984.geometry} material={materials.mat21} />
       <mesh castShadow receiveShadow geometry={nodes.mesh1945116984_1.geometry} material={materials.mat12} />
       <mesh castShadow receiveShadow geometry={nodes.mesh1945116984_2.geometry} material={materials.mat8} />

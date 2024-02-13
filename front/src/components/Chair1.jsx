@@ -12,7 +12,7 @@ export function Chair1(props) {
   const position = props.position
   return (
     <group {...props} dispose={null}>
-      <ColliderBox scale={[5.5, 3, 2]} position={position} rotation={[0, Math.PI/3-Math.PI/12, 0]}/>
+      <ColliderBox scale={[4.7, 3, 2]} position={position} rotation={[0, Math.PI/3-Math.PI/12, 0]}/>
       <mesh castShadow geometry={nodes.group876641566.geometry} material={materials.mat11} />
       <mesh castShadow geometry={nodes.group1077511786.geometry} material={materials.mat11} />
       <mesh castShadow geometry={nodes.group246137678.geometry} material={materials.mat22} />

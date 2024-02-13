@@ -12,7 +12,7 @@ export function Seagull2(props) {
   const rotation= props.rotation
   return (
     <group {...props} dispose={null}>
-      <ColliderBox scale={[1.7, 5, 1]} position={[position[0]-0.5, position[1], position[2]+0.5]} rotation={rotation}/>
+      <ColliderBox scale={[1.7, 5, 1]} position={[position[0]-0.5, position[1]-1, position[2]+0.5]} rotation={rotation}/>
       <mesh castShadow geometry={nodes.Geo_Seagull.geometry} material={materials.lambert2SG} />
     </group>
   )
