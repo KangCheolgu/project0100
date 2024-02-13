@@ -21,7 +21,6 @@ import { Duck } from "../components/Duck";
 import { useLoader } from '@react-three/fiber'
 import { RepeatWrapping } from 'three'
 import * as THREE from 'three'
-
 export default function Section5(props){
 
     const texture = useLoader(THREE.TextureLoader, '/sand.webp')
@@ -173,7 +172,7 @@ export default function Section5(props){
 
         {/* 해변 출입구*/}
         <Road_1 scale={[1, 1, 1.1]} position={[position[0]+60, position[1]-0.26, position[2]+6]} rotation={[Math.PI/41, 0, 0]}/>
-        <ColliderBox position={[position[0]+24, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <ColliderBox position={[position[0]+60, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
         <Road_1 scale={[1, 1, 1.1]} position={[position[0]+0, position[1]-0.26, position[2]+6]} rotation={[Math.PI/41, 0, 0]}/>
         <ColliderBox position={[position[0]+0, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
