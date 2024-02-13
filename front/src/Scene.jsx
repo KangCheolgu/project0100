@@ -20,9 +20,10 @@ import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
+import { socket } from "./lobby/lobby.jsx";
 
-export const socket = io("http://localhost:5000")
-
+// 여기 변경
+// export const socket = io("http://localhost:5000/")
 export default function Scene() {
 
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
@@ -80,6 +81,7 @@ export default function Scene() {
 
   const startPingCheck = async () => {
     //핑 체크 0.1초 간격
+    console.log("핑체크");
     const pingCheck = setInterval(() => {
       // date 
       const start = Date.now();
@@ -104,18 +106,22 @@ export default function Scene() {
   }
 
 ///////////////////////// 핑관련 끝
+  useEffect(() => {
+    socket.emit("startGame")
+  },[])
  
   // 유저 접속 관련
   useEffect(() => {
     // 접속한 유저 목록 갱신
     function onPlayers(backEndPlayers){ 
+      console.log(backEndPlayers);
       const playersArray = Object.values(backEndPlayers);
       setPlayers(playersArray)
     }
 
     // 내가 설정한 최대 인원 숫자와 현재 인원이 같으면 핑체크 시작
     socket.on("clientCount", () => {
-
+        console.log("클라이언트 카운트다운");
         const pingCheck = setTimeout(() => {
           startPingCheck()
         }, 4000)
@@ -147,19 +153,22 @@ export default function Scene() {
     // socket.on("timeCheck", (serverTimeStart)=>{
     //   console.log("in time check");
     // })
-
+    
+    
     //유저 업데이트
     socket.on("updatePlayers", onPlayers)
 
     return (() => {
       socket.off("updatePlayers", onPlayers);
+      socket.off("opponentPing")
+      socket.off("clientCount")
     })
   },[])
 
   // 상대에게 내 핑 상태를 보냄
   useEffect(() => {
     const sendPingResultToServer = () => {
-      // 핑 결과를 서버로 보냅니다.
+      // 핑 결과를 서버로 보냅니다. 이걸 두번 합니다.
       socket.emit("pingResult", averagePing );
       console.log("my ping :", averagePing);
     };
@@ -243,8 +252,9 @@ export default function Scene() {
             {
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
+                
               ))
-              }
+            }
             {/* <Ground /> */}
             {/* <Library position={[-40, 0, 39]}/> */}
             {isObstacleStarted && (

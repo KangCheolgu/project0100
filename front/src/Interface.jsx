@@ -4,7 +4,9 @@ import * as THREE from 'three'
 import { useKeyboardControls } from '@react-three/drei'
 import {addEffect} from '@react-three/fiber'
 import useGame from './stores/useGame'
-import Scene, { socket } from './Scene'
+// import Scene, { socket } from './Scene'
+import Scene from './Scene'
+import { socket } from "./lobby/lobby.jsx";
 
 export default function Interface(props){
     const lapse = useRef()

@@ -3,18 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Scene from './Scene';
 import { KeyboardControls } from '@react-three/drei';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import LoginPage from './lobby/login';
+import GamePage from './GamePage';
+import { LobbyPage } from './lobby/lobby';
+import RoomPage from './lobby/waitingroom';
+import AuthGoogle from './lobby/authgoogle';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <KeyboardControls
-      map={[
-        {name: 'forward', keys:['ArrowUp', 'KeyW']},
-        {name: 'backward', keys:['ArrowDown', 'KeyS']},
-        {name: 'leftward', keys:['ArrowLeft', 'KeyA']},
-        {name: 'rightward', keys:['ArrowRight', 'KeyD']},
-        {name: 'jump', keys:['Space']}
-      ] } 
-  >
-    <Scene />
-  </KeyboardControls>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/lobby" element={<LobbyPage />} />
+      <Route path="/waitingroom" element={<RoomPage />} />
+      <Route path="/gameroom" element={<GamePage />} /> 
+      <Route path="/auth/google" element={<AuthGoogle />} /> 
+    </Routes>
+  </BrowserRouter>
 );

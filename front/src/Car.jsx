@@ -5,7 +5,8 @@ import { useControls } from "leva";
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
 import { Vector3 } from "three";
-import { socket } from "./Scene.jsx";
+// import { socket } from "./Scene.jsx";
+import { socket } from "./lobby/lobby.jsx";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { CarModel } from "./components/CarModel.jsx";
@@ -254,7 +255,6 @@ const Car = (props) => {
     //       reset()
     //   }
     // )
-    console.log(props.position);
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
 
