@@ -18,10 +18,10 @@ export default function Map2(props){
         <Road_3 position={[position[0]+24, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>
         <Road_1 position={[position[0]+30, position[1]+0,position[2]+ 0]} rotation={[0, Math.PI/2, 0]}/>
         <Road_4 position={[position[0]+42, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>
-        <Sidewalk_corner_7 position={[position[0]+42, position[1]+0.09, position[2]+0]} rotation={[0, -Math.PI/2, 0]}/>
+        {/* <Sidewalk_corner_7 position={[position[0]+42, position[1]+0.09, position[2]+0]} rotation={[0, -Math.PI/2, 0]}/> */}
         <Road_1 position={[position[0]+36, position[1]+0, position[2]+0]} rotation={[0, Math.PI/2, 0]}/>
         
-        <Sidewalk_corner_7 position={[position[0]+24, position[1]+0.12, position[2]]} rotation={[0, Math.PI ,0]}/>
+        {/* <Sidewalk_corner_3 position={[position[0]+24, position[1]+0.12, position[2]]} rotation={[0, Math.PI ,0]}/> */}
 
         <Sidewalk position={[position[0]+19.5, position[1]+0.09, position[2]]} rotation={[0, Math.PI/2, 0]}/>
         <Sidewalk position={[position[0]+19.5, position[1]+0.09, position[2]-6]} rotation={[0, Math.PI/2, 0]}/>
