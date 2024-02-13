@@ -14,7 +14,7 @@ import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./Map1/ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle} from "./components/MoveObstacle.jsx";
 import Countdown from "./sound/CountDown.jsx";
 import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
@@ -187,13 +187,18 @@ export default function Scene() {
 
   socket.on("clientCount",(serverTimeStart)=>{
     //서버시간 받으면
-    const timeoutDuration = 5000
-    //5초 뒤에 장애물 시작
+    const serverTimeNow = new Date(serverTimeStart).getTime() //서버로부터 시간 가져옴
+    const ClientTime = new Date().getTime() //현재 클라이언트 시간 가져옴
+    const timeDifference = serverTimeNow - ClientTime
+    
+    const ObstacleStart = 7000 + timeDifference
+
     setTimeout(()=>{
       setIsObstacleStarted(true)
-    }, timeoutDuration)
+    }, ObstacleStart)
   })
 
+  {/* Background */}
   const tl = useRef();
   const backgroundColors = useRef({
     colorA: "#00d5ff",
@@ -217,13 +222,11 @@ export default function Scene() {
       colorA: "#81318b",
       colorB: "#55ab8f",
     });
-    {/*tl.current.pause();*/}
   }, []);
   
 
   return (
     <>
-      
       <Interface players={players}/>
       <BgmSound />
       <Canvas shadows>
@@ -254,17 +257,18 @@ export default function Scene() {
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
-              <ResortOcean scale={[0.2,0.2, 0.2]} position={[30,3, 100]} rotation={[-Math.PI/20, 0, 0]}/>
-              <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>
-              <Map2 position={[0, 0, -60]}/>
+              {/*<ResortOcean scale={[0.2,0.2, 0.2]} position={[30,3, 100]} rotation={[-Math.PI/20, 0, 0]}/>
+              <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>*/}
+              <Map2 position={[0, 0, -94]}/>
               <Wall />
-            
+              {/*<Water/>*/}
             {/*
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-              */}
-  
+            */}
+              
+            <Bump position={[0,-0.6,-70]}/>
             {isObstacleStarted && (
             <>
             {/* 장애물 배치 */}
@@ -272,6 +276,11 @@ export default function Scene() {
             <LeftAndRightObstacle/>
             <LeftRightObstacle/>
             <UpDownObstacle/>
+            <ShutterObstacle/>
+            <SpinObstacle/>
+            <CarRedObstacle/>
+            <CarGreenObstacle/>
+            <MotorObstacle/>
             </>
             )}
             

@@ -6,7 +6,7 @@ export default function Section4(props){
         <Building_10_Blue position={[-8.5, 0, -31]} rotation={[0, Math.PI/2, 0]}/>
         <Building_10_Red position={[-9.5, 0, -9]} rotation={[0, Math.PI/2, 0]}/>
         <Building_5_Green position={[-8.5, 0,-15]} rotation={[0, Math.PI/2, 0]}/>
-        <Building_9_Red position={[-8.5, 0,0]} rotation={[0, Math.PI/2, 0]}/>
+        <Building_9_Red position={[-8.5, 0,-1]} rotation={[0, Math.PI/2, 0]}/>
     </group>
     );
 }

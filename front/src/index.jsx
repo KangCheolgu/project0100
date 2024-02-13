@@ -12,7 +12,8 @@ root.render(
         {name: 'backward', keys:['ArrowDown', 'KeyS']},
         {name: 'leftward', keys:['ArrowLeft', 'KeyA']},
         {name: 'rightward', keys:['ArrowRight', 'KeyD']},
-        {name: 'jump', keys:['Space']}
+        {name: 'shift', keys:['Shift']},
+        {name: 'space', keys:['Space']}
       ] } 
   >
     <Scene />

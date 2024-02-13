@@ -1,7 +1,6 @@
 import { useCompoundBody, useRaycastVehicle } from "@react-three/cannon";
 import { useEffect, useMemo, useRef, useState, Suspense } from "react";
 import { Html } from '@react-three/drei'
-import { useControls } from "leva";
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
 import { Vector3 } from "three";
@@ -15,9 +14,13 @@ import collisionSound from './sound/car-hit/car-hit-2.wav';
 import klaxonSoundFile from './sound/car-horn/car-horn-1.wav';
 import engineSoundFile from './sound/engines/1/low_on.wav';
 import { Speed } from "./Speeds.jsx";
+import FollowCamera from "./utils/FollowCamera.jsx";
+import { CollisionHandler } from "./CollisionHandler.jsx";
+import { calculateSpeed } from "./utils/speedCalculator.jsx";
+
 let checkPointIndex = 0
 
-const Car = ({cameraGroup, ...props}) => {
+const Car = ({ cameraGroup, ...props }) => {
   // 체크포인트 위치
   // const spot = [{x: -32, y: 0, z:-13},
   //   {x: -1, y: 0, z:-17},
@@ -40,7 +43,6 @@ const Car = ({cameraGroup, ...props}) => {
   // Quaternion, Position 인스턴스 생성
   const worldPosition = useMemo(() => new Vector3(), []);
   const worldQuaternion = useMemo(() => new THREE.Quaternion(), []);
-
 
   let position = props.position;
   let rotation = props.rotation;
@@ -72,7 +74,7 @@ const Car = ({cameraGroup, ...props}) => {
         },
         {
           args: [width, height, front],
-          position: [0, height, 0],
+          position: [0, height+0.04, 0],
           type: "Box",
         },
       ],
@@ -80,67 +82,10 @@ const Car = ({cameraGroup, ...props}) => {
     useRef(null)
   );
 
-  // 자동차 충돌 관리///////////////////////////////////////////
-  const [isCollision, setIsCollision] = useState(false)
-  // console.log(isCollision)
-  const handleCollision = () => {
-    const sound = new Audio(collisionSound);
-    sound.play().catch(error => console.error("오디오 재생 실패:", error));
-    //Boom 관련 시작
-    if (socket.id === props.id) {
-      setIsCollision(true)
-      setImagePosition(getRandomPosition())
-    }
-    // console.log(imagePosition)
-
-  };
-  if (isCollision === true) {
-    setTimeout(() => {
-      setIsCollision(false)
-    }, 350)
-  }
-
-
-
-  const getRandomPosition = () => {
-
-    const cellWidth = window.innerWidth / 3
-    const cellHeight = window.innerHeight / 3
-
-    const startX = cellWidth
-    const startY = cellHeight * 2
-
-
-    const randomX = startX + Math.random() * cellWidth
-    const randomY = startY + Math.random() * cellHeight
-    return { x: randomX, y: randomY }
-  }
-
-  const [imagePosition, setImagePosition] = useState(getRandomPosition())
-
-  // useEffect(()=>{
-  //   setImagePosition(getRandomPosition())
-  // }, [imagePosition])
-
-  ////-------crash 말풍선 관련 끝------/////
-
-  ////////////////////////////////////////////////////////////////
-
-  // 클락션 소리 /////////////////////////////////////////////////////////
-  const klaxonDuration = 500; // 1초
-  ///////////////////////////////////////////////////////////////////////
-
-  // 엔진 소리 관리 //////////////////////////////////////////////////////////////
-  const engineSoundRef = useRef(new Audio(engineSoundFile)); // 엔진 소리 객체를 참조로 저장
-  useEffect(() => {
-    // 엔진 소리를 항상 재생하도록 수정
-    engineSoundRef.current.loop = true;
-    engineSoundRef.current.volume = 0.4; // 원하는 볼륨으로 설정
-    engineSoundRef.current.play().catch(error => console.error("엔진 소리 재생 실패:", error));
-  }, []);
-
+  // 바퀴
   const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
-  
+
+  // 자동차 조작
   const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
       chassisBody,
@@ -150,15 +95,59 @@ const Car = ({cameraGroup, ...props}) => {
     useRef(null),
   );
 
+  ////////////////////////////////////////////////////////////////
+  // brake lights
+  const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
+
+  // 클락션 소리 /////////////////////////////////////////////////////////
+  const klaxonDuration = 500; // 1초
+  ///////////////////////////////////////////////////////////////////////
+
+  // 자동차 충돌
+  const [isCollision, setIsCollision] = useState(false)
+  const handleCollision = () => {
+    const isCurrentUser = socket.id === props.id;
+    CollisionHandler(setIsCollision, collisionSound, isCurrentUser);
+  };
+
+  // 엔진 소리 관리
+  const engineSoundRef = useRef(new Audio(engineSoundFile));
+  useEffect(() => {
+    engineSoundRef.current.loop = true;
+    engineSoundRef.current.volume = 0.4;
+    engineSoundRef.current.play().catch(error => console.error("엔진 소리 재생 실패:", error));
+  }, []);
+
   useVehicleControls(vehicleApi, chassisApi, props.id, props.state, klaxonDuration, klaxonSoundFile);
 
-  const [smoothedCameraPosition] = useState(
-    () => new THREE.Vector3(10, 10, 10)
-  );
-  const [smoothedCameraRotation] = useState(
-    () => new THREE.Quaternion()
-  );
-  const [carVelocity, setCarVelocity] = useState(new THREE.Vector3());
+  // 속도계 
+  const [currentSpeed, setCurrentSpeed] = useState(0);
+  const lastSpeed = useRef(0); // Reference to store the last updated speed
+  const lastPosition = useRef(new Vector3());
+  const lastUpdateTime = useRef(Date.now());
+
+  useEffect(() => {
+    const updateSpeed = () => {
+      const now = Date.now();
+      const deltaTime = (now - lastUpdateTime.current) / 300; // Convert to seconds
+      const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
+      // Use the utility function to calculate speed
+      const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
+      // Check if the speed has changed significantly (by 10 km/h or more)
+      if (Math.abs(speed - lastSpeed.current) >= 10) {
+        setCurrentSpeed(speed); // Update the state only if the change is significant
+        lastSpeed.current = speed; // Update the last speed reference
+      }
+
+      // Always update the last position and time, regardless of whether the speed was updated
+      lastPosition.current.copy(currentPosition);
+      lastUpdateTime.current = now;
+    };
+
+    const intervalId = setInterval(updateSpeed, 300); // Continue to check speed every 200ms
+    return () => clearInterval(intervalId);
+  }, []);
+
   /* 
   *   About phase
   */
@@ -167,87 +156,58 @@ const Car = ({cameraGroup, ...props}) => {
   // const inspot= useGame((state)=> state.inspot)
   // let isIn = useGame((state)=> state.isIn)
   // const lapse = useGame((state)=> state.lapse)
-    
+
   // Back-View 카메라
   useFrame((state, delta) => {
     const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-    if (socket.id === props.id) {
+    const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
-      const cpX = parseFloat(bodyPosition.x.toFixed(4))
-      const cpY = parseFloat(bodyPosition.y.toFixed(4))
-      const cpZ = parseFloat(bodyPosition.z.toFixed(4))
-
-      const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
-
-      // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
-      const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
-
-      // 카메라의 전역 위치 계산
-      const cameraPosition = new THREE.Vector3();
-      cameraPosition.copy(relativeCameraPosition);
-      cameraPosition.applyQuaternion(bodyRotation); // 카메라 위치를 자동차의 회전에 따라 변환
-      cameraPosition.add({ x: cpX, y: cpY, z: cpZ }); // 카메라 위치를 자동차 위치에 더함
-      
       // 부스터 이펙트 위치 및 방향 지정.
-      cameraGroup.current.quaternion.copy(bodyRotation);
-      cameraGroup.current.position.lerp(new THREE.Vector3(cpX, cpY, cpZ), delta*24);
-      
-      // smooth camera 전환속도
-      smoothedCameraPosition.lerp(cameraPosition, 0.2);
+    cameraGroup.current.quaternion.copy(bodyRotation);
+    cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
+    /* Phases*/
 
-      state.camera.position.copy(smoothedCameraPosition);
-      // state.camera.position.copy(cameraPosition);
+    /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
+    /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
+    // if(isIn.every((elem)=>elem===true)
+    //   && bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
+    //   && bodyPosition.z < startSpot.z+ 1 && bodyPosition.z > startSpot.z-1){
+    //   around()
+    //   if(lapse==2){
+    //     end()
+    //   }
+    // } else {
+    // /* 체크포인트 지날 때 */
+    //   const newisIn = [false, false, false, false]
+    //   for(let i=0;i<4;i++){
+    //     newisIn[i] = bodyPosition.x < spot[i].x + 3 && bodyPosition.x > spot[i].x - 3 && bodyPosition.z < spot[i].z+ 3 && bodyPosition.z > spot[i].z-3
+    //     if(newisIn[0]){
+    //       inspot(0)
+    //       break
+    //     }
 
-      // 카메라가 항상 자동차의 뒷부분을 바라보도록 설정
-      const cameraTarget = new THREE.Vector3();
-      cameraTarget.copy({ x: cpX, y: cpY, z: cpZ });
-      cameraTarget.y += 0.35;
-      state.camera.lookAt(cameraTarget);
+    //     if(isIn[i-1]===true&&newisIn[i]){
+    //       inspot(i)
+    //     }
+    //   }
+    // } 
 
-      /* Phases*/
+    // 체크 포인트 인덱스 갱신 
+    // 지정된 위치를 지나면 checkpointIndex를 올림
+    if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'x') {
+      if (CheckPoint[checkPointIndex % (CheckPoint.length)].x - 10 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 10
+        && CheckPoint[checkPointIndex % (CheckPoint.length)].z - 0.5 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 0.5) {
+        // checkPointIndex++
+      }
 
-      /* 종료 조건 : 2바퀴 완주 및 모든 체크포인트 true 및 body가 시작지점*/
-      /* 한 바퀴 조건 : 모든 체크포인트 true 및 body가 시작지점일 때 체크포인트 false로 초기화 */
-      // if(isIn.every((elem)=>elem===true)
-      //   && bodyPosition.x < startSpot.x + 1&& bodyPosition.x > startSpot.x - 1 
-      //   && bodyPosition.z < startSpot.z+ 1 && bodyPosition.z > startSpot.z-1){
-      //   around()
-      //   if(lapse==2){
-      //     end()
-      //   }
-      // } else {
-      // /* 체크포인트 지날 때 */
-      //   const newisIn = [false, false, false, false]
-      //   for(let i=0;i<4;i++){
-      //     newisIn[i] = bodyPosition.x < spot[i].x + 3 && bodyPosition.x > spot[i].x - 3 && bodyPosition.z < spot[i].z+ 3 && bodyPosition.z > spot[i].z-3
-      //     if(newisIn[0]){
-      //       inspot(0)
-      //       break
-      //     }
-
-      //     if(isIn[i-1]===true&&newisIn[i]){
-      //       inspot(i)
-      //     }
-      //   }
-      // } 
-
-      // 체크 포인트 인덱스 갱신 
-      // 지정된 위치를 지나면 checkpointIndex를 올림
-      if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'x') {
-        if (CheckPoint[checkPointIndex % (CheckPoint.length)].x - 10 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 10
-          && CheckPoint[checkPointIndex % (CheckPoint.length)].z - 0.5 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 0.5) {
-          // checkPointIndex++
-        }
-
-      } else if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'z') {
-        if (CheckPoint[checkPointIndex % (CheckPoint.length)].z - 10 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 10
-          && CheckPoint[checkPointIndex % (CheckPoint.length)].x - 0.5 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 0.5) {
-          // checkPointIndex++
-        }
+    } else if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'z') {
+      if (CheckPoint[checkPointIndex % (CheckPoint.length)].z - 10 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 10
+        && CheckPoint[checkPointIndex % (CheckPoint.length)].x - 0.5 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 0.5) {
+        // checkPointIndex++
       }
     }
-
-  });
+  }
+  );
 
   useEffect(() => {
     // const unsubscribeReset = useGame.subscribe(
@@ -258,7 +218,7 @@ const Car = ({cameraGroup, ...props}) => {
     //       reset()
     //   }
     // )
-    console.log(props.position);
+    //console.log(props.position);
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
 
@@ -393,7 +353,7 @@ const Car = ({cameraGroup, ...props}) => {
 
     useInterval(() => {
       if (socket.id === props.id) {
-        const delta = 0.15; // 100ms expressed in seconds
+        const delta = 0.30; // 100ms expressed in seconds
         const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
         const bodyQuaternion = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
@@ -422,11 +382,11 @@ const Car = ({cameraGroup, ...props}) => {
         };
         socket.emit("currentState", currentState);
       }
-    }, 15);
+    }, 30);
   };
   return (<>
     <group ref={cameraGroup}>
-      <Speed/>
+      <Speed />
     </group>
     <group ref={vehicle} castShadow receiveShadow>
       <Suspense>
@@ -440,11 +400,16 @@ const Car = ({cameraGroup, ...props}) => {
       <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
       <Timer />
       <Html>
+        {socket.id === props.id && ( // 속도를 출력하는 조건 추가
+          <div style={{ position: 'fixed', top: '400px', left: '800px', color: 'white', fontSize: '160px', fontFamily: 'Arial', zIndex: 999 }}>
+            {currentSpeed}
+          </div>
+        )}
         {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
-        {/* style={{position: "absolute", top: imagePosition.y, left: imagePosition.x}}/>} */}
       </Html>
+      <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
     </group>
-    </>
+  </>
 
   )
 }
