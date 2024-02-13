@@ -12,7 +12,7 @@ import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
 import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
-import ColliderWall from "./ColliderWall.jsx"
+import ColliderWall from "./Map1/ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
 import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle, CrabObstacle} from "./components/MoveObstacle.jsx";
 import Countdown from "./sound/CountDown.jsx";
@@ -198,6 +198,7 @@ export default function Scene() {
     }, ObstacleStart)
   })
 
+  {/* Background */}
   const tl = useRef();
   const backgroundColors = useRef({
     colorA: "#00d5ff",
@@ -221,13 +222,11 @@ export default function Scene() {
       colorA: "#81318b",
       colorB: "#55ab8f",
     });
-    {/*tl.current.pause();*/}
   }, []);
   
 
   return (
     <>
-      
       <Interface players={players}/>
       <BgmSound />
       <Canvas shadows>
@@ -258,11 +257,11 @@ export default function Scene() {
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
-              <ResortOcean scale={[0.2,0.2, 0.2]} position={[30,3, 100]} rotation={[-Math.PI/20, 0, 0]}/>
-              <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>
+              {/*<ResortOcean scale={[0.2,0.2, 0.2]} position={[30,3, 100]} rotation={[-Math.PI/20, 0, 0]}/>
+              <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>*/}
               <Map2 position={[0, 0, -94]}/>
               <Wall />
-            
+              {/*<Water/>*/}
             {
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
@@ -276,11 +275,11 @@ export default function Scene() {
             {/* 장애물 배치 */}
             <SpinObstacle position={[25,0.5,-28]} offset={3}/>
             <SpinObstacle position={[27,0.5,-97]} offset={4}/>
-            <LeftAndRightObstacle/>
-            <ShutterObstacle/>
+            {/*<LeftAndRightObstacle/>*/}
+            {/*<ShutterObstacle/>*/}
             <CarRedObstacle/>
             <CarGreenObstacle/>
-            <MotorObstacle/>
+            {/*<MotorObstacle/>*/}
             <CrabObstacle position ={[7,0,0]} offset={32} />
             <CrabObstacle position={[-7,0,0]} offset={32}/>
             <CrabObstacle position={[0,0,0]} offset={38}/>
