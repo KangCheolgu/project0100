@@ -399,16 +399,20 @@ export function Bump(props){
 //////////// 빨간색 차 장애물 //////////////
 export function CarRedObstacle(props){
   
+  const position1 = props.position
+  const offset = props.offset
+  const rotation = props.rotation
+
   const [box, {position}] = useBox(()=>({
     mass: 0,
-    position: [61.8, 0.7, -90],
+    position: [position1[0]+61.8, position1[1]+0.7, position1[2]-90],
     material: 'object',
     args: [1.5,1,3.5]
   }),
   useRef()
   )  
   
-  const targetPosition = useRef(-60)
+  const targetPosition = useRef(offset)
   const direction = useRef(1)
 
   useEffect(() => {
@@ -421,13 +425,13 @@ export function CarRedObstacle(props){
 
   useFrame((_, delta) => {
     targetPosition.current += direction.current * delta * 5
-    if (targetPosition.current > -40) direction.current = -1
-    if (targetPosition.current < -85) direction.current = 1
+    if (targetPosition.current > offset+40) direction.current = -1 //큰거 놓기
+    if (targetPosition.current < offset-40) direction.current = 1 //작은거 놓기
   })
 
   return (
     <mesh ref={box} castShadow>
-      <CarRed rotation={[0,Math.PI,0]} position={[0,-0.7,0]}/>
+      <CarRed rotation={[rotation[0],rotation[1],rotation[2]]} position={[0,position1[1]-0.7,0]}/>
       <meshStandardMaterial/>
     </mesh>
   )
@@ -445,12 +449,12 @@ export function CarGreenObstacle(props){
   useRef()
   )  
   
-  const targetPosition = useRef(-10)
+  const targetPosition = useRef(-120)
   const direction = useRef(1)
 
   useEffect(() => {
     const unsubscribe = position.subscribe((v) => {
-      position.set(v[0], v[1], lerp(v[2], targetPosition.current, 0.004)) //lerp(from,to,speed)
+      position.set(v[0], v[1], lerp(v[2], targetPosition.current, 0.006)) //lerp(from,to,speed)
     })
     return unsubscribe
   }, [])
@@ -458,8 +462,8 @@ export function CarGreenObstacle(props){
 
   useFrame((_, delta) => {
     targetPosition.current += direction.current * delta * 5
-    if (targetPosition.current > -40) direction.current = -1
-    if (targetPosition.current < -85) direction.current = 1
+    if (targetPosition.current > -35) direction.current = -1
+    if (targetPosition.current < -125) direction.current = 1
   })
 
   return (
