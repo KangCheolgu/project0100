@@ -36,7 +36,7 @@ if (e.key === 'r') {
     const newPosition = [position[0], position[1] + 0.005, position[2]]; // Slightly raise the y-coordinate
     chassisApi.position.set(...newPosition);
   });
-  chassisApi.quaternion.set(0, 0, 0, 1); // Reset quaternion to upright orientation
+  chassisApi.quaternion.set(0, 1, 0, 0); // Reset quaternion to upright orientation
   chassisApi.velocity.set(0, 0, 0); // Optionally reset velocity
   chassisApi.angularVelocity.set(0, 0, 0); // Optionally reset angular velocity
 }
