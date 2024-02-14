@@ -3,7 +3,6 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { socket } from "./lobby/lobby.jsx";
 import { Text, Html  } from '@react-three/drei';
 import * as THREE from "three";
-import SpectatorFollowCamera from './utils/SpectatorFollowCamera.jsx';
 
 function Spectator(props) {
   const cameraRef = useRef();
@@ -76,8 +75,6 @@ function Spectator(props) {
         if (!receivingData || (selectedPlayer !== null && updateData.index !== selectedPlayer)) {
           return; // 정보 수신 중이 아니거나 선택된 플레이어가 아닐 경우 무시
         }
-
-
         setBodyPosition({x:updateData.position.x, y:updateData.position.y, z:updateData.position.z})
         setBodyRotation({
           isQuaternion: true,
@@ -86,9 +83,6 @@ function Spectator(props) {
           z: updateData.quaternion[2],
           w: updateData.quaternion[3] 
         })
-
-        console.log(updateData);
-
       };
     
       socket.on("updateAnotherPlayer", handleSocketData);

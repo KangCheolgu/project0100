@@ -15,13 +15,10 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
         
         // lap
         lapse : 1,
-        isIn : [false,false, false, false],
 
         // Phase
         phase: 'ready',
         start:() =>
-
-        
         {
             set((state)=>
             {
@@ -36,8 +33,8 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
         {
             set((state)=>
             {
-                if(state.phase === 'playing'||state.phase==='ended')
-                    return {phase: 'ready', isIn: [false, false, false, false], lapse: 0}
+                if(state.phase === 'playing'|| state.phase==='ended')
+                    return {phase: 'ready', isIn: [false, false, false, false], lapse: 1}
                 return {}
             })
         },
@@ -56,25 +53,8 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
         {
             set((state)=>
             {
-                return {lapse: state.lapse+1, isIn: [false, false, false, false]}
-                
+                return {lapse: state.lapse+1}
             })
-        },
-
-        inspot:(index)=>
-        {
-            set((state) => {
-                const updateIsIn = [...state.isIn];
-                updateIsIn[index] = true;
-                return { isIn: updateIsIn };
-            });
-    
-        },
-        outspot: (state, index)=>
-        {
-            const updateIsIn = [...state.isIn]
-            updateIsIn[index] = false
-            return { ...state, isIn: updateIsIn };
         },
 
         Countdown: ()=>{

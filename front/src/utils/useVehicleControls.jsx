@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
-// import { socket } from "../Scene.jsx";
 import { socket } from "../lobby/lobby.jsx";
-=======
-import { socket } from "../Scene.jsx";
 import klaxonSoundFile from '../sound/car-horn/car-horn-1.wav';
 import * as THREE from 'three';
->>>>>>> 890cb175dd3d2eeaae8669c4dfbf92c445142357
 
 export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
   const [controls, setControls] = useState({});

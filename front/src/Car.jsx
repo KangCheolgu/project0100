@@ -18,8 +18,10 @@ import { Speed } from "./Speeds.jsx";
 import FollowCamera from "./utils/FollowCamera.jsx";
 import { CollisionHandler } from "./CollisionHandler.jsx";
 import { calculateSpeed } from "./utils/speedCalculator.jsx";
+import useGame from "./stores/useGame.jsx";
 
 let checkPointIndex = 0
+let lapseCheck = [false]
 
 const Car = ({ cameraGroup, ...props }) => {
     // 이전 등수 현재등수
@@ -133,32 +135,61 @@ const Car = ({ cameraGroup, ...props }) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Back-View 카메라
+  // 랩타임 관련
+  const end = useGame((state)=> state.end)
+  const around = useGame((state) => state.around)
+
   useFrame((state, delta) => {
-    const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-    const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
-
-      // 부스터 이펙트 위치 및 방향 지정.
-    cameraGroup.current.quaternion.copy(bodyRotation);
-    cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
-    /* Phases*/
-
-    // 체크 포인트 인덱스 갱신 
-    // 지정된 위치를 지나면 checkpointIndex를 올림
-    if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'x') {
-      if (CheckPoint[checkPointIndex % (CheckPoint.length)].x - 10 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 10
-        && CheckPoint[checkPointIndex % (CheckPoint.length)].z - 0.5 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 0.5) {
-        // checkPointIndex++
+    if (socket.id === props.id) {
+      const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+      const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
+        // 부스터 이펙트 위치 및 방향 지정.
+      cameraGroup.current.quaternion.copy(bodyRotation);
+      cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
+      /* Phases*/
+      if (checkPointIndex === 1 && lapseCheck[0] === false) {
+        around()
+        lapseCheck[0] = true
       }
 
-    } else if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'z') {
-      if (CheckPoint[checkPointIndex % (CheckPoint.length)].z - 10 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 10
-        && CheckPoint[checkPointIndex % (CheckPoint.length)].x - 0.5 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 0.5) {
-        // checkPointIndex++
+      if (checkPointIndex === 2) {
+        end()     
       }
+
+      // if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
+      //   around()
+      //   lapseCheck[0] = true
+      // }
+      // if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
+      //   end()     
+      // }
+
+      // 체크 포인트 인덱스 갱신 
+      // 지정된 위치를 지나면 checkpointIndex를 올림
+      // if(checkPointIndex % (CheckPoint.length) === 13 ){
+      //   if (CheckPoint[checkPointIndex % (CheckPoint.length)].z - 25 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 25
+      //       && CheckPoint[checkPointIndex % (CheckPoint.length)].x - 0.5 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 0.5) {
+      //         console.log(checkPointIndex % (CheckPoint.length),"번 체크포인트 지남")
+      //         checkPointIndex++
+      //   }
+      // } else {
+      //   if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'x') {
+      //     if (CheckPoint[checkPointIndex % (CheckPoint.length)].x - 10 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 10
+      //       && CheckPoint[checkPointIndex % (CheckPoint.length)].z - 0.5 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 0.5) {
+      //       console.log(checkPointIndex % (CheckPoint.length),"번 체크포인트 지남")
+      //       checkPointIndex++
+      //     }
+
+      //   } else if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'z') {
+      //     if (CheckPoint[checkPointIndex % (CheckPoint.length)].z - 10 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 10
+      //       && CheckPoint[checkPointIndex % (CheckPoint.length)].x - 0.5 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 0.5) {
+      //       console.log(checkPointIndex % (CheckPoint.length),"번 체크포인트 지남")
+      //       checkPointIndex++
+      //     }
+      //   }
+      // }
     }
-  }
-  );
+  });
 
   useEffect(() => {
 
@@ -210,11 +241,9 @@ const Car = ({ cameraGroup, ...props }) => {
         } else {
           // 상대방 실시간 위치
           const targetX = parseFloat(targetPosition.x.toFixed(3))
-          const targetY = parseFloat(targetPosition.y.toFixed(3))
           const targetZ = parseFloat(targetPosition.z.toFixed(3))
           // 나의 실시간 위치
           const myX = parseFloat(bodyPosition.x.toFixed(3))
-          const myY = parseFloat(bodyPosition.y.toFixed(3))
           const myZ = parseFloat(bodyPosition.z.toFixed(3))
           // 체크포인트 축이 z라면 x 비교 
           if (CheckPoint[checkPointIndex].axis === 'z') {
@@ -239,7 +268,6 @@ const Car = ({ cameraGroup, ...props }) => {
               setCurrentRank(newRank);
             }
           }
-
         }
       }
     }
@@ -331,7 +359,7 @@ const Car = ({ cameraGroup, ...props }) => {
 
   return (<>
     <group ref={cameraGroup}>
-      <Speed />
+      {/* <Speed /> */}
     </group>
     <group ref={vehicle} castShadow receiveShadow>
       <Suspense>
@@ -344,14 +372,14 @@ const Car = ({ cameraGroup, ...props }) => {
       <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
       <Timer />
-      <Html>
+      {/* <Html>
         {socket.id === props.id && ( // 속도를 출력하는 조건 추가
           <div style={{ position: 'fixed', top: '200px', left:'600px', color: 'white', fontSize: '160px', fontFamily: 'Arial', zIndex: 999 }}>
             {currentSpeed}
           </div>
         )}
         {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
-      </Html>
+      </Html> */}
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
     </group>
   </>

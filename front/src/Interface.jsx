@@ -101,7 +101,7 @@ export default function Interface(){
       {phase==='ended'?<div className="restart" onClick={restart}>Restart</div>:null}
       {phase==='ended'?<div className="endtime"></div>:null}
 
-      {/* 관전자에게만 보이는 카메라 이동 버튼 */}
+      {/* 관전자에게만 보이는 부분 */}
       {isSpectator && (
         <div style={{position:"fixed",fontFamily:"sans-serif"}} className="spectator-button">
           <button  style={{margin:"5px",width:"50px", padding:"7px"}}
@@ -135,7 +135,7 @@ export default function Interface(){
         </div>
       )}
 
-      {/* 플레이어 한테만 보이는 키보드 조작 UI */}
+      {/* 플레이어 한테만 보이는 부분 */}
       {!isSpectator && (
             <div className="controls">
             <div className="raw">
