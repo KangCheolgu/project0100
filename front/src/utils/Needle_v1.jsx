@@ -28,10 +28,10 @@ function Needle({ socket, props, currentSpeed }) {
                     height: '15px',
                     backgroundColor: color,
                     position: 'absolute',
-                    bottom: '20%',
-                    right: '15%',
+                    bottom: '22%',
+                    right: '13%',
                     transform: `translate(-50%, -50%) rotate(${angle}deg)`,
-                    transformOrigin: '250px 50%',
+                    transformOrigin: '240px 50%',
                     clipPath: 'polygon(60% 0, 100% 50%, 60% 100%, 0 50%)',
                     transition: 'transform 0.5s ease-out', // CSS transition for smooth movement
                     opacity: 0.7
