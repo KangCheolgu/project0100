@@ -344,7 +344,7 @@ const Car = ({ cameraGroup, ...props }) => {
       <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
       <Timer />
        <Html>
-        <div style={{position: 'fixed', border: '3px solid', width: window.screen.width/2 , height: window.screen.height/2 }}>
+        <div style={{position: 'fixed', width: window.screen.width/2 , height: window.screen.height/2 }}>
           <Needle socket={socket} props={props} currentSpeed={currentSpeed} />
           <Speedometer socket={socket} props={props} currentSpeed={currentSpeed} />
         </div>

@@ -253,7 +253,7 @@ export default function Scene() {
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -3, 0]}>
-          <Debug>
+          {/* <Debug> */}
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
@@ -262,11 +262,11 @@ export default function Scene() {
               <Map2 position={[0, 0, -94]}/>
               <Wall />
             
-            {/* {
+            {
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-            } */}
+            }
   
                                                           
             {/* <Ground /> */}
@@ -280,14 +280,14 @@ export default function Scene() {
             <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
             <CarGreenObstacle/>
             {/* <MotorObstacle/> */}
-            <CrabObstacle position ={[7,-0.5,0]} offset={32} />
-            <CrabObstacle position={[-7,-0.5,0]} offset={32}/>
-            <CrabObstacle position={[0,-0.5,0]} offset={38}/>
+            <CrabObstacle position ={[7,-0.01,0]} offset={32} />
+            <CrabObstacle position={[-7,-0.01,0]} offset={32}/>
+            <CrabObstacle position={[0,-0.01,0]} offset={38}/>
             </>
             )}
             
             </Suspense>
-         </Debug>
+         {/* </Debug> */}
         </Physics>
       </Canvas>
     </>
