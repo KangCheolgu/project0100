@@ -13,14 +13,32 @@ import { MeshDistortMaterial, MeshWobbleMaterial } from "@react-three/drei";
 import ColliderBox from "../ColliderBox.jsx";
 import Water from "../Water.jsx";
 import { BasketballCourt } from "../components/resort/Basketball.jsx";
+import { Signs } from "../components/Signs.jsx";
+import { Signs2 } from "../components/Signs2.jsx";
+import { Arrow2 } from "../components/Arrow2.jsx";
 
 export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
     const scale = props.scale
     return(<group castShadow receiveShadow >   
-
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+1, position[1]+2, position[2]+40]} rotation={[-Math.PI/2, Math.PI, 0]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+63, position[1]+2, position[2]+35]} rotation={[-Math.PI/2, Math.PI, -Math.PI/2]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+60, position[1]+2, position[2]-16]} rotation={[-Math.PI/2, Math.PI, Math.PI]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+38.5, position[1]+2, position[2]-12]} rotation={[-Math.PI/2, Math.PI, Math.PI/2]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+21, position[1]+2, position[2]+0]} rotation={[Math.PI/2, Math.PI, Math.PI/2]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+25, position[1]+2, position[2]-33]} rotation={[Math.PI/2, Math.PI,0]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+64, position[1]+2, position[2]-33]} rotation={[Math.PI/2, 0,Math.PI/2]}/>
+        
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+60, position[1]+2, position[2]-128]} rotation={[Math.PI/2, 0, 0]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+37, position[1]+2, position[2]-124]} rotation={[Math.PI/2, 0, -Math.PI/2]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+40, position[1]+2, position[2]-90]} rotation={[-Math.PI/2, 0,0]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+19, position[1]+2, position[2]-95]} rotation={[-Math.PI/2, 0,-Math.PI/2]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+22, position[1]+2, position[2]-128]} rotation={[Math.PI/2, 0, 0]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]-5, position[1]+2, position[2]-123]} rotation={[Math.PI/2, 0, -Math.PI/2]}/>
+        
         <Startline position={[position[0]+1.45, position[1]+0, position[2]-10]} scale={[1.3, 1, 1.15]} rotation={[0, Math.PI/2, 0]} castShadow receiveShadow/>
+
         
         <Block position={[position[0]+6.6, position[1], position[2]-31.5]} rotation={[0, Math.PI/2, 0]}/>
         <Block position={[position[0]+6.6, position[1], position[2]-28.5]} rotation={[0, Math.PI/2, 0]}/>
@@ -46,10 +64,6 @@ export default function Map1(props){
         <Block position={[position[0]+40.5, position[1], position[2]-22.9]} rotation={[0, 0, 0]}/>
         <Block position={[position[0]+43, position[1], position[2]-22.9]} rotation={[0, 0, 0]}/>
         <Block position={[position[0]+45.5, position[1], position[2]-22.9]} rotation={[0, 0, 0]}/>
-
-        {/*<Block position={[position[0]+58, position[1], position[2]-9.5]} rotation={[0, 0, 0]}/>
-        <Block position={[position[0]+61, position[1], position[2]-9.5]} rotation={[0, 0, 0]}/>
-        <Block position={[position[0]+64, position[1], position[2]-9.5]} rotation={[0, 0, 0]}/>*/}
         
         <Block position={[position[0]+57, position[1], position[2]-17]} rotation={[0, 0, 0]}/>
         <Block position={[position[0]+60.5, position[1], position[2]-17]} rotation={[0, 0, 0]}/>
@@ -66,16 +80,6 @@ export default function Map1(props){
         <Block position={[position[0]+48, position[1], position[2]-1]} rotation={[0, Math.PI/2, 0]}/>
         <Block position={[position[0]+48, position[1], position[2]+2]} rotation={[0, Math.PI/2, 0]}/>
         
-        {/*<Block position={[position[0]+44, position[1], position[2]-31.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Block position={[position[0]+44, position[1], position[2]-28.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Block position={[position[0]+44, position[1], position[2]-25.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Block position={[position[0]+44, position[1], position[2]-22.5]} rotation={[0, Math.PI/2, 0]}/>*/}
-
-        {/*<Block position={[position[0]+28, position[1], position[2]-1.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Block position={[position[0]+28, position[1], position[2]+1.5]} rotation={[0, Math.PI/2, 0]}/>
-        <Block position={[position[0]+38, position[1], position[2]-1.5]} rotation={[0, Math.PI/2, 0]}/>
-    <Block position={[position[0]+38, position[1], position[2]+1.5]} rotation={[0, Math.PI/2, 0]}/>*/}
-        
         {/*첫번째 블럭 */}
         <Section1 position={[position[0], position[1], position[2]]}/>
         {/*두번째 블럭*/}
@@ -87,47 +91,6 @@ export default function Map1(props){
         {/* 남쪽 외곽 */}
         <Section5 position={position}/>
     
-        
-        {/* 연결다리*/}
-        {/* <Road_1 position={[position[0], position[1]+0, position[2]-36]}/>
-        <Road_1 position={[position[0], position[1]+0, position[2]-42]}/>
-        <Road_1 position={[position[0], position[1]+0, position[2]-48]}/>
-        <Road_1 position={[position[0], position[1]+0, position[2]-54]}/>
-        <Road_1 position={[position[0]+60, position[1]+0, position[2]-36]}/>
-        <Road_1 position={[position[0]+60, position[1]+0, position[2]-42]}/>
-        <Road_1 position={[position[0]+60, position[1]+0, position[2]-48]}/>
-        <Road_1 position={[position[0]+60, position[1]+0, position[2]-54]}/> */}
-    {/*}
-        <Grass position={[position[0]+6, position[1]+0.01, position[2]-48]}/>
-        <Grass position={[position[0]+12, position[1]+0.01, position[2]-48]}/>
-        <Grass position={[position[0]+18, position[1]-0.01, position[2]-48]}/>
-        <Grass position={[position[0]+24, position[1]-0.01, position[2]-48]}/>
-        <Grass position={[position[0]+30, position[1]-0.01, position[2]-48]}/>
-        <Grass position={[position[0]+36, position[1]-0.01, position[2]-48]}/>
-        <Grass position={[position[0]+42, position[1]-0.01, position[2]-48]}/>
-        <Grass position={[position[0]+48, position[1]-0.01, position[2]-48]}/>
-        <Grass position={[position[0]+54, position[1]-0.01, position[2]-48]}/>
-
-        <Grass position={[position[0]+6, position[1]-0.01, position[2]-42]}/>
-        <Grass position={[position[0]+12, position[1]-0.01, position[2]-42]}/>
-        <Grass position={[position[0]+18, position[1]-0.01, position[2]-42]}/>
-        <Grass position={[position[0]+24, position[1]-0.01, position[2]-42]}/>
-        <Grass position={[position[0]+30, position[1]-0.01, position[2]-42]}/>
-        <Grass position={[position[0]+36, position[1]-0.01, position[2]-42]}/>
-        <Grass position={[position[0]+42, position[1]-0.01, position[2]-42]}/>
-        <Grass position={[position[0]+48, position[1]-0.01, position[2]-42]}/>
-        <Grass position={[position[0]+54, position[1]-0.01, position[2]-42]}/>
-        
-        <Grass position={[position[0]+6, position[1]-0.01, position[2]-36]}/>
-        <Grass position={[position[0]+12, position[1]-0.01, position[2]-36]}/>
-        <Grass position={[position[0]+18, position[1]-0.01, position[2]-36]}/>
-        <Grass position={[position[0]+24, position[1]-0.01, position[2]-36]}/>
-        <Grass position={[position[0]+30, position[1]-0.01, position[2]-36]}/>
-        <Grass position={[position[0]+36, position[1]-0.01, position[2]-36]}/>
-        <Grass position={[position[0]+42, position[1]-0.01, position[2]-36]}/>
-        <Grass position={[position[0]+48, position[1]-0.01, position[2]-36]}/>
-        <Grass position={[position[0]+54, position[1]-0.01, position[2]-36]}/>
-    */} 
         {/*서쪽 연석*/}
         <Border_1 position={[position[0]-3, position[1]-0.04, position[2]]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]-3, position[1]-0.04, position[2]-6]} rotation={[0, Math.PI/2, 0]} />

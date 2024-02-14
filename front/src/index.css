@@ -132,3 +132,15 @@ body,
   height: auto; /* 높이 자동 조정 */
   z-index: 9999; /* 다른 요소들보다 위로 올리기 */
 }
+
+@font-face {
+  font-family: 'Aptos';
+  src: url('../public/assets/fonts/aptos-semibold.ttf') format('woff2'), 
+       url('../public/assets/fonts/aptos-semibold.ttf') format('woff'); 
+}
+
+@font-face {
+  font-family: 'Aptos-italic';
+  src: url('../public/assets/fonts/aptos-italic.ttf') format('woff2'), 
+       url('../public/assets/fonts/aptos-italic.ttf') format('woff'); 
+}

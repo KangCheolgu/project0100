@@ -6,7 +6,7 @@ import { StreetVendorCart } from './StreetVendorCart'
 import { PoliceCar } from './PoliceCar'
 import { BananaCar } from './BananaCar'
 import * as THREE from "three";
-import { CarRed, CarGreen, MotorbikeYellow, MotorbikeOrange, MotorbikePizza } from './resort/Vehicles1'
+import { CarRed, CarGreen, MotorbikeYellow, MotorbikeOrange, MotorbikePizza } from './resort/Vehicles'
 import { Crab } from './Crab'
 import { Rock } from './Rock'
 import { RockLarge } from './RockLarge'
