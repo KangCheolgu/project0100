@@ -81,6 +81,94 @@ export default function Wall(props){
         <ColliderBox scale={[10.8, 10, 0.1]} position={[position[0]-48.1, position[1], position[2] - 21]}/>
         <ColliderBox scale={[10.8, 10, 0.1]} position={[position[0]-48.1, position[1], position[2] - 1]}/>
 
+        {/* 오브젝트 */}
+        <ColliderBox scale={[3, 4, 6]} position={[position[0] + 9, position[1]+0.05, position[2] - 1]}/>
+
+        <ColliderBox scale={[2, 2, 1]} position={[position[0] + 5.5, position[1], position[2] - 1]} rotation={[0, -Math.PI/4, 0]}/>
+
+        {/* 가로등 */}
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 4, position[1] - 0.09, position[2] - 3]} />
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 4, position[1] - 0.09, position[2] - 13]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 4, position[1] - 0.09, position[2] - 23]} />
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 14, position[1] - 0.09, position[2] - 23]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 14, position[1] - 0.09, position[2] - 13]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 14, position[1] - 0.09, position[2] - 3]} />
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 22, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 22, position[1] - 0.09, position[2] - 26]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 22, position[1] - 0.09, position[2] - 16]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 22, position[1] - 0.09, position[2] - 5]} />
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 32, position[1] - 0.09, position[2] - 5]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 32, position[1] - 0.09, position[2] - 22]} />
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 40, position[1] - 0.09, position[2] - 5]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 40, position[1] - 0.09, position[2] - 23]}/>
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 48, position[1] - 0.09, position[2] - 26]} rotation={[0, Math.PI / 2, 0]}/>
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 48, position[1] - 0.09, position[2] - 33.5]} rotation={[0, Math.PI / 2, 0]}/>
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 56, position[1] - 0.09, position[2] - 5]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 56, position[1] - 0.09, position[2] - 23]}/>
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 64, position[1] - 0.09, position[2] - 5]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 64, position[1] - 0.09, position[2] - 23]}/>
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 64, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] + 4, position[1] - 0.09, position[2] - 3]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] + 4, position[1] - 0.09, position[2] - 13]} />
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] + 4, position[1] - 0.09, position[2] - 23]} />
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] -9, position[1] - 0.09, position[2] - 34]} rotation={[0, Math.PI / 2, 0]}/>
+
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 4, position[1] - 0.09, position[2] - 6]} rotation={[0, Math.PI / 2, 0]}/>
+        <ColliderBox scale={[0.15, 8, 0.15]} position={[position[0] - 33, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+
+        {/* Block */}
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-4, position[1] -0.1, position[2] + 7]} rotation={[0, Math.PI / 2, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-4, position[1] -0.1, position[2] + 5]} rotation={[0, Math.PI / 2, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-5, position[1] -0.1, position[2] + 3]} rotation={[0, -Math.PI / 4, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-12, position[1] -0.1, position[2] + 3]} rotation={[0, Math.PI / 2, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-24, position[1] -0.1, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-30, position[1] -0.1, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-43, position[1] -0.1, position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-53, position[1] -0.1, position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-58.5, position[1] -0.1, position[2] + 20]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-61.5, position[1] -0.1, position[2] + 30]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-58.5, position[1] -0.1, position[2] + 40]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale={[2, 2, 1.2]} position={[position[0]-61.5, position[1] -0.1, position[2] + 50]} rotation={[0, 0, 0]}/>
+
+        {/* 콘 */}
+        <ColliderBox scale={[0.5, 2, 0.5]} position={[position[0] + 1, position[1] -0.1, position[2] - 29.5]} rotation={[0, -Math.PI / 4, 0]}/>
+        <ColliderBox scale={[0.5, 2, 0.5]} position={[position[0] + 2.2, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+        <ColliderBox scale={[0.5, 2, 0.5]} position={[position[0] - 0.2, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+        <ColliderBox scale={[0.5, 2, 0.5]} position={[position[0] + 1, position[1] -0.1, position[2] - 32.5]} rotation={[0, -Math.PI / 4, 0]}/>
+
+        <ColliderBox scale={[0.5, 2, 0.5]} position={[position[0] -60, position[1] -0.1, position[2] - 29.5]} rotation={[0, -Math.PI / 4, 0]}/>
+        <ColliderBox scale={[0.5, 2, 0.5]} position={[position[0] -62.2, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+        <ColliderBox scale={[0.5, 2, 0.5]} position={[position[0] -57.8, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
+        <ColliderBox scale={[0.5, 2, 0.5]} position={[position[0] -60, position[1] -0.1, position[2] - 32.5]} rotation={[0, -Math.PI / 4, 0]}/>
+
+        {/* Hydrant */}
+        <ColliderBox scale={[0.3, 2, 0.3]} position={[position[0] + 3, position[1] - 0.04, position[2] - 32]} />
+        <ColliderBox scale={[0.3, 2, 0.3]} position={[position[0] - 5, position[1] - 0.04, position[2] - 26]} />
+        <ColliderBox scale={[0.3, 2, 0.3]} position={[position[0] - 23, position[1] + 0.04, position[2] - 4]} />
+
+        {/* Vehicle */}
+        <ColliderBox scale={[1.5, 3, 3.5]} position={[position[0] - 15, position[1] - 0.09, position[2] - 33]} rotation={[Math.PI / 36, -Math.PI / 2, 0]} />
+        <ColliderBox scale={[1.5, 3, 3.5]} position={[position[0] - 40, position[1] - 0.09, position[2] - 33]} rotation={[Math.PI / 36, -Math.PI / 2, 0]} />
+        <ColliderBox scale={[1.5, 3, 3.5]} position={[position[0] - 55, position[1] - 0.09, position[2] - 33]} rotation={[Math.PI / 36, -Math.PI / 2, 0]} />
+
+        <ColliderBox scale={[1.5, 3, 3.5]} position={[position[0] - 15, position[1] - 0.09, position[2] - 20]} rotation={[0, Math.PI, -Math.PI / 36]} />
+        <ColliderBox scale={[1.5, 3, 3.5]} position={[position[0] - 21, position[1] - 0.09, position[2] - 10]} rotation={[0, 0, -Math.PI / 36]} />
+        <ColliderBox scale={[1.5, 3, 3.5]} position={[position[0] - 33, position[1] - 0.09, position[2] - 20]} rotation={[0, Math.PI, -Math.PI / 36]} />
+        <ColliderBox scale={[1.5, 3, 3.5]} position={[position[0] - 39, position[1] - 0.09, position[2] - 15]} rotation={[0, 0, -Math.PI / 36]} />
+        <ColliderBox scale={[1.5, 3, 3.5]} position={[position[0] - 63, position[1] - 0.09, position[2] - 10]} rotation={[0, 0, -Math.PI / 36]} />
+        <ColliderBox scale={[1.5, 3, 3.5]} position={[position[0] - 63, position[1] - 0.09, position[2]]} rotation={[0, 0, -Math.PI / 36]} />
+
+        {/* TrashCan */}
+        <ColliderBox scale={[3.5, 4, 2]} position={[position[0] - 27.5, position[1] - 0.04, position[2] - 10.1]} />
 
     </group>
     )
