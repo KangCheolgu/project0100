@@ -215,103 +215,102 @@ export default function Section1(props){
     <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-2.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
 
     {/* 보더라인 */}
-    <Border_1 position={[position[0] + 3.1, position[1]-0.14, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] + 3.1, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] + 3.1, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] + 3.1, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] + 3.1, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] + 3.1, position[1]-0.14, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] + 3.1, position[1]-0.04, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] + 3.1, position[1]-0.04, position[2]]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] + 3.1, position[1]-0.04, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] + 3.1, position[1]-0.04, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] + 3.1, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] + 3.1, position[1]-0.04, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_1 position={[position[0] - 3.1, position[1]-0.14, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 3.1, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 3.1, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 3.1, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 3.1, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 3.1, position[1]-0.04, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 3.1, position[1]-0.04, position[2]]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 3.1, position[1]-0.04, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 3.1, position[1]-0.04, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 3.1, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />0
+    <Border_1 position={[position[0] - 14.9, position[1]-0.04, position[2]]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 14.9, position[1]-0.04, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 14.9, position[1]-0.04, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 14.9, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_1 position={[position[0] - 14.9, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 14.9, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 14.9, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 14.9, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 21.1, position[1]-0.04, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 21.1, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 21.1, position[1]-0.04, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 21.1, position[1]-0.04, position[2] - 30]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_1 position={[position[0] - 21.1, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 21.1, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 21.1, position[1]-0.14, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 21.1, position[1]-0.14, position[2] - 30]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 32.9, position[1]-0.04, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 32.9, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 32.9, position[1]-0.04, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_1 position={[position[0] - 32.9, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 32.9, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 32.9, position[1]-0.14, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 39.1, position[1]-0.04, position[2]]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 39.1, position[1]-0.04, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 39.1, position[1]-0.04, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 39.1, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_1 position={[position[0] - 39.1, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 39.1, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 39.1, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 39.1, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 56.9, position[1]-0.04, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 56.9, position[1]-0.04, position[2]]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 56.9, position[1]-0.04, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 56.9, position[1]-0.04, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 56.9, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 56.9, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 63.1, position[1]-0.04, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 63.1, position[1]-0.04, position[2]]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 63.1, position[1]-0.04, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 63.1, position[1]-0.04, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 63.1, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 63.1, position[1]-0.04, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2]]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] - 6]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 63.1, position[1]-0.14, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 6, position[1]-0.04, position[2] - 3]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 6, position[1]-0.04, position[2] - 9]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 6, position[1]-0.04, position[2] - 15]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 6, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_1 position={[position[0] - 6, position[1]-0.14, position[2] - 3]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 6, position[1]-0.14, position[2] - 9]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 6, position[1]-0.14, position[2] - 15]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 6, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 12, position[1]-0.04, position[2] - 3]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 12, position[1]-0.04, position[2] - 9]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 12, position[1]-0.04, position[2] - 15]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 12, position[1]-0.04, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_1 position={[position[0] - 12, position[1]-0.14, position[2] - 3]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 12, position[1]-0.14, position[2] - 9]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 12, position[1]-0.14, position[2] - 15]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_1 position={[position[0] - 12, position[1]-0.14, position[2] - 18]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_1 position={[position[0] - 5.9, position[1]-0.04, position[2] - 33]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 11.9, position[1]-0.04, position[2] - 33]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 17.9, position[1]-0.04, position[2] - 33]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 41.9, position[1]-0.04, position[2] - 33]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 47.9, position[1]-0.04, position[2] - 33]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 53.9, position[1]-0.04, position[2] - 33]} rotation={[0, 0, 0]} />
 
-    <Border_1 position={[position[0] - 5.9, position[1]-0.14, position[2] - 33]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 11.9, position[1]-0.14, position[2] - 33]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 17.9, position[1]-0.14, position[2] - 33]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 41.9, position[1]-0.14, position[2] - 33]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 47.9, position[1]-0.14, position[2] - 33]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 53.9, position[1]-0.14, position[2] - 33]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 47.9, position[1]-0.04, position[2] - 27]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 48, position[1]-0.04, position[2] - 24]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 48, position[1]-0.04, position[2] + 3]} rotation={[0, 0, 0]} />
 
-    <Border_1 position={[position[0] - 47.9, position[1]-0.14, position[2] - 27]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 48, position[1]-0.14, position[2] - 24]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 48, position[1]-0.14, position[2] + 3]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 18, position[1]-0.04, position[2] + 3]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 24, position[1]-0.04, position[2] + 3]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 30, position[1]-0.04, position[2] + 3]} rotation={[0, 0, 0]} />
+    <Border_1 position={[position[0] - 36, position[1]-0.04, position[2] + 3]} rotation={[0, 0, 0]} />
 
-    <Border_1 position={[position[0] - 18, position[1]-0.14, position[2] + 3]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 24, position[1]-0.14, position[2] + 3]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 30, position[1]-0.14, position[2] + 3]} rotation={[0, 0, 0]} />
-    <Border_1 position={[position[0] - 36, position[1]-0.14, position[2] + 3]} rotation={[0, 0, 0]} />
+    <Border_2 position={[position[0] + 0.1, position[1]-0.04, position[2] - 30]} rotation={[0, 0, 0]} />
+    <Border_2 position={[position[0] - 6.1, position[1]-0.04, position[2] - 24]} rotation={[0, 0, 0]} />
+    <Border_2 position={[position[0] - 11.9, position[1]-0.04, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_2 position={[position[0] + 0.1, position[1]-0.14, position[2] - 30]} rotation={[0, 0, 0]} />
-    <Border_2 position={[position[0] - 6.1, position[1]-0.14, position[2] - 24]} rotation={[0, 0, 0]} />
-    <Border_2 position={[position[0] - 11.9, position[1]-0.14, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
-
-    <Border_2 position={[position[0] -35.9, position[1]-0.14, position[2] - 30]} rotation={[0, 0, 0]} />
-    <Border_2 position={[position[0] -60.1, position[1]-0.14, position[2] - 30]} rotation={[0, Math.PI / 2, 0]} />
-    <Border_2 position={[position[0] -42.1, position[1]-0.14, position[2] - 24]} rotation={[0, 0, 0]} />
-    <Border_2 position={[position[0] -53.9, position[1]-0.14, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_2 position={[position[0] -35.9, position[1]-0.04, position[2] - 30]} rotation={[0, 0, 0]} />
+    <Border_2 position={[position[0] -60.1, position[1]-0.04, position[2] - 30]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_2 position={[position[0] -42.1, position[1]-0.04, position[2] - 24]} rotation={[0, 0, 0]} />
+    <Border_2 position={[position[0] -53.9, position[1]-0.04, position[2] - 24]} rotation={[0, Math.PI / 2, 0]} />
 
     {/* <Border_2 position={[position[0] -17.9, position[1]-0.14, position[2]]} rotation={[0, -Math.PI / 2, 0]} /> */}
-    <Border_2 position={[position[0] -24.1, position[1]-0.14, position[2]-6]} rotation={[0, -Math.PI / 2, 0]} />
+    <Border_2 position={[position[0] -24.1, position[1]-0.04, position[2]-6]} rotation={[0, -Math.PI / 2, 0]} />
 
-    <Border_2 position={[position[0] -29.9, position[1]-0.14, position[2]-6]} rotation={[0, Math.PI, 0]} />
+    <Border_2 position={[position[0] -29.9, position[1]-0.04, position[2]-6]} rotation={[0, Math.PI, 0]} />
     {/* <Border_2 position={[position[0] -36.1, position[1]-0.14, position[2]]} rotation={[0, Math.PI, 0]} /> */}
 
-    <Border_5 position={[position[0] -9, position[1]-0.14, position[2]-21]} rotation={[0, 0, 0]} />
-    <Border_5 position={[position[0] -9, position[1]-0.14, position[2]-21]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_5 position={[position[0] -9, position[1]-0.04, position[2]-21]} rotation={[0, 0, 0]} />
+    <Border_5 position={[position[0] -9, position[1]-0.04, position[2]-21]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_5 position={[position[0] -45, position[1]-0.14, position[2]-21]} rotation={[0, 0, 0]} />
-    <Border_5 position={[position[0] -51, position[1]-0.14, position[2]-21]} rotation={[0, Math.PI / 2, 0]} />
+    <Border_5 position={[position[0] -45, position[1]-0.04, position[2]-21]} rotation={[0, 0, 0]} />
+    <Border_5 position={[position[0] -51, position[1]-0.04, position[2]-21]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Border_5 position={[position[0] -9, position[1]-0.14, position[2]]} rotation={[0, Math.PI, 0]} />
-    <Border_5 position={[position[0] -9, position[1]-0.14, position[2]]} rotation={[0, -Math.PI / 2, 0]} />
+    <Border_5 position={[position[0] -9, position[1]-0.04, position[2]]} rotation={[0, Math.PI, 0]} />
+    <Border_5 position={[position[0] -9, position[1]-0.04, position[2]]} rotation={[0, -Math.PI / 2, 0]} />
 
-    <Border_5 position={[position[0] - 51, position[1]-0.14, position[2]]} rotation={[0, Math.PI, 0]}/>
-    <Border_5 position={[position[0] - 45, position[1]-0.14, position[2]]} rotation={[0, -Math.PI / 2, 0]}/>
+    <Border_5 position={[position[0] - 51, position[1]-0.04, position[2]]} rotation={[0, Math.PI, 0]}/>
+    <Border_5 position={[position[0] - 45, position[1]-0.04, position[2]]} rotation={[0, -Math.PI / 2, 0]}/>
 
     <Fence2 position={[position[0] - 6.5, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
     <Fence2 position={[position[0] - 10, position[1], position[2] + 9]} rotation={[0, 0, 0]} />
