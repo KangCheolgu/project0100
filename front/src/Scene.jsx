@@ -244,7 +244,7 @@ export default function Scene() {
           shadow-camera-right={100}
           shadow-mapSize-height={512*4}
           shadow-mapSize-width={512*4}
-          position={[30, 60, -30]}
+          position={[30, 60, -100]}
           color="#ffffff"
         />
         {/*DirectionalLight & Camera Helper*/}
@@ -268,7 +268,7 @@ export default function Scene() {
               ))
             }
   
-              
+                                                          
             {/* <Ground /> */}
             {isObstacleStarted && (
             <>
