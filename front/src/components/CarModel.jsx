@@ -10,7 +10,7 @@ export function CarModel(props) {
   const { nodes, materials } = useGLTF('/assets/models/ToyCar-red.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Formula.geometry} material={materials.toy_Cars_color_01} position={[0, -0.1, 0]} rotation={[Math.PI / 2, 0, Math.PI]} scale={0.0017}>
+      <mesh castShadow receiveShadow geometry={nodes.Formula.geometry} material={materials.toy_Cars_color_01} position={[0, -0.1, 0]} rotation={[Math.PI / 2, 0, Math.PI]} scale={0.0017}>
       </mesh>
     </group>
   )

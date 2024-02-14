@@ -7,11 +7,13 @@ import { Palm_1, Palm_2, Palm_3, Palm_4, Palm_5, Clumb_1, Clumb_2, Clumb_3, Clum
 import { BasketballCourt } from "../components/resort/Basketball.jsx";
 import { Metalfence } from "../components/resort/Metalfence.jsx";
 import { Bridge } from "../components/resort/Bridge.jsx";
+import { StoneWall } from "../components/StoneWall.jsx";
 
 export default function Section1(props){
     const position = props.position || [60, 0, -60]
 
-    return(<group castShadow receiveShadow >
+    return(
+    <group castShadow receiveShadow >
 
     <Bridge position={[position[0], position[1]-6, position[2] + 43]} rotation={[0, -Math.PI/2 , 0]} />
     <Bridge position={[position[0], position[1]-6, position[2] + 18]} rotation={[0, -Math.PI/2 , 0]} />
@@ -372,6 +374,9 @@ export default function Section1(props){
     <Fence2 position={[position[0] - 45, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
     <Fence2 position={[position[0] - 53, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
     <Fence2 position={[position[0] - 64, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
+
+    <StoneWall position={[position[0] - 30, position[1]- 22.5, position[2] + 5]} rotation={[0, 0, 0]} />
+    <StoneWall position={[position[0] - 30, position[1]- 22.5, position[2] + 65]} rotation={[0, 0, 0]} />
 
     </group>
     );
