@@ -550,3 +550,17 @@ export function CrabObstacle(props){
     </mesh>
   )
 }
+
+export function Brick(){
+  const Box = useBox(() =>({
+    mass: 1,
+    args: [1,0.7,0.5],
+    position: [0,0,0]
+  }))
+
+  return(
+    <mesh ref={Box}>
+      <meshStandardMaterial/>
+    </mesh>
+  )
+}
