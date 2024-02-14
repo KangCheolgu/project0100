@@ -10,17 +10,19 @@ import { socket } from "./lobby/lobby.jsx";
 
 export default function Interface(){
 
-    const lapse = useRef()
-    const time = useRef()
-    const endtime = useRef()
-    const forward = useKeyboardControls((state)=>state.forward) 
-    const backward = useKeyboardControls((state)=>state.backward)
-    const leftward = useKeyboardControls((state)=>state.leftward)
-    const rightward = useKeyboardControls((state)=>state.rightward)
-    const restart = useGame((state)=> state.restart)
-    const phase = useGame((state)=> state.phase)
-    let count = useGame((state)=> state.count)
-    let elapsedTime = 0
+    const lapse = useRef();
+    const time = useRef();
+    const endtime = useRef();
+    const forward = useKeyboardControls((state) => state.forward);
+    const backward = useKeyboardControls((state) => state.backward);
+    const leftward = useKeyboardControls((state) => state.leftward);
+    const rightward = useKeyboardControls((state) => state.rightward);
+    const shift = useKeyboardControls((state) => state.shift);
+    const space = useKeyboardControls((state) => state.space);
+    const restart = useGame((state) => state.restart);
+    const phase = useGame((state) => state.phase);
+    let count = useGame((state) => state.count);
+    let elapsedTime = 0;
 
     // 유저 목록을 받아서 목록에 추가해줌
     const [players, setPlayers] = useState([])
@@ -34,41 +36,40 @@ export default function Interface(){
             setSpectators(roomData.spectators)
         }
 
-        socket.on("updatePlayers", onPlayers)
+        socket.on("updatePlayers", onPlayers);
 
-        const unsubscribeEffect = addEffect(()=>
-        {
-            const state = useGame.getState()
-            
-            let newLapse = state.lapse
-            if(state.phase ==='playing')
-                elapsedTime = Date.now() - state.startTime
-            else if(state.phase==='ended'){
-                elapsedTime = state.endTime-state.startTime
+        const unsubscribeEffect = addEffect(() => {
+            const state = useGame.getState();
+
+            let newLapse = state.lapse;
+            if (state.phase === 'playing')
+                elapsedTime = Date.now() - state.startTime;
+            else if (state.phase === 'ended') {
+                elapsedTime = state.endTime - state.startTime;
             }
-            elapsedTime /= 1000
-            elapsedTime = elapsedTime.toFixed(3)
+            elapsedTime /= 1000;
+            elapsedTime = elapsedTime.toFixed(3);
 
-            if(time.current)
-                time.current.textContent = elapsedTime
-            if(lapse.current)
-                lapse.current.textContent = newLapse+"/2"
-                
-        })
-        
+            if (time.current)
+                time.current.textContent = elapsedTime;
+            if (lapse.current)
+                lapse.current.textContent = newLapse + "/2";
+
+        });
+
         socket.on("rankingChange", (rankingData) => {
-            if(rankingData === "호스트가1등") {
-                setRanking("1등")
+            if (rankingData === "호스트가1등") {
+                setRanking("1등");
             } else {
-                setRanking("2등")
+                setRanking("2등");
             }
-        })
+        });
 
-        return ()=>{
-            unsubscribeEffect()
+        return () => {
+            unsubscribeEffect();
             socket.off("rankingChange");
-        }
-    }, [])
+        };
+    }, []);
 
     const controls = useKeyboardControls((state)=>state)
     const isSpectator = spectators.some(spectator => spectator.id === socket.id);
@@ -136,15 +137,19 @@ export default function Interface(){
 
       {/* 플레이어 한테만 보이는 키보드 조작 UI */}
       {!isSpectator && (
-          <div className="controls">
-          <div className="raw">
-              <div className={`key ${forward ? 'active' : '' }`}></div>
-          </div>
-          <div className="raw">
-              <div className={`key ${leftward ? 'active' : '' }`}></div>
-              <div className={`key ${backward ? 'active' : '' }`}></div>
-              <div className={`key ${rightward ? 'active' : '' }`}></div>
-          </div>
+            <div className="controls">
+            <div className="raw">
+                <div className={`key ${forward ? 'active' : '' }`}></div>
+            </div>
+            <div className="raw">
+                <div className={`key ${leftward ? 'active' : '' }`}></div>
+                <div className={`key ${backward ? 'active' : '' }`}></div>
+                <div className={`key ${rightward ? 'active' : '' }`}></div>
+            </div>
+            <div className="raw">
+                <div className={`key ${shift ? 'active' : ''} large`}></div> {/* shift 키에 large 클래스 추가 */}
+                <div className={`key ${space ? 'active' : ''} large`}></div> {/* 스페이스 바에 large 클래스 추가 */}
+            </div>
       </div>
       )}
       {/* Controls */}

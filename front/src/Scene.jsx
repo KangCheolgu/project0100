@@ -1,9 +1,9 @@
-import { Canvas, useThree, extend } from "@react-three/fiber";
+import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
 import { Physics, Debug } from "@react-three/cannon";
-import Car from "./Car.jsx";
+import Car_App from "./Car.jsx";
 import io from "socket.io-client"
-import { useState, useEffect, useRef, React, Suspense } from "react";
-import { OrbitControls, useProgress, Stats } from '@react-three/drei';
+import { useState, useEffect, useRef, React, Suspense, useLayoutEffect } from "react";
+import { OrbitControls, useProgress, Stats, PerspectiveCamera } from '@react-three/drei';
 import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
@@ -11,22 +11,31 @@ import BgmSound from "./sound/BgmSound.jsx";
 import LoadingPage from "./utils/Loading.jsx";
 import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
-import ColliderWall from "./ColliderWall.jsx"
+import ColliderWall from "./Map1/ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle, CrabObstacle} from "./components/MoveObstacle.jsx";
 import Countdown from "./sound/CountDown.jsx";
 import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
 import { socket } from "./lobby/lobby.jsx";
-import * as THREE from 'three'
 import Spectator from "./Spectator.jsx";
+import Water from "./Water.jsx";
+import * as THREE from "three";
+import Interaface2 from "./Interface2.jsx";
+import Sand from "./Sand.jsx";
+import { ResortOcean } from "./components/ResortOcean.jsx";
+import { ResortOceanSmall } from "./components/ResortOceanSmall.jsx";
+import { Background } from "./components/Background.jsx";
+import { gsap } from "gsap";
+import Wall from "./Map2/ColliderWall_Map2.jsx";
+import Light from "./Light.jsx";
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
 export default function Scene() {
-
+  const ocean = useRef();
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
   const [spectators, setSpectators] = useState([])
@@ -186,20 +195,54 @@ export default function Scene() {
 
   socket.on("clientCount",(serverTimeStart)=>{
     //서버시간 받으면
-    const timeoutDuration = 5000
-    //5초 뒤에 장애물 시작
+    const serverTimeNow = new Date(serverTimeStart).getTime() //서버로부터 시간 가져옴
+    const ClientTime = new Date().getTime() //현재 클라이언트 시간 가져옴
+    const timeDifference = serverTimeNow - ClientTime
+    
+    const ObstacleStart = 7000 + timeDifference
+
     setTimeout(()=>{
       setIsObstacleStarted(true)
-    }, timeoutDuration)
+    }, ObstacleStart)
   })
+
+  {/* Background */}
+  const tl = useRef();
+  const backgroundColors = useRef({
+    colorA: "#00d5ff",
+    colorB: "#abaadd",
+  })
+  useLayoutEffect(()=>{
+    tl.current =gsap.timeline();
+
+    tl.current.to(backgroundColors.current, {
+      duration: 30,
+      colorA: "#6f35cc",
+      colorB: "#ffad30",
+    });
+    tl.current.to(backgroundColors.current, {
+      duration: 20,
+      colorA: "#f25235",
+      colorB: "#ffcc00",
+    });
+    tl.current.to(backgroundColors.current, {
+      duration: 20,
+      colorA: "#81318b",
+      colorB: "#55ab8f",
+    });
+  }, []);
   
+
   return (
     <>
       <Interface />
       <BgmSound />
-      <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}} style={{zIndex:'0'}}>
-        <ambientLight intensity={3} color="#fff7e6"/>
-        {/*position={[0, 5, 5]}*/}
+      <Canvas shadows>
+        <PerspectiveCamera position={[1.5, 8, 4]} fov={75} makeDefault/>
+        <Background backgroundColors={backgroundColors}/>
+        <Sand/>
+        <ambientLight intensity={2} color="#fff7e6"/>
+        
         <directionalLight
           castShadow
           intensity={4}
@@ -209,38 +252,46 @@ export default function Scene() {
           shadow-camera-right={100}
           shadow-mapSize-height={512*4}
           shadow-mapSize-width={512*4}
-          position={[30, 20, -30]}
+          position={[30, 60, -30]}
           color="#ffffff"
         />
         <SkyCube scale={100} position={[30, 0, -50]}/>
+        {/*DirectionalLight & Camera Helper*/}
+        {/*<Light/>*/}
         
         {/* <OrbitControls /> */}
         <Stats/>
-        <Physics gravity={[0, -2.6, 0]}>
+        <Physics gravity={[0, -3, 0]}>
           <Debug>
-            <axesHelper/>
-          <axesHelper/>
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
-              {/*<Ground rotation={[Math.PI/2, 0, 0]}/>*/}
               <Map1 position={[0, 0, 0]}/>
-              <Map2 position={[0, 0, -60]}/>
+              {/*<ResortOcean scale={[0.2,0.2, 0.2]} position={[30,3, 100]} rotation={[-Math.PI/20, 0, 0]}/>
+              <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>*/}
+              <Map2 position={[0, 0, -94]}/>
+              <Wall />
             
             {
               players.map((player, index) => (
-                <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
+                <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
             }
+  
+              
             {/* <Ground /> */}
-            {/* <Library position={[-40, 0, 39]}/> */}
             {isObstacleStarted && (
             <>
             {/* 장애물 배치 */}
-            <SpinObstacle/>
-            <LeftAndRightObstacle/>
-            <LeftRightObstacle/>
-            <UpDownObstacle/>
-            {/* <ShutterObstacle/> */}
+            <SpinObstacle position={[25,0.5,-28]} offset={3}/>
+            <SpinObstacle position={[27,0.5,-97]} offset={4}/>
+            {/* <LeftAndRightObstacle/> */}
+            <ShutterObstacle/>
+            <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
+            <CarGreenObstacle/>
+            {/* <MotorObstacle/> */}
+            <CrabObstacle position ={[7,0,0]} offset={32} />
+            <CrabObstacle position={[-7,0,0]} offset={32}/>
+            <CrabObstacle position={[0,0,0]} offset={38}/>
             </>
             )}
             
