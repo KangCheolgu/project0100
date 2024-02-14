@@ -343,10 +343,12 @@ const Car = ({ cameraGroup, ...props }) => {
       <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
       <Timer />
-         <Html>
-        <Needle socket={socket} props={props} currentSpeed={currentSpeed} />
-        <Speedometer socket={socket} props={props} currentSpeed={currentSpeed} />
-        {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
+       <Html>
+        <div style={{position: 'fixed', border: '3px solid', width: window.screen.width/2 , height: window.screen.height/2 }}>
+          <Needle socket={socket} props={props} currentSpeed={currentSpeed} />
+          <Speedometer socket={socket} props={props} currentSpeed={currentSpeed} />
+        </div>
+          {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
     </group>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 function Needle({ socket, props, currentSpeed }) {
     const maxSpeed = 70;
     // useState to manage the angle state
-    const [angle, setAngle] = useState((currentSpeed / maxSpeed) * 100 - 10);
+    const [angle, setAngle] = useState((currentSpeed / maxSpeed) * 90 - 10);
     const [color, setColor] = useState('white'); // 초기 색상 white
 
     // useEffect to update the angle smoothly upon currentSpeed change
@@ -16,7 +16,7 @@ function Needle({ socket, props, currentSpeed }) {
         if (currentSpeed >= 50) {
             setColor('#FF6666');
         } else {
-            setColor('white'); 
+            setColor('white');
         }
     }, [currentSpeed]);
 
@@ -28,8 +28,8 @@ function Needle({ socket, props, currentSpeed }) {
                     height: '15px',
                     backgroundColor: color,
                     position: 'absolute',
-                    top: '530px',
-                    left: '660px',
+                    bottom: '20%',
+                    right: '15%',
                     transform: `translate(-50%, -50%) rotate(${angle}deg)`,
                     transformOrigin: '250px 50%',
                     clipPath: 'polygon(60% 0, 100% 50%, 60% 100%, 0 50%)',
