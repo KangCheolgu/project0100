@@ -1,5 +1,4 @@
 import { Canvas, useThree, extend } from "@react-three/fiber";
-
 import { Physics, Debug } from "@react-three/cannon";
 import Car from "./Car.jsx";
 import io from "socket.io-client"
@@ -21,6 +20,8 @@ import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
 import { socket } from "./lobby/lobby.jsx";
+import * as THREE from 'three'
+import Spectator from "./Spectator.jsx";
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
@@ -28,6 +29,7 @@ export default function Scene() {
 
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
+  const [spectators, setSpectators] = useState([])
 
   // 상태 체크하여 
   const [state, setState] = useState(false)
@@ -113,12 +115,12 @@ export default function Scene() {
   // 유저 접속 관련
   useEffect(() => {
     // 접속한 유저 목록 갱신
-    function onPlayers(backEndPlayers){ 
-      console.log(backEndPlayers);
-      const playersArray = Object.values(backEndPlayers);
-      setPlayers(playersArray)
+    function onPlayers(roomData){ 
+      console.log(roomData);
+      setPlayers(roomData.players)
+      setSpectators(roomData.spectators)
     }
-
+    
     // 내가 설정한 최대 인원 숫자와 현재 인원이 같으면 핑체크 시작
     socket.on("clientCount", () => {
         console.log("클라이언트 카운트다운");
@@ -136,7 +138,6 @@ export default function Scene() {
 
      // 스타트 시그널을 받으면 
     socket.on("startSignal", (allPings)=>{
-
       // 상대핑의 평균을 구하여 
       const allPingsArray = Object.values(allPings);
       const opponentPingData = allPingsArray.find(ping => ping.id !== socket.id);
@@ -153,8 +154,7 @@ export default function Scene() {
     // socket.on("timeCheck", (serverTimeStart)=>{
     //   console.log("in time check");
     // })
-    
-    
+
     //유저 업데이트
     socket.on("updatePlayers", onPlayers)
 
@@ -195,9 +195,9 @@ export default function Scene() {
   
   return (
     <>
-      <Interface players={players}/>
+      <Interface />
       <BgmSound />
-      <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}}>
+      <Canvas shadows camera={{ fov:75, position:[1.5, 8, 4]}} style={{zIndex:'0'}}>
         <ambientLight intensity={3} color="#fff7e6"/>
         {/*position={[0, 5, 5]}*/}
         <directionalLight
@@ -212,32 +212,9 @@ export default function Scene() {
           position={[30, 20, -30]}
           color="#ffffff"
         />
-          {/* castShadow
-          intensity={4}
-          shadow-camera-top={100}
-          shadow-camera-bottom={-400}
-          shadow-camera-left={-100}
-          shadow-camera-right={400}
-          shadow-mapSize-height={512*4}
-          shadow-mapSize-width={512*4}
-          shadow-camera-bias={-0.002}
-          position={[30, 60, -30]}
-          color="#edd59e"
-        >
-        </directionalLight> */}
-  {/*castShadow
-    intensity={4}
-    shadow-camera-top={1000}
-    shadow-camera-xbottom={-1000}
-    shadow-camera-left={-100}
-    shadow-camera-right={100}
-    shadow-mapSize-height={512*4}
-    shadow-mapSize-width={512*4}
-    position={[30, 20, -30]}
-    color="#ffffff" */}
         <SkyCube scale={100} position={[30, 0, -50]}/>
         
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         <Stats/>
         <Physics gravity={[0, -2.6, 0]}>
           <Debug>
@@ -252,7 +229,6 @@ export default function Scene() {
             {
               players.map((player, index) => (
                 <Car id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
-                
               ))
             }
             {/* <Ground /> */}
@@ -271,6 +247,9 @@ export default function Scene() {
             </Suspense>
          </Debug>
         </Physics>
+        {spectators.map((spectator, index) => (
+          <Spectator id={spectator.id} key={index} position={spectator.position} />
+        ))}
       </Canvas>
     </>
   );

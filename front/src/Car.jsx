@@ -1,6 +1,6 @@
 import { useCompoundBody, useRaycastVehicle } from "@react-three/cannon";
 import { useEffect, useMemo, useRef, useState, Suspense } from "react";
-import { Html } from '@react-three/drei'
+import { Html, PerspectiveCamera } from '@react-three/drei'
 import { useControls } from "leva";
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
@@ -19,6 +19,19 @@ import engineSoundFile from './sound/engines/1/low_on.wav';
 let checkPointIndex = 0
 
 const Car = (props) => {
+  // const [myPing, setMyPing] = useState(0)
+  // const [oppoPing, setOppoPing] = useState(0)
+
+  // useEffect(() => {``
+  //   socket.on("startSignal", (allPings)=>{
+  //     const allPingsArray = Object.values(allPings);
+  //     const opponentPingData = allPingsArray.find(ping => ping.id !== socket.id);
+  //     const myPingData = allPingsArray.find(ping => ping.id === socket.id);
+  //     setMyPing(myPingData.ping)
+  //     setOppoPing(opponentPingData.ping)
+  //   })
+  // },[myPing, oppoPing])
+  
   // 체크포인트 위치
   // const spot = [{x: -32, y: 0, z:-13},
   //   {x: -1, y: 0, z:-17},
@@ -179,7 +192,7 @@ const Car = (props) => {
       const cpZ = parseFloat(bodyPosition.z.toFixed(4))
 
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
-
+      console.log(bodyRotation);
       // 카메라의 상대 위치 (자동차 뒷부분에서의 상대 위치)
       const relativeCameraPosition = new THREE.Vector3(0, 0.5, 0.9);
 
@@ -247,14 +260,7 @@ const Car = (props) => {
   });
 
   useEffect(() => {
-    // const unsubscribeReset = useGame.subscribe(
-    //   (state) => state.phase,
-    //   (value) =>
-    //   {
-    //     if(value === 'ready')
-    //       reset()
-    //   }
-    // )
+
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
 
@@ -414,7 +420,8 @@ const Car = (props) => {
           quaternion: bodyQuaternion,
           velocity: newVelocity,
           acceleration: newAcceleration,
-          checkPointIndex: checkPointIndex
+          checkPointIndex: checkPointIndex,
+          index: props.index
         };
         socket.emit("currentState", currentState);
       }
@@ -437,6 +444,13 @@ const Car = (props) => {
         {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
         {/* style={{position: "absolute", top: imagePosition.y, left: imagePosition.x}}/>} */}
       </Html>
+
+      <PerspectiveCamera
+        position={[position.x, position.y + 10, position.z - 10]}
+        rotation={rotation}
+        fov={75}
+      />
+
     </group>
 
   )
