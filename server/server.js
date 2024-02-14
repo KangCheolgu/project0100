@@ -6,6 +6,7 @@ import cors from "cors"
 import axios from "axios";
 import passport from "passport"
 import bodyParser from "body-parser"
+import { isKeyObject } from "util/types";
 // import {fileURLToPath} from 'url';
 // import path from "path";
 // const __dirname = fileURLToPath(path.dirname(import.meta.url));
@@ -131,7 +132,7 @@ io.on('connection', (socket) => {
         rooms[roomName].players.push(player);
       }  
     }
-
+    // 관전자로 입장했을때
     if(type === 1) {
       if (rooms[roomName].spectators.length >= 1) {
         // 최대 인원 초과 메시지 전송
@@ -149,8 +150,8 @@ io.on('connection', (socket) => {
       };
 
       // 이미 같은 유저가 있는지 확인
-      const existingPlayer = rooms[roomName].spectators.find(p => p.id === socket.id);
-      if (!existingPlayer) {
+      const existingSpectator = rooms[roomName].spectators.find(p => p.id === socket.id);
+      if (!existingSpectator) {
         rooms[roomName].spectators.push(spectator);
       } 
     }
@@ -179,18 +180,14 @@ io.on('connection', (socket) => {
       console.log("startGame 받음");
       console.log(rooms[roomName].players);
       // 해당 방의 플레이어 정보 업데이트
-      io.to(roomName).emit("updatePlayers", rooms[roomName].players);
+      io.to(roomName).emit("updatePlayers", rooms[roomName]);
 
-      // 원하는 클라이언트 수와 배열 수 같으면 서버 시간을 보냄
-      console.log(rooms[roomName].players.length);
+      // 원하는 플레이어 수와 배열 수 같으면 서버 시간을 보냄
       if (rooms[roomName].players.length === numClients) {
         const serverTimeStart = Date.now();
         console.log("server Time: ", serverTimeStart);
         io.to(roomName).emit("clientCount", serverTimeStart);
       }
-
-      // new player update
-      io.to(roomName).emit('updatePlayers', rooms[roomName].players);
 
       // 각 소켓에서 보낸 위치 정보를 받고 다른 유저에게 전달
       socket.on('currentState', (data) => {
@@ -199,6 +196,7 @@ io.on('connection', (socket) => {
         // io.emit('updateAnotherPlayer', "data")
       });
 
+      // 플레이어와 관전자 모두가 핑 체크함
       socket.on("ping", (callback) => {
         callback();
       });
@@ -213,7 +211,6 @@ io.on('connection', (socket) => {
             id: socket.id,
             ping: averagePing,
         };
-        
       
         console.log(rooms[roomName].allPings);
         //상대방에게 핑데이터 보냄 이는 Scene.jsx 에서 받을거임
@@ -235,6 +232,23 @@ io.on('connection', (socket) => {
       socket.on("overtaken", () => {
         io.to(roomName).emit("rankingChange", "호스트가2등");
       });
+
+      // 카메라 컨트롤 구역
+      socket.on("prevCameraButton", () => {
+        console.log('prev');
+        io.to(roomName).emit("prevCameraMove")
+      })
+      socket.on("1pCameraButton", () => {
+        io.to(roomName).emit("1pCameraMove")
+      })
+      socket.on("2pCameraButton", () => {
+        io.to(roomName).emit("2pCameraMove")
+      })
+      socket.on("nextCameraButton", () => {
+        console.log('next');
+        io.to(roomName).emit("nextCameraMove")
+      })
+      
     })
     // 플레이어가 방을 나갈 때
     socket.on("leaveRoom", (roomName) => {
@@ -260,7 +274,7 @@ io.on('connection', (socket) => {
           // 해당 방에서 플레이어를 제거합니다.
           rooms[roomName].players = rooms[roomName].players.filter(player => player.id !== socket.id);
           // 해당 방의 플레이어 정보 업데이트를 방에 속한 모든 클라이언트에게 전송합니다.
-          io.to(roomName).emit("updatePlayers", rooms[roomName].players);
+          io.to(roomName).emit("updatePlayers", rooms[roomName]);
       }
     });
 
