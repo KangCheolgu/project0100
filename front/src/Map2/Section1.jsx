@@ -12,7 +12,8 @@ import { StoneWall } from "../components/StoneWall.jsx";
 export default function Section1(props){
     const position = props.position || [60, 0, -60]
 
-    return(<group castShadow receiveShadow >
+    return(
+    <group castShadow receiveShadow >
 
     <Bridge position={[position[0], position[1]-6, position[2] + 43]} rotation={[0, -Math.PI/2 , 0]} />
     <Bridge position={[position[0], position[1]-6, position[2] + 18]} rotation={[0, -Math.PI/2 , 0]} />

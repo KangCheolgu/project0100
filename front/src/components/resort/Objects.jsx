@@ -11,9 +11,9 @@ export function TrashCan(props) {
   return (
     <group {...props} dispose={null}>
       <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.cap_1.geometry} material={materials.Trash_cans} position={[-63, -59.451, -172.053]} />
-        <mesh geometry={nodes.cap_2.geometry} material={materials.Trash_cans} position={[63, -59.451, -172.053]} />
-        <mesh geometry={nodes.Trash_can_large.geometry} material={materials.Trash_cans} />
+        <mesh castShadow receiveShadow geometry={nodes.cap_1.geometry} material={materials.Trash_cans} position={[-63, -59.451, -172.053]} />
+        <mesh castShadow receiveShadow geometry={nodes.cap_2.geometry} material={materials.Trash_cans} position={[63, -59.451, -172.053]} />
+        <mesh castShadow receiveShadow geometry={nodes.Trash_can_large.geometry} material={materials.Trash_cans} />
       </group>
     </group>
 
@@ -24,7 +24,7 @@ export function WallClumb(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Wall_clumb.geometry} material={materials.Wall_clumb} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Wall_clumb.geometry} material={materials.Wall_clumb} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
   )
@@ -34,7 +34,7 @@ export function Umbrella(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Umbrella.geometry} material={materials.Umbrella_Chair_Table} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Umbrella.geometry} material={materials.Umbrella_Chair_Table} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
   )
@@ -43,8 +43,7 @@ export function TrashBag(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-            <mesh geometry={nodes.Trash_bag.geometry} material={materials.Trash_bag} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-
+        <mesh castShadow receiveShadow geometry={nodes.Trash_bag.geometry} material={materials.Trash_bag} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
   )
@@ -54,15 +53,15 @@ export function TrafficLight(props) {
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Traffic_Light_1.geometry} material={materials.Traffic_Light} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Green.geometry} material={materials.Light_Green} />
-        <mesh geometry={nodes.Pedestrian_Green.geometry} material={materials.Light_P_Green} />
-        <mesh geometry={nodes.Pedestrian_Red.geometry} material={materials.Light_P_Red} />
-        <mesh geometry={nodes.Red.geometry} material={materials.Light_Red} />
-        <mesh geometry={nodes.Sign_1__1_.geometry} material={materials.Road_Signs} position={[-5, 0, -378.2]} rotation={[0, 0, Math.PI / 2]} scale={[1, 0.45, 1]} />
-        <mesh geometry={nodes.Sign_1__2_.geometry} material={materials.Road_Signs} position={[5, 0, -378.2]} rotation={[0, 0, -Math.PI / 2]} scale={[1, 0.45, 1]} />
-        <mesh geometry={nodes.Sign_2__1_.geometry} material={materials.Road_Signs} position={[-2.5, -40.1, -180]} rotation={[0, 0, Math.PI / 2]} scale={[1, 0.45, 1]} />
-        <mesh geometry={nodes.Sign_2__2_.geometry} material={materials.Road_Signs} position={[2.5, -40.1, -180]} rotation={[0, 0, -Math.PI / 2]} scale={[1, 0.45, 1]} />
-        <mesh geometry={nodes.Yellow.geometry} material={materials.Light_Yellow} />
+        <mesh castShadow receiveShadow geometry={nodes.Green.geometry} material={materials.Light_Green} />
+        <mesh castShadow receiveShadow geometry={nodes.Pedestrian_Green.geometry} material={materials.Light_P_Green} />
+        <mesh castShadow receiveShadow geometry={nodes.Pedestrian_Red.geometry} material={materials.Light_P_Red} />
+        <mesh castShadow receiveShadow geometry={nodes.Red.geometry} material={materials.Light_Red} />
+        <mesh castShadow receiveShadow geometry={nodes.Sign_1__1_.geometry} material={materials.Road_Signs} position={[-5, 0, -378.2]} rotation={[0, 0, Math.PI / 2]} scale={[1, 0.45, 1]} />
+        <mesh castShadow receiveShadow geometry={nodes.Sign_1__2_.geometry} material={materials.Road_Signs} position={[5, 0, -378.2]} rotation={[0, 0, -Math.PI / 2]} scale={[1, 0.45, 1]} />
+        <mesh castShadow receiveShadow geometry={nodes.Sign_2__1_.geometry} material={materials.Road_Signs} position={[-2.5, -40.1, -180]} rotation={[0, 0, Math.PI / 2]} scale={[1, 0.45, 1]} />
+        <mesh castShadow receiveShadow geometry={nodes.Sign_2__2_.geometry} material={materials.Road_Signs} position={[2.5, -40.1, -180]} rotation={[0, 0, -Math.PI / 2]} scale={[1, 0.45, 1]} />
+        <mesh castShadow receiveShadow geometry={nodes.Yellow.geometry} material={materials.Light_Yellow} />
       </mesh>
 
     </group>
@@ -74,7 +73,7 @@ export function UmbrellaChairTable(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Table.geometry} material={materials.Umbrella_Chair_Table} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Table.geometry} material={materials.Umbrella_Chair_Table} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
   )
@@ -84,7 +83,7 @@ export function SignPizza(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Sign_pizza.geometry} material={materials.Signboards} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Sign_pizza.geometry} material={materials.Signboards} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
   )
@@ -93,7 +92,7 @@ export function SignOpen(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-            <mesh geometry={nodes.Sign_open.geometry} material={materials.Signboards} position={[0, 0 ,0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Sign_open.geometry} material={materials.Signboards} position={[0, 0 ,0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
   )
@@ -102,7 +101,7 @@ export function SignHotel2(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Sign_hotel_2.geometry} material={materials.Signboards} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Sign_hotel_2.geometry} material={materials.Signboards} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
   )
@@ -111,7 +110,7 @@ export function SignHotel1(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Sign_hotel_1.geometry} material={materials.Signboards} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Sign_hotel_1.geometry} material={materials.Signboards} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
   )
@@ -120,8 +119,7 @@ export function SignCoffee(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-            <mesh geometry={nodes.Sign_coffee_house.geometry} material={materials.Signboards} position={[0, 0 ,0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-
+      <mesh castShadow receiveShadow geometry={nodes.Sign_coffee_house.geometry} material={materials.Signboards} position={[0, 0 ,0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
   )
@@ -130,8 +128,8 @@ export function RoadPillarCaution(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Road_Pillar_2.geometry} material={materials.Traffic_Light} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Sign_1.geometry} material={materials.Road_Signs} position={[0, 0, 0]} scale={[1, 0.5, 1]} />
+      <mesh castShadow receiveShadow geometry={nodes.Road_Pillar_2.geometry} material={materials.Traffic_Light} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh castShadow receiveShadow geometry={nodes.Sign_1.geometry} material={materials.Road_Signs} position={[0, 0, 0]} scale={[1, 0.5, 1]} />
       </mesh>
 
     </group>
@@ -141,8 +139,8 @@ export function RoadPillarStop(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-     <mesh geometry={nodes.Road_Pillar_1.geometry} material={materials.Traffic_Light} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Sign_3.geometry} material={materials.Road_Signs} position={[0, 0, 0]} scale={[1, 0.5, 1]} />
+     <mesh castShadow receiveShadow geometry={nodes.Road_Pillar_1.geometry} material={materials.Traffic_Light} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh castShadow receiveShadow geometry={nodes.Sign_3.geometry} material={materials.Road_Signs} position={[0, 0, 0]} scale={[1, 0.5, 1]} />
       </mesh>
     </group>
   )
@@ -151,8 +149,8 @@ export function RoadPillarCross(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-     <mesh geometry={nodes.Road_Pillar_3.geometry} material={materials.Traffic_Light} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Sign_2.geometry} material={materials.Road_Signs} position={[0, 0, 0]} scale={[1, 0.5, 1]} />
+     <mesh castShadow receiveShadow geometry={nodes.Road_Pillar_3.geometry} material={materials.Traffic_Light} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh castShadow receiveShadow geometry={nodes.Sign_2.geometry} material={materials.Road_Signs} position={[0, 0, 0]} scale={[1, 0.5, 1]} />
       </mesh>
     </group>
   )
@@ -161,8 +159,8 @@ export function RoadPillarRed(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Road_Pillar_4.geometry} material={materials.Traffic_Light} position={[0, 0,0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-        <mesh geometry={nodes.Sign_4.geometry} material={materials.Road_Signs} position={[0, 0, 0]} rotation={[-Math.PI, 0, -Math.PI]} scale={[1, 0.5, 1]} />
+      <mesh castShadow receiveShadow geometry={nodes.Road_Pillar_4.geometry} material={materials.Traffic_Light} position={[0, 0,0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <mesh castShadow receiveShadow geometry={nodes.Sign_4.geometry} material={materials.Road_Signs} position={[0, 0, 0]} rotation={[-Math.PI, 0, -Math.PI]} scale={[1, 0.5, 1]} />
       </mesh>
     </group>
   )
@@ -171,7 +169,7 @@ export function RoadPillar(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Road_Pillar.geometry} material={materials.Traffic_Light} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Road_Pillar.geometry} material={materials.Traffic_Light} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -179,8 +177,7 @@ export function PizzaBox(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-            <mesh geometry={nodes.Pizza_Box.geometry} material={materials.Pizza_Box} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-
+      <mesh castShadow receiveShadow geometry={nodes.Pizza_Box.geometry} material={materials.Pizza_Box} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }      
@@ -188,7 +185,7 @@ export function Bottle(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Bottle.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Bottle.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -196,7 +193,7 @@ export function Bench(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
   <group {...props} dispose={null}>
-    <mesh geometry={nodes.Bench.geometry} material={materials.Bench} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />    
+    <mesh castShadow receiveShadow geometry={nodes.Bench.geometry} material={materials.Bench} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />    
   </group>
   )
 } 
@@ -204,7 +201,7 @@ export function Cup(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
   <group {...props} dispose={null}>
-    <mesh geometry={nodes.Cup.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    <mesh castShadow receiveShadow geometry={nodes.Cup.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
   </group>
   )
 }  
@@ -212,7 +209,7 @@ export function Pillar(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
   <group {...props} dispose={null}>
-    <mesh geometry={nodes.Pillar_1.geometry} material={materials.Fence} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    <mesh castShadow receiveShadow geometry={nodes.Pillar_1.geometry} material={materials.Fence} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
   </group>
   )
 } 
@@ -220,8 +217,7 @@ export function Newspaper(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
   <group {...props} dispose={null}>
-          <mesh geometry={nodes.Newspaper.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-
+    <mesh castShadow receiveShadow geometry={nodes.Newspaper.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
   </group>
   )
 } 
@@ -229,7 +225,7 @@ export function Mailbox(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
   <group {...props} dispose={null}>
-    <mesh geometry={nodes.Mailbox.geometry} material={materials.Mailbox} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    <mesh castShadow receiveShadow geometry={nodes.Mailbox.geometry} material={materials.Mailbox} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
   </group>
   )
 }
@@ -238,7 +234,7 @@ export function Lighter(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
   <group {...props} dispose={null}>
-    <mesh geometry={nodes.Lighter.geometry} material={materials.Lighter_hydrant} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    <mesh castShadow receiveShadow geometry={nodes.Lighter.geometry} material={materials.Lighter_hydrant} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
   </group>
   )
 } 
@@ -246,8 +242,7 @@ export function Hydrant(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
   <group {...props} dispose={null}>
-          <mesh geometry={nodes.Hydrant.geometry} material={materials.Lighter_hydrant} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-
+    <mesh castShadow receiveShadow geometry={nodes.Hydrant.geometry} material={materials.Lighter_hydrant} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
   </group>
   )
 }    
@@ -255,7 +250,7 @@ export function Hatch(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
   <group {...props} dispose={null}>
-    <mesh geometry={nodes.Hatch.geometry} material={materials.Border_road_props} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+    <mesh castShadow receiveShadow geometry={nodes.Hatch.geometry} material={materials.Border_road_props} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
   </group>
   )
 }   
@@ -263,7 +258,7 @@ export function Fence2(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-            <mesh geometry={nodes.Fence_2.geometry} material={materials.Fence} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Fence_2.geometry} material={materials.Fence} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }  
@@ -271,7 +266,7 @@ export function Fence1(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Fence_1.geometry} material={materials.Fence} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Fence_1.geometry} material={materials.Fence} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -279,7 +274,7 @@ export function Cone(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-            <mesh geometry={nodes.Cone.geometry} material={materials.Border_road_props} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Cone.geometry} material={materials.Border_road_props} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -287,8 +282,7 @@ export function Clumb_empty_2(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-            <mesh geometry={nodes.Clumb_empty_2.geometry} material={materials.Clumbs} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
-
+      <mesh castShadow receiveShadow geometry={nodes.Clumb_empty_2.geometry} material={materials.Clumbs} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -296,7 +290,7 @@ export function Clumb_empty_1(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Clumb_empty_1.geometry} material={materials.Clumbs} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Clumb_empty_1.geometry} material={materials.Clumbs} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -304,7 +298,7 @@ export function ChalkBoard(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Chalk_board.geometry} material={materials.Chalk_board} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Chalk_board.geometry} material={materials.Chalk_board} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -312,7 +306,7 @@ export function Chair(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Chair.geometry} material={materials.Umbrella_Chair_Table} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Chair.geometry} material={materials.Umbrella_Chair_Table} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }  
@@ -320,7 +314,7 @@ export function Can(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Can.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Can.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -328,7 +322,7 @@ export function Box(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Box.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Box.geometry} material={materials.Garbage} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -344,7 +338,7 @@ export function Bin(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Bin.geometry} material={materials.Trash_cans} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Bin.geometry} material={materials.Trash_cans} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
 }
@@ -352,7 +346,7 @@ export function Antenna(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Antenna.geometry} material={materials.Antenna} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
+      <mesh castShadow receiveShadow geometry={nodes.Antenna.geometry} material={materials.Antenna} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
 
     </group>
   )
