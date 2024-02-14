@@ -1,17 +1,19 @@
 import { } from "@react-three/cannon";
 import { Building_7_Blue, Building_9_Blue, Building_8_Green, Building_5_Green, Building_6_Green, Building_4_Red, Building_3_Red, Building_2, Building_8_Red, Building_9_Red, Building_1_Red, Building_10_Red, Building_10_Blue, Building_5_Red, Building_10_1_Blue } from "../components/resort/Buildings"
-import { CarRed, CarGreen, IceCreamCart, MotorbikeYellow, MotorbikeOrange } from "../components/resort/Vehicles";
+import { CarRed, CarGreen, IceCreamCart, MotorbikeYellow, MotorbikeOrange } from "../components/resort/Vehicles1.jsx";
 import { Grass, Road_1, Road_4, Road_3, Sidewalk, Road_half_3, Sidewalk_corner_3, Sidewalk_corner_7, Border_1, Border_2, Border_3, Border_4, Border_4_1, Border_5, Border_half} from "../components/resort/Road.jsx"
-import { Lighter, TrafficLight, Bench, Clumb_empty_1, Fence1, Fence2, TrashBag, TrashCan, Hatch, Hydrant, RoadPillar, Mailbox, Block, Cone } from "../components/resort/Objects.jsx";
+import { Lighter, TrafficLight, Bench, Clumb_empty_1, Fence1, Fence2, TrashBag, TrashCan, Hatch, Hydrant, RoadPillar, Mailbox, Block, Cone } from "../components/resort/Objects1.jsx";
 import { Palm_1, Palm_2, Palm_3, Palm_4, Palm_5, Clumb_1, Clumb_2, Clumb_3, Clumb_4, Clumb_5, Clumb_6, Clumb_7, Clumb_8, Bush_1, Bush_2, Bush_3 } from "../components/Trees.jsx";
 import { BasketballCourt } from "../components/resort/Basketball.jsx";
 import { Metalfence } from "../components/resort/Metalfence.jsx";
 import { Bridge } from "../components/resort/Bridge.jsx";
+import { StoneWall } from "../components/StoneWall.jsx";
 
 export default function Section1(props){
     const position = props.position || [60, 0, -60]
 
-    return(<group castShadow receiveShadow >
+    return(
+    <group castShadow receiveShadow >
 
     <Bridge position={[position[0], position[1]-6, position[2] + 43]} rotation={[0, -Math.PI/2 , 0]} />
     <Bridge position={[position[0], position[1]-6, position[2] + 18]} rotation={[0, -Math.PI/2 , 0]} />
@@ -371,6 +373,9 @@ export default function Section1(props){
     <Fence2 position={[position[0] - 45, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
     <Fence2 position={[position[0] - 53, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
     <Fence2 position={[position[0] - 64, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
+
+    <StoneWall position={[position[0] - 30, position[1]- 22.5, position[2] + 5]} rotation={[0, 0, 0]} />
+    <StoneWall position={[position[0] - 30, position[1]- 22.5, position[2] + 65]} rotation={[0, 0, 0]} />
 
     </group>
     );

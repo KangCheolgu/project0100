@@ -17,6 +17,8 @@ import { Speed } from "./Speeds.jsx";
 import FollowCamera from "./utils/FollowCamera.jsx";
 import { CollisionHandler } from "./CollisionHandler.jsx";
 import { calculateSpeed } from "./utils/speedCalculator.jsx";
+import Speedometer from "./utils/Speedometer.jsx";
+import Needle from "./utils/Needle_v1.jsx";
 
 let checkPointIndex = 0
 
@@ -341,12 +343,9 @@ const Car = ({ cameraGroup, ...props }) => {
       <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
       <Timer />
-      <Html>
-        {socket.id === props.id && ( // 속도를 출력하는 조건 추가
-          <div style={{ position: 'fixed', top: '200px', left:'600px', color: 'white', fontSize: '160px', fontFamily: 'Arial', zIndex: 999 }}>
-            {currentSpeed}
-          </div>
-        )}
+         <Html>
+        <Needle socket={socket} props={props} currentSpeed={currentSpeed} />
+        <Speedometer socket={socket} props={props} currentSpeed={currentSpeed} />
         {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />

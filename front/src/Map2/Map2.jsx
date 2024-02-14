@@ -6,7 +6,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { Grass, Road_1, Road_4, Road_3, Sidewalk, Road_half_3, Sidewalk_corner_3, Sidewalk_corner_7, Border_1, Border_2, Border_3, Border_4, Border_4_1, Border_5, Border_half} from "../components/resort/Road.jsx"
 import { Startline } from "../components/Startline.jsx";
 import Section1 from "./Section1.jsx";
-import { Fence1, Fence2 } from "../components/resort/Objects.jsx";
+import { Fence1, Fence2 } from "../components/resort/Objects1.jsx";
  
 export default function Map2(props){
     const position = props.position

@@ -10,7 +10,7 @@ export function Metalfence(props) {
   const { nodes, materials } = useGLTF('/assets/models/Metalfence.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Fence_Cylinder.geometry} material={materials.Silver} />
+      <mesh castShadow receiveShadow geometry={nodes.Fence_Cylinder.geometry} material={materials.Silver} />
     </group>
   )
 }

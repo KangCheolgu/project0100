@@ -1,9 +1,9 @@
 
 import { } from "@react-three/cannon";
 import * as THREE from "three";
-import {Grass, Road_1,Road_4, Road_3,Sidewalk_2, Sidewalk, Sidewalk_half, Road_half_3, Sidewalk_corner_3,Sidewalk_corner_7, Border_1, Border_2, Border_3, Border_4, Border_4_1} from "../components/resort/Roads.jsx"
+import {Grass, Road_1,Road_4, Road_3,Sidewalk_2, Sidewalk, Sidewalk_half, Road_half_3, Sidewalk_corner_3,Sidewalk_corner_7, Border_1, Border_2, Border_3, Border_4, Border_4_1, Border_half} from "../components/resort/Roads.jsx"
 import { Startline } from "../components/Startline.jsx";
-import { Block } from "../components/resort/Objects.jsx";
+import { Block } from "../components/resort/Objects1.jsx";
 import Section1 from "./Section1.jsx";
 import Section2 from "./Section2.jsx";
 import Section3 from "./Section3.jsx";
@@ -134,7 +134,9 @@ export default function Map1(props){
         <Border_1 position={[position[0]-3, position[1]-0.04, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]-3, position[1]-0.04, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]-3, position[1]-0.04, position[2]-24]} rotation={[0, Math.PI/2, 0]} />
-        
+        <Border_1 position={[position[0]-3, position[1]-0.04, position[2]-30]} rotation={[0, Math.PI/2, 0]} />
+        <Border_half position={[position[0]-3, position[1]-0.04, position[2]-32.9]} rotation={[0, Math.PI/2, 0]} />
+
         <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]]}/>
         <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]-6]}/>
         <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]-12]}/>
@@ -153,14 +155,15 @@ export default function Map1(props){
         <Border_1 position={[position[0]+42, position[1]-0.04, position[2]+3]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+48, position[1]-0.04, position[2]+3]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+54, position[1]-0.04, position[2]+3]} rotation={[0, 0, 0]} />
-        <Border_2 position={[position[0]+60, position[1]-0.04, position[2]+0]} rotation={[0, -Math.PI/2, 0]}/>
 
         {/* 동쪽 연석 */}
+        <Border_1 position={[position[0]+63, position[1]-0.04, position[2]]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+63, position[1]-0.04, position[2]-6]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+63, position[1]-0.04, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+63, position[1]-0.04, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+63, position[1]-0.04, position[2]-24]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+63, position[1]-0.04, position[2]-30]} rotation={[0, Math.PI/2, 0]} />
+        <Border_half position={[position[0]+63, position[1]-0.04, position[2]-33]} rotation={[0, Math.PI/2, 0]} />
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-0]} rotation={[0, 0, 0]}/>
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-6]} rotation={[0, 0, 0]}/>
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-12]} rotation={[0, 0, 0]}/>
@@ -171,6 +174,7 @@ export default function Map1(props){
 
 
         {/* 북쪽 연석 */}
+        <Border_half position={[position[0]+57, position[1]-0.04, position[2]-32.9]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+54, position[1]-0.04, position[2]-33]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+48, position[1]-0.04, position[2]-33]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+42, position[1]-0.04, position[2]-33]} rotation={[0, 0, 0]} />
@@ -180,6 +184,7 @@ export default function Map1(props){
         <Border_1 position={[position[0]+18, position[1]-0.04, position[2]-33]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+12, position[1]-0.04, position[2]-33]} rotation={[0, 0, 0]} />
         <Border_1 position={[position[0]+6, position[1]-0.04, position[2]-33]} rotation={[0, 0, 0]} />
+        <Border_half position={[position[0]+3, position[1]-0.04, position[2]-32.9]} rotation={[0, Math.PI/2, 0]} />
         
         <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+6, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
         <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+12, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
