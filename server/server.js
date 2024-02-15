@@ -21,7 +21,7 @@ const io = new Server(server, {
 
 const GOOGLE_CLIENT_ID = '107173313275-r3d4eh0tc407jcc41bmbajm8vdd6s9uh.apps.googleusercontent.com'// YOUR GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = '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'// YOUR GOOGLE_CLIENT_SECRET;
-const GOOGLE_LOGIN_REDIRECT_URI = 'http://ec2-3-34-179-188.ap-northeast-2.compute.amazonaws.com/auth/google';
+const GOOGLE_LOGIN_REDIRECT_URI = 'http://ec2-13-209-26-84.ap-northeast-2.compute.amazonaws.com:3000/auth/google';
 // const GOOGLE_LOGIN_REDIRECT_URI = 'http://localhost:3000/auth/google';
 
 // const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID// YOUR GOOGLE_CLIENT_ID;

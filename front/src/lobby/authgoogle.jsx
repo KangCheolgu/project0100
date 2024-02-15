@@ -21,7 +21,7 @@ function AuthGoogle() {
     const scope = searchParams.get("scope")
     
     // axios.post("http://localhost:5000/auth/getgoogletoken", {
-    axios.post("http://ec2-3-34-179-188.ap-northeast-2.compute.amazonaws.com:5000/auth/getgoogletoken", {
+    axios.post("http://ec2-13-209-26-84.ap-northeast-2.compute.amazonaws.com:5000/auth/getgoogletoken", {
       withCredentials: true,
       code: code,
       scope: scope
