@@ -2,6 +2,7 @@
 import { } from "@react-three/cannon";
 import * as THREE from "three";
 import {Grass, Road_1,Road_4, Road_3,Sidewalk_2, Sidewalk, Sidewalk_half, Road_half_3, Sidewalk_corner_3,Sidewalk_corner_7, Border_1, Border_2, Border_3, Border_4, Border_4_1, Border_half} from "../components/resort/Roads.jsx"
+import { Fence2, WallClumb } from "../components/resort/Objects1.jsx";
 import { Startline } from "../components/Startline.jsx";
 import { Block } from "../components/resort/Objects1.jsx";
 import Section1 from "./Section1.jsx";
@@ -16,12 +17,40 @@ import { BasketballCourt } from "../components/resort/Basketball.jsx";
 import { Signs } from "../components/Signs.jsx";
 import { Signs2 } from "../components/Signs2.jsx";
 import { Arrow2 } from "../components/Arrow2.jsx";
+import { ResortOcean } from "../components/ResortOcean.jsx";
 
 export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
     const scale = props.scale
     return(<group castShadow receiveShadow >   
+        <Fence2 position={[position[0]-22, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]-18, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]-14, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]-10, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]-6, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+6, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+10, position[1], position[2]-35]}/>
+        <Fence2 position={[position[0]+14, position[1], position[2]-35]}/>  
+        <Fence2 position={[position[0]+18, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+22, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+26, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+30, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+34, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+38, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+42, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+46, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+50, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+54, position[1], position[2]-35]}/> 
+        <Fence2 position={[position[0]+65, position[1], position[2]-35]}/> 
+
+        <ResortOcean scale={[0.2,0.2, 0.2]} position={[30,0.1, 145]} rotation={[Math.PI/30, 0, 0]}/>
+        <ResortOcean scale={[0.2,0.2, 0.2]} position={[30,-5, -65]} rotation={[Math.PI/30, 0, 0]}/>
+        <ResortOcean scale={[0.2,0.2, 0.2]} position={[-90,-5, -65]} rotation={[Math.PI/30, 0, 0]}/>
+        <ResortOcean scale={[0.2,0.2, 0.2]} position={[150,-5, -65]} rotation={[Math.PI/30, 0, 0]}/>
+        <ResortOcean scale={[0.2,0.2, 0.2]} position={[-90,-5, 80]} rotation={[Math.PI/30, 0, 0]}/>
+        <ResortOcean scale={[0.2,0.2, 0.2]} position={[150,-5, 80]} rotation={[Math.PI/30, 0, 0]}/>
+
         <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+1, position[1]+2, position[2]+40]} rotation={[-Math.PI/2, Math.PI, 0]}/>
         <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+63, position[1]+2, position[2]+35]} rotation={[-Math.PI/2, Math.PI, -Math.PI/2]}/>
         <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+60, position[1]+2, position[2]-16]} rotation={[-Math.PI/2, Math.PI, Math.PI]}/>
