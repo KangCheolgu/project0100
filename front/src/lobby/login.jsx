@@ -9,7 +9,7 @@ function LoginPage() {
 
   const signInWithGoogle = () => {
     // window.open("http://localhost:5000/auth/", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
-    window.open("http://ec2-3-34-179-188.ap-northeast-2.compute.amazonaws.com/auth/", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
+    window.open("http://ec2-3-34-179-188.ap-northeast-2.compute.amazonaws.com:5000/auth/", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
   }
 
   return (
