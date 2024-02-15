@@ -255,7 +255,7 @@ export default function Scene() {
           position={[30, 60, -100]}
           color="#ffffff"
         />
-        <SkyCube scale={100} position={[30, 0, -50]}/>
+        {/* <SkyCube scale={100} position={[30, 0, -50]}/> */}
         {/*DirectionalLight & Camera Helper*/}
         {/*<Light/>*/}
         

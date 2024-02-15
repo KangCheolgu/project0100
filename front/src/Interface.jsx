@@ -135,7 +135,7 @@ export default function Interface(){
           START
         </div>}
       {/* Restart */}
-      {phase==='ended'?<div className="restart" onClick={restart}>로비로 나가기</div>:null}
+      {phase==='ended'?<div style={{fontFamily:'sans-serif'}} className="restart" onClick={restart}>로비로 나가기</div>:null}
       {phase==='ended'?<div className="endtime"></div>:null}
 
       {/* 관전자에게만 보이는 부분 */}

@@ -151,23 +151,24 @@ const Car = ({ cameraGroup, ...props }) => {
         // 부스터 이펙트 위치 및 방향 지정.
       cameraGroup.current.quaternion.copy(bodyRotation);
       cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
+
       /* Phases*/
-      if (checkPointIndex === 1 && lapseCheck[0] === false) {
-        around()
-        lapseCheck[0] = true
-      }
-
-      if (checkPointIndex === 2) {
-        end()     
-      }
-
-      // if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
+      // if (checkPointIndex === 1 && lapseCheck[0] === false) {
       //   around()
       //   lapseCheck[0] = true
       // }
-      // if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
+
+      // if (checkPointIndex === 2) {
       //   end()     
       // }
+
+      if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
+        around()
+        lapseCheck[0] = true
+      }
+      if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
+        end()     
+      }
 
       // 체크 포인트 인덱스 갱신 
       // 지정된 위치를 지나면 checkpointIndex를 올림
@@ -359,7 +360,7 @@ const Car = ({ cameraGroup, ...props }) => {
         };
         socket.emit("currentState", currentState);
       }
-    }, 30);
+    }, 15);
   };
 
   return (<>
