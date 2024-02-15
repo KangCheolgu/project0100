@@ -13,7 +13,7 @@ import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./Map1/ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle, CrabObstacle} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle, CrabObstacle, Brick} from "./components/MoveObstacle.jsx";
 import Countdown from "./sound/CountDown.jsx";
 import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
@@ -252,7 +252,7 @@ export default function Scene() {
           shadow-camera-right={100}
           shadow-mapSize-height={512*4}
           shadow-mapSize-width={512*4}
-          position={[30, 60, -30]}
+          position={[30, 60, -100]}
           color="#ffffff"
         />
         <SkyCube scale={100} position={[30, 0, -50]}/>
@@ -262,6 +262,7 @@ export default function Scene() {
         {/* <OrbitControls /> */}
         <Stats/>
         <Physics gravity={[0, -3, 0]}>
+          {/* <Debug> */}
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
@@ -276,7 +277,7 @@ export default function Scene() {
               ))
             }
   
-              
+                                                          
             {/* <Ground /> */}
             {isObstacleStarted && (
             <>
@@ -288,13 +289,14 @@ export default function Scene() {
             <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
             <CarGreenObstacle/>
             {/* <MotorObstacle/> */}
-            <CrabObstacle position ={[7,0,0]} offset={32} />
-            <CrabObstacle position={[-7,0,0]} offset={32}/>
-            <CrabObstacle position={[0,0,0]} offset={38}/>
+            <CrabObstacle position ={[7,-0.01,0]} offset={32} />
+            <CrabObstacle position={[-7,-0.01,0]} offset={32}/>
+            <CrabObstacle position={[0,-0.01,0]} offset={38}/>
             </>
             )}
             
             </Suspense>
+         {/* </Debug> */}
         </Physics>
         {spectators.map((spectator, index) => (
           <Spectator id={spectator.id} key={index} position={spectator.position} />

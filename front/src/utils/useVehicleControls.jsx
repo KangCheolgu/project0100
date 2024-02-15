@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { socket } from "../lobby/lobby.jsx";
 import klaxonSoundFile from '../sound/car-horn/car-horn-1.wav';
 import * as THREE from 'three';
 
 export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
-  const [controls, setControls] = useState({});
   const engineForce = 70;
   const [brake, setBrake] = useState(false);
   const klaxonDuration = 500;
@@ -18,11 +17,6 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
 
   // 키 다운 이벤트
   const handleKeyDown = (e) => {
-    setControls((currentControls) => ({
-      ...currentControls,
-      [e.key]: true,
-      boost: e.key === 'Shift' || e.shiftKey ? true : currentControls.boost // Shift 키가 눌려있을 때 boost 활성화
-    }));
 
     // for brake lights
     if (e.key === ' ') {
@@ -31,15 +25,15 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     }
 
     // 'R' 키 입력 시 자동차 위치 y 좌표 증가 및 쿼터니언 초기화
-if (e.key === 'r') {
-  chassisApi.position.subscribe((position) => {
-    const newPosition = [position[0], position[1] + 0.005, position[2]]; // Slightly raise the y-coordinate
-    chassisApi.position.set(...newPosition);
-  });
-  chassisApi.quaternion.set(0, 1, 0, 0); // Reset quaternion to upright orientation
-  chassisApi.velocity.set(0, 0, 0); // Optionally reset velocity
-  chassisApi.angularVelocity.set(0, 0, 0); // Optionally reset angular velocity
-}
+    if (e.key === 'r') {
+      chassisApi.position.subscribe((position) => {
+        const newPosition = [position[0], position[1] + 0.005, position[2]]; // Slightly raise the y-coordinate
+        chassisApi.position.set(...newPosition);
+      });
+      chassisApi.quaternion.set(0, 1, 0, 0); // Reset quaternion to upright orientation
+      chassisApi.velocity.set(0, 0, 0); // Optionally reset velocity
+      chassisApi.angularVelocity.set(0, 0, 0); // Optionally reset angular velocity
+    }
 
     // 클락션 소리 및 쉬프트 키와 함께 'h' 키 처리
     if (e.key.toLowerCase() === 'h') {
@@ -68,11 +62,6 @@ if (e.key === 'r') {
   }
 
   const handleKeyUp = (e) => {
-    setControls((currentControls) => ({
-      ...currentControls,
-      [e.key]: false,
-      boost: e.key === 'Shift' ? false : currentControls.boost // Shift 키를 떼면 boost 비활성화
-    }));
     if (e.key === ' ') {
       setBrake(false);
       setBrakeLightsOn(false);
@@ -90,6 +79,41 @@ if (e.key === 'r') {
       }
     }
   }, [state, id, klaxon, klaxonDuration, klaxonSoundFile, klaxonTimer]);
+
+  const [controls, setControls] = useState({});
+
+  // 기본 이동 관련 건들지 마시오
+  const KeyDownPressHandler = (e) => {
+    if(!controls[e.key]) {
+      setControls((controls) => ({ 
+        ...controls, [e.key]: true ,
+        boost: e.key === 'Shift' || e.shiftKey ? true : controls.boost
+      }));
+      console.log("DOWN", e.key);
+    }
+  }
+
+  const KeyUpPressHandler = (e) => {
+    setControls((controls) => ({ 
+      ...controls, [e.key]: false,
+      boost: e.key === 'Shift' ? false : controls.boost
+    }));
+    console.log("UP", e.key);
+  }
+  /////////////// 건들지 마시오
+  useEffect(()=>{
+    if( state === true && socket.id === id){     
+        window.addEventListener('keydown', KeyDownPressHandler);
+        window.addEventListener('keyup', KeyUpPressHandler);
+      return () => {
+        window.removeEventListener('keydown', KeyDownPressHandler);
+        window.removeEventListener('keyup', KeyUpPressHandler);
+      }
+    }
+  })
+  ////////////////// 건들지 마시오
+
+
 
   // 차량 제어 로직
   useEffect(() => {

@@ -19,6 +19,8 @@ import FollowCamera from "./utils/FollowCamera.jsx";
 import { CollisionHandler } from "./CollisionHandler.jsx";
 import { calculateSpeed } from "./utils/speedCalculator.jsx";
 import useGame from "./stores/useGame.jsx";
+import Speedometer from "./utils/Speedometer.jsx";
+import Needle from "./utils/Needle_v1.jsx";
 
 let checkPointIndex = 0
 let lapseCheck = [false]
@@ -84,7 +86,7 @@ const Car = ({ cameraGroup, ...props }) => {
   );
 
   // brake lights
-  const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
+  // const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
 
   // 클락션 소리 /////////////////////////////////////////////////////////
   const klaxonDuration = 500; // 1초
@@ -362,7 +364,7 @@ const Car = ({ cameraGroup, ...props }) => {
 
   return (<>
     <group ref={cameraGroup}>
-      {/* <Speed /> */}
+      <Speed id={socket.id}/>
     </group>
     <group ref={vehicle} castShadow receiveShadow>
       <Suspense>
@@ -375,14 +377,13 @@ const Car = ({ cameraGroup, ...props }) => {
       <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
       <Timer />
-      {/* <Html>
-        {socket.id === props.id && ( // 속도를 출력하는 조건 추가
-          <div style={{ position: 'fixed', top: '200px', left:'600px', color: 'white', fontSize: '160px', fontFamily: 'Arial', zIndex: 999 }}>
-            {currentSpeed}
-          </div>
-        )}
-        {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
-      </Html> */}
+       <Html>
+        <div style={{position: 'fixed', width: window.screen.width/2 , height: window.screen.height/2 }}>
+          <Needle socket={socket} props={props} currentSpeed={currentSpeed} />
+          <Speedometer socket={socket} props={props} currentSpeed={currentSpeed} />
+        </div>
+          {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
+      </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
     </group>
   </>

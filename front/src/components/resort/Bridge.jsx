@@ -10,7 +10,7 @@ export function Bridge(props) {
   const { nodes, materials } = useGLTF('/assets/models/Bridge.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Bridge.geometry} material={materials.Diffuse_color} scale={700} />
+      <mesh castShadow receiveShadow geometry={nodes.Bridge.geometry} material={materials.Diffuse_color} scale={700} />
     </group>
   )
 }
