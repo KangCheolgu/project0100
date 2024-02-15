@@ -152,11 +152,6 @@ export default function Scene() {
 
       return () => clearTimeout(startSignal)
     })
-    
-    // // 서버 시간 검증
-    // socket.on("timeCheck", (serverTimeStart)=>{
-    //   console.log("in time check");
-    // })
 
     //유저 업데이트
     socket.on("updatePlayers", onPlayers)
@@ -257,16 +252,14 @@ export default function Scene() {
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
-              {/*<ResortOcean scale={[0.2,0.2, 0.2]} position={[30,3, 100]} rotation={[-Math.PI/20, 0, 0]}/>
-              <ResortOcean scale={[0.2,0.2, 0.2]} position={[100,3, 10]} rotation={[0, Math.PI/2, 0]}/>*/}
               <Map2 position={[0, 0, -94]}/>
               <Wall />
             
-            {
+            {/*
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-            }
+              */}
   
                                                           
             {/* <Ground /> */}
