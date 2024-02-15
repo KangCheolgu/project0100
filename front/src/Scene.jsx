@@ -152,11 +152,6 @@ export default function Scene() {
 
       return () => clearTimeout(startSignal)
     })
-    
-    // // 서버 시간 검증
-    // socket.on("timeCheck", (serverTimeStart)=>{
-    //   console.log("in time check");
-    // })
 
     //유저 업데이트
     socket.on("updatePlayers", onPlayers)
