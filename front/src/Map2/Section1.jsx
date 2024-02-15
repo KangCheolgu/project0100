@@ -8,6 +8,7 @@ import { BasketballCourt } from "../components/resort/Basketball.jsx";
 import { Metalfence } from "../components/resort/Metalfence.jsx";
 import { Bridge } from "../components/resort/Bridge.jsx";
 import { StoneWall } from "../components/StoneWall.jsx";
+import { Corner_Sign_Left, Corner_Sign_Right, Corner_Sign_Speedlimit } from "../components/resort/Signs.jsx";
 
 export default function Section1(props){
     const position = props.position || [60, 0, -60]
@@ -374,9 +375,10 @@ export default function Section1(props){
     <Fence2 position={[position[0] - 53, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
     <Fence2 position={[position[0] - 64, position[1], position[2] - 40.5]} rotation={[0, 0, 0]} />
 
-    <StoneWall position={[position[0] - 30, position[1]- 22.5, position[2] + 5]} rotation={[0, 0, 0]} />
-    <StoneWall position={[position[0] - 30, position[1]- 22.5, position[2] + 65]} rotation={[0, 0, 0]} />
+    <StoneWall position={[position[0] - 30, position[1]- 22.06, position[2] + 5]} rotation={[0, 0, 0]} />
+    <StoneWall position={[position[0] - 40, position[1]- 22.06, position[2] + 65]} rotation={[0, 0, 0]} />
 
+    <Corner_Sign_Left position={[position[0] + 3, position[1] + 2, position[2] - 27]} rotation={[0, Math.PI, 0]}/>
     </group>
     );
 }
