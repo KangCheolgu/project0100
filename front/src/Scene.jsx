@@ -259,7 +259,7 @@ export default function Scene() {
         {/*DirectionalLight & Camera Helper*/}
         {/*<Light/>*/}
         
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -3, 0]}>
           {/* <Debug> */}

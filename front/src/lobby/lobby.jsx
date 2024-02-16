@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import cookie from 'react-cookies';
 
-// export const socket = io("http://localhost:5000/")
-export const socket = io("http://ec2-13-209-26-84.ap-northeast-2.compute.amazonaws.com:5000/")
+export const socket = io("http://localhost:5000/")
+// export const socket = io("http://ec2-13-209-26-84.ap-northeast-2.compute.amazonaws.com:5000/")
 
 export const LobbyPage = () => {
   const navigate = useNavigate()

@@ -17,7 +17,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
 
   // 키 다운 이벤트
   const handleKeyDown = (e) => {
-
+    console.log(e);
     // for brake lights
     if (e.key === ' ') {
       setBrake(true);
