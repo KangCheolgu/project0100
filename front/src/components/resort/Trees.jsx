@@ -207,13 +207,3 @@ export function Bush_1_1(props) {
 }
 
 useGLTF.preload('/assets/models/resort-trees_remove.glb')
-
-
-        
-      
-      
-      
-      
-      
-      
-      

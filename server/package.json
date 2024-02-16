@@ -3,15 +3,23 @@
   "version": "1.0.0",
   "description": "test node",
   "main": "index.jsx",
+  "proxy": "http://ec2-13-209-26-84.ap-northeast-2.compute.amazonaws.com:5000",
   "scripts": {
-    "start": "nodemon app",
+    "start": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kangcg",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "axios": "^1.6.7",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "date-utils": "^1.2.21",
+    "dotenv": "^16.4.2",
+    "express": "^4.18.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "socket.io": "^4.7.4"
   },
   "devDependencies": {

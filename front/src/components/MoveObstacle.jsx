@@ -448,7 +448,7 @@ export function CrabObstacle(props){
     mass: 0,
     position: [position1[0]+32, position1[1]-0.05, position1[2]-50],
     material: 'object',
-    args: [1,1,1.5]
+    args: [1,2,1.5]
   }),
   useRef()
   )  
