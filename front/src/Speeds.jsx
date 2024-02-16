@@ -2,6 +2,8 @@ import {Instances, Instance} from "@react-three/drei";
 import {useFrame, useThree} from "@react-three/fiber";
 import {useRef, useState, useEffect} from "react";
 import {AdditiveBlending, DoubleSide, MathUtils} from "three";
+import { socket } from "./lobby/lobby.jsx";
+
 const INSTANCES = 80;
 
 const SpeedShape=()=>{
@@ -9,9 +11,9 @@ const SpeedShape=()=>{
     let randomPosition={
         x: 0,
         y: 0,
-        z:0,
+        z: 0,
     }
-    let randomSpeed =0;
+    let randomSpeed = 0;
 
     const resetRandom = ()=>{
         randomPosition = {
@@ -40,27 +42,34 @@ const SpeedShape=()=>{
         />
     );
 };
-export const Speed = () => {
+export const Speed = (props) => {
+
     const speedMaterial = useRef();
     const [showSpeed, setShowSpeed] = useState(false);
-  
-    useEffect(() => {
-      const handleKeyPress = (event) => {
-        if (event.shiftKey) {
+    const handleKeyDown = (event) => {
+      console.log(event);
+      if (event.shiftKey) {
           setShowSpeed(true);
-        } else {
-          setShowSpeed(false);
+      }
+    };
+
+    const handleKeyUp = (event) => {
+        if (!event.shiftKey) {
+            setShowSpeed(false);
         }
-      };
-  
-      window.addEventListener("keydown", handleKeyPress);
-      window.addEventListener("keyup", handleKeyPress);
-  
-      return () => {
-        window.removeEventListener("keydown", handleKeyPress);
-        window.removeEventListener("keyup", handleKeyPress);
-      };
-    }, []);
+    };
+
+    useEffect(() => {
+      if(props.id === socket.id){
+        window.addEventListener("keydown", handleKeyDown);
+        window.addEventListener("keyup", handleKeyUp);
+    
+        return () => {
+          window.removeEventListener("keydown", handleKeyDown);
+          window.removeEventListener("keyup", handleKeyUp);
+        };
+      }
+    });
   
     return showSpeed ? (
       <group>

@@ -11,12 +11,19 @@ export default function Wall(props){
     //  )
     return (
     <group rotation={props.rotation}>
-        <ColliderBox scale={[80, 20, 0.1]} position={[29, 7, +65]}/>
-        <ColliderBox scale={[0.1, 20, 120]} position={[-6, 9, +20]}/>
-        <ColliderBox scale={[0.1, 20, 120]} position={[65, 9, +20]}/>
-        
+        {/* 땅 */}
         <ColliderBox scale={[100, 0.1, 150]} position={[30, 0, -72]} />
         <ColliderBox scale={[100, 0.01, 60]} position={[30, -0.51, 39]} />
+
+        {/* 남쪽 해변 벽*/}
+        <ColliderBox scale={[80, 20, 0.1]} position={[29, 7, +65]}/>
+        {/* 서쪽 벽 */}
+        <ColliderBox scale={[0.1, 20, 120]} position={[-6, 9, +20]}/>
+        {/* 동쪽 벽 */}
+        <ColliderBox scale={[0.1, 20, 120]} position={[65, 9, +20]}/>
+        {/*북쪽 벽 */}
+        <ColliderBox scale={[54, 20, 0.1]} position={[30, 10, -36]}/>
+        
 
         <ColliderBox scale={[12.25, 10, 12]} position={[33,  5,-15]}/>
         {/*<ColliderBox scale={[7.2, 10, 7.5]} position={[33,  5, -19.8]}/>*/}
@@ -27,12 +34,9 @@ export default function Wall(props){
 
         
 
-        {/*<ColliderBox scale={[21, 10, 12]} position={[55, 5, -15]}/>*/}
         {/* Section1 */}
         <ColliderBox scale={[12, 10, 18]} position={[12, 5, -15]}/>
         
-        {/*<ColliderBox scale={[76, 20, 0.1]} position={[29, 10, 6]}/>*/}
-        <ColliderBox scale={[55, 20, 0.1]} position={[29, 10, -36]}/>
         
 
 

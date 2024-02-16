@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState, forwardRef } from "react";
 import * as THREE from "three";
 import { useFrame} from "@react-three/fiber";
 import { Building_7_Blue, Building_9_Blue, Building_8_Green, Building_5_Green, Building_6_Green, Building_4_Red, Building_3_Red, Building_2, Building_8_Red, Building_9_Red, Building_1_Red, Building_10_Red, Building_10_Blue, Building_5_Red } from "../components/resort/Buildings"
-import { IceCreamCart } from "../components/resort/Vehicles";
+import { IceCreamCart } from "../components/resort/Vehicles1";
 
 export default function Section1(props){
     const position = props.position
