@@ -46,30 +46,30 @@ export const Speed = (props) => {
 
     const speedMaterial = useRef();
     const [showSpeed, setShowSpeed] = useState(false);
-    const handleKeyDown = (event) => {
-      console.log(event);
-      if (event.shiftKey) {
-          setShowSpeed(true);
-      }
-    };
+    // const handleKeyDown = (event) => {
+    //   console.log(event);
+    //   if (event.shiftKey) {
+    //       setShowSpeed(true);
+    //   }
+    // };
 
-    const handleKeyUp = (event) => {
-        if (!event.shiftKey) {
-            setShowSpeed(false);
-        }
-    };
+    // const handleKeyUp = (event) => {
+    //     if (!event.shiftKey) {
+    //         setShowSpeed(false);
+    //     }
+    // };
 
-    useEffect(() => {
-      if(props.id === socket.id){
-        window.addEventListener("keydown", handleKeyDown);
-        window.addEventListener("keyup", handleKeyUp);
+    // useEffect(() => {
+    //   if(props.id === socket.id){
+    //     window.addEventListener("keydown", handleKeyDown);
+    //     window.addEventListener("keyup", handleKeyUp);
     
-        return () => {
-          window.removeEventListener("keydown", handleKeyDown);
-          window.removeEventListener("keyup", handleKeyUp);
-        };
-      }
-    });
+    //     return () => {
+    //       window.removeEventListener("keydown", handleKeyDown);
+    //       window.removeEventListener("keyup", handleKeyUp);
+    //     };
+    //   }
+    // });
   
     return showSpeed ? (
       <group>

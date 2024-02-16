@@ -115,30 +115,30 @@ const Car = ({ cameraGroup, ...props }) => {
   const lastPosition = useRef(new Vector3());
   const lastUpdateTime = useRef(Date.now());
 
-  useEffect(() => {
-    if (socket.id === props.id) {
-      const updateSpeed = () => {
-        const now = Date.now();
-        const deltaTime = (now - lastUpdateTime.current) / 1000; // Convert to seconds
-        const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
-        // Use the utility function to calculate speed
-        const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
-        // Check if the speed has changed significantly (by 10 km/h or more)
-        // if (Math.abs(speed - lastSpeed.current) >= 10) {
-          setCurrentSpeed(speed); // Update the state only if the change is significant
-          lastSpeed.current = speed; // Update the last speed reference
-        // }
+  // useEffect(() => {
+  //   if (socket.id === props.id) {
+  //     const updateSpeed = () => {
+  //       const now = Date.now();
+  //       const deltaTime = (now - lastUpdateTime.current) / 1000; // Convert to seconds
+  //       const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
+  //       // Use the utility function to calculate speed
+  //       const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
+  //       // Check if the speed has changed significantly (by 10 km/h or more)
+  //       // if (Math.abs(speed - lastSpeed.current) >= 10) {
+  //         setCurrentSpeed(speed); // Update the state only if the change is significant
+  //         lastSpeed.current = speed; // Update the last speed reference
+  //       // }
 
-        // Always update the last position and time, regardless of whether the speed was updated
-        lastPosition.current.copy(currentPosition);
-        lastUpdateTime.current = now;
-      };
+  //       // Always update the last position and time, regardless of whether the speed was updated
+  //       lastPosition.current.copy(currentPosition);
+  //       lastUpdateTime.current = now;
+  //     };
     
 
-      const intervalId = setInterval(updateSpeed, 500); // Continue to check speed every 200ms
-      return () => clearInterval(intervalId);
-    }
-  }, []);
+  //     const intervalId = setInterval(updateSpeed, 500); // Continue to check speed every 200ms
+  //     return () => clearInterval(intervalId);
+  //   }
+  // }, []);
 
   // 랩타임 관련
   const end = useGame((state)=> state.end)

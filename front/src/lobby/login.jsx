@@ -4,12 +4,20 @@ import axios from "axios";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const CURRENT_URL = "http://localhost:5000"
+// const CURRENT_URL = "https://project0100.shop:5000"
+
 function LoginPage() {
   const navigate = useNavigate();
 
   const signInWithGoogle = () => {
-    // window.open("http://localhost:5000/auth/", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
-    window.open("http://ec2-13-209-26-84.ap-northeast-2.compute.amazonaws.com:5000/auth/", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
+    window.open(CURRENT_URL + "/auth/google", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
+  }
+  const signInWithNaver = () => {
+    window.open(CURRENT_URL + "/auth/naver", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
+  }
+  const signInWithKakao = () => {
+    window.open(CURRENT_URL + "/auth/kakao", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
   }
 
   return (

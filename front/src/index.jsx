@@ -19,7 +19,7 @@ root.render(
       <Route path="/lobby" element={<LobbyPage />} />
       <Route path="/waitingroom" element={<RoomPage />} />
       <Route path="/gameroom" element={<GamePage />} /> 
-      <Route path="/auth/google" element={<AuthGoogle />} /> 
+      <Route path="/auth/google/redirect" element={<AuthGoogle />} /> 
     </Routes>
   </BrowserRouter>
 );

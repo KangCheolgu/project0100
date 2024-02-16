@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import cookie from 'react-cookies';
 
+const CURRENT_URL = "http://localhost:5000"
+// const CURRENT_URL = "http://project0100.shop:5000"
+
 function AuthGoogle() {
     
   const navigate = useNavigate();
@@ -20,16 +23,15 @@ function AuthGoogle() {
     const code = searchParams.get("code")
     const scope = searchParams.get("scope")
     
-    // axios.post("http://localhost:5000/auth/getgoogletoken", {
-    axios.post("http://ec2-13-209-26-84.ap-northeast-2.compute.amazonaws.com:5000/auth/getgoogletoken", {
+    axios.post( CURRENT_URL + "/auth/google/gettoken", {
       withCredentials: true,
       code: code,
       scope: scope
     })
       .then((res) => {
         if (res.status == 200) {
-          // console.log(res.data.email);
-          // console.log(res.data.name);
+          console.log(res.data.email);
+          console.log(res.data.name);
           cookie.save('userEmail', res.data.email, {
             path:"/",
             expires
