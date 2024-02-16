@@ -12,7 +12,6 @@ function AuthGoogle() {
     
   const navigate = useNavigate();
   const location = useLocation();
-  const queryString = location.search; 
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -22,11 +21,13 @@ function AuthGoogle() {
     setSearchParams(location)
     const code = searchParams.get("code")
     const scope = searchParams.get("scope")
+    const state = searchParams.get("state")
     
     axios.post( CURRENT_URL + "/api/auth/google/gettoken", {
       withCredentials: true,
       code: code,
-      scope: scope
+      scope: scope,
+      state: state
     })
       .then((res) => {
         if (res.status == 200) {
