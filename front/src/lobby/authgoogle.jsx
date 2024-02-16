@@ -23,7 +23,7 @@ function AuthGoogle() {
     const code = searchParams.get("code")
     const scope = searchParams.get("scope")
     
-    axios.post( CURRENT_URL + "/auth/google/gettoken", {
+    axios.post( CURRENT_URL + "/api/auth/google/gettoken", {
       withCredentials: true,
       code: code,
       scope: scope

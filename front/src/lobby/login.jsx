@@ -11,13 +11,13 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const signInWithGoogle = () => {
-    window.open(CURRENT_URL + "/auth/google", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
+    window.open(CURRENT_URL + "/api/auth/google", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
   }
   const signInWithNaver = () => {
-    window.open(CURRENT_URL + "/auth/naver", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
+    window.open(CURRENT_URL + "/api/auth/naver", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
   }
   const signInWithKakao = () => {
-    window.open(CURRENT_URL + "/auth/kakao", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
+    window.open(CURRENT_URL + "/api/auth/kakao", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
   }
 
   return (

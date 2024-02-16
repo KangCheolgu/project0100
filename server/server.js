@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 // auth 관리 라우터
-app.use("/auth", auth)
+app.use("/api/auth", auth)
 // db 관리 라우터
 // app.use("/database", database)
 

@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 router.get('/google', (req, res) => {
+  console.log("/auth/google");
   let url = 'https://accounts.google.com/o/oauth2/v2/auth';
   url += `?client_id=${GOOGLE_CLIENT_ID}`
   url += `&redirect_uri=${GOOGLE_LOGIN_REDIRECT_URI}`
