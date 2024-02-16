@@ -5,14 +5,48 @@ import ColliderBox from "../ColliderBox.jsx";
 export default function Section2(props){
     const position = props.position
     return(<group castShadow receiveShadow >
-        <Border_2 position={[position[0]+30, position[1]+0, position[2]-6]} rotation={[0, Math.PI, 0]}/>
-        <Border_2 position={[position[0]+36, position[1]+0, position[2]-6]} rotation={[0, -Math.PI/2, 0]}/>
-        <Border_1 position={[position[0]+39, position[1]+0, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
-        <Border_1 position={[position[0]+39, position[1]+0, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
-        <Border_2 position={[position[0]+36, position[1]+0, position[2]-24]} rotation={[0, 0, 0]}/>
-        <Border_2 position={[position[0]+30, position[1]+0, position[2]-24]} rotation={[0, Math.PI/2, 0]}/>
-        <Border_1 position={[position[0]+27, position[1]+0, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
-        <Border_1 position={[position[0]+27, position[1]+0, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
+        {/* 연석 커브 하단 우측 */}
+        <ColliderBox scale={[+3, +0.1, +1.5]} position={[position[0]+37.5, position[1]+0.05, position[2]-5.25]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+37.4, position[1]+0.05, position[2]-4.35]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+37.2, position[1]+0.05, position[2]-4.1]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+37.1, position[1]+0.05, position[2]-3.9]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+36.9, position[1]+0.05, position[2]-3.6]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+36.5, position[1]+0.05, position[2]-3.3]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+36.2, position[1]+0.05, position[2]-3.15]}/>
+        {/* 연석 커브 하단 좌측 */}
+        <ColliderBox scale={[+3, +0.1, +1.5]} position={[position[0]+28.5, position[1]+0.05, position[2]-5.25]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+28.6, position[1]+0.05, position[2]-4.35]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+28.7, position[1]+0.05, position[2]-4.1]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+28.8, position[1]+0.05, position[2]-3.9]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+29.1, position[1]+0.05, position[2]-3.6]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+29.5, position[1]+0.05, position[2]-3.3]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+29.9, position[1]+0.05, position[2]-3.15 ]}/>
+        {/* 연석 커브 상단 좌측*/}
+        <ColliderBox scale={[+3, +0.1, +1.5]} position={[position[0]+28.5, position[1]+0.05, position[2]-24.7]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+28.6, position[1]+0.05, position[2]-25.6]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+28.7, position[1]+0.05, position[2]-25.85]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+28.8, position[1]+0.05, position[2]-26.1]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+29.1, position[1]+0.05, position[2]-26.35]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+29.5, position[1]+0.05, position[2]-26.6]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+29.9, position[1]+0.05, position[2]-26.85 ]}/>
+        {/* 연석 커브 상단 우측 */}
+        <ColliderBox scale={[+3, +0.1, +1.5]} position={[position[0]+37.5, position[1]+0.05, position[2]-24.7]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+37.4, position[1]+0.05, position[2]-25.6]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+37.2, position[1]+0.05, position[2]-25.85]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+37.1, position[1]+0.05, position[2]-26.1]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+36.9, position[1]+0.05, position[2]-26.35]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+36.5, position[1]+0.05, position[2]-26.6]}/>
+        <ColliderBox scale={[+2.9, +0.1,+0.3]} position={[position[0]+36.2, position[1]+0.05, position[2]-26.85 ]}/>
+
+
+        <Border_2 position={[position[0]+30, position[1]-0.04, position[2]-6]} rotation={[0, Math.PI, 0]}/>
+        <Border_2 position={[position[0]+36, position[1]-0.04, position[2]-6]} rotation={[0, -Math.PI/2, 0]}/>
+        <Border_1 position={[position[0]+39, position[1]-0.04, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
+        <Border_1 position={[position[0]+39, position[1]-0.04, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
+        <Border_2 position={[position[0]+36, position[1]-0.04, position[2]-24]} rotation={[0, 0, 0]}/>
+        <Border_2 position={[position[0]+30, position[1]-0.04, position[2]-24]} rotation={[0, Math.PI/2, 0]}/>
+        <Border_1 position={[position[0]+27, position[1]-0.04, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
+        <Border_1 position={[position[0]+27, position[1]-0.04, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
@@ -26,6 +60,7 @@ export default function Section2(props){
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
 
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-25]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-5]} rotation={[0, Math.PI/2, 0]}/>
 
         <Grass position={[position[0]+33, position[1]-0.01, position[2]-6]}/>
         <Grass position={[position[0]+33, position[1]-0.01, position[2]-12]}/>

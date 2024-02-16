@@ -5,6 +5,7 @@ Command: npx gltfjsx@6.2.16 public\assets\models\Vehicles.glb -o src/components/
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import ColliderBox from '../../ColliderBox'
 
 export function MotorbikeOrange(props) {
   const { nodes, materials } = useGLTF('/assets/models/Vehicles.glb')
@@ -47,8 +48,11 @@ export function MotorbikeYellow(props) {
 }
 export function IceCreamCart(props) {
   const { nodes, materials } = useGLTF('/assets/models/Vehicles.glb')
+  const position=props.position
+  const rotation= props.rotation
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} >
+      <ColliderBox scale ={[2, 5.5, 1.5]} position={position} rotation = {rotation}/>
       <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
         <mesh castShadow receiveShadow geometry={nodes.Box.geometry} material={materials.Ice_Cream_Cart} rotation={[-Math.PI / 2, 0, 0]} />
         <mesh castShadow receiveShadow geometry={nodes.Object103.geometry} material={materials.Ice_Cream_Cart} position={[-62.31, 0, -14.514]} rotation={[-Math.PI / 2, 0, 0]} />
@@ -59,8 +63,11 @@ export function IceCreamCart(props) {
 }
 export function CarRed(props) {
   const { nodes, materials } = useGLTF('/assets/models/Vehicles.glb')
+  const position = props.position
+  const rotation = props.rotation
   return (
     <group {...props} dispose={null}>
+      <ColliderBox scale={[2, 3, 3.7]} position={position} rotation={rotation}/>
       <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
         <mesh castShadow receiveShadow geometry={nodes.Car.geometry} material={materials.Car_1} position={[0, -1.173, -1.235]} />
         <mesh castShadow receiveShadow geometry={nodes.Car_wheel_fl.geometry} material={materials.Car_1} position={[65, 121.426, -33.587]} rotation={[-Math.PI / 2, 0, 0]} />
@@ -73,8 +80,11 @@ export function CarRed(props) {
 }   
 export function CarGreen(props) {
   const { nodes, materials } = useGLTF('/assets/models/Vehicles.glb')
+  const position = props.position
+  const rotation = props.rotation
   return (
     <group {...props} dispose={null}>
+      <ColliderBox scale={[2, 3, 3.7]} position={position} rotation={rotation}/>
       <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
         <mesh castShadow receiveShadow geometry={nodes.Car_1.geometry} material={materials.Car_2} position={[0, -1.173, -1.235]} />
         <mesh castShadow receiveShadow geometry={nodes.Car_wheel_fl_1.geometry} material={materials.Car_1} position={[65, 121.426, -33.587]} rotation={[-Math.PI / 2, 0, 0]} />

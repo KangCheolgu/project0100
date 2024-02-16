@@ -1,13 +1,7 @@
-import { Tent } from "../components/Tent";
-import { Cabin } from "../components/Cabin";
 import { BeachBall } from "../components/BeachBall";
 import { Surfboard } from "../components/Surfboard";
 import {Grass, Road_1,Road_4, Road_3,Sidewalk_2, Sidewalk, Sidewalk_half, Road_half_3, Sidewalk_corner_3,Sidewalk_corner_7, Border_1, Border_2, Border_3, Border_4, Border_4_1} from "../components/resort/Roads";
-import { Palm_1, Palm_2, Palm_3, Palm_4, Palm_5, Grass_Tree, Clumb_1, Clumb_2, Clumb_3, Clumb_4, Clumb_5, Clumb_6, Clumb_7, Clumb_8, Bush_1_1, Bush_2_1, Bush_3_1 } from "../components/resort/Trees";
-import { Rock1 } from "../components/Rock1";
-import { RockLarge1 } from "../components/RockLarge1";
-import { RockLarge2 } from "../components/RockLarge2";
-import { RockLarge3 } from "../components/RockLarge3";
+import { Palm_1, Palm_2, Palm_3, Palm_4, Palm_5, Grass_Tree, Clumb_1, Clumb_2, Clumb_3, Clumb_4, Clumb_5, Clumb_6, Clumb_7, Clumb_8, Bush_1_1, Bush_2_1, Bush_3_1 } from "../components/resort/Trees1";
 import ColliderBox from "../ColliderBox";
 import { Cliff } from "../components/Cliff";
 import { RedUmbrella } from "../components/RedUmbrella";
@@ -176,13 +170,7 @@ export default function Section5(props){
         <Road_1 scale={[1, 1, 1.1]} position={[position[0]+0, position[1]-0.26, position[2]+6]} rotation={[Math.PI/41, 0, 0]}/>
         <ColliderBox position={[position[0]+0, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
 
-        <Road_4 position={[position[0]+24, position[1]-0.49, position[2]+12]}/>
-        <Road_1 position={[position[0]+30, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+36, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+42, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+48, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
-        <Road_1 position={[position[0]+54, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI/2, 0]}/>
-    <Road_4 position={[position[0]+60, position[1]-0.49, position[2]+12]} rotation={[0, Math.PI, 0]}/>
+        
     </group>
     );
 }

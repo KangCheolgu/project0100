@@ -5,6 +5,7 @@ Command: npx gltfjsx@6.2.16 public\assets\models\Objects.glb -o src/components/r
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import ColliderBox from '../../ColliderBox'
 
 export function TrashCan(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
@@ -41,8 +42,10 @@ export function Umbrella(props) {
 }
 export function TrashBag(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
+  const position = props.position
   return (
     <group {...props} dispose={null}>
+        <ColliderBox scale={[0.7, 1.2, 0.5]} position={position}/>
         <mesh castShadow receiveShadow geometry={nodes.Trash_bag.geometry} material={materials.Trash_bag} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
 
@@ -223,8 +226,10 @@ export function Newspaper(props) {
 } 
 export function Mailbox(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
+  const position = props.position
   return (
   <group {...props} dispose={null}>
+    <ColliderBox scale={[0.8, 3, 0.8]} position={position}/>
     <mesh castShadow receiveShadow geometry={nodes.Mailbox.geometry} material={materials.Mailbox} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
   </group>
   )
@@ -232,8 +237,10 @@ export function Mailbox(props) {
 
 export function Lighter(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
+  const position = props.position
   return (
   <group {...props} dispose={null}>
+    <ColliderBox scale={[0.3, 6, 0.3]} position={position}/> 
     <mesh castShadow receiveShadow geometry={nodes.Lighter.geometry} material={materials.Lighter_hydrant} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
   </group>
   )
@@ -272,8 +279,10 @@ export function Fence1(props) {
 }
 export function Cone(props) {
   const { nodes, materials } = useGLTF('/assets/models/Objects.glb')
+  const position = props.position
   return (
     <group {...props} dispose={null}>
+      <ColliderBox scale={[0.5, 1.5, 0.5]} position={position}/>
       <mesh castShadow receiveShadow geometry={nodes.Cone.geometry} material={materials.Border_road_props} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </group>
   )
