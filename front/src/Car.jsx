@@ -4,7 +4,8 @@ import { Html } from '@react-three/drei'
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
 import { Vector3 } from "three";
-import { socket } from "./Scene.jsx";
+// import { socket } from "./Scene.jsx";
+import { socket } from "./lobby/lobby.jsx";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { CarModel } from "./components/CarModel.jsx";
@@ -17,10 +18,12 @@ import { Speed } from "./Speeds.jsx";
 import FollowCamera from "./utils/FollowCamera.jsx";
 import { CollisionHandler } from "./CollisionHandler.jsx";
 import { calculateSpeed } from "./utils/speedCalculator.jsx";
+import useGame from "./stores/useGame.jsx";
 import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
 
 let checkPointIndex = 0
+let lapseCheck = [false]
 
 const Car = ({ cameraGroup, ...props }) => {
     // 이전 등수 현재등수
@@ -83,7 +86,7 @@ const Car = ({ cameraGroup, ...props }) => {
   );
 
   // brake lights
-  const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
+  // const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
 
   // 클락션 소리 /////////////////////////////////////////////////////////
   const klaxonDuration = 500; // 1초
@@ -113,55 +116,89 @@ const Car = ({ cameraGroup, ...props }) => {
   const lastUpdateTime = useRef(Date.now());
 
   useEffect(() => {
-    const updateSpeed = () => {
-      const now = Date.now();
-      const deltaTime = (now - lastUpdateTime.current) / 1000; // Convert to seconds
-      const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
-      // Use the utility function to calculate speed
-      const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
-      // Check if the speed has changed significantly (by 10 km/h or more)
-      // if (Math.abs(speed - lastSpeed.current) >= 10) {
-        setCurrentSpeed(speed); // Update the state only if the change is significant
-        lastSpeed.current = speed; // Update the last speed reference
-      // }
+    if (socket.id === props.id) {
+      const updateSpeed = () => {
+        const now = Date.now();
+        const deltaTime = (now - lastUpdateTime.current) / 1000; // Convert to seconds
+        const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
+        // Use the utility function to calculate speed
+        const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
+        // Check if the speed has changed significantly (by 10 km/h or more)
+        // if (Math.abs(speed - lastSpeed.current) >= 10) {
+          setCurrentSpeed(speed); // Update the state only if the change is significant
+          lastSpeed.current = speed; // Update the last speed reference
+        // }
 
-      // Always update the last position and time, regardless of whether the speed was updated
-      lastPosition.current.copy(currentPosition);
-      lastUpdateTime.current = now;
-    };
+        // Always update the last position and time, regardless of whether the speed was updated
+        lastPosition.current.copy(currentPosition);
+        lastUpdateTime.current = now;
+      };
+    
 
-    const intervalId = setInterval(updateSpeed, 300); // Continue to check speed every 200ms
-    return () => clearInterval(intervalId);
+      const intervalId = setInterval(updateSpeed, 500); // Continue to check speed every 200ms
+      return () => clearInterval(intervalId);
+    }
   }, []);
 
-  // Back-View 카메라
+  // 랩타임 관련
+  const end = useGame((state)=> state.end)
+  const around = useGame((state) => state.around)
+
   useFrame((state, delta) => {
-    const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-    const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
+    if (socket.id === props.id) {
+      const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+      const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
+        // 부스터 이펙트 위치 및 방향 지정.
+      cameraGroup.current.quaternion.copy(bodyRotation);
+      cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
 
-      // 부스터 이펙트 위치 및 방향 지정.
-    cameraGroup.current.quaternion.copy(bodyRotation);
-    cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
-    /* Phases*/
+      /* Phases*/
+      // if (checkPointIndex === 1 && lapseCheck[0] === false) {
+      //   around()
+      //   lapseCheck[0] = true
+      // }
 
-    // 체크 포인트 인덱스 갱신 
-    // 지정된 위치를 지나면 checkpointIndex를 올림
-    if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'x') {
-      if (CheckPoint[checkPointIndex % (CheckPoint.length)].x - 10 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 10
-        && CheckPoint[checkPointIndex % (CheckPoint.length)].z - 0.5 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 0.5) {
-        // checkPointIndex++
+      // if (checkPointIndex === 2) {
+      //   end()     
+      // }
+
+      if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
+        around()
+        lapseCheck[0] = true
+      }
+      if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
+        end()     
       }
 
-    } else if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'z') {
-      if (CheckPoint[checkPointIndex % (CheckPoint.length)].z - 10 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 10
-        && CheckPoint[checkPointIndex % (CheckPoint.length)].x - 0.5 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 0.5) {
-        // checkPointIndex++
+      // 체크 포인트 인덱스 갱신 
+      // 지정된 위치를 지나면 checkpointIndex를 올림
+      if(checkPointIndex % (CheckPoint.length) === 13 ){
+        if (CheckPoint[checkPointIndex % (CheckPoint.length)].z - 25 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 25
+            && CheckPoint[checkPointIndex % (CheckPoint.length)].x - 0.5 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 0.5) {
+              console.log(checkPointIndex % (CheckPoint.length),"번 체크포인트 지남")
+              checkPointIndex++
+        }
+      } else {
+        if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'x') {
+          if (CheckPoint[checkPointIndex % (CheckPoint.length)].x - 10 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 10
+            && CheckPoint[checkPointIndex % (CheckPoint.length)].z - 0.5 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 0.5) {
+            console.log(checkPointIndex % (CheckPoint.length),"번 체크포인트 지남")
+            checkPointIndex++
+          }
+
+        } else if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'z') {
+          if (CheckPoint[checkPointIndex % (CheckPoint.length)].z - 10 < bodyPosition.z && bodyPosition.z < CheckPoint[checkPointIndex % (CheckPoint.length)].z + 10
+            && CheckPoint[checkPointIndex % (CheckPoint.length)].x - 0.5 < bodyPosition.x && bodyPosition.x < CheckPoint[checkPointIndex % (CheckPoint.length)].x + 0.5) {
+            console.log(checkPointIndex % (CheckPoint.length),"번 체크포인트 지남")
+            checkPointIndex++
+          }
+        }
       }
     }
-  }
-  );
+  });
 
   useEffect(() => {
+
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
 
@@ -210,11 +247,9 @@ const Car = ({ cameraGroup, ...props }) => {
         } else {
           // 상대방 실시간 위치
           const targetX = parseFloat(targetPosition.x.toFixed(3))
-          const targetY = parseFloat(targetPosition.y.toFixed(3))
           const targetZ = parseFloat(targetPosition.z.toFixed(3))
           // 나의 실시간 위치
           const myX = parseFloat(bodyPosition.x.toFixed(3))
-          const myY = parseFloat(bodyPosition.y.toFixed(3))
           const myZ = parseFloat(bodyPosition.z.toFixed(3))
           // 체크포인트 축이 z라면 x 비교 
           if (CheckPoint[checkPointIndex].axis === 'z') {
@@ -239,7 +274,6 @@ const Car = ({ cameraGroup, ...props }) => {
               setCurrentRank(newRank);
             }
           }
-
         }
       }
     }
@@ -321,16 +355,17 @@ const Car = ({ cameraGroup, ...props }) => {
           quaternion: bodyQuaternion,
           velocity: newVelocity,
           acceleration: newAcceleration,
-          checkPointIndex: checkPointIndex
+          checkPointIndex: checkPointIndex,
+          index: props.index
         };
         socket.emit("currentState", currentState);
       }
-    }, 30);
+    }, 15);
   };
 
   return (<>
     <group ref={cameraGroup}>
-      <Speed />
+      <Speed id={socket.id}/>
     </group>
     <group ref={vehicle} castShadow receiveShadow>
       <Suspense>

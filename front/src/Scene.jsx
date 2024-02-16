@@ -1,5 +1,4 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-
+import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
 import { Physics, Debug } from "@react-three/cannon";
 import Car_App from "./Car.jsx";
 import io from "socket.io-client"
@@ -20,6 +19,8 @@ import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
+import { socket } from "./lobby/lobby.jsx";
+import Spectator from "./Spectator.jsx";
 import Water from "./Water.jsx";
 import * as THREE from "three";
 import Interaface2 from "./Interface2.jsx";
@@ -31,12 +32,13 @@ import { gsap } from "gsap";
 import Wall from "./Map2/ColliderWall_Map2.jsx";
 import Light from "./Light.jsx";
 
-export const socket = io("http://localhost:5000")
-
+// 여기 변경
+// export const socket = io("http://localhost:5000/")
 export default function Scene() {
   const ocean = useRef();
   // 플레이어 받아서 플레이어 마다 Car 컴포넌트 생성
   const [players, setPlayers] = useState([])
+  const [spectators, setSpectators] = useState([])
 
   // 상태 체크하여 
   const [state, setState] = useState(false)
@@ -90,6 +92,7 @@ export default function Scene() {
 
   const startPingCheck = async () => {
     //핑 체크 0.1초 간격
+    console.log("핑체크");
     const pingCheck = setInterval(() => {
       // date 
       const start = Date.now();
@@ -114,18 +117,22 @@ export default function Scene() {
   }
 
 ///////////////////////// 핑관련 끝
+  useEffect(() => {
+    socket.emit("startGame")
+  },[])
  
   // 유저 접속 관련
   useEffect(() => {
     // 접속한 유저 목록 갱신
-    function onPlayers(backEndPlayers){ 
-      const playersArray = Object.values(backEndPlayers);
-      setPlayers(playersArray)
+    function onPlayers(roomData){ 
+      console.log(roomData);
+      setPlayers(roomData.players)
+      setSpectators(roomData.spectators)
     }
-
+    
     // 내가 설정한 최대 인원 숫자와 현재 인원이 같으면 핑체크 시작
     socket.on("clientCount", () => {
-
+        console.log("클라이언트 카운트다운");
         const pingCheck = setTimeout(() => {
           startPingCheck()
         }, 4000)
@@ -140,7 +147,6 @@ export default function Scene() {
 
      // 스타트 시그널을 받으면 
     socket.on("startSignal", (allPings)=>{
-
       // 상대핑의 평균을 구하여 
       const allPingsArray = Object.values(allPings);
       const opponentPingData = allPingsArray.find(ping => ping.id !== socket.id);
@@ -158,13 +164,15 @@ export default function Scene() {
 
     return (() => {
       socket.off("updatePlayers", onPlayers);
+      socket.off("opponentPing")
+      socket.off("clientCount")
     })
   },[])
 
   // 상대에게 내 핑 상태를 보냄
   useEffect(() => {
     const sendPingResultToServer = () => {
-      // 핑 결과를 서버로 보냅니다.
+      // 핑 결과를 서버로 보냅니다. 이걸 두번 합니다.
       socket.emit("pingResult", averagePing );
       console.log("my ping :", averagePing);
     };
@@ -222,7 +230,7 @@ export default function Scene() {
 
   return (
     <>
-      <Interface players={players}/>
+      <Interface />
       <BgmSound />
       <Canvas shadows>
         <PerspectiveCamera position={[1.5, 8, 4]} fov={75} makeDefault/>
@@ -242,6 +250,7 @@ export default function Scene() {
           position={[30, 60, -100]}
           color="#ffffff"
         />
+        {/* <SkyCube scale={100} position={[30, 0, -50]}/> */}
         {/*DirectionalLight & Camera Helper*/}
         {/*<Light/>*/}
         
@@ -282,6 +291,9 @@ export default function Scene() {
             </Suspense>
          </Debug>
         </Physics>
+        {spectators.map((spectator, index) => (
+          <Spectator id={spectator.id} key={index} position={spectator.position} />
+        ))}
       </Canvas>
     </>
   );
