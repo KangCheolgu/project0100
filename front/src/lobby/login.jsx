@@ -4,8 +4,8 @@ import axios from "axios";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const CURRENT_URL = "http://localhost:5000"
-// const CURRENT_URL = "https://project0100.shop:5000"
+// const CURRENT_URL = "http://localhost:5000"
+const CURRENT_URL = "https://project0100.shop"
 
 function LoginPage() {
   const navigate = useNavigate();

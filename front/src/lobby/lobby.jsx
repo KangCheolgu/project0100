@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import cookie from 'react-cookies';
 
-export const socket = io("http://localhost:5000/")
-// export const socket = io("https://project0100.shop:5000")
+// export const socket = io("http://localhost:5000/")
+export const socket = io("https://project0100.shop")
 
 export const LobbyPage = () => {
   const navigate = useNavigate()

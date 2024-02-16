@@ -1,12 +1,10 @@
 import { Server } from "socket.io"
 import express from "express"; // express를 가져와 변수에 저장
 import http from "http"; // 서버의 정보
-import https from "https"
 import cors from "cors"
 import bodyParser from "body-parser"
 import auth from "./utils/auth.js";
 import dotenv from 'dotenv';
-import sslKeys from "./utils/sslKeys.mjs";
 
 dotenv.config();
 
@@ -15,17 +13,11 @@ dotenv.config();
 // const __dirname = fileURLToPath(path.dirname(import.meta.url));
 
 const app = express(); // express를 실행한 값을 app에 저장
-let server;
+const server = http.createServer(app);
 
-if (process.env.NODE_ENV === 'production') {
-  server = https.createServer(sslKeys, app).listen(443, () => {
-    console.log(`Node.js : 443 포트에서 서버가 가동되었습니다!`);
-  });
-} else {
-  server = http.createServer(app).listen(5000, () => {
-    console.log('서버가 5000 포트에서 실행 중입니다.');
-  })
-}
+server.listen(5000, () => {
+  console.log(`서버가 5000번 포트에서 실행 중입니다.`);
+});
 
 // Cors 관련
 const io = new Server(server, {

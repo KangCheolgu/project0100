@@ -14,7 +14,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET// YOUR GOOGLE_CLIE
 let GOOGLE_LOGIN_REDIRECT_URI
 
 if (process.env.NODE_ENV === 'production') {
-    GOOGLE_LOGIN_REDIRECT_URI = 'https://project0100.shop:3000/auth/google';
+    GOOGLE_LOGIN_REDIRECT_URI = 'https://project0100.shop/auth/google/redirect';
 } else {
     GOOGLE_LOGIN_REDIRECT_URI = 'http://localhost:3000/auth/google/redirect';
 }
