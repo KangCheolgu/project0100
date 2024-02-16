@@ -257,18 +257,18 @@ export default function Scene() {
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -3, 0]}>
-          <Debug>
+          {/*<Debug>*/}
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
               <Map2 position={[0, 0, -94]}/>
               <Wall />
             
-            {/*
+            {
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-              */}
+            }
   
                                                           
             {/* <Ground /> */}
@@ -289,7 +289,7 @@ export default function Scene() {
             )}
             
             </Suspense>
-         </Debug>
+         {/*</Debug>*/}
         </Physics>
         {spectators.map((spectator, index) => (
           <Spectator id={spectator.id} key={index} position={spectator.position} />

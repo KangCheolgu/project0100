@@ -21,6 +21,7 @@ import { calculateSpeed } from "./utils/speedCalculator.jsx";
 import useGame from "./stores/useGame.jsx";
 import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
+import { Minimap } from "./Minimap.jsx";
 
 let checkPointIndex = 0
 let lapseCheck = [false]
@@ -197,6 +198,12 @@ const Car = ({ cameraGroup, ...props }) => {
     }
   });
 
+  const [targetX, setMinimapTargetX] = useState(1)
+  const [targetZ, setMinimapTargetZ] = useState(12)
+
+  const [myX, setMinimapMyX] = useState(-1)
+  const [myZ, setMinimapMyZ] = useState(-12)
+  
   useEffect(() => {
 
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
@@ -206,6 +213,12 @@ const Car = ({ cameraGroup, ...props }) => {
       const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
 
+    
+      const targetX = parseFloat(targetPosition.x.toFixed(2))
+      const targetZ = parseFloat(targetPosition.y.toFixed(2))
+
+      const myX = parseFloat(bodyPosition.x.toFixed(2))
+      const myZ = parseFloat(bodyPosition.z.toFixed(2))
       if (updateData.id === props.id && socket.id !== props.id) {
         const targetQuaternion = new THREE.Quaternion(updateData.quaternion[0], updateData.quaternion[1], updateData.quaternion[2], updateData.quaternion[3]);
         const targetVelocity = new THREE.Vector3(updateData.velocity.x, updateData.velocity.y, updateData.velocity.z);
@@ -386,6 +399,7 @@ const Car = ({ cameraGroup, ...props }) => {
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
+      <Minimap targetX={targetX} targetZ={targetZ} myX={myX} myZ={myZ}/>
     </group>
   </>
 
