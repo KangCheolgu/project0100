@@ -228,7 +228,7 @@ export default function Scene() {
   return (
     <>
       <Interface players={players}/>
-      <BgmSound />
+      {/* <BgmSound /> */}
       <Canvas shadows>
         <PerspectiveCamera position={[1.5, 8, 4]} fov={75} makeDefault/>
         <Background backgroundColors={backgroundColors}/>
@@ -262,12 +262,11 @@ export default function Scene() {
               <Map2 position={[0, 0, -94]}/>
               <Wall />
             
-            {/* {
+            {
               players.map((player, index) => (
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
-            } */}
-  
+            }
                                                           
             {/* <Ground /> */}
             {isObstacleStarted && (

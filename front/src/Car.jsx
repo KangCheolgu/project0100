@@ -19,6 +19,7 @@ import { CollisionHandler } from "./CollisionHandler.jsx";
 import { calculateSpeed } from "./utils/speedCalculator.jsx";
 import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
+import { Minimap } from "./components/Minimap.jsx";
 
 let checkPointIndex = 0
 
@@ -161,6 +162,13 @@ const Car = ({ cameraGroup, ...props }) => {
   }
   );
 
+  //Minimap 관련 변수들
+  const [targetX, setMinimapTargetX] = useState(1)
+  const [targetZ, setMinimapTargetZ] = useState(12)
+  
+  const [myX, setMinimapMyX] = useState(-1)
+  const [myZ, setMinimapMyZ] = useState(-12)
+  
   useEffect(() => {
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
@@ -168,6 +176,23 @@ const Car = ({ cameraGroup, ...props }) => {
     function updateAnotherPlayer(updateData) {
       const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+
+          //Minimap 좌표 가져오기
+          //상대 좌표
+          const targetX = parseFloat(targetPosition.x.toFixed(2))
+          const targetZ = parseFloat(targetPosition.y.toFixed(2))
+          
+          //내 좌표
+          const myX = parseFloat(bodyPosition.x.toFixed(2))
+          const myZ = parseFloat(bodyPosition.z.toFixed(2))
+
+          
+          // 상대방, 나의 실시간 위치를 미니맵으로 보내기 위한 useState
+          setMinimapTargetX(targetX)
+          setMinimapTargetZ(targetZ)
+          setMinimapMyX(myX)
+          setMinimapMyZ(myZ)
+      
 
       if (updateData.id === props.id && socket.id !== props.id) {
         const targetQuaternion = new THREE.Quaternion(updateData.quaternion[0], updateData.quaternion[1], updateData.quaternion[2], updateData.quaternion[3]);
@@ -216,6 +241,7 @@ const Car = ({ cameraGroup, ...props }) => {
           const myX = parseFloat(bodyPosition.x.toFixed(3))
           const myY = parseFloat(bodyPosition.y.toFixed(3))
           const myZ = parseFloat(bodyPosition.z.toFixed(3))
+
           // 체크포인트 축이 z라면 x 비교 
           if (CheckPoint[checkPointIndex].axis === 'z') {
             if (targetX > myX) {
@@ -239,7 +265,6 @@ const Car = ({ cameraGroup, ...props }) => {
               setCurrentRank(newRank);
             }
           }
-
         }
       }
     }
@@ -349,6 +374,7 @@ const Car = ({ cameraGroup, ...props }) => {
         {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
+      <Minimap targetX={targetX} targetZ={targetZ} myX={myX} myZ={myZ}/>
     </group>
   </>
 
