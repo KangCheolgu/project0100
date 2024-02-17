@@ -77,8 +77,8 @@ export function Minimap({size=300, sizeHeight=300, chassisBody, socket, vehicleI
         // miniMap.current.quaternion.setFromRotationMatrix(matrix)
         // player.current.quaternion.setFromRotationMatrix(matrix)
         
-        // const ratioX = size / 10
-        // const ratioY = 600 / size
+        const ratioX = size / 10
+        const ratioY = 600 / size
         
       player1.current.position.set(screenPosition.x - 74 + myX, screenPosition.y - 65 - myZ, 0)
       player2.current.position.set(screenPosition.x - 74 + targetX, screenPosition.y - 65 - targetZ, 0)
