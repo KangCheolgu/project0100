@@ -60,55 +60,89 @@ function MiniMapTexture({ buffer }) {
     return <OrthographicCamera ref={camera} makeDefault={false} rotation={[-Math.PI / 2, 0, 0]} near={20} far={500} />
 }
 
-export function Minimap({size=300, targetX, targetZ, myX, myZ }){
-    // 수정된 부분: useFBO 훅을 사용하여 buffer 생성
-    // const virtualScene = useMemo(() => new THREE.Scene(), [])
-    // const buffer = useFBO(600, 600)
-    // const miniMapCamera = useRef()
-    // const miniMap = useRef()
-    // const { gl, camera, scene, size: screenSize } = useThree(({ camera, gl, scene, size }) => ({ gl, camera, scene, size }))
-    // const [screenPosition, setScreenPosition] = useState(new THREE.Vector3(screenSize.width / 2 - size / 2, screenSize.height / 2 - size / 2, 0))
-    // const player = useRef()
-    // const player2 = useRef()
-    // const matrix = new THREE.Matrix4()
+let targetX, targetZ
 
-    // useEffect(() => {
-    //     setScreenPosition(new THREE.Vector3(0,0,0), [screenSize])
-    // }, [])
+export function Minimap({size=300, chassisBody, socket }){
 
-    // useFrame(() => {
-    //     matrix.copy(camera.matrix).invert()
-    //     miniMap.current.quaternion.setFromRotationMatrix(matrix)
-    //     player.current.quaternion.setFromRotationMatrix(matrix)
-    //     // player2.current.quaternion.setFromRotationMatrix(matrix)
-    //     gl.autoClear = true
-    //     gl.render(scene, camera)
-    //     gl.autoClear = false
-    //     gl.clearDepth()
+  socket.on("updateAnotherPlayer", (data)=>{
+    //data => id, position, quaternion, velocity, acceleration checkPointIndex, index
+    const targetPosition = new THREE.Vector3(data.position.x, data.position.y ,data.position.z);
+    targetX = parseFloat(targetPosition.x.toFixed(3))
+    targetZ = parseFloat(targetPosition.z.toFixed(3))
+    // console.log(targetX)
+    
+  })
+  
+  // useFrame(()=>{
+  //   const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
+    
+  //   const myX = parseFloat(bodyPosition.x.toFixed(3))
+  //   const myZ = parseFloat(bodyPosition.z.toFixed(3))
 
-    //     const ratioX = size / 10
-    //     const ratioY = 600 / size
+  // })
+  
+  // useEffect(()=>{
+  //   const myX = bodyPosition.x.
+      
+  //     console.log(myX)
+  //   }, [bodyPosition])
+
+
+    
+    //수정된 부분: useFBO 훅을 사용하여 buffer 생성
+    const virtualScene = useMemo(() => new THREE.Scene(), [])
+    const buffer = useFBO(600, 600)
+    const miniMapCamera = useRef()
+    const miniMap = useRef()
+    const { gl, camera, scene, size: screenSize } = useThree(({ camera, gl, scene, size }) => ({ gl, camera, scene, size }))
+    const [screenPosition, setScreenPosition] = useState(new THREE.Vector3(screenSize.width / 2 - size / 2, screenSize.height / 2 - size / 2, 0))
+    const player = useRef()
+    const player2 = useRef()
+    const matrix = new THREE.Matrix4()
+    
+    useEffect(() => {
+        setScreenPosition(new THREE.Vector3(0,0,0), [screenSize])
+    }, [])
+
+    useFrame(() => {
+      const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
+    
+      const myX = parseFloat(bodyPosition.x.toFixed(3))
+      const myZ = parseFloat(bodyPosition.z.toFixed(3))
+
+        matrix.copy(camera.matrix).invert()
+        miniMap.current.quaternion.setFromRotationMatrix(matrix)
+        player.current.quaternion.setFromRotationMatrix(matrix)
+        player2.current.quaternion.setFromRotationMatrix(matrix)
+        gl.autoClear = true
+        gl.render(scene, camera)
+        gl.autoClear = false
+        gl.clearDepth()
+
+        const ratioX = size / 10
+        const ratioY = 600 / size
         
-    //     player.current.position.set(screenPosition.x + myX * ratioX, screenPosition.y - myZ * ratioY, 0)
-    //     // player2.current.position.set(screenPosition.x + targetX * ratioX, screenPosition - targetZ * ratioY, 0)
-    //     gl.render(virtualScene, miniMapCamera.current)
-    //   }, 1)
+        player.current.position.set(screenPosition.x + targetX * ratioX, screenPosition.y - targetZ * ratioY, 0)
+        player2.current.position.set(screenPosition.x + myX * ratioX, screenPosition - myZ * ratioY, 0)
+        gl.render(virtualScene, miniMapCamera.current)
+      }, 1)
       
 
-    // return (
-    //     <>
-    //   {createPortal(
-    //     <>
-    //       <OrthographicCamera ref={miniMapCamera} makeDefault={false} position={[0, 0, 100]} />
-    //       <sprite ref={miniMap} position={screenPosition} scale={[size, size, 1]}>
-    //         <spriteMaterial map={buffer.texture} />
-    //       </sprite>
-    //       <sprite ref={player} position={screenPosition} scale={[size / 30, size / 30, 1]} />
-    //       {/* <sprite ref={player2} position={screenPosition} scale={[size / 30, size/ 30, 1]} /> */}
-    //     </>,    
-    //     virtualScene,
-    //   )}
-    //   <MiniMapTexture buffer={buffer} />
-    // </>
-    // );
+    return (
+        <>
+      {createPortal(
+        <>
+          <OrthographicCamera ref={miniMapCamera} makeDefault={false} position={[0, 0, 100]} />
+          <sprite ref={miniMap} position={screenPosition} scale={[size, size, 1]}>
+            <spriteMaterial map={buffer.texture} />
+          </sprite>
+          <sprite ref={player} position={screenPosition} scale={[size / 30, size / 30, 1]} />
+          <sprite ref={player2} position={screenPosition} scale={[size / 30, size/ 30, 1]} />
+        </>,    
+        virtualScene,
+      )}
+      <MiniMapTexture buffer={buffer} />
+    </>
+    );
+
 }

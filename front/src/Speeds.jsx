@@ -47,7 +47,6 @@ export const Speed = (props) => {
     const speedMaterial = useRef();
     const [showSpeed, setShowSpeed] = useState(false);
     const handleKeyDown = (event) => {
-      console.log(event);
       if (event.shiftKey) {
           setShowSpeed(true);
       }
