@@ -47,6 +47,7 @@ export default function Section2(props){
         <Border_2 position={[position[0]+30, position[1]-0.04, position[2]-24]} rotation={[0, Math.PI/2, 0]}/>
         <Border_1 position={[position[0]+27, position[1]-0.04, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+27, position[1]-0.04, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
+        
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>

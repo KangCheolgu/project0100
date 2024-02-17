@@ -269,6 +269,7 @@ export default function Scene() {
                 <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
               ))
             }
+  
                                                           
             {/* <Ground /> */}
             {isObstacleStarted && (
@@ -277,7 +278,7 @@ export default function Scene() {
             <SpinObstacle position={[25,0.5,-28]} offset={3}/>
             <SpinObstacle position={[27,0.5,-97]} offset={4}/>
             {/* <LeftAndRightObstacle/> */}
-            <ShutterObstacle/>
+            {/*<ShutterObstacle/>*/}
             <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
             <CarGreenObstacle/>
             {/* <MotorObstacle/> */}

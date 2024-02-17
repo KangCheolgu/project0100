@@ -200,10 +200,10 @@ const Car = ({ cameraGroup, ...props }) => {
 
   
   useEffect(() => {
-
+    
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
-
+    
     function updateAnotherPlayer(updateData) {
       const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
@@ -399,6 +399,6 @@ const Car = ({ cameraGroup, ...props }) => {
 }
 const Car_App = (props) => {
   const cameraGroup = useRef();
-  return <Car {...props} cameraGroup={cameraGroup} />;
+  return <Car {...props} cameraGroup={cameraGroup}/>;
 };
 export default Car_App;
