@@ -1,17 +1,20 @@
 import { OrthographicCamera, useFBO } from '@react-three/drei'
-import { createPortal, useThree, useFrame } from '@react-three/fiber'
+import { extend, createPortal, useThree, useFrame } from '@react-three/fiber'
 import { useEffect, useRef, useMemo, useState } from 'react'
 import * as THREE from 'three';
+import { MeshLineGeometry , MeshLineMaterial } from 'meshline'
+
+extend({ MeshLineGeometry, MeshLineMaterial })
 
 function MiniMapTexture({ buffer }) {
     const camera = useRef()
-    const { gl, scene } = useThree()
+    const { gl, scene } = useThree(({ gl, scene }) => ({ gl, scene }))
 
     useEffect(() => {
       gl.setRenderTarget(buffer)
       // 수정된 부분: 상대적인 값 대신에 절대적인 값으로 설정
-      camera.current.bottom = -60
-      camera.current.top = 150
+      camera.current.bottom = -55
+      camera.current.top = 145
       camera.current.left = -10
       camera.current.right =70
       // 수정된 부분: 카메라 위치 재설정
@@ -24,44 +27,65 @@ function MiniMapTexture({ buffer }) {
     return <OrthographicCamera ref={camera} makeDefault={false} rotation={[-Math.PI / 2, 0, 0]} near={20} far={500} />
 }
 
-export function Minimap({size=300, targetX, targetZ, myX, myZ }){
-    // 수정된 부분: useFBO 훅을 사용하여 buffer 생성
+let targetX, targetZ
+
+export function Minimap({size=200, size_height=300, chassisBody, socket }){
     const virtualScene = useMemo(() => new THREE.Scene(), [])
     const buffer = useFBO(600, 600)
     const miniMapCamera = useRef()
     const miniMap = useRef()
-    const { gl, camera, scene, size: screenSize } = useThree(({ camera, gl, scene, size }) => ({ gl, camera, scene, size }))
-    const [screenPosition, setScreenPosition] = useState(new THREE.Vector3(screenSize.width / 2 - size / 2, screenSize.height / 2 - size / 2, 0))
-    const player = useRef()
+    const { gl, camera, scene, size: screenSize } = useThree(({ camera, gl, scene, size, size_height }) => ({ gl, camera, scene, size, size_height }))
+    const [screenPosition, setScreenPosition] = useState(new THREE.Vector3(screenSize.width / 2 - size / 2, screenSize.height / 2 - size_height / 2, 0))
+    const player1 = useRef()
+    const player2 = useRef()
     const matrix = new THREE.Matrix4()
+    const direction = new THREE.Vector3()
+
+    socket.on("updateAnotherPlayer", (data)=>{
+      //data => id, position, quaternion, velocity, acceleration checkPointIndex, index
+      const targetPosition = new THREE.Vector3(data.position.x, data.position.y ,data.position.z);
+      targetX = parseFloat(targetPosition.x.toFixed(3))
+      targetZ = parseFloat(targetPosition.z.toFixed(3))
+      // console.log(targetX)
+      
+    })
 
     useEffect(() => {
-        setScreenPosition(new THREE.Vector3(0,0,0), [screenSize])
-    }, [])
+        setScreenPosition(new THREE.Vector3(screenSize.width / 2 - size / 2, screenSize.height / 2 - size_height / 2, 0))
+      }, [screenSize])
+    
 
     useFrame(() => {
-        matrix.copy(camera.matrix).invert()
+      const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
+
+        {/*matrix.copy(camera.matrix).invert()
         miniMap.current.quaternion.setFromRotationMatrix(matrix)
-        player.current.quaternion.setFromRotationMatrix(matrix)
+        player1.current.quaternion.setFromRotationMatrix(matrix)
+    player2.current.quaternion.setFromRotationMatrix(matrix)*/}
         gl.autoClear = true
         gl.render(scene, camera)
         gl.autoClear = false
         gl.clearDepth()
-        const ratioX = size / 10
-        const ratioY = 600 / size
-        player.current.position.set(screenPosition.x + 1 * ratioX, screenPosition.y - 1 * ratioY, 0)
+        {/*direction.subVectors(new THREE.Vector3(myX, 0, myZ), new THREE.Vector3(0, 0, 0)*/}
+        const ratioX = size / 71
+        const ratioY = 101 / size
+        player1.current.position.set(screenPosition.x-74+bodyPosition.x, screenPosition.y-65-bodyPosition.z, 0)
+        player2.current.position.set(screenPosition.x-74+targetX, screenPosition.y-65-targetZ, 0)
         gl.render(virtualScene, miniMapCamera.current)
       }, 1)
+    
+      
 
     return (
         <>
       {createPortal(
         <>
           <OrthographicCamera ref={miniMapCamera} makeDefault={false} position={[0, 0, 100]} />
-          <sprite ref={miniMap} position={screenPosition} scale={[size, size, 1]}>
+          <sprite ref={miniMap} position={screenPosition} scale={[size, size_height, 1]}>
             <spriteMaterial map={buffer.texture} />
           </sprite>
-          <sprite ref={player} position={screenPosition} scale={[size / 30, size / 30, 1]} />
+          <sprite material-color="red" ref={player1} position={[screenPosition]} scale={[size/30,size_height/50, 1]} />
+          <sprite material-color="blue" ref={player2} position={[screenPosition]} scale={[size/30,size/30, 1]} />
         </>,    
         virtualScene,
       )}
