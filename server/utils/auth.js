@@ -59,8 +59,8 @@ router.post('/google/gettoken', async (req, res) => {
 router.get('/naver', (req, res) => {
   console.log("/auth/naver");
   let url = 'https://nid.naver.com/oauth2.0/authorize';
-  url += '&response_type=code'
-  url += `?client_id=${NAVER_CLIENT_ID}`
+  url += '?response_type=code'
+  url += `&client_id=${NAVER_CLIENT_ID}`
   url += `&redirect_uri=${NAVER_LOGIN_REDIRECT_URI}`
   url += `&state=test` 
 
@@ -92,7 +92,7 @@ router.get('/naver', (req, res) => {
 //   console.log("resp2 ",resp2.data);
 //   res.json(resp2.data)
 // });
-
+import { request } from "express";
 router.post('/naver/gettoken', function (req, res) {
   code = req.body.code;
   state = req.body.state;
@@ -103,7 +103,7 @@ router.post('/naver/gettoken', function (req, res) {
       url: api_url,
       headers: {'X-Naver-Client-Id':NAVER_CLIENT_ID, 'X-Naver-Client-Secret': NAVER_CLIENT_SECRET}
    };
-  request.get(options, function (error, response, body) {
+    request.get(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       // res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
       res.end(body);
@@ -112,6 +112,60 @@ router.post('/naver/gettoken', function (req, res) {
       console.log('error = ' + response.statusCode);
     }
   });
+
+  router.post('/naver/gettoken', function (req, res) {
+    let code = req.body.code;
+    let state = req.body.state;
+    let api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
+     + NAVER_CLIENT_ID + '&client_secret=' + NAVER_CLIENT_SECRET + '&redirect_uri=' + NAVER_LOGIN_REDIRECT_URI + '&code=' + code + '&state=' + state;
+  
+    const options = {
+      url: api_url,
+      headers: {'X-Naver-Client-Id': NAVER_CLIENT_ID, 'X-Naver-Client-Secret': NAVER_CLIENT_SECRET}
+    };
+    
+    axios.get(api_url, options)
+      .then(response => {
+        const responseData = response.data
+        const accessToken = responseData.access_token;
+
+        var header = "Bearer " + accessToken;
+        var api_url2 = 'https://openapi.naver.com/v1/nid/me';
+        var options2 = {
+          url: api_url2,
+          headers: {'Authorization': header}
+        };
+        
+        axios.get(api_url2, options2)
+          .then(response => {
+              res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
+              console.log(response.data);
+              console.log(JSON.stringify(response.data));
+              res.end(JSON.stringify(response.data));
+          })
+          .catch(error => {
+              console.error('Error:', error.message);
+              if (error.response) {
+                  res.status(error.response.status).end();
+                  console.log('error = ' + error.response.status);
+              } else {
+                  res.status(500).end();
+              }
+          });
+      })
+      .catch(error => {
+        if (error.response) {
+          res.status(error.response.status).end();
+          console.error('Error:', error.response.status);
+        } else {
+          res.status(500).end();
+          console.error('Error:', error.message);
+        }
+      });
+
+    
+  })
+
 });
 
 export default router

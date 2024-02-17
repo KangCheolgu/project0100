@@ -22,10 +22,6 @@ function AuthNaver() {
     const code = searchParams.get("code")
     const state = searchParams.get("state")
 
-    console.log("여긴 오냐?");
-    console.log(code);
-    console.log(state);
-
     axios.post( CURRENT_URL + "/api/auth/naver/gettoken", {
       withCredentials: true,
       code: code,
@@ -33,13 +29,11 @@ function AuthNaver() {
     })
       .then((res) => {
         if (res.status == 200) {
-          console.log(res.data.email);
-          console.log(res.data.name);
-          cookie.save('userEmail', res.data.email, {
+          cookie.save('userEmail', res.data.response.email, {
             path:"/",
             expires
           });
-          cookie.save('userName', res.data.name, {
+          cookie.save('userName', res.data.response.name, {
             path:"/",
             expires
           });
