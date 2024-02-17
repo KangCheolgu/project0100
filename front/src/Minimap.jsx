@@ -41,13 +41,29 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     const matrix = new THREE.Matrix4()
     const direction = new THREE.Vector3()
 
+    const points = [];
+    {/*Map1*/}
+    points.push(new THREE.Vector3(592, 77, 0.1)); // 해변 좌측 하단
+    points.push(new THREE.Vector3(742, 77,  0.1)); // 해변 우측 하단
+    points.push(new THREE.Vector3(742, 150,  0.1)); // 골목길 입구
+    points.push(new THREE.Vector3(697, 150,  0.1)); // 골목길 출구
+    points.push(new THREE.Vector3(697, 131,  0.1));
+    points.push(new THREE.Vector3(653, 131,  0.1));
+    points.push(new THREE.Vector3(653, 170,  0.1));
+    points.push(new THREE.Vector3(742, 170,  0.1)); // 다리 입구
+    {/* Map2*/}
+    points.push(new THREE.Vector3(742, 316,  0.1)); // 우측 상단
+    points.push(new THREE.Vector3(697, 316,  0.1));
+    points.push(new THREE.Vector3(697, 270, 0.1));
+    points.push(new THREE.Vector3(653, 270,  0.1));
+    points.push(new THREE.Vector3(653, 316,  0.1));
+    points.push(new THREE.Vector3(592, 316,  0.1)); // 좌측 상단
+    points.push(new THREE.Vector3(592, 77,  0.1));
     
     socket.on("updateAnotherPlayer", (data)=>{
-      //data => id, position, quaternion, velocity, acceleration checkPointIndex, index
       const targetPosition = new THREE.Vector3(data.position.x, data.position.y ,data.position.z);
       targetX = parseFloat(targetPosition.x.toFixed(3))
       targetZ = parseFloat(targetPosition.z.toFixed(3))
-      // console.log(targetX)
       
     })
 
@@ -57,31 +73,25 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     
 
     useFrame(() => {      
-        {/*matrix.copy(camera.matrix).invert()
-        miniMap.current.quaternion.setFromRotationMatrix(matrix)
-        player1.current.quaternion.setFromRotationMatrix(matrix)
-    player2.current.quaternion.setFromRotationMatrix(matrix)*/}
         gl.autoClear = true
         gl.render(scene, camera)
         gl.autoClear = false
         gl.clearDepth()
-        {/*direction.subVectors(new THREE.Vector3(myX, 0, myZ), new THREE.Vector3(0, 0, 0)*/}
-        const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
+
+        const ratioX = 150 / 61
+        const ratioY = 239 / 180
         
+        const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
         if(socket.id===vehicleId){
           myX = parseFloat(bodyPosition.x.toFixed(3))
           myZ = parseFloat(bodyPosition.z.toFixed(3))
         }
-        player1.current.position.set(screenPosition.x-74+myX, screenPosition.y-65-myZ, 0)
-        player2.current.position.set(screenPosition.x-74+targetX, screenPosition.y-65-targetZ, 0)
-        
-        const ratioX = size / 71
-        const ratioY = 101 / size
-        
-       
+
+        player1.current.position.set(screenPosition.x-74+myX*ratioX, screenPosition.y-64-myZ*ratioY, 0.2)
+        player2.current.position.set(screenPosition.x-74+targetX*ratioX, screenPosition.y-64-targetZ*ratioY, 0.2)
+
         gl.render(virtualScene, miniMapCamera.current)
-      }, 1)
-    
+      }, 1) 
 
     return (
         <>
@@ -89,10 +99,14 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
         <>
           <OrthographicCamera ref={miniMapCamera} makeDefault={false} position={[0, 0, 100]} />
           <sprite ref={miniMap} position={screenPosition} scale={[size, size_height, 1]}>
-            <spriteMaterial map={buffer.texture} />
+            <spriteMaterial map={buffer.texture} transparent={true} opacity={0.7}/>
           </sprite>
-          <sprite material-color="red" ref={player1} position={[screenPosition]} scale={[size/30,size_height/50, 1]} />
-          <sprite material-color="blue" ref={player2} position={[screenPosition]} scale={[size/30,size_height/50, 1]} />
+          <sprite material-color="blue" ref={player1} position={[screenPosition]} scale={[20,20, 1]} />
+          <sprite material-color="black" ref={player2} position={[screenPosition]} scale={[20,20, 1]} />
+          <mesh>
+            <meshLineGeometry attach="geometry" points={points}/>
+            <meshLineMaterial  attach="material" lineWidth ={0.02} color={"white"}/>
+          </mesh>
         </>,    
         virtualScene,
       )}

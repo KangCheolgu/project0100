@@ -257,7 +257,7 @@ export default function Scene() {
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -3, 0]}>
-          {/*<Debug>*/}
+          <Debug>
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
@@ -278,7 +278,7 @@ export default function Scene() {
             <SpinObstacle position={[25,0.5,-28]} offset={3}/>
             <SpinObstacle position={[27,0.5,-97]} offset={4}/>
             {/* <LeftAndRightObstacle/> */}
-            <ShutterObstacle/>
+            {/*<ShutterObstacle/>*/}
             <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
             <CarGreenObstacle/>
             {/* <MotorObstacle/> */}
@@ -289,7 +289,7 @@ export default function Scene() {
             )}
             
             </Suspense>
-         {/*</Debug>*/}
+         </Debug>
         </Physics>
         {spectators.map((spectator, index) => (
           <Spectator id={spectator.id} key={index} position={spectator.position} />
