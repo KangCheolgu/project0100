@@ -8,7 +8,7 @@ import cookie from 'react-cookies';
 // const CURRENT_URL = "http://localhost:5000"
 const CURRENT_URL = "https://project0100.shop"
 
-function AuthGoogle() {
+function AuthNaver() {
     
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,12 +20,16 @@ function AuthGoogle() {
     setSearchParams(location)
 
     const code = searchParams.get("code")
-    const scope = searchParams.get("scope")
+    const state = searchParams.get("state")
 
-    axios.post( CURRENT_URL + "/api/auth/google/gettoken", {
+    console.log("여긴 오냐?");
+    console.log(code);
+    console.log(state);
+
+    axios.post( CURRENT_URL + "/api/auth/naver/gettoken", {
       withCredentials: true,
       code: code,
-      scope: scope,
+      state: state
     })
       .then((res) => {
         if (res.status == 200) {
@@ -48,8 +52,8 @@ function AuthGoogle() {
   }, []);
 
   return (
-    <div>로딩 중</div>
+    <div>네이버 로딩 중</div>
   );
 }
 
-export default AuthGoogle;
+export default AuthNaver;

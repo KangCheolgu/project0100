@@ -64,10 +64,14 @@ router.get('/naver', (req, res) => {
   url += `&redirect_uri=${NAVER_LOGIN_REDIRECT_URI}`
   url += `&state=test` 
 
-  res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});   
+  // res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});   
   res.redirect(url);
 });
-
+// router.get('/naver', function (req, res) {
+//   api_url = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
+//    res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});
+//    res.end("<a href='"+ api_url + "'><img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>");
+//  });
 // router.post('/naver/gettoken', async (req, res) => {
 //   // console.log("콘솔로그", req.body);
 //   const resp = await axios.post('https://nid.naver.com/oauth2.0/token', {
@@ -101,7 +105,7 @@ router.post('/naver/gettoken', function (req, res) {
    };
   request.get(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
+      // res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
       res.end(body);
     } else {
       res.status(response.statusCode).end();
