@@ -27,9 +27,9 @@ function MiniMapTexture({ buffer }) {
     return <OrthographicCamera ref={camera} makeDefault={false} rotation={[-Math.PI / 2, 0, 0]} near={20} far={500} />
 }
 
-let targetX, targetZ
+let targetX, targetZ, myX, myZ
 
-export function Minimap({size=200, size_height=300, chassisBody, socket }){
+export function Minimap({size=200, size_height=300, chassisBody, socket, vehicleId }){
     const virtualScene = useMemo(() => new THREE.Scene(), [])
     const buffer = useFBO(600, 600)
     const miniMapCamera = useRef()
@@ -41,6 +41,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket }){
     const matrix = new THREE.Matrix4()
     const direction = new THREE.Vector3()
 
+    
     socket.on("updateAnotherPlayer", (data)=>{
       //data => id, position, quaternion, velocity, acceleration checkPointIndex, index
       const targetPosition = new THREE.Vector3(data.position.x, data.position.y ,data.position.z);
@@ -55,9 +56,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket }){
       }, [screenSize])
     
 
-    useFrame(() => {
-      const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
-
+    useFrame(() => {      
         {/*matrix.copy(camera.matrix).invert()
         miniMap.current.quaternion.setFromRotationMatrix(matrix)
         player1.current.quaternion.setFromRotationMatrix(matrix)
@@ -67,14 +66,22 @@ export function Minimap({size=200, size_height=300, chassisBody, socket }){
         gl.autoClear = false
         gl.clearDepth()
         {/*direction.subVectors(new THREE.Vector3(myX, 0, myZ), new THREE.Vector3(0, 0, 0)*/}
+        const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
+        
+        if(socket.id===vehicleId){
+          myX = parseFloat(bodyPosition.x.toFixed(3))
+          myZ = parseFloat(bodyPosition.z.toFixed(3))
+        }
+        player1.current.position.set(screenPosition.x-74+myX, screenPosition.y-65-myZ, 0)
+        player2.current.position.set(screenPosition.x-74+targetX, screenPosition.y-65-targetZ, 0)
+        
         const ratioX = size / 71
         const ratioY = 101 / size
-        player1.current.position.set(screenPosition.x-74+bodyPosition.x, screenPosition.y-65-bodyPosition.z, 0)
-        player2.current.position.set(screenPosition.x-74+targetX, screenPosition.y-65-targetZ, 0)
+        
+       
         gl.render(virtualScene, miniMapCamera.current)
       }, 1)
     
-      
 
     return (
         <>
@@ -85,7 +92,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket }){
             <spriteMaterial map={buffer.texture} />
           </sprite>
           <sprite material-color="red" ref={player1} position={[screenPosition]} scale={[size/30,size_height/50, 1]} />
-          <sprite material-color="blue" ref={player2} position={[screenPosition]} scale={[size/30,size/30, 1]} />
+          <sprite material-color="blue" ref={player2} position={[screenPosition]} scale={[size/30,size_height/50, 1]} />
         </>,    
         virtualScene,
       )}

@@ -400,7 +400,7 @@ const Car = ({ cameraGroup, ...props }) => {
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
-      <Minimap chassisBody={chassisBody} socket={socket}/>
+      <Minimap chassisBody={chassisBody} socket={socket} vehicleId={props.id}/>
     </group>
   </>
 
@@ -408,6 +408,6 @@ const Car = ({ cameraGroup, ...props }) => {
 }
 const Car_App = (props) => {
   const cameraGroup = useRef();
-  return <Car {...props} cameraGroup={cameraGroup} />;
+  return <Car {...props} cameraGroup={cameraGroup}/>;
 };
 export default Car_App;
