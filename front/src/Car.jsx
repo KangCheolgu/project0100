@@ -391,7 +391,7 @@ const Car = ({ cameraGroup, ...props }) => {
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
-      <Minimap chassisBody={chassisBody} socket={socket}/>
+      <Minimap chassisBody={chassisBody} socket={socket}  vehicleId={props.id}/>
     </group>
   </>
 

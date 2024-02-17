@@ -1,39 +1,3 @@
-// import { useEffect, useRef } from "react";
-// import { useThree, Canvas } from "@react-three/fiber";
-// import {Html} from "@react-three/drei"
-
-// export function Minimap({targetX, targetZ, myX, myZ}){
-  
-//   const targetRef = useRef(null);
-//   const myRef = useRef(null);
-
-//   useEffect(() => {
-//     // 타겟 위치 업데이트
-//     targetRef.current.style.left = `${targetX}px`;
-//     targetRef.current.style.top = `${targetZ}px`;
-
-//     // 내 위치 업데이트
-//     myRef.current.style.left = `${myX}px`;
-//     myRef.current.style.top = `${myZ}px`;
-//   }, [targetX, targetZ, myX, myZ]);
-
-//   return (
-//     <Html>
-
-//     <div style={{ position: 'relative', width: '500px', height: '500px', border: '1px solid black' }}>
-//       <div
-//         ref={targetRef}
-//         style={{ position: 'absolute', width: '10px', height: '10px', backgroundColor: 'red', borderRadius: '50%' }}
-//         ></div>
-//       <div
-//         ref={myRef}
-//         style={{ position: 'absolute', width: '10px', height: '10px', backgroundColor: 'blue', borderRadius: '50%' }}
-//         ></div>
-//     </div>
-//       </Html>
-//   );
-// }
-
 import { OrthographicCamera, useFBO } from '@react-three/drei'
 import { createPortal, useThree, useFrame } from '@react-three/fiber'
 import { useEffect, useRef, useMemo, useState } from 'react'
@@ -60,9 +24,9 @@ function MiniMapTexture({ buffer }) {
     return <OrthographicCamera ref={camera} makeDefault={false} rotation={[-Math.PI / 2, 0, 0]} near={20} far={500} />
 }
 
-let targetX, targetZ
+let targetX, targetZ, myX, myZ
 
-export function Minimap({size=300, chassisBody, socket }){
+export function Minimap({size=300, sizeHeight=300, chassisBody, socket, vehicleId }){
 
   socket.on("updateAnotherPlayer", (data)=>{
     //data => id, position, quaternion, velocity, acceleration checkPointIndex, index
@@ -73,21 +37,13 @@ export function Minimap({size=300, chassisBody, socket }){
     
   })
   
-  // useFrame(()=>{
-  //   const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
-    
-  //   const myX = parseFloat(bodyPosition.x.toFixed(3))
-  //   const myZ = parseFloat(bodyPosition.z.toFixed(3))
 
-  // })
-  
   // useEffect(()=>{
-  //   const myX = bodyPosition.x.
-      
-  //     console.log(myX)
-  //   }, [bodyPosition])
-
-
+    //   const myX = bodyPosition.x.
+    
+    //     console.log(myX)
+    //   }, [bodyPosition])
+    
     
     //수정된 부분: useFBO 훅을 사용하여 buffer 생성
     const virtualScene = useMemo(() => new THREE.Scene(), [])
@@ -96,36 +52,39 @@ export function Minimap({size=300, chassisBody, socket }){
     const miniMap = useRef()
     const { gl, camera, scene, size: screenSize } = useThree(({ camera, gl, scene, size }) => ({ gl, camera, scene, size }))
     const [screenPosition, setScreenPosition] = useState(new THREE.Vector3(screenSize.width / 2 - size / 2, screenSize.height / 2 - size / 2, 0))
-    const player = useRef()
+    const player1 = useRef()
     const player2 = useRef()
-    const matrix = new THREE.Matrix4()
+    // const matrix = new THREE.Matrix4()
     
     useEffect(() => {
-        setScreenPosition(new THREE.Vector3(0,0,0), [screenSize])
+      setScreenPosition(new THREE.Vector3(screenSize.width/2 - size/2, screenSize.height/2-sizeHeight/2), [screenSize])
     }, [])
-
+    
     useFrame(() => {
       const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
+
+      gl.autoClear = true
+      gl.render(scene, camera)
+      gl.autoClear = false
+      gl.clearDepth()
+      
+      if(socket.id === vehicleId){
     
-      const myX = parseFloat(bodyPosition.x.toFixed(3))
-      const myZ = parseFloat(bodyPosition.z.toFixed(3))
-
-        matrix.copy(camera.matrix).invert()
-        miniMap.current.quaternion.setFromRotationMatrix(matrix)
-        player.current.quaternion.setFromRotationMatrix(matrix)
-        player2.current.quaternion.setFromRotationMatrix(matrix)
-        gl.autoClear = true
-        gl.render(scene, camera)
-        gl.autoClear = false
-        gl.clearDepth()
-
-        const ratioX = size / 10
-        const ratioY = 600 / size
+        myX = parseFloat(bodyPosition.x.toFixed(3))
+        myZ = parseFloat(bodyPosition.z.toFixed(3))
+      }
+        // matrix.copy(camera.matrix).invert()
+        // miniMap.current.quaternion.setFromRotationMatrix(matrix)
+        // player.current.quaternion.setFromRotationMatrix(matrix)
         
-        player.current.position.set(screenPosition.x + targetX * ratioX, screenPosition.y - targetZ * ratioY, 0)
-        player2.current.position.set(screenPosition.x + myX * ratioX, screenPosition - myZ * ratioY, 0)
-        gl.render(virtualScene, miniMapCamera.current)
-      }, 1)
+        // const ratioX = size / 10
+        // const ratioY = 600 / size
+        
+      player1.current.position.set(screenPosition.x - 74 + myX, screenPosition.y - 65 - myZ, 0)
+      player2.current.position.set(screenPosition.x - 74 + targetX, screenPosition.y - 65 - targetZ, 0)
+      gl.render(virtualScene, miniMapCamera.current)
+      
+      },0.1)
       
 
     return (
@@ -133,11 +92,11 @@ export function Minimap({size=300, chassisBody, socket }){
       {createPortal(
         <>
           <OrthographicCamera ref={miniMapCamera} makeDefault={false} position={[0, 0, 100]} />
-          <sprite ref={miniMap} position={screenPosition} scale={[size, size, 1]}>
+          <sprite ref={miniMap} position={screenPosition} scale={[size, sizeHeight, 1]}>
             <spriteMaterial map={buffer.texture} />
           </sprite>
-          <sprite ref={player} position={screenPosition} scale={[size / 30, size / 30, 1]} />
-          <sprite ref={player2} position={screenPosition} scale={[size / 30, size/ 30, 1]} />
+          <sprite material-color={"#00FF00"} ref={player1} position={screenPosition} scale={[size / 30, size / 30, 1]} />
+          <sprite material-color={"red"} ref={player2} position={screenPosition} scale={[size / 30, size/ 30, 1]} />
         </>,    
         virtualScene,
       )}
