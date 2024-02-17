@@ -8,10 +8,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// import {fileURLToPath} from 'url';
-// import path from "path";
-// const __dirname = fileURLToPath(path.dirname(import.meta.url));
-
 const app = express(); // express를 실행한 값을 app에 저장
 const server = http.createServer(app);
 
@@ -221,6 +217,10 @@ io.on('connection', (socket) => {
         console.log('next');
         io.to(roomName).emit("nextCameraMove")
       })
+
+      socket.on('phaseEnded', (firstPlayerData) => {
+        socket.broadcast.to(roomName).emit('phaseEndedSign', firstPlayerData)
+      })
       
     })
     // 플레이어가 방을 나갈 때
@@ -238,6 +238,19 @@ io.on('connection', (socket) => {
       }
     });
 
+    //게임이 끝나고 로비로 갈때
+    socket.on("leaveAndGoToLobby", () => {
+      // 현재 방 정보를 가져오기 위해 플레이어의 방 이름을 확인하고 방에서 나가기
+      socket.leave(roomName);
+      console.log(`${socket.id} left room ${roomName}`);
+  
+      // 해당 방 정보를 삭제하고 방 목록에서 제거
+      if (rooms[roomName])
+        delete rooms[roomName];
+  
+      // 방 정보가 업데이트된 것을 클라이언트에게 알림
+      io.emit("getRoomList", rooms);
+    });
     // 연결이 끊어질경우
     socket.on('disconnect', () => {
       console.log(`${socket.id} disconnected`);
@@ -248,6 +261,14 @@ io.on('connection', (socket) => {
           rooms[roomName].players = rooms[roomName].players.filter(player => player.id !== socket.id);
           // 해당 방의 플레이어 정보 업데이트를 방에 속한 모든 클라이언트에게 전송합니다.
           io.to(roomName).emit("updatePlayers", rooms[roomName]);
+  
+          // 방이 플레이어가 없으면 방을 제거합니다.
+          if (rooms[roomName].players.length === 0) {
+              delete rooms[roomName];
+              console.log(`Room ${roomName} has been removed.`);
+              // 방 정보 업데이트
+              io.emit('getRoomList', rooms);
+          }
       }
     });
 
@@ -272,6 +293,7 @@ io.on('connection', (socket) => {
               const playerSocket = io.sockets.sockets.get(player.id);
               if (playerSocket) {
                   playerSocket.leave(roomName);
+                  alert("방장이 방을 나갔습니다.")
               }
           });
           if(rooms[roomName].spectator){
@@ -279,6 +301,7 @@ io.on('connection', (socket) => {
                 const spectatorSocket = io.sockets.sockets.get(spectator.id);
                 if (spectatorSocket) {
                     spectatorSocket.leave(roomName);
+                    alert("방장이 방을 나갔습니다.")
                 }
             });
           }

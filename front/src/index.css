@@ -14,6 +14,10 @@ body,
     height: 100%;
     background: white;
 }
+.loadingPage {
+    position: fixed;
+    z-index: 1111;
+}
 
 .interface{
     position: fixed;
@@ -72,34 +76,35 @@ body,
 /**
  * Restart
  */
- .restart
+ .toLobby
  {
      display: flex;
      justify-content: center;
      position: absolute;
-     top: 40%;
+     top: 67%;
      left: 0;
      width: 100%;
      color: #ffffff;
-     font-size: 80px;
+     font-size: 40px;
      background: #00000033;
-     padding-top: 10px;
      pointer-events: auto;
      cursor: pointer;
  }
 
- .endtime
+ .winnerdiv
  {
-     display: flex;
-     justify-content: center;
-     position: absolute;
-     top: 40%;
-     left: 0;
-     width: 100%;
-     color: #ffffff;
-     font-size: 80px;
-     background: #00000033;
-     padding-top: 10px;
+    font-family: "RacingFont", sans-serif;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    color: #ffffff;
+    font-size: 80px;
+    background: #00000033;
+    padding-top: 10px;
+    text-align: center;
  }
 
  /**

@@ -152,22 +152,20 @@ const Car = ({ cameraGroup, ...props }) => {
       cameraGroup.current.quaternion.copy(bodyRotation);
       cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
 
-      /* Phases*/
-      // if (checkPointIndex === 1 && lapseCheck[0] === false) {
+      // if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
       //   around()
       //   lapseCheck[0] = true
       // }
-
-      // if (checkPointIndex === 2) {
-      //   end()     
-      // }
-
-      if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
+      // if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
+      //   end()
+        
+      if (checkPointIndex ===  1 && lapseCheck[0] === false) {
         around()
         lapseCheck[0] = true
       }
-      if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
-        end()     
+      if (checkPointIndex ===  2 ) {
+        end()
+        useGame.setState({ winner: socket.id });
       }
 
       // 체크 포인트 인덱스 갱신 
@@ -360,7 +358,7 @@ const Car = ({ cameraGroup, ...props }) => {
         };
         socket.emit("currentState", currentState);
       }
-    }, 15);
+    }, 30);
   };
 
   return (<>

@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import cookie from 'react-cookies';
 
-// const CURRENT_URL = "http://localhost:5000"
-const CURRENT_URL = "https://project0100.shop"
+const CURRENT_URL = "http://localhost:5000"
+// const CURRENT_URL = "https://project0100.shop"
 
 function AuthGoogle() {
     
@@ -29,8 +29,7 @@ function AuthGoogle() {
     })
       .then((res) => {
         if (res.status == 200) {
-          console.log(res.data.email);
-          console.log(res.data.name);
+
           cookie.save('userEmail', res.data.email, {
             path:"/",
             expires
@@ -48,7 +47,7 @@ function AuthGoogle() {
   }, []);
 
   return (
-    <div>로딩 중</div>
+    <div>구글 로딩 중</div>
   );
 }
 

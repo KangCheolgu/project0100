@@ -7,8 +7,8 @@ import googleButton from "../static/button/google_button.png"
 import naverButton from "../static/button/naver_button.png"
 import kakaoButton from "../static/button/kakao_button.png"
 
-// const CURRENT_URL = "http://localhost:5000"
-const CURRENT_URL = "https://project0100.shop"
+const CURRENT_URL = "http://localhost:5000"
+// const CURRENT_URL = "https://project0100.shop"
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -31,29 +31,29 @@ function LoginPage() {
       <Row style={{textAlign:"center", height:"250px", }}>
         <Col></Col>
         <Col md="5" style={{border:"1px solid", borderRadius:"10px", padding:"10px"}}>
-          <Row>
-            <Col style={{fontSize:"30px"}}>LOG IN</Col>
+          <Row style={{marginTop:"10px"}}>
+            <Col style={{fontSize:"30px"}}>지금 바로 접속하세요!</Col>
           </Row>
           <Row style={{marginTop:"40px"}}>
-            <Col md="1"></Col>
+            <Col md="2"></Col>
             <Col>
               <Button onClick={signInWithGoogle} style={{width:"100%", backgroundColor:"white", border:"none", padding:"0"}}>
                 <img src={googleButton} typeof='button' style={{ width: '100%', height: 'auto'}} alt="google button Img"/>
               </Button>
             </Col>
-            <Col md="1"></Col>
+            <Col md="2"></Col>
             <Col>
               <Button onClick={signInWithNaver} style={{width:"100%", backgroundColor:"white", border:"none", padding:"0"}}>
                 <img src={naverButton} typeof='button' style={{ width: '100%', height: 'auto'}} alt="google button Img"/>
               </Button>
             </Col>
-            <Col md="1"></Col> 
-            <Col>
+            <Col md="2"></Col> 
+            {/* <Col>
               <Button onClick={signInWithKakao} style={{width:"100%", backgroundColor:"white", border:"none", padding:"0"}}>
                 <img src={kakaoButton} typeof='button' style={{ width: '100%', height: 'auto'}} alt="google button Img"/>
               </Button>
             </Col>
-            <Col md="1"></Col>
+            <Col md="1"></Col> */}
           </Row>
         </Col>
         <Col></Col>
