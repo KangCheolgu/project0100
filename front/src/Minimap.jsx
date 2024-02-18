@@ -106,8 +106,8 @@ export function Minimap({size=250, size_height=350, chassisBody, socket, vehicle
           <sprite ref={miniMap} position={screenPosition} scale={[size, size_height, 1]}>
             <spriteMaterial map={buffer.texture} transparent={true} opacity={0.7}/>
           </sprite>
-          <sprite material-color="#00FF00" ref={player1} position={[screenPosition]} scale={[20,20, 1]} />
-          <sprite material-color="red" ref={player2} position={[screenPosition]} scale={[20,20, 1]} />
+          <sprite material-color="#00FF00" ref={player1} position={[screenPosition]} scale={[30,30, 1]} />
+          <sprite material-color="red" ref={player2} position={[screenPosition]} scale={[30,30, 1]} />
           
           <sprite ref ={roadRef}  position={screenPosition} scale={[size*0.80, size_height*0.85, 1]}>
             <spriteMaterial attach="material" map={roadtexture}/>
