@@ -17,7 +17,6 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
 
   // 키 다운 이벤트
   const handleKeyDown = (e) => {
-    //console.log(e);
     // for brake lights
     if (e.key === ' ') {
       setBrake(true);
@@ -87,7 +86,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     if(!controls[e.key]) {
       setControls((controls) => ({ 
         ...controls, [e.key]: true ,
-        boost: e.key === 'Shift' || e.shiftKey ? true : controls.boost
+        boost: e.shiftKey ? true : controls.boost
       }));
       // console.log("DOWN", e.key);
     }
@@ -96,7 +95,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
   const KeyUpPressHandler = (e) => {
     setControls((controls) => ({ 
       ...controls, [e.key]: false,
-      boost: e.key === 'Shift' ? false : controls.boost
+      boost: e.shiftKey ? false : controls.boost
     }));
     // console.log("UP", e.key);
   }
@@ -159,5 +158,5 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
 
   }, [controls, vehicleApi, chassisApi]);
 
-  return { controls, brakeLightsOn };
+  return controls;
 }

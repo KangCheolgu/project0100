@@ -23,7 +23,8 @@ export default function Map1(props){
     const position = props.position
     const rotation = props.rotation
     const scale = props.scale
-    return(<group castShadow receiveShadow >   
+    return(<group castShadow receiveShadow >
+        
         <Fence2 position={[position[0]-22, position[1], position[2]-35]}/> 
         <Fence2 position={[position[0]-18, position[1], position[2]-35]}/> 
         <Fence2 position={[position[0]-14, position[1], position[2]-35]}/> 

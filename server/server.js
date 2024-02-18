@@ -1,32 +1,26 @@
 import { Server } from "socket.io"
 import express from "express"; // express를 가져와 변수에 저장
 import http from "http"; // 서버의 정보
-import path from "path"; // 서버 경로를 저장한 변수
 import cors from "cors"
-import axios from "axios";
-import passport from "passport"
 import bodyParser from "body-parser"
-import { isKeyObject } from "util/types";
-// import {fileURLToPath} from 'url';
-// import path from "path";
-// const __dirname = fileURLToPath(path.dirname(import.meta.url));
+import auth from "./utils/auth.js";
+import dotenv from 'dotenv';
+import database from "./utils/database.js"
+dotenv.config();
 
 const app = express(); // express를 실행한 값을 app에 저장
 const server = http.createServer(app);
+
+server.listen(5000, () => {
+  console.log(`서버가 5000번 포트에서 실행 중입니다.`);
+});
+
+// Cors 관련
 const io = new Server(server, {
   cors: {
     origin: "*",
   }
 });
-
-const GOOGLE_CLIENT_ID = '107173313275-r3d4eh0tc407jcc41bmbajm8vdd6s9uh.apps.googleusercontent.com'// YOUR GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET = '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'// YOUR GOOGLE_CLIENT_SECRET;
-const GOOGLE_LOGIN_REDIRECT_URI = 'http://ec2-13-209-26-84.ap-northeast-2.compute.amazonaws.com:3000/auth/google';
-// const GOOGLE_LOGIN_REDIRECT_URI = 'http://localhost:3000/auth/google';
-
-// const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID// YOUR GOOGLE_CLIENT_ID;
-// const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET// YOUR GOOGLE_CLIENT_SECRET;
-// const GOOGLE_REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI;
 
 const corsOptions = {
   origin: "*",
@@ -35,39 +29,14 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.get('/auth', (req, res) => {
-  let url = 'https://accounts.google.com/o/oauth2/v2/auth';
-  url += `?client_id=${GOOGLE_CLIENT_ID}`
-  url += `&redirect_uri=${GOOGLE_LOGIN_REDIRECT_URI}`
-  url += '&response_type=code'
-  url += '&scope=email profile'    
-  res.redirect(url);
-});
-
-app.post('/auth/getgoogletoken', async (req, res) => {
-  // console.log("콘솔로그", req.body);
-  const resp = await axios.post('https://oauth2.googleapis.com/token', {
-    // x-www-form-urlencoded(body)
-    code: req.body.code,
-    client_id: GOOGLE_CLIENT_ID,
-    client_secret: GOOGLE_CLIENT_SECRET,
-    redirect_uri: GOOGLE_LOGIN_REDIRECT_URI,
-    grant_type: 'authorization_code',
-  });
-
-  const resp2 = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
-    // Request Header에 Authorization 추가
-    headers: {
-        Authorization: `Bearer ${resp.data.access_token}`,
-    },
-  });
-  console.log("resp2 ",resp2.data);
-  res.json(resp2.data)
-});
-
+// auth 관리 라우터
+app.use("/api/auth", auth)
+// db 관리 라우터
+app.use("/api/database", database)
 
 const rooms = {}
 var numClients = 2
@@ -120,6 +89,7 @@ io.on('connection', (socket) => {
       const position = rooms[roomName].players.length === 0 ? [-1, 0.3, -12] : [1, 0.3, -12];
       const player = {
           id: socket.id,
+          email: roomData.userEmail,
           name: roomData.userName,
           position: position,
           rotation: [0, 0, 0],
@@ -248,6 +218,10 @@ io.on('connection', (socket) => {
         console.log('next');
         io.to(roomName).emit("nextCameraMove")
       })
+
+      socket.on('phaseEnded', (firstPlayerData) => {
+        socket.broadcast.to(roomName).emit('phaseEndedSign', firstPlayerData)
+      })
       
     })
     // 플레이어가 방을 나갈 때
@@ -265,6 +239,19 @@ io.on('connection', (socket) => {
       }
     });
 
+    //게임이 끝나고 로비로 갈때
+    socket.on("leaveAndGoToLobby", () => {
+      // 현재 방 정보를 가져오기 위해 플레이어의 방 이름을 확인하고 방에서 나가기
+      socket.leave(roomName);
+      console.log(`${socket.id} left room ${roomName}`);
+  
+      // 해당 방 정보를 삭제하고 방 목록에서 제거
+      if (rooms[roomName])
+        delete rooms[roomName];
+  
+      // 방 정보가 업데이트된 것을 클라이언트에게 알림
+      io.emit("getRoomList", rooms);
+    });
     // 연결이 끊어질경우
     socket.on('disconnect', () => {
       console.log(`${socket.id} disconnected`);
@@ -275,6 +262,14 @@ io.on('connection', (socket) => {
           rooms[roomName].players = rooms[roomName].players.filter(player => player.id !== socket.id);
           // 해당 방의 플레이어 정보 업데이트를 방에 속한 모든 클라이언트에게 전송합니다.
           io.to(roomName).emit("updatePlayers", rooms[roomName]);
+  
+          // 방이 플레이어가 없으면 방을 제거합니다.
+          if (rooms[roomName].players.length === 0) {
+              delete rooms[roomName];
+              console.log(`Room ${roomName} has been removed.`);
+              // 방 정보 업데이트
+              io.emit('getRoomList', rooms);
+          }
       }
     });
 
@@ -321,7 +316,5 @@ io.on('connection', (socket) => {
   });
 })
 
-server.listen(5000, () => {
-  console.log('서버가 5000 포트에서 실행 중입니다.');
-});
+
 
