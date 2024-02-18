@@ -166,6 +166,7 @@ export default function Scene() {
       socket.off("updatePlayers", onPlayers);
       socket.off("opponentPing")
       socket.off("clientCount")
+      socket.off("startSignal")
     })
   },[])
 
@@ -227,73 +228,83 @@ export default function Scene() {
     });
   }, []);
   
+  const [loadingEnd, setLoadingEnd] = useState(false)
 
   return (
     <>
       <Interface />
       <BgmSound />
+      {/* {!loadingEnd && 
+        // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
+      } */}
       <Canvas shadows>
-        <PerspectiveCamera position={[1.5, 8, 4]} fov={75} makeDefault/>
-        <Background backgroundColors={backgroundColors}/>
-        <Sand/>
-        <ambientLight intensity={2} color="#fff7e6"/>
-        
-        <directionalLight
-          castShadow
-          intensity={4}
-          shadow-camera-top={100}
-          shadow-camera-bottom={-100}
-          shadow-camera-left={-100}
-          shadow-camera-right={100}
-          shadow-mapSize-height={512*4}
-          shadow-mapSize-width={512*4}
-          position={[30, 60, -100]}
-          color="#ffffff"
-        />
-        {/* <SkyCube scale={100} position={[30, 0, -50]}/> */}
-        {/*DirectionalLight & Camera Helper*/}
-        {/*<Light/>*/}
-        
-        <OrbitControls />
-        <Stats/>
-        <Physics gravity={[0, -3, 0]}>
-          <Debug>
-            <Suspense fallback={<LoadingPage />}>
-              <ColliderWall/>
-              <Map1 position={[0, 0, 0]}/>
-              <Map2 position={[0, 0, -94]}/>
-              <Wall />
+        <Suspense fallback={null}>
+          
+          <>
+            <PerspectiveCamera position={[1.5, 8, 4]} fov={75} makeDefault/>
+            <Background backgroundColors={backgroundColors}/>
+            <Sand/>
+            <ambientLight intensity={2} color="#fff7e6"/>
             
-            {/*
-              players.map((player, index) => (
-                <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
-              ))
-              */}
-  
-                                                          
-            {/* <Ground /> */}
-            {isObstacleStarted && (
-            <>
-            {/* 장애물 배치 */}
-            <SpinObstacle position={[25,0.5,-28]} offset={3}/>
-            <SpinObstacle position={[27,0.5,-97]} offset={4}/>
-            {/* <LeftAndRightObstacle/> */}
-            <ShutterObstacle/>
-            <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
-            <CarGreenObstacle/>
-            {/* <MotorObstacle/> */}
-            <CrabObstacle position ={[7,-0.03,0]} offset={32} />
-            <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
-            <CrabObstacle position={[0,-0.03,0]} offset={38}/>
-            </>
-            )}
+            <directionalLight
+              castShadow
+              intensity={4}
+              shadow-camera-top={100}
+              shadow-camera-bottom={-100}
+              shadow-camera-left={-100}
+              shadow-camera-right={100}
+              shadow-mapSize-height={512*4}
+              shadow-mapSize-width={512*4}
+              position={[30, 60, -100]}
+              color="#ffffff"
+            />
+            {/* <SkyCube scale={100} position={[30, 0, -50]}/> */}
+            {/*DirectionalLight & Camera Helper*/}
+            {/*<Light/>*/}
             
-            </Suspense>
-         </Debug>
-        </Physics>
-        {spectators.map((spectator, index) => (
-          <Spectator id={spectator.id} key={index} position={spectator.position} />
-        ))}
+            <OrbitControls />
+            <Stats/>
+            <Physics gravity={[0, -3, 0]}>
+              {/* <Debug> */}
+                
+                  <ColliderWall/>
+                  <Map1 position={[0, 0, 0]}/>
+                  {/* <Map2 position={[0, 0, -94]}/> */}
+                  <Wall />
+                
+                {
+                  players.map((player, index) => (
+                    <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
+                  ))
+                }
+      
+                                                              
+                {/* <Ground /> */}
+                {isObstacleStarted && (
+                <>
+                {/* 장애물 배치 */}
+                <SpinObstacle position={[25,0.5,-28]} offset={3}/>
+                <SpinObstacle position={[27,0.5,-97]} offset={4}/>
+                {/* <LeftAndRightObstacle/> */}
+                <ShutterObstacle/>
+                <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
+                <CarGreenObstacle/>
+                {/* <MotorObstacle/> */}
+                <CrabObstacle position ={[7,-0.03,0]} offset={32} />
+                <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
+                <CrabObstacle position={[0,-0.03,0]} offset={38}/>
+                </>
+                )}
+                
+                
+            {/* </Debug> */}
+            </Physics>
+            {spectators.map((spectator, index) => (
+              <Spectator id={spectator.id} key={index} position={spectator.position} />
+            ))}
+          
+          </>          
+          </Suspense>
       </Canvas>
     </>
   );
