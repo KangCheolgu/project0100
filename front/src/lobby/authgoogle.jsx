@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import cookie from 'react-cookies';
 
-const CURRENT_URL = "http://localhost:5000"
-// const CURRENT_URL = "https://project0100.shop"
+// const CURRENT_URL = "http://localhost:5000"
+const CURRENT_URL = "https://project0100.shop"
 
 function AuthGoogle() {
     

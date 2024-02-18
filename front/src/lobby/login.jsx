@@ -7,8 +7,8 @@ import googleButton from "../static/button/google_button.png"
 import naverButton from "../static/button/naver_button.png"
 import kakaoButton from "../static/button/kakao_button.png"
 
-const CURRENT_URL = "http://localhost:5000"
-// const CURRENT_URL = "https://project0100.shop"
+// const CURRENT_URL = "http://localhost:5000"
+const CURRENT_URL = "https://project0100.shop"
 
 function LoginPage() {
   const navigate = useNavigate();
