@@ -3,7 +3,7 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car_App from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense, useLayoutEffect } from "react";
-import { OrbitControls, useProgress, Stats, PerspectiveCamera } from '@react-three/drei';
+import { OrbitControls, useProgress, Stats, PerspectiveCamera, BakeShadows } from '@react-three/drei';
 import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
@@ -31,6 +31,7 @@ import { Background } from "./components/Background.jsx";
 import { gsap } from "gsap";
 import Wall from "./Map2/ColliderWall_Map2.jsx";
 import Light from "./Light.jsx";
+import { Perf } from 'r3f-perf'
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
@@ -241,16 +242,17 @@ export default function Scene() {
       } */}
       <Canvas shadows frameloop="demand">
         <Suspense fallback={null}>
+          <color attach="background" args={["#abdbe3"]} />
           
           <>
-            <PerspectiveCamera position={[1.5, 8, 4]} fov={75} makeDefault/>
+            <PerspectiveCamera position={[1.5, 8, 4]} fov={75} far={100} layers={[0]} makeDefault/>
             <Background backgroundColors={backgroundColors}/>
             <Sand/>
             <ambientLight intensity={2} color="#fff7e6"/>
             
-            {/*{<Light/>*/}
+            {/*<Light/>*/}
             
-
+            
             <directionalLight
               castShadow
               targetObject ={targetObject}
@@ -268,8 +270,7 @@ export default function Scene() {
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>
-              <Debug>
-                
+              {/*<Debug>*/}
                   <ColliderWall/>
                   <Map1 position={[0, 0, 0]}/>
                   <Map2 position={[0, 0, -94]}/>
@@ -296,9 +297,7 @@ export default function Scene() {
                 <CrabObstacle position={[0,-0.03,0]} offset={38}/>
                 </>
                 )}
-                
-                
-            </Debug>
+            {/*</Debug>*/}
             </Physics>
             {spectators.map((spectator, index) => (
               <Spectator id={spectator.id} key={index} position={spectator.position} />

@@ -102,7 +102,7 @@ export function Minimap({size=250, size_height=350, chassisBody, socket, vehicle
       {createPortal(
         <>
         
-          <OrthographicCamera ref={miniMapCamera} makeDefault={false} position={[0, 0, 100]} />
+          <OrthographicCamera ref={miniMapCamera} makeDefault={false} position={[0, 0, 100]}/>
           <sprite ref={miniMap} position={screenPosition} scale={[size, size_height, 1]}>
             <spriteMaterial map={buffer.texture} transparent={true} opacity={0.7}/>
           </sprite>
