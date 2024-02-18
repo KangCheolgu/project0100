@@ -1,6 +1,6 @@
 import express from "express";
 import maria from './consts.js';
-maria.connect();  
+// maria.connect(); : 
 const router = express.Router();
 
 // 로비에 들어오면 랭킹 리스트를 보여준다.
