@@ -192,7 +192,8 @@ export default function Interface(){
               {player2Ranking === "1등" ? '1st : ' : '2nd : '} {players[1].name}
             </div>
           )}
-        </div>k
+        </div>
+        
         {/* Countdown */}
         {count > 0 && count < 4 && 
           <div className={`countdown ${animationStart ? 'countdown-animation' : ''}`} >

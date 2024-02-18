@@ -1,10 +1,11 @@
 import { OrthographicCamera, useFBO } from '@react-three/drei'
-import { extend, createPortal, useThree, useFrame } from '@react-three/fiber'
+import { extend, createPortal, useThree, useFrame, useLoader } from '@react-three/fiber'
 import { useEffect, useRef, useMemo, useState } from 'react'
 import * as THREE from 'three';
-import { MeshLineGeometry , MeshLineMaterial } from 'meshline'
+import {TextureLoader} from 'three'
+{/*import { MeshLineGeometry , MeshLineMaterial } from 'meshline'
 
-extend({ MeshLineGeometry, MeshLineMaterial })
+extend({ MeshLineGeometry, MeshLineMaterial })*/}
 
 function MiniMapTexture({ buffer }) {
     const camera = useRef()
@@ -29,7 +30,10 @@ function MiniMapTexture({ buffer }) {
 
 let targetX, targetZ, myX, myZ
 
-export function Minimap({size=200, size_height=300, chassisBody, socket, vehicleId }){
+export function Minimap({size=250, size_height=350, chassisBody, socket, vehicleId }){
+    const roadRef = useRef();
+    const roadtexture = useLoader(TextureLoader, '/assets/images/minimap.png');
+
     const virtualScene = useMemo(() => new THREE.Scene(), [])
     const buffer = useFBO(600, 600)
     const miniMapCamera = useRef()
@@ -68,7 +72,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     })
 
     useEffect(() => {
-        setScreenPosition(new THREE.Vector3(screenSize.width / 2 - size / 2 , screenSize.height / 2 - size_height / 2, 0))
+        setScreenPosition(new THREE.Vector3(screenSize.width / 2 - size / 2-20 , screenSize.height / 2 - size_height / 2 -140, 0))
       }, [screenSize])
     
 
@@ -78,8 +82,8 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
         gl.autoClear = false
         gl.clearDepth()
 
-        const ratioX = 150 / 61
-        const ratioY = 239 / 180
+        const ratioX = 150 / 47
+        const ratioY = 239 / 130
         
         const bodyPosition = chassisBody.current.getWorldPosition(new THREE.Vector3())
         if(socket.id===vehicleId){
@@ -87,8 +91,8 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
           myZ = parseFloat(bodyPosition.z.toFixed(3))
         }
 
-        player1.current.position.set(screenPosition.x-74+myX*ratioX, screenPosition.y-64-myZ*ratioY, 0.2)
-        player2.current.position.set(screenPosition.x-74+targetX*ratioX, screenPosition.y-64-targetZ*ratioY, 0.2)
+        player1.current.position.set(screenPosition.x-95+myX*ratioX, screenPosition.y-80-myZ*ratioY, 0.2)
+        player2.current.position.set(screenPosition.x-95+targetX*ratioX, screenPosition.y-80-targetZ*ratioY, 0.2)
 
         gl.render(virtualScene, miniMapCamera.current)
       }, 1) 
@@ -102,15 +106,18 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
           <sprite ref={miniMap} position={screenPosition} scale={[size, size_height, 1]}>
             <spriteMaterial map={buffer.texture} transparent={true} opacity={0.7}/>
           </sprite>
-          <sprite material-color="blue" ref={player1} position={[screenPosition]} scale={[20,20, 1]} />
+          <sprite material-color="#00FF00" ref={player1} position={[screenPosition]} scale={[20,20, 1]} />
           <sprite material-color="red" ref={player2} position={[screenPosition]} scale={[20,20, 1]} />
+          
+          <sprite ref ={roadRef}  position={screenPosition} scale={[size*0.80, size_height*0.85, 1]}>
+            <spriteMaterial attach="material" map={roadtexture}/>
+          </sprite>
           <sprite 
-            material-color="white" 
             position={[screenPosition.x, screenPosition.y, screenPosition.z-0.1]}
             scale={[size+10,size_height+10, 1]}
           >
-            <spriteMaterial transparent={true} opacity={0.1}/>
-          </sprite>
+            <spriteMaterial transparent={true} opacity={0.5} color="white"/>
+      </sprite>
           {/*<mesh>
             <meshLineGeometry attach="geometry" points={points}/>
             <meshLineMaterial  attach="material" lineWidth ={0.02} color={""}/>
