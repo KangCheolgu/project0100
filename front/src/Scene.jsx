@@ -258,18 +258,14 @@ export default function Scene() {
               position={[30, 60, -100]}
               color="#ffffff"
             />
-            {/* <SkyCube scale={100} position={[30, 0, -50]}/> */}
-            {/*DirectionalLight & Camera Helper*/}
-            {/*<Light/>*/}
-            
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>
-              {/* <Debug> */}
+              <Debug>
                 
                   <ColliderWall/>
                   <Map1 position={[0, 0, 0]}/>
-                  <Map2 position={[0, 0, -94]}/>
+                  {/* <Map2 position={[0, 0, -94]}/> */}
                   <Wall />
                 
                 {
@@ -278,15 +274,13 @@ export default function Scene() {
                   ))
                 }
       
-                                                              
-                {/* <Ground /> */}
                 {isObstacleStarted && (
                 <>
                 {/* 장애물 배치 */}
                 <SpinObstacle position={[25,0.5,-28]} offset={3}/>
                 <SpinObstacle position={[27,0.5,-97]} offset={4}/>
                 {/* <LeftAndRightObstacle/> */}
-                <ShutterObstacle/>
+                {/* <ShutterObstacle/> */}
                 <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
                 <CarGreenObstacle/>
                 {/* <MotorObstacle/> */}
@@ -297,7 +291,7 @@ export default function Scene() {
                 )}
                 
                 
-            {/* </Debug> */}
+            </Debug>
             </Physics>
             {spectators.map((spectator, index) => (
               <Spectator id={spectator.id} key={index} position={spectator.position} />
