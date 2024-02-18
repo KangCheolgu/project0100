@@ -10,6 +10,9 @@ import { socket } from "./lobby/lobby.jsx";
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+// const CURRENT_URL = "http://localhost:5000"
+const CURRENT_URL = "https://project0100.shop"
+
 export default function Interface(){
     const navigate = useNavigate()
 
@@ -143,7 +146,7 @@ export default function Interface(){
           useGame.setState({ recordTime : tmpRecord });
           setWinnerData(winnerSocketData.name)
 
-          axios.post('http://localhost:5000/api/database/saveWinnerRecord', {
+          axios.post(CURRENT_URL + '/api/database/saveWinnerRecord', {
             name: winnerSocketData.name,
             email: winnerSocketData.email,
             record: tmpRecord,
