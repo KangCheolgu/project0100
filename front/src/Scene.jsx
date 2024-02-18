@@ -237,7 +237,7 @@ export default function Scene() {
       {/* {!loadingEnd && 
         // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
       } */}
-      <Canvas shadows>
+      <Canvas shadows frameloop="demand">
         <Suspense fallback={null}>
           
           <>
@@ -261,11 +261,11 @@ export default function Scene() {
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>
-              <Debug>
+              {/*<Debug>*/}
                 
                   <ColliderWall/>
                   <Map1 position={[0, 0, 0]}/>
-                  {/* <Map2 position={[0, 0, -94]}/> */}
+                  <Map2 position={[0, 0, -94]}/>
                   <Wall />
                 
                 {
@@ -291,7 +291,7 @@ export default function Scene() {
                 )}
                 
                 
-            </Debug>
+            {/*</Debug>*/}
             </Physics>
             {spectators.map((spectator, index) => (
               <Spectator id={spectator.id} key={index} position={spectator.position} />
