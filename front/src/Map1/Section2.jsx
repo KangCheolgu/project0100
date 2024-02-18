@@ -48,17 +48,17 @@ export default function Section2(props){
         <Border_1 position={[position[0]+27, position[1]-0.04, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+27, position[1]-0.04, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
         
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37.12, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37.12, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+37.12, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
 
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+29, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+29, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+29, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+28.88, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+28.88, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+28.88, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
 
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4.5,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4.5,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4.5,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
 
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-25]} rotation={[0, Math.PI/2, 0]}/>
         <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+33, position[1]+0.05, position[2]-5]} rotation={[0, Math.PI/2, 0]}/>
@@ -67,7 +67,7 @@ export default function Section2(props){
         <Grass position={[position[0]+33, position[1]-0.01, position[2]-12]}/>
         <Grass position={[position[0]+33, position[1]-0.01, position[2]-18]}/>
         <Grass position={[position[0]+33, position[1]-0.01, position[2]-24]}/>  
-        <Sidewalk position={[position[0]+33, position[1]+0, position[2]-15]}/>
+        <Sidewalk position={[position[0]+33, position[1]+0.01, position[2]-15]}/>
 
         {/*Section2*/}
         <Sidewalk_corner_7 position={[position[0]+33, position[1]+0.01, position[2]-21]} rotation={[0, Math.PI/2 ,0]}/>

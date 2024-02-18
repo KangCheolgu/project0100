@@ -165,10 +165,10 @@ export default function Section5(props){
         <Road_1 position={[position[0]+60, position[1]-0.519, position[2]+12]} rotation={[0, 0, 0]}/>
 
         {/* 해변 출입구*/}
-        <Road_1 scale={[1, 1, 1.1]} position={[position[0]+60, position[1]-0.26, position[2]+6]} rotation={[Math.PI/41, 0, 0]}/>
-        <ColliderBox position={[position[0]+60, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
-        <Road_1 scale={[1, 1, 1.1]} position={[position[0]+0, position[1]-0.26, position[2]+6]} rotation={[Math.PI/41, 0, 0]}/>
-        <ColliderBox position={[position[0]+0, position[1]-0.31, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/41, 0, 0]}/>
+        <Road_1 scale={[1, 1, 1.1]} position={[position[0]+60, position[1]-0.26, position[2]+6]} rotation={[Math.PI/40, 0, 0]}/>
+        <ColliderBox position={[position[0]+60, position[1]-0.239, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/40, 0, 0]}/>
+        <Road_1 scale={[1, 1, 1.1]} position={[position[0]+0, position[1]-0.26, position[2]+6]} rotation={[Math.PI/40, 0, 0]}/>
+        <ColliderBox position={[position[0]+0, position[1]-0.239, position[2]+6]} scale={[6, 0.1, 6.1]} rotation={[Math.PI/40, 0, 0]}/>
 
         
     </group>

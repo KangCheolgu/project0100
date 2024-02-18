@@ -229,6 +229,8 @@ export default function Scene() {
   }, []);
   
   const [loadingEnd, setLoadingEnd] = useState(false)
+  const targetObject = new THREE.Object3D();
+  targetObject.position.set(0, 0, -50);
 
   return (
     <>
@@ -246,22 +248,27 @@ export default function Scene() {
             <Sand/>
             <ambientLight intensity={2} color="#fff7e6"/>
             
+            {/*{<Light/>*/}
+            
+
             <directionalLight
               castShadow
+              targetObject ={targetObject}
               intensity={4}
-              shadow-camera-top={100}
-              shadow-camera-bottom={-100}
-              shadow-camera-left={-100}
+              shadow-camera-top={30}
+              shadow-camera-bottom={-60}
+              shadow-camera-left={-120}
               shadow-camera-right={100}
+              shadow-camera-far={100}
               shadow-mapSize-height={512*4}
               shadow-mapSize-width={512*4}
-              position={[30, 60, -100]}
+              position={[50, 80, -50]}
               color="#ffffff"
             />
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>
-              {/*<Debug>*/}
+              <Debug>
                 
                   <ColliderWall/>
                   <Map1 position={[0, 0, 0]}/>
@@ -291,7 +298,7 @@ export default function Scene() {
                 )}
                 
                 
-            {/*</Debug>*/}
+            </Debug>
             </Physics>
             {spectators.map((spectator, index) => (
               <Spectator id={spectator.id} key={index} position={spectator.position} />
