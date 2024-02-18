@@ -20,7 +20,7 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
 
         // winner
         winner : "",
-
+        recordTime : 0,
         // Phase
         phase: 'ready',
         start:() =>

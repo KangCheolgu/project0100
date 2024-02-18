@@ -8,13 +8,15 @@ import useGame from './stores/useGame'
 import Scene from './Scene'
 import { socket } from "./lobby/lobby.jsx";
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Interface(){
     const navigate = useNavigate()
 
     const lapse = useRef();
     const time = useRef();
-    
+
+    const end = useGame((state)=> state.end)
     const endTime = useGame((state) => state.endTime);
     const forward = useKeyboardControls((state) => state.forward);
     const backward = useKeyboardControls((state) => state.backward);
@@ -24,6 +26,7 @@ export default function Interface(){
     const space = useKeyboardControls((state) => state.space);
     const restart = useGame((state) => state.restart);
     const phase = useGame((state) => state.phase);
+    const recordTime = useGame((state) => state.recordTime);
     let count = useGame((state) => state.count);
 
     // 유저 목록을 받아서 목록에 추가해줌
@@ -31,13 +34,12 @@ export default function Interface(){
     const [spectators, setSpectators] = useState([])
     const [ranking, setRanking] = useState("");
     const [animationStart, setAnimationStart] = useState(null);
-
     const [player1Ranking, setPlayer1Ranking] = useState("1등");
     const [player2Ranking, setPlayer2Ranking] = useState("2등");
     let elapsedTime = 0
     const [winnerData, setWinnerData] = useState()
     const winner = useGame((state) => state.winner);
-
+    const [tmpRecord, setTmpRecord] = useState(0)
     const toLobby = () => {
       socket.emit("leaveAndGoToLobby")
       navigate("/lobby") 
@@ -74,6 +76,7 @@ export default function Interface(){
               elapsedTime = Date.now() - state.startTime;
             else if (state.phase === 'ended') {
               elapsedTime = state.endTime - state.startTime;
+              setTmpRecord(elapsedTime)
             }
 
             let minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
@@ -87,7 +90,7 @@ export default function Interface(){
             formattedTime = `${minutes}:${seconds}:${milliseconds}`;
 
             if (time.current)
-                time.current.textContent = "TIME  : "+ formattedTime;
+                time.current.textContent = formattedTime;
             if (lapse.current)
                 lapse.current.textContent = "LAPS  : " + newLapse + " / 2";
 
@@ -112,39 +115,54 @@ export default function Interface(){
     useEffect(() => {
       // 다른 사람이 먼저 1등을 했을 때의 신호 처리
       socket.on('phaseEndedSign', (firstPlayerData) => {
+        end()
         console.log(firstPlayerData);
-          const winnerSocketData = players.find(item => item.id === firstPlayerData[0]);
-          console.log(winnerSocketData.name);
-          if (winnerSocketData) {
-              setWinnerData(winnerSocketData.name);
-              // phase를 'ended'로 변경하는 액션 호출
-              useGame.setState({ phase: 'ended' });
-              if (time.current)
-                time.current.textContent = firstPlayerData[1];
-          }
+        const winnerSocketData = players.find(item => item.id === firstPlayerData[0]);
+        console.log(winnerSocketData.name);
+        if (winnerSocketData) {
+            // phase를 'ended'로 변경하는 액션 호출
+            useGame.setState({ recordTime : firstPlayerData[1] });
+            setWinnerData(winnerSocketData.name);
+        }
       });
 
       return () => {
           // 이벤트 리스너 정리
           socket.off('phaseEndedSign');
       };
-    }, [players, winnerData, phase]);
+    }, [phase, recordTime]);
 
       // useEffect를 사용하여 상태 변경 감지
     useEffect(() => {
       // 상태가 'end'로 변경되었을 때 winner 메시지 출력
-      console.log(winner);
       if (phase === 'ended' && winner === socket.id) {
         if (time.current){
           // 승리자의 소켓을 보냄
-          const recordTime = time.current.textContent
           const winnerSocketData = players.find(item => item.id === winner);
-          console.log(winnerSocketData.name);
-          socket.emit('phaseEnded', [socket.id, recordTime]);
+          socket.emit('phaseEnded', [socket.id, tmpRecord]);
+          useGame.setState({ recordTime : tmpRecord });
           setWinnerData(winnerSocketData.name)
+
+          axios.post('http://localhost:5000/api/database/saveWinnerRecord', {
+            name: winnerSocketData.name,
+            email: winnerSocketData.email,
+            record: tmpRecord,
+          });
         }
       }
-    }, [phase, endTime, winnerData, players]);
+    }, [tmpRecord]);
+
+    function formatTime(milliseconds) {
+      // 밀리초를 분, 초, 밀리초로 변환합니다.
+      const minutes = Math.floor(milliseconds / (1000 * 60));
+      const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
+      const ms = milliseconds % 1000;
+  
+      // 형식에 맞게 시간을 포맷합니다.
+      const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${ms.toString().padStart(3, '0')}`;
+  
+      return formattedTime;
+  }
 
 
 
@@ -155,7 +173,11 @@ export default function Interface(){
       {/* lapse */}
       <div ref={lapse} style={{fontFamily:"RacingFont", fontSize:"60px"}} className ="lapse">1/2</div>
       {/* Time */}
-      <div ref = { time } style={{fontFamily:"RacingFont", fontSize:"60px"}} className="time">00:00:000</div>
+      <div>
+        <div style={{fontFamily:"RacingFont", fontSize:"60px"}} className="time">TIME :</div>
+        <div ref = { time } style={{fontFamily:"RacingFont", fontSize:"60px", marginLeft:"160px"}} className="time">00:00:000</div>
+      </div>
+      
       {phase !== 'ended' && 
       <>
         {/* Ranking */}
@@ -239,12 +261,12 @@ export default function Interface(){
       </>
       }
       {/* 게임 종료시 */}
-      { phase==='ended'?
+      { phase==='ended' ?
         <>
           <div className="winnerdiv">
             Winner is {winnerData} !!!
             <br />
-            {time.current.textContent}
+            Time Record : {formatTime(recordTime)}
           </div>
           <br/>
           <div style={{fontFamily:'sans-serif'}} className="toLobby" onClick={toLobby}>로비로 나가기</div>

@@ -5,7 +5,7 @@ import cors from "cors"
 import bodyParser from "body-parser"
 import auth from "./utils/auth.js";
 import dotenv from 'dotenv';
-
+import database from "./utils/database.js"
 dotenv.config();
 
 const app = express(); // express를 실행한 값을 app에 저장
@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 // auth 관리 라우터
 app.use("/api/auth", auth)
 // db 관리 라우터
-// app.use("/database", database)
+app.use("/api/database", database)
 
 const rooms = {}
 var numClients = 2
@@ -89,6 +89,7 @@ io.on('connection', (socket) => {
       const position = rooms[roomName].players.length === 0 ? [-1, 0.3, -12] : [1, 0.3, -12];
       const player = {
           id: socket.id,
+          email: roomData.userEmail,
           name: roomData.userName,
           position: position,
           rotation: [0, 0, 0],
@@ -293,7 +294,6 @@ io.on('connection', (socket) => {
               const playerSocket = io.sockets.sockets.get(player.id);
               if (playerSocket) {
                   playerSocket.leave(roomName);
-                  alert("방장이 방을 나갔습니다.")
               }
           });
           if(rooms[roomName].spectator){
@@ -301,7 +301,6 @@ io.on('connection', (socket) => {
                 const spectatorSocket = io.sockets.sockets.get(spectator.id);
                 if (spectatorSocket) {
                     spectatorSocket.leave(roomName);
-                    alert("방장이 방을 나갔습니다.")
                 }
             });
           }

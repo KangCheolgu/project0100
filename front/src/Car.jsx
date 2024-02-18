@@ -21,9 +21,10 @@ import { calculateSpeed } from "./utils/speedCalculator.jsx";
 import useGame from "./stores/useGame.jsx";
 import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
+import axios from "axios";
 
 let checkPointIndex = 0
-let lapseCheck = [false]
+let lapseCheck = [false, false]
 
 const Car = ({ cameraGroup, ...props }) => {
     // 이전 등수 현재등수
@@ -158,12 +159,14 @@ const Car = ({ cameraGroup, ...props }) => {
       // }
       // if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
       //   end()
+      // }
         
       if (checkPointIndex ===  1 && lapseCheck[0] === false) {
-        around()
         lapseCheck[0] = true
+        around()
       }
-      if (checkPointIndex ===  2 ) {
+      if (checkPointIndex ===  2 && lapseCheck[1] === false) {
+        lapseCheck[1] = true
         end()
         useGame.setState({ winner: socket.id });
       }
