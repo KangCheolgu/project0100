@@ -42,7 +42,7 @@ export default function Interface(){
     const [tmpRecord, setTmpRecord] = useState(0)
     const toLobby = () => {
       socket.emit("leaveAndGoToLobby")
-      navigate("/lobby") 
+      navigate("/lobby")
     }
 
     useEffect(() => {
