@@ -117,30 +117,30 @@ const Car = ({ cameraGroup, ...props }) => {
   const lastPosition = useRef(new Vector3());
   const lastUpdateTime = useRef(Date.now());
 
-  // useEffect(() => {
-  //   if (socket.id === props.id) {
-  //     const updateSpeed = () => {
-  //       const now = Date.now();
-  //       const deltaTime = (now - lastUpdateTime.current) / 1000; // Convert to seconds
-  //       const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
-  //       // Use the utility function to calculate speed
-  //       const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
-  //       // Check if the speed has changed significantly (by 10 km/h or more)
-  //       // if (Math.abs(speed - lastSpeed.current) >= 10) {
-  //         setCurrentSpeed(speed); // Update the state only if the change is significant
-  //         lastSpeed.current = speed; // Update the last speed reference
-  //       // }
+  useEffect(() => {
+    if (socket.id === props.id) {
+      const updateSpeed = () => {
+        const now = Date.now();
+        const deltaTime = (now - lastUpdateTime.current) / 1000; // Convert to seconds
+        const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
+        // Use the utility function to calculate speed
+        const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
+        // Check if the speed has changed significantly (by 10 km/h or more)
+        // if (Math.abs(speed - lastSpeed.current) >= 10) {
+          setCurrentSpeed(speed); // Update the state only if the change is significant
+          lastSpeed.current = speed; // Update the last speed reference
+        // }
 
-  //       // Always update the last position and time, regardless of whether the speed was updated
-  //       lastPosition.current.copy(currentPosition);
-  //       lastUpdateTime.current = now;
-  //     };
+        // Always update the last position and time, regardless of whether the speed was updated
+        lastPosition.current.copy(currentPosition);
+        lastUpdateTime.current = now;
+      };
     
 
-  //     const intervalId = setInterval(updateSpeed, 500); // Continue to check speed every 200ms
-  //     return () => clearInterval(intervalId);
-  //   }
-  // }, []);
+      const intervalId = setInterval(updateSpeed, 500); // Continue to check speed every 200ms
+      return () => clearInterval(intervalId);
+    }
+  }, []);
 
   // 랩타임 관련
   const end = useGame((state)=> state.end)
@@ -162,11 +162,11 @@ const Car = ({ cameraGroup, ...props }) => {
       //   end()
       // }
         
-      if (checkPointIndex ===  1 && lapseCheck[0] === false) {
+      if (checkPointIndex ===  CheckPoint.length + 1 && lapseCheck[0] === false) {
         lapseCheck[0] = true
         around()
       }
-      if (checkPointIndex ===  2 && lapseCheck[1] === false) {
+      if (checkPointIndex ===  CheckPoint.length * 2 + 1 && lapseCheck[1] === false) {
         lapseCheck[1] = true
         end()
         useGame.setState({ winner: socket.id });
@@ -395,8 +395,8 @@ const Car = ({ cameraGroup, ...props }) => {
       <Timer />
        <Html>
         <div style={{position: 'fixed', width: window.screen.width/2 , height: window.screen.height/2 }}>
-          <Needle socket={socket} props={props} currentSpeed={currentSpeed} />
-          <Speedometer socket={socket} props={props} currentSpeed={currentSpeed} />
+          <Needle socket={socket} props={props} currentSpeed={currentSpeed * 2} />
+          <Speedometer socket={socket} props={props} currentSpeed={currentSpeed * 2} />
         </div>
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
