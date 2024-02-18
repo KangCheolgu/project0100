@@ -257,7 +257,7 @@ export default function Scene() {
         <OrbitControls />
         <Stats/>
         <Physics gravity={[0, -3, 0]}>
-          <Debug>
+          {/*<Debug>*/}
             <Suspense fallback={<LoadingPage />}>
               <ColliderWall/>
               <Map1 position={[0, 0, 0]}/>
@@ -289,7 +289,7 @@ export default function Scene() {
             )}
             
             </Suspense>
-         </Debug>
+        {/* </Debug>*/}
         </Physics>
         {spectators.map((spectator, index) => (
           <Spectator id={spectator.id} key={index} position={spectator.position} />

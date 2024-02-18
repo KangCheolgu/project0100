@@ -110,6 +110,7 @@ export default function Interface(){
       <div ref={lapse} style={{fontFamily:"RacingFont", fontSize:"60px"}} className ="lapse">1/2</div>
       {/* Time */}
       <div ref = { time } style={{fontFamily:"RacingFont", fontSize:"60px"}} className="time">00:00:000</div>
+      <div className="minimap"></div>
       {/* Ranking */}
       <div className='rankingSpace'>
         {players.length >= 1 && (

@@ -68,7 +68,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     })
 
     useEffect(() => {
-        setScreenPosition(new THREE.Vector3(screenSize.width / 2 - size / 2, screenSize.height / 2 - size_height / 2, 0))
+        setScreenPosition(new THREE.Vector3(screenSize.width / 2 - size / 2 , screenSize.height / 2 - size_height / 2, 0))
       }, [screenSize])
     
 
@@ -97,15 +97,23 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
         <>
       {createPortal(
         <>
+        
           <OrthographicCamera ref={miniMapCamera} makeDefault={false} position={[0, 0, 100]} />
           <sprite ref={miniMap} position={screenPosition} scale={[size, size_height, 1]}>
             <spriteMaterial map={buffer.texture} transparent={true} opacity={0.7}/>
           </sprite>
           <sprite material-color="blue" ref={player1} position={[screenPosition]} scale={[20,20, 1]} />
-          <sprite material-color="black" ref={player2} position={[screenPosition]} scale={[20,20, 1]} />
+          <sprite material-color="red" ref={player2} position={[screenPosition]} scale={[20,20, 1]} />
+          <sprite 
+            material-color="white" 
+            position={[screenPosition.x, screenPosition.y, screenPosition.z-0.1]}
+            scale={[size+10,size_height+10, 1]}
+          >
+            <spriteMaterial transparent={true} opacity={0.1}/>
+          </sprite>
           <mesh>
             <meshLineGeometry attach="geometry" points={points}/>
-            <meshLineMaterial  attach="material" lineWidth ={0.02} color={"white"}/>
+            <meshLineMaterial  attach="material" lineWidth ={0.02} color={""}/>
           </mesh>
         </>,    
         virtualScene,
