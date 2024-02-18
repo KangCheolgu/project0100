@@ -40,9 +40,9 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     const player2 = useRef()
     const matrix = new THREE.Matrix4()
     const direction = new THREE.Vector3()
-
+    {/*
     const points = [];
-    {/*Map1*/}
+    {/*Map1
     points.push(new THREE.Vector3(592, 77, 0.1)); // 해변 좌측 하단
     points.push(new THREE.Vector3(742, 77,  0.1)); // 해변 우측 하단
     points.push(new THREE.Vector3(742, 150,  0.1)); // 골목길 입구
@@ -51,7 +51,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     points.push(new THREE.Vector3(653, 131,  0.1));
     points.push(new THREE.Vector3(653, 170,  0.1));
     points.push(new THREE.Vector3(742, 170,  0.1)); // 다리 입구
-    {/* Map2*/}
+    {/* Map2
     points.push(new THREE.Vector3(742, 316,  0.1)); // 우측 상단
     points.push(new THREE.Vector3(697, 316,  0.1));
     points.push(new THREE.Vector3(697, 270, 0.1));
@@ -59,7 +59,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     points.push(new THREE.Vector3(653, 316,  0.1));
     points.push(new THREE.Vector3(592, 316,  0.1)); // 좌측 상단
     points.push(new THREE.Vector3(592, 77,  0.1));
-    
+    */}
     socket.on("updateAnotherPlayer", (data)=>{
       const targetPosition = new THREE.Vector3(data.position.x, data.position.y ,data.position.z);
       targetX = parseFloat(targetPosition.x.toFixed(3))
@@ -68,7 +68,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     })
 
     useEffect(() => {
-        setScreenPosition(new THREE.Vector3(screenSize.width / 2 - size / 2, screenSize.height / 2 - size_height / 2, 0))
+        setScreenPosition(new THREE.Vector3(screenSize.width / 2 - size / 2 , screenSize.height / 2 - size_height / 2, 0))
       }, [screenSize])
     
 
@@ -97,16 +97,24 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
         <>
       {createPortal(
         <>
+        
           <OrthographicCamera ref={miniMapCamera} makeDefault={false} position={[0, 0, 100]} />
           <sprite ref={miniMap} position={screenPosition} scale={[size, size_height, 1]}>
             <spriteMaterial map={buffer.texture} transparent={true} opacity={0.7}/>
           </sprite>
           <sprite material-color="blue" ref={player1} position={[screenPosition]} scale={[20,20, 1]} />
-          <sprite material-color="black" ref={player2} position={[screenPosition]} scale={[20,20, 1]} />
-          <mesh>
+          <sprite material-color="red" ref={player2} position={[screenPosition]} scale={[20,20, 1]} />
+          <sprite 
+            material-color="white" 
+            position={[screenPosition.x, screenPosition.y, screenPosition.z-0.1]}
+            scale={[size+10,size_height+10, 1]}
+          >
+            <spriteMaterial transparent={true} opacity={0.1}/>
+          </sprite>
+          {/*<mesh>
             <meshLineGeometry attach="geometry" points={points}/>
-            <meshLineMaterial  attach="material" lineWidth ={0.02} color={"white"}/>
-          </mesh>
+            <meshLineMaterial  attach="material" lineWidth ={0.02} color={""}/>
+      </mesh>*/}
         </>,    
         virtualScene,
       )}

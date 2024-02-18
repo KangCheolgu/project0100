@@ -85,17 +85,17 @@ export const LobbyPage = () => {
     }
   }
   // 기록이 작은 순으로 3개 가져옴
-  const getRankingList = async () => {
-    try {
-        const response = await axios.get(CURRENT_URL + '/api/database/getrankinglist');
-        // 서버로부터 받은 랭킹 목록을 반환합니다.
-        console.log("response");
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching ranking list:', error);
-        return []; // 에러 발생 시 빈 배열 반환
-    }
-  };
+  // const getRankingList = async () => {
+  //   try {
+  //       const response = await axios.get(CURRENT_URL + '/api/database/getrankinglist');
+  //       // 서버로부터 받은 랭킹 목록을 반환합니다.
+  //       console.log("response");
+  //       return response.data;
+  //   } catch (error) {
+  //       console.error('Error fetching ranking list:', error);
+  //       return []; // 에러 발생 시 빈 배열 반환
+  //   }
+  // };
 
   useEffect(() => {
     // 받은 방 리스트
@@ -113,11 +113,11 @@ export const LobbyPage = () => {
   useEffect(() => {
     // 처음에 렌더링 되면 방 리스트와 랭킹을 불러와서 나타냄
     socket.emit("roomlist")
-    getRankingList()
-    .then(rankingList => {
-        console.log('Ranking list:', rankingList);
-        // 여기서 랭킹 목록을 처리합니다.
-    });
+    // getRankingList()
+    // .then(rankingList => {
+    //     console.log('Ranking list:', rankingList);
+    //     // 여기서 랭킹 목록을 처리합니다.
+    // });
   },[])
 
   return (

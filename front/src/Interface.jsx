@@ -143,11 +143,11 @@ export default function Interface(){
           useGame.setState({ recordTime : tmpRecord });
           setWinnerData(winnerSocketData.name)
 
-          axios.post('http://localhost:5000/api/database/saveWinnerRecord', {
-            name: winnerSocketData.name,
-            email: winnerSocketData.email,
-            record: tmpRecord,
-          });
+          // axios.post('http://localhost:5000/api/database/saveWinnerRecord', {
+          //   name: winnerSocketData.name,
+          //   email: winnerSocketData.email,
+          //   record: tmpRecord,
+          // });
         }
       }
     }, [tmpRecord]);

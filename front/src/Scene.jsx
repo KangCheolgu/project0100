@@ -258,10 +258,6 @@ export default function Scene() {
               position={[30, 60, -100]}
               color="#ffffff"
             />
-            {/* <SkyCube scale={100} position={[30, 0, -50]}/> */}
-            {/*DirectionalLight & Camera Helper*/}
-            {/*<Light/>*/}
-            
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>
@@ -278,15 +274,13 @@ export default function Scene() {
                   ))
                 }
       
-                                                              
-                {/* <Ground /> */}
                 {isObstacleStarted && (
                 <>
                 {/* 장애물 배치 */}
                 <SpinObstacle position={[25,0.5,-28]} offset={3}/>
                 <SpinObstacle position={[27,0.5,-97]} offset={4}/>
                 {/* <LeftAndRightObstacle/> */}
-                <ShutterObstacle/>
+                {/* <ShutterObstacle/> */}
                 <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
                 <CarGreenObstacle/>
                 {/* <MotorObstacle/> */}
