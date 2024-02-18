@@ -40,9 +40,9 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     const player2 = useRef()
     const matrix = new THREE.Matrix4()
     const direction = new THREE.Vector3()
-
+    {/*
     const points = [];
-    {/*Map1*/}
+    {/*Map1
     points.push(new THREE.Vector3(592, 77, 0.1)); // 해변 좌측 하단
     points.push(new THREE.Vector3(742, 77,  0.1)); // 해변 우측 하단
     points.push(new THREE.Vector3(742, 150,  0.1)); // 골목길 입구
@@ -51,7 +51,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     points.push(new THREE.Vector3(653, 131,  0.1));
     points.push(new THREE.Vector3(653, 170,  0.1));
     points.push(new THREE.Vector3(742, 170,  0.1)); // 다리 입구
-    {/* Map2*/}
+    {/* Map2
     points.push(new THREE.Vector3(742, 316,  0.1)); // 우측 상단
     points.push(new THREE.Vector3(697, 316,  0.1));
     points.push(new THREE.Vector3(697, 270, 0.1));
@@ -59,7 +59,7 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
     points.push(new THREE.Vector3(653, 316,  0.1));
     points.push(new THREE.Vector3(592, 316,  0.1)); // 좌측 상단
     points.push(new THREE.Vector3(592, 77,  0.1));
-    
+    */}
     socket.on("updateAnotherPlayer", (data)=>{
       const targetPosition = new THREE.Vector3(data.position.x, data.position.y ,data.position.z);
       targetX = parseFloat(targetPosition.x.toFixed(3))
@@ -111,10 +111,10 @@ export function Minimap({size=200, size_height=300, chassisBody, socket, vehicle
           >
             <spriteMaterial transparent={true} opacity={0.1}/>
           </sprite>
-          <mesh>
+          {/*<mesh>
             <meshLineGeometry attach="geometry" points={points}/>
             <meshLineMaterial  attach="material" lineWidth ={0.02} color={""}/>
-          </mesh>
+      </mesh>*/}
         </>,    
         virtualScene,
       )}

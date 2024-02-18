@@ -4,9 +4,13 @@ import io from "socket.io-client"
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import cookie from 'react-cookies';
+import axios from "axios";
 
 export const socket = io("http://localhost:5000/")
-// export const socket = io("http://ec2-13-209-26-84.ap-northeast-2.compute.amazonaws.com:5000/")
+// export const socket = io("https://project0100.shop")
+
+const CURRENT_URL = "http://localhost:5000"
+// const CURRENT_URL = "https://project0100.shop"
 
 export const LobbyPage = () => {
   const navigate = useNavigate()
@@ -80,6 +84,18 @@ export const LobbyPage = () => {
       socket.off("joinRoomSign")
     }
   }
+  // 기록이 작은 순으로 3개 가져옴
+  // const getRankingList = async () => {
+  //   try {
+  //       const response = await axios.get(CURRENT_URL + '/api/database/getrankinglist');
+  //       // 서버로부터 받은 랭킹 목록을 반환합니다.
+  //       console.log("response");
+  //       return response.data;
+  //   } catch (error) {
+  //       console.error('Error fetching ranking list:', error);
+  //       return []; // 에러 발생 시 빈 배열 반환
+  //   }
+  // };
 
   useEffect(() => {
     // 받은 방 리스트
@@ -88,16 +104,20 @@ export const LobbyPage = () => {
       setRoomList(roomlistArray)
     })
 
-    return () => {
+    return () => {  
       socket.off("getRoomlist")
     }
 
   },[roomList])
 
   useEffect(() => {
-    // 처음에 렌더링 되면 방 리스트를 불러와서 나타냄
+    // 처음에 렌더링 되면 방 리스트와 랭킹을 불러와서 나타냄
     socket.emit("roomlist")
-
+    // getRankingList()
+    // .then(rankingList => {
+    //     console.log('Ranking list:', rankingList);
+    //     // 여기서 랭킹 목록을 처리합니다.
+    // });
   },[])
 
   return (
