@@ -58,7 +58,7 @@ export default function Map1(props){
         <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+38.5, position[1]+2, position[2]-12]} rotation={[-Math.PI/2, Math.PI, Math.PI/2]}/>
         <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+21, position[1]+2, position[2]+0]} rotation={[Math.PI/2, Math.PI, Math.PI/2]}/>
         <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+25, position[1]+2, position[2]-33]} rotation={[Math.PI/2, Math.PI,0]}/>
-        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+64, position[1]+2, position[2]-33]} rotation={[Math.PI/2, 0,Math.PI/2]}/>
+        <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+64, position[1]+2, position[2]-31]} rotation={[Math.PI/2, 0,Math.PI/2]}/>
         
         <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+60, position[1]+2, position[2]-128]} rotation={[Math.PI/2, 0, 0]}/>
         <Arrow2 scale={[2.5, 2, 2]} position={[position[0]+37, position[1]+2, position[2]-124]} rotation={[Math.PI/2, 0, -Math.PI/2]}/>

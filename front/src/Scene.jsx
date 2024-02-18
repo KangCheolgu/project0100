@@ -269,7 +269,7 @@ export default function Scene() {
                 
                   <ColliderWall/>
                   <Map1 position={[0, 0, 0]}/>
-                  {/* <Map2 position={[0, 0, -94]}/> */}
+                  <Map2 position={[0, 0, -94]}/>
                   <Wall />
                 
                 {

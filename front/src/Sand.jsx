@@ -3,17 +3,14 @@ import { createNoise2D } from 'simplex-noise'
 import { useLoader } from '@react-three/fiber'
 import { RepeatWrapping } from 'three'
 import seedrandom from 'seedrandom'
-import { useTrimesh } from "@react-three/cannon";
-import { useRef } from "react";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 function Sand(props) {
   const texture = useLoader(THREE.TextureLoader, '/sand.webp')
   texture.wrapS = texture.wrapT = RepeatWrapping
   texture.repeat.set(25, 25)
 
-  const seed = 'my-seed' // set a fixed random seed value
-  const simplex = createNoise2D(seedrandom(seed))
+  //const seed = 'my-seed' // set a fixed random seed value
+  //const simplex = createNoise2D(seedrandom(seed))
 
   function getHeight(x, y) {
     // Scale the coordinates
@@ -21,20 +18,20 @@ function Sand(props) {
     y *= 0.01
 
     // Generate noise
-    const noise = simplex(x, y)
+    //const noise = simplex(x, y)
 
     // Map noise to height
-    let height = Math.pow(noise, 3) * 5
+    //let height = Math.pow(noise, 3) * 5
 
     // Add a dune at (100, 100)
-    const duneX = 100
-    const duneY = 100
-    const duneHeight = 20
-    const duneWidth = 30
-    const duneDist = Math.sqrt((x - duneX) ** 2 + (y - duneY) ** 2)
-    if (duneDist < duneWidth) {
-      height += duneHeight * (1 - duneDist / duneWidth)
-    }
+    //const duneX = 100
+    //const duneY = 100
+    //const duneHeight = 20
+    //const duneWidth = 30
+    //const duneDist = Math.sqrt((x - duneX) ** 2 + (y - duneY) ** 2)
+    //if (duneDist < duneWidth) {
+    //  height += duneHeight * (1 - duneDist / duneWidth)
+    //}
 
     return height
   }
