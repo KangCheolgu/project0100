@@ -15,6 +15,8 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
   // brake
   const [brakeLightsOn, setBrakeLightsOn] = useState(false);
 
+  const [currentEngineForce, setCurrentEngineForce] = useState(engineForce);
+
   // 키 다운 이벤트
   const handleKeyDown = (e) => {
     console.log(e);
@@ -117,25 +119,33 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
 
   // 차량 제어 로직
   useEffect(() => {
-    let currentEngineForce = controls.boost ? engineForce * 2 : engineForce; // boost 상태에 따라 엔진 힘 조정
-
-    if (controls.ArrowUp || controls.w) {
-      vehicleApi.applyEngineForce(currentEngineForce, 0);
-      vehicleApi.applyEngineForce(currentEngineForce, 1);
-    } else if (controls.ArrowDown || controls.s) {
-      vehicleApi.applyEngineForce(-currentEngineForce, 0);
-      vehicleApi.applyEngineForce(-currentEngineForce, 1);
+    const isMovingForward = controls.ArrowUp || controls.w;
+    const isMovingBackward = controls.ArrowDown || controls.s;
+    const isTurningLeft = controls.ArrowLeft || controls.a;
+    const isTurningRight = controls.ArrowRight || controls.d;
+  
+    // 엔진 힘 조정
+    let appliedEngineForce = 0;
+    if (isMovingForward) {
+      appliedEngineForce = controls.boost ? engineForce * 2 : engineForce;
+    } else if (isMovingBackward) {
+      appliedEngineForce = controls.boost ? -engineForce * 2 : -engineForce;
     } else {
-      vehicleApi.applyEngineForce(0, 0);
-      vehicleApi.applyEngineForce(0, 1);
+      // 감속 로직: 아무 이동 키도 누르지 않았을 때
+      // 여기서는 간단한 선형 감속을 적용합니다. 실제 게임에서는 더 복잡한 물리 기반 로직을 사용할 수 있습니다.
+      appliedEngineForce = currentEngineForce * 0.5; // 현재 엔진 힘의 98%를 적용하여 점진적으로 감속
     }
+  
+    // 엔진 힘 적용
+    vehicleApi.applyEngineForce(appliedEngineForce, 0);
+    vehicleApi.applyEngineForce(appliedEngineForce, 1);
 
-    if (controls.ArrowLeft || controls.a) {
+    if (isTurningLeft) {
       vehicleApi.setSteeringValue(0.3, 2);
       vehicleApi.setSteeringValue(0.3, 3);
       vehicleApi.setSteeringValue(-0.07, 0);
       vehicleApi.setSteeringValue(-0.07, 1);
-    } else if (controls.ArrowRight || controls.d) {
+    } else if (isTurningRight) {
       vehicleApi.setSteeringValue(-0.3, 2);
       vehicleApi.setSteeringValue(-0.3, 3);
       vehicleApi.setSteeringValue(0.07, 0);
@@ -147,7 +157,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     }
 
     // 조향 키가 눌리지 않았을 때만 브레이크 적용
-    if (brake && !controls.ArrowLeft && !controls.ArrowRight && !controls.a && !controls.d) {
+    if (brake &&  !isTurningLeft && !isTurningRight) {
       vehicleApi.setBrake(20, 0);
       vehicleApi.setBrake(20, 1);
     } else {
@@ -157,7 +167,56 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
       vehicleApi.setBrake(0, 3);
     }
 
-  }, [controls, vehicleApi, chassisApi]);
+    setCurrentEngineForce(appliedEngineForce);
+
+  }, [controls, vehicleApi, chassisApi, currentEngineForce]);
 
   return { controls, brakeLightsOn };
 }
+
+
+// useEffect(() => {
+//   let currentEngineForce = controls.boost ? engineForce * 2 : engineForce; // boost 상태에 따라 엔진 힘 조정
+
+//   if (controls.ArrowUp || controls.w) {
+//     vehicleApi.applyEngineForce(currentEngineForce, 0);
+//     vehicleApi.applyEngineForce(currentEngineForce, 1);
+//   } else if (controls.ArrowDown || controls.s) {
+//     vehicleApi.applyEngineForce(-currentEngineForce, 0);
+//     vehicleApi.applyEngineForce(-currentEngineForce, 1);
+//   } else {
+//     vehicleApi.applyEngineForce(0, 0);
+//     vehicleApi.applyEngineForce(0, 1);
+//   }
+
+//   if (controls.ArrowLeft || controls.a) {
+//     vehicleApi.setSteeringValue(0.3, 2);
+//     vehicleApi.setSteeringValue(0.3, 3);
+//     vehicleApi.setSteeringValue(-0.07, 0);
+//     vehicleApi.setSteeringValue(-0.07, 1);
+//   } else if (controls.ArrowRight || controls.d) {
+//     vehicleApi.setSteeringValue(-0.3, 2);
+//     vehicleApi.setSteeringValue(-0.3, 3);
+//     vehicleApi.setSteeringValue(0.07, 0);
+//     vehicleApi.setSteeringValue(0.07, 1);
+//   } else {
+//     for (let i = 0; i < 4; i++) {
+//       vehicleApi.setSteeringValue(0, i);
+//     }
+//   }
+
+//   // 조향 키가 눌리지 않았을 때만 브레이크 적용
+//   if (brake && !controls.ArrowLeft && !controls.ArrowRight && !controls.a && !controls.d) {
+//     vehicleApi.setBrake(20, 0);
+//     vehicleApi.setBrake(20, 1);
+//   } else {
+//     vehicleApi.setBrake(0, 0);
+//     vehicleApi.setBrake(0, 1);
+//     vehicleApi.setBrake(0, 2);
+//     vehicleApi.setBrake(0, 3);
+//   }
+
+// }, [controls, vehicleApi, chassisApi]);
+
+// return { controls, brakeLightsOn };
+// }

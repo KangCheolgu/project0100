@@ -1,15 +1,12 @@
 import React from 'react'
 import * as THREE from 'three'
-import { useBox } from "@react-three/cannon";
 import ColliderBox from '../ColliderBox';
 
 export default function Wall(props){
     const wallGeometry = new THREE.BoxGeometry(1, 1, 1)
     const wallMaterial = new THREE.MeshStandardMaterial({color: "brown"})
     const position = props.position || [60, 0, -94]
-    // const [meshRef] = useBox(
-    //     () => ({ mass: 1, type: 'Static'}),
-    //  )
+
     return (
     <group rotation={props.rotation}>
         {/* 바닥 */}
