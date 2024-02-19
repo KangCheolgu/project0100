@@ -20,18 +20,18 @@ import { OrbitControls, useProgress, Stats, PerspectiveCamera, CameraShake, Html
 import { Physics, Debug } from "@react-three/cannon";
 import * as THREE from 'three';
 import Sand from '../Sand';
-import { Background } from '../components/Background';
 import Light from "../Light.jsx";
 import SvgIcon from "@mui/material/SvgIcon";
-import { SvgIconComponent } from "@mui/icons-material";
 import SportsScoreIcon from '@mui/icons-material/SportsScore';
+
 function Flag(props){
   return (
     <SvgIcon component={SportsScoreIcon} inheritViewBox/>
   )
 }
-function ProfileCard(props) {
+function ProfileCard(props, cnt) {
   const name = props.name
+  const isHost=["Host", "Player"]
   return (
     <Card
       sx={{
@@ -39,7 +39,10 @@ function ProfileCard(props) {
         maxWidth: '100%',
         boxShadow: 'lg',
       }}
+      style={{ backgroundColor: "white" }}
     >
+      <img src="/assets/images/flag3.png" style={{position:"absolute", width:"100px", height:"100px", transform: "translateX(-10px) rotate(-45deg) scaleX(-1)"}}/>
+      <img src="/assets/images/flag3.png" style={{position:"absolute", width:"100px", height:"100px", transform: "translateX(200px) rotate(45deg)"}}/>
       <CardContent sx={{ alignItems: 'center', textAlign: 'center'}}>
         <Avatar src="/static/images/avatar/1.jpg" sx={{ '--Avatar-size': '6rem' }} />
         <Chip
@@ -52,7 +55,7 @@ function ProfileCard(props) {
             border: '3px solid',
             borderColor: 'background.surface',
           }}
-        >■ ■ ■ <Flag sx={{fontSize: "large"}}/> ■ ■ ■</Chip>
+        >{cnt?"Player":"Host"}</Chip>
         
         <Typography style={{ fontSize: "2.5rem" }}>{name}</Typography>
         
@@ -144,7 +147,6 @@ export default function RoomPage() {
   }
   
   return (<>
-
     <Container style={{marginTop:"100px"}}>
       <Row style={{textAlign:"center"}}>
         <Col></Col>  
@@ -157,9 +159,9 @@ export default function RoomPage() {
             <Col>
               <Row>
                 {
-                players && players.map((player) => (
+                players && players.map((player, index) => (
                     <Col >
-                      <ProfileCard name={player.name?player.name:"Guest"}/>
+                      <ProfileCard name={player.name?player.name:"Guest"} cnt={index}/>
                     </Col>
                 ))
                 }
@@ -169,14 +171,15 @@ export default function RoomPage() {
           <Row style={{marginTop:"20px"}}>
             <Col style={{height:"100px"}}>
               
-              <Button 
+              <Button className="btn"
                 onClick={(e) => {e.currentTarget.style.marginTop = "15px"; e.currentTarget.style.marginBottom="5px"; e.currentTarget.style.boxShadow="0px 0px 0px 0px";  startGameInRoom();}}
+                sx={{fontFamily: 'CookieRun_Black, sans-serif'}}
                 style={{width:"100%", height:"100px", fontSize:"40px", 
-                boxShadow: "7px 7px 0px 2px #000000",  transition: "all 0.2s", 
+                boxShadow: "7px 7px 0px 2px #01939A",  transition: "all 0.2s", 
                 fontSize:"3.5rem", 
                 textShadow: "-3px 0px black, 0px 3px black, 3px 0px black, 0px -3px black",
-                backgroundColor: "#000080"
-                }}>{/* #FFD400  #FFF0A6*/}
+                backgroundColor: "#5DC8CD"
+                }}>{/*#FFD400  #FFF0A6 #000080*/}
                   GAME START</Button>
             </Col>
           </Row>
