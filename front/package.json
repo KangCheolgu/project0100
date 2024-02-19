@@ -23,6 +23,7 @@
     "lil-gui": "^0.19.1",
     "meshline": "^3.2.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.1",
     "react-cookies": "^0.1.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.0",

@@ -88,7 +88,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
         ...controls, [e.key]: true ,
         boost: e.shiftKey ? true : controls.boost
       }));
-      // console.log("DOWN", e.key);
+      console.log("DOWN", e.key);
     }
   }
 
@@ -97,7 +97,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
       ...controls, [e.key]: false,
       boost: e.shiftKey ? false : controls.boost
     }));
-    // console.log("UP", e.key);
+    console.log("UP", e.key);
   }
   /////////////// 건들지 마시오
   useEffect(()=>{
