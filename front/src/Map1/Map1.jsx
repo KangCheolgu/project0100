@@ -130,13 +130,13 @@ export default function Map1(props){
         <Border_1 position={[position[0]-3, position[1]-0.04, position[2]-30]} rotation={[0, Math.PI/2, 0]} />
         <Border_half position={[position[0]-3, position[1]-0.04, position[2]-32.9]} rotation={[0, Math.PI/2, 0]} />
 
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]-6]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]-12]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]-18]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]-24]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]-30]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-5, position[1]+0.05, position[2]-36]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-4.88, position[1]+0.05, position[2]]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-4.88, position[1]+0.05, position[2]-6]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-4.88, position[1]+0.05, position[2]-12]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-4.88, position[1]+0.05, position[2]-18]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-4.88, position[1]+0.05, position[2]-24]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-4.88, position[1]+0.05, position[2]-30]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]-4.88, position[1]+0.05, position[2]-36]}/>
 
 
         {/*남쪽 연석*/}
@@ -157,13 +157,13 @@ export default function Map1(props){
         <Border_1 position={[position[0]+63, position[1]-0.04, position[2]-24]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+63, position[1]-0.04, position[2]-30]} rotation={[0, Math.PI/2, 0]} />
         <Border_half position={[position[0]+63, position[1]-0.04, position[2]-33]} rotation={[0, Math.PI/2, 0]} />
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-0]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-6]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-12]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-18]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-24]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-30]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+65, position[1]+0.05, position[2]-36]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+64.88, position[1]+0.05, position[2]-0]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+64.88, position[1]+0.05, position[2]-6]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+64.88, position[1]+0.05, position[2]-12]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+64.88, position[1]+0.05, position[2]-18]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+64.88, position[1]+0.05, position[2]-24]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+64.88, position[1]+0.05, position[2]-30]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+64.88, position[1]+0.05, position[2]-36]} rotation={[0, 0, 0]}/>
 
 
         {/* 북쪽 연석 */}
@@ -179,15 +179,15 @@ export default function Map1(props){
         <Border_1 position={[position[0]+6, position[1]-0.04, position[2]-33]} rotation={[0, 0, 0]} />
         <Border_half position={[position[0]+3, position[1]-0.04, position[2]-32.9]} rotation={[0, Math.PI/2, 0]} />
         
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+6, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+12, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+18, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+24, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+30, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+36, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+42, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+48, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+54, position[1]+0.05, position[2]-35]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+6, position[1]+0.05, position[2]-34.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+12, position[1]+0.05, position[2]-34.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+18, position[1]+0.05, position[2]-34.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+24, position[1]+0.05, position[2]-34.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+30, position[1]+0.05, position[2]-34.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+36, position[1]+0.05, position[2]-34.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+42, position[1]+0.05, position[2]-34.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+48, position[1]+0.05, position[2]-34.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6 ]} position={[position[0]+54, position[1]+0.05, position[2]-34.88]} rotation={[0, Math.PI/2, 0]}/>
 
         {/* Section1 연석 */}
         <Border_2 position={[position[0]+6, position[1]-0.04, position[2]-6]} rotation={[0, Math.PI, 0]}/>
@@ -200,16 +200,16 @@ export default function Map1(props){
         <Border_1 position={[position[0]+21, position[1]-0.04, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+21, position[1]-0.04, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
         <Border_2 position={[position[0]+18, position[1]-0.04, position[2]-6]} rotation={[0, -Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+9, position[1]+0.05, position[2]-5]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+15, position[1]+0.05, position[2]-5]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+19, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+19, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+19, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+9, position[1]+0.05, position[2]-25]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+15, position[1]+0.05, position[2]-25]} rotation={[0, Math.PI/2, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+5, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+5, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
-        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+5, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+9, position[1]+0.051, position[2]-4.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+15, position[1]+0.051, position[2]-4.88]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+19.12, position[1]+0.051, position[2]-9]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+19.12, position[1]+0.051, position[2]-15]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+19.12, position[1]+0.051, position[2]-21]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+9, position[1]+0.05, position[2]-25.12]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+15, position[1]+0.05, position[2]-25.12]} rotation={[0, Math.PI/2, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+4.88, position[1]+0.05, position[2]-9]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+4.88, position[1]+0.05, position[2]-15]} rotation={[0, 0, 0]}/>
+        <ColliderBox scale = {[4,0.1, 6]} position={[position[0]+4.88, position[1]+0.05, position[2]-21]} rotation={[0, 0, 0]}/>
         
         {/* 연석 커브 하단 우측 */}
         <ColliderBox scale={[+3, +0.1, +1.5]} position={[position[0]+19.5, position[1]+0.05, position[2]-5.25]}/>
