@@ -15,8 +15,11 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
   // brake
   const [brakeLightsOn, setBrakeLightsOn] = useState(false);
 
+  const [currentEngineForce, setCurrentEngineForce] = useState(engineForce);
+
   // 키 다운 이벤트
   const handleKeyDown = (e) => {
+    console.log(e);
     // for brake lights
     if (e.key === ' ') {
       setBrake(true);
@@ -86,7 +89,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     if(!controls[e.key]) {
       setControls((controls) => ({ 
         ...controls, [e.key]: true ,
-        boost: e.shiftKey ? true : controls.boost
+        boost: e.key === 'Shift' || e.shiftKey ? true : controls.boost
       }));
       console.log("DOWN", e.key);
     }
@@ -95,7 +98,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
   const KeyUpPressHandler = (e) => {
     setControls((controls) => ({ 
       ...controls, [e.key]: false,
-      boost: e.shiftKey ? false : controls.boost
+      boost: e.key === 'Shift' ? false : controls.boost
     }));
     console.log("UP", e.key);
   }
@@ -112,51 +115,48 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
   })
   ////////////////// 건들지 마시오
 
+useEffect(() => {
+  let currentEngineForce = controls.boost ? engineForce * 2 : engineForce; // boost 상태에 따라 엔진 힘 조정
 
+  if (controls.ArrowUp || controls.w) {
+    vehicleApi.applyEngineForce(currentEngineForce, 0);
+    vehicleApi.applyEngineForce(currentEngineForce, 1);
+  } else if (controls.ArrowDown || controls.s) {
+    vehicleApi.applyEngineForce(-currentEngineForce, 0);
+    vehicleApi.applyEngineForce(-currentEngineForce, 1);
+  } else {
+    vehicleApi.applyEngineForce(0, 0);
+    vehicleApi.applyEngineForce(0, 1);
+  }
 
-  // 차량 제어 로직
-  useEffect(() => {
-    let currentEngineForce = controls.boost ? engineForce * 2 : engineForce; // boost 상태에 따라 엔진 힘 조정
-
-    if (controls.ArrowUp || controls.w) {
-      vehicleApi.applyEngineForce(currentEngineForce, 0);
-      vehicleApi.applyEngineForce(currentEngineForce, 1);
-    } else if (controls.ArrowDown || controls.s) {
-      vehicleApi.applyEngineForce(-currentEngineForce, 0);
-      vehicleApi.applyEngineForce(-currentEngineForce, 1);
-    } else {
-      vehicleApi.applyEngineForce(0, 0);
-      vehicleApi.applyEngineForce(0, 1);
+  if (controls.ArrowLeft || controls.a) {
+    vehicleApi.setSteeringValue(0.3, 2);
+    vehicleApi.setSteeringValue(0.3, 3);
+    vehicleApi.setSteeringValue(-0.07, 0);
+    vehicleApi.setSteeringValue(-0.07, 1);
+  } else if (controls.ArrowRight || controls.d) {
+    vehicleApi.setSteeringValue(-0.3, 2);
+    vehicleApi.setSteeringValue(-0.3, 3);
+    vehicleApi.setSteeringValue(0.07, 0);
+    vehicleApi.setSteeringValue(0.07, 1);
+  } else {
+    for (let i = 0; i < 4; i++) {
+      vehicleApi.setSteeringValue(0, i);
     }
+  }
 
-    if (controls.ArrowLeft || controls.a) {
-      vehicleApi.setSteeringValue(0.3, 2);
-      vehicleApi.setSteeringValue(0.3, 3);
-      vehicleApi.setSteeringValue(-0.07, 0);
-      vehicleApi.setSteeringValue(-0.07, 1);
-    } else if (controls.ArrowRight || controls.d) {
-      vehicleApi.setSteeringValue(-0.3, 2);
-      vehicleApi.setSteeringValue(-0.3, 3);
-      vehicleApi.setSteeringValue(0.07, 0);
-      vehicleApi.setSteeringValue(0.07, 1);
-    } else {
-      for (let i = 0; i < 4; i++) {
-        vehicleApi.setSteeringValue(0, i);
-      }
-    }
+  // 조향 키가 눌리지 않았을 때만 브레이크 적용
+  if (brake && !controls.ArrowLeft && !controls.ArrowRight && !controls.a && !controls.d) {
+    vehicleApi.setBrake(20, 0);
+    vehicleApi.setBrake(20, 1);
+  } else {
+    vehicleApi.setBrake(0, 0);
+    vehicleApi.setBrake(0, 1);
+    vehicleApi.setBrake(0, 2);
+    vehicleApi.setBrake(0, 3);
+  }
 
-    // 조향 키가 눌리지 않았을 때만 브레이크 적용
-    if (brake && !controls.ArrowLeft && !controls.ArrowRight && !controls.a && !controls.d) {
-      vehicleApi.setBrake(20, 0);
-      vehicleApi.setBrake(20, 1);
-    } else {
-      vehicleApi.setBrake(0, 0);
-      vehicleApi.setBrake(0, 1);
-      vehicleApi.setBrake(0, 2);
-      vehicleApi.setBrake(0, 3);
-    }
+}, [controls, vehicleApi, chassisApi]);
 
-  }, [controls, vehicleApi, chassisApi]);
-
-  return controls;
+return { controls, brakeLightsOn };
 }

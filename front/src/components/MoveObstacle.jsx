@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { useCompoundBody, useBox, useSphere } from '@react-three/cannon'
+import { useCompoundBody, useBox, useSphere, useCannon } from '@react-three/cannon'
 import { useFrame } from '@react-three/fiber'
 import { BoxGeometry, Vector3 } from 'three'
 import { StreetVendorCart } from './StreetVendorCart'
@@ -47,8 +47,8 @@ export function SpinObstacle(props) {
   return (
     <mesh ref={ref} castShadow receiveShadow>
       {/* 가운데 기둥 */}
-      <MotorbikeOrange position={[offset, -0.5, 0]} rotation={[0,Math.PI,0]}/>
-      <MotorbikePizza position={[-offset, -0.5,0]}/>
+      <MotorbikeOrange position={[offset, -0.5, 0]} rotation={[0,Math.PI,0]} castShadow receiveShadow/>
+      <MotorbikePizza position={[-offset, -0.5,0]} castShadow receiveShadow/>
       <meshStandardMaterial />
     </mesh>
   )
@@ -85,42 +85,6 @@ export function LeftAndRightObstacle(props){
   return (
     <mesh ref={box} castShadow>
       <StreetVendorCart scale={[0.3,0.3,0.3]} position={[0, -0.1, 0]}/>
-      <meshStandardMaterial/>
-    </mesh>
-  )
-}
-//////////////// 위아래 장애물 ////////////////////
-export function UpDownObstacle(props){
-  
-  const [box, {position}] = useBox(()=>({
-    mass: 0,
-    position: [20, 0.5, -20],
-    material: 'object',
-    args: [1.1,1,1]
-  }),
-  useRef()
-  )  
-  
-  const targetPosition = useRef(5)
-  const direction = useRef(1)
-
-  useEffect(() => {
-    const unsubscribe = position.subscribe((v) => {
-      position.set(v[0], lerp(v[1], targetPosition.current, 0.1), v[2]) //lerp(from,to,speed)
-    })
-    return unsubscribe
-  }, [])
-
-
-  useFrame((_, delta) => {
-    targetPosition.current += direction.current * delta * 2
-    if (targetPosition.current > 4) direction.current = -1
-    if (targetPosition.current < -2) direction.current = 1
-  })
-
-  return (
-    <mesh ref={box} castShadow>
-      <StreetVendorCart scale={[0.3,0.3,0.3]}/>
       <meshStandardMaterial/>
     </mesh>
   )
@@ -181,43 +145,6 @@ export function ShutterObstacle(props) {
     <mesh ref={ref} castShadow receiveShadow>
       {/* 가운데 기둥 */}
       <meshStandardMaterial position={[0,-1,0]}/>
-    </mesh>
-  )
-}
-
-//////////// 좌우로 장애물 //////////////
-export function LeftRightObstacle(props){
-  
-  const [box, {position}] = useBox(()=>({
-    mass: 0,
-    position: [40, 0.7, -15],
-    material: 'object',
-    args: [1.1,1,1]
-  }),
-  useRef()
-  )  
-  
-  const targetPosition = useRef(5)
-  const direction = useRef(1)
-
-  useEffect(() => {
-    const unsubscribe = position.subscribe((v) => {
-      position.set(lerp(v[0], targetPosition.current, 0.1), v[1], v[2]) //lerp(from,to,speed)
-    })
-    return unsubscribe
-  }, [])
-
-
-  useFrame((_, delta) => {
-    targetPosition.current += direction.current * delta * 5
-    if (targetPosition.current > 45) direction.current = -1
-    if (targetPosition.current < 36) direction.current = 1
-  })
-
-  return (
-    <mesh ref={box} castShadow>
-      <StreetVendorCart scale={[0.3,0.3,0.3]} position={[0, -0.1, 0]}/>
-      <meshStandardMaterial/>
     </mesh>
   )
 }
@@ -430,8 +357,8 @@ export function CarRedObstacle(props){
   })
 
   return (
-    <mesh ref={box} castShadow>
-      <CarRed rotation={[rotation[0],rotation[1],rotation[2]]} position={[0,position1[1]-0.7,0]}/>
+    <mesh ref={box} castShadow receiveShadow>
+      <CarRed rotation={[rotation[0],rotation[1],rotation[2]]} position={[0,position1[1]-0.7,0]} castShadow receiveShadow/>
       <meshStandardMaterial/>
     </mesh>
   )
@@ -467,8 +394,8 @@ export function CarGreenObstacle(props){
   })
 
   return (
-    <mesh ref={box} castShadow>
-      <CarGreen position={[0,-0.7,0]}/>
+    <mesh ref={box} castShadow receiveShadow>
+      <CarGreen position={[0,-0.7,0]} castShadow receiveShadow/>
       <meshStandardMaterial/>
     </mesh>
   )
@@ -505,7 +432,7 @@ export function MotorObstacle(props){
   })
 
   return (
-    <mesh ref={box} castShadow>
+    <mesh ref={box} castShadow receiveShadow>
       <MotorbikeYellow position={[0,-0.5,0]}/>
       <meshStandardMaterial/>
     </mesh>
@@ -544,22 +471,66 @@ export function CrabObstacle(props){
   })
 
   return (
-    <mesh ref={box} castShadow>
-      <Crab scale={0.1} position={[0,position1[1]-0.3,0]} rotation={[0,Math.PI,0]}/>
+    <mesh ref={box} castShadow receiveShadow>
+      <Crab scale={0.1} position={[0,position1[1]-0.3,0]} rotation={[0,Math.PI,0]} castShadow receiveShadow/>
       <meshStandardMaterial/>
     </mesh>
   )
 }
 
 export function Brick(){
-  const Box = useBox(() =>({
+  const [Box1, api1] = useBox(() =>({
     mass: 1,
-    args: [1,0.7,0.5],
-    position: [0,0,0]
+    args: [0.5,0.5,0.8],
+    position: [50,0.3,-15]
   }))
+  const [Box2, api2] = useBox(() =>({
+    mass: 1,
+    args: [0.5,0.5,0.8],
+    position: [50,0.3,-16]
+  }))
+  const [Box3, api3] = useBox(() =>({
+    mass: 1,
+    args: [0.5,0.5,0.8],
+    position: [50,0.3,-14]
+  }))
+  // const [Box4, api4] = useBox(() =>({
+  //   mass: 1,
+  //   args: [0.5,0.5,0.8],
+  //   position: [50,1,-15]
+  // }))
+  // const [Box5, api5] = useBox(() =>({
+  //   mass: 1,
+  //   args: [0.5,0.5,0.8],
+  //   position: [50,1,-15]
+  // }))
+  // const [Box6, api6] = useBox(() =>({
+  //   mass: 1,
+  //   args: [0.5,0.5,0.8],
+  //   position: [50,1,-15]
+  // }))
+  // const [Box7, api7] = useBox(() =>({
+  //   mass: 1,
+  //   args: [0.5,0.5,0.8],
+  //   position: [50,1,-15]
+  // }))
+  // const [Box8, api8] = useBox(() =>({
+  //   mass: 1,
+  //   args: [0.5,0.5,0.8],
+  //   position: [50,1,-15]
+  // }))
+  // const [Box9, api9] = useBox(() =>({
+  //   mass: 1,
+  //   args: [0.5,0.5,0.8],
+  //   position: [50,1,-15]
+  // }))
 
+  // useEffect(()=>{
+  //   api1.applyImpulse([-3,0,0], [0,0,1]) //0,0,0의 지점에 0,0,-5라는 힘을 주겠다.
+  // })
+  
   return(
-    <mesh ref={Box}>
+    <mesh ref={Box1}>
       <meshStandardMaterial/>
     </mesh>
   )

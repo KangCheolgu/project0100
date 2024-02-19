@@ -235,8 +235,8 @@ export default function Scene() {
 
   return (
     <>
-      {/*<Interface />
-      <BgmSound />*/}
+      <Interface />
+      <BgmSound />
       {/* {!loadingEnd && 
         // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
       } */}
@@ -276,11 +276,11 @@ export default function Scene() {
                   <Map2 position={[0, 0, -94]}/>
                   <Wall />
                 
-                {/*
+                {
                   players.map((player, index) => (
                     <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
                   ))
-                  */}
+                }
       
                 {isObstacleStarted && (
                 <>
