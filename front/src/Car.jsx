@@ -199,11 +199,6 @@ const Car = ({ cameraGroup, ...props }) => {
     }
   });
 
-  const [targetX, setMinimapTargetX] = useState(1)
-  const [targetZ, setMinimapTargetZ] = useState(12)
-
-  const [myX, setMinimapMyX] = useState(-1)
-  const [myZ, setMinimapMyZ] = useState(-12)
   
   useEffect(() => {
     
@@ -215,30 +210,25 @@ const Car = ({ cameraGroup, ...props }) => {
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
 
       
-      const targetX1 = parseFloat(targetPosition.x.toFixed(2))
-      const targetZ1 = parseFloat(targetPosition.z.toFixed(2))
-      const myX1 = parseFloat(bodyPosition.x.toFixed(2))
-      const myZ1 = parseFloat(bodyPosition.z.toFixed(2))
       
-
       if (updateData.id === props.id && socket.id !== props.id) {
         const targetQuaternion = new THREE.Quaternion(updateData.quaternion[0], updateData.quaternion[1], updateData.quaternion[2], updateData.quaternion[3]);
         const targetVelocity = new THREE.Vector3(updateData.velocity.x, updateData.velocity.y, updateData.velocity.z);
         const targetAcceleration = new THREE.Vector3(updateData.acceleration.x, updateData.acceleration.y, updateData.acceleration.z);
-
+        
         const networkLatency = 0.003; // 3ms = 0.003 seconds, 핑 3ms 가정
         const delta = 0;
         const adjustedDelta = delta + networkLatency; // 전송 주기 + 서버 핑
-
+        
         const extrapolatedPosition = targetPosition.clone();
         extrapolatedPosition.add(targetVelocity.clone().multiplyScalar(adjustedDelta));
         extrapolatedPosition.add(targetAcceleration.clone().multiplyScalar(0.5 * Math.pow(adjustedDelta, 2)));
-
+        
         // extrapolation을 한 포지션과 이전 위치를 interpolation
         const lerpFactor = 0.4; // Interpolation strength
         lastPosition.lerp(extrapolatedPosition, lerpFactor);
         chassisApi.position.copy(lastPosition);
-
+        
         // quaternion interpolation
         lastQuaternion.slerp(targetQuaternion, lerpFactor);
         chassisApi.quaternion.copy(lastQuaternion);
@@ -266,6 +256,7 @@ const Car = ({ cameraGroup, ...props }) => {
           // 나의 실시간 위치
           const myX = parseFloat(bodyPosition.x.toFixed(3))
           const myZ = parseFloat(bodyPosition.z.toFixed(3))
+
           // 체크포인트 축이 z라면 x 비교 
           if (CheckPoint[checkPointIndex].axis === 'z') {
             if (targetX > myX) {
@@ -401,7 +392,7 @@ const Car = ({ cameraGroup, ...props }) => {
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
-      <Minimap chassisBody={chassisBody} socket={socket} vehicleId={props.id}/>
+      <Minimap chassisBody={chassisBody} socket={socket}  vehicleId={props.id}/>
     </group>
   </>
 

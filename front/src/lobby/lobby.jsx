@@ -5,8 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import cookie from 'react-cookies';
 import axios from "axios";
+import './lobby.css'
 
+import Map1 from '../Map1/Map1';
+import Map2 from '../Map2/Map2';
+import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
+import { OrbitControls, useProgress, Stats, PerspectiveCamera, CameraShake} from '@react-three/drei';
+import { Physics, Debug } from "@react-three/cannon";
+import * as THREE from 'three';
+import Sand from '../Sand';
+import { Background } from '../components/Background';
 export const socket = io("http://localhost:5000/")
+
 // export const socket = io("https://project0100.shop")
 
 const CURRENT_URL = "http://localhost:5000"
@@ -120,57 +130,53 @@ export const LobbyPage = () => {
     // });
   },[])
 
-  return (
-    <Container style={{marginTop:"30px"}}>
-      <Row style={{textAlign:"center"}}>
-        <Col></Col>  
-        <Col md="10" style={{fontSize:"70px"}}>L O B B Y</Col>  
-        <Col></Col>  
-      </Row>
-      <Row style={{fontSize:"20px", marginBottom:"12px"}}>
-        <Col md="2"></Col>
-        <Col style={{textAlign:"right"}}>{userName} 님 환영합니다. &nbsp;&nbsp;&nbsp; 
+  const targetObject = new THREE.Object3D();
+  targetObject.position.set(0, 0, -50);
+
+  function Rig() {
+    const [vec] = useState(() => new THREE.Vector3())
+    const { camera, mouse } = useThree()
+    useFrame(() => camera.position.lerp(vec.set(mouse.x * 2+20, 15, 30), 0.05))
+    return <CameraShake maxYaw={0.01} maxPitch={0.01} maxRoll={0.01} yawFrequency={0.5} pitchFrequency={0.5} rollFrequency={0.4} />
+  }
+
+  return (<>
+    <Container className='lobby-container'>
+      {/* 환영합니다. */}
+      <Row className='welcome'>
+        <Col md="1"></Col>
+        <Col>{userName} 님 환영합니다. &nbsp;&nbsp;&nbsp; 
           <Button onClick={logOut}>로그아웃</Button></Col>
-        <Col md="2"></Col>
+        <Col md="1"></Col>
       </Row>
-      <Row style={{textAlign:"center"}}>
-        <Col></Col>  
-        <Col md="8" style={{border:"solid 1px",borderRadius:"10px", padding:"30px 60px 30px 60px"}}>
-          <Row style={{height:"400px"}}>
-            <Col style={{height:"100%"}}>
-              <Row style={{height:"320px", border:"1px solid"}}>
-                <Col style={{fontSize:"20px"}}>
-                  Top Ranking
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Button onClick={createRoom} style={{width:"100%", height:"100%", fontSize:"30px", marginTop:"10px"}}>
-                    Create Room
-                  </Button>
-                </Col>
-              </Row>
+      {/* 겉에 큰 박스 */}
+      <Row className='lobby'>
+        <Col>
+          <Row className='row1'>
+            <Col className='left-area'>
+              <div className='control-area'></div>
+              <div className='ranking-area'></div>
             </Col>
-            <Col md="1"></Col>
-            <Col md="5" style={{border:"solid 1px", fontSize:"30px", padding:" 0px 0px 10px 20px", overflowY:"scroll"}}>
-              <Row style={{height:"380px",width:"100%"}}>
+            <Col md="2"></Col>
+            {/* 대기방 영역 */}
+            <Col className='right-area' >
+              <div className='room-area'>
                 <Col>
                   {
                     roomList ? roomList.map((room, index) => (
-                      <Row style={{height:"50px", marginTop:"10px"}}>
-                        <Col style={{height:"100%", padding:"0"}}>
-                          <Button 
+                      <Row className='players-room' >
+                        <Col>
+                          <Button className='join-btn'
                           onClick={() => joinRoom({
                             userEmail: room.roomName,
                             userName: userName,
                             type:0
                           })}
-                          style={{width:"100%", height:"100%"}} 
                           key={room.roomName}>
                             <span>{room.roomHost} 님의 방</span>
                           </Button>
                         </Col>
-                        <Col md="3" style={{height:"100%", padding:"0"}}>
+                        {/* <Col md="3" style={{height:"100%", padding:"0"}}>
                           <Button 
                             onClick={() => spectateRoom({
                               userEmail: room.roomName,
@@ -181,7 +187,7 @@ export const LobbyPage = () => {
                             key={room.roomName}>
                               <span style={{fontSize:"13px"}}>관전</span>
                           </Button>
-                        </Col>
+                        </Col> */}
                       </Row>
                     )) : (
                       <Row style={{height:"50px", marginTop:"10px"}}>
@@ -192,12 +198,42 @@ export const LobbyPage = () => {
                     )
                   }
                 </Col>
-              </Row>
+              </div>
+              <div className='create-room-area'>
+                <Button className='create-room' onClick={createRoom}>
+                    방 만들기
+                  </Button>
+              </div>
             </Col> 
           </Row>
-        </Col>  
-        <Col></Col>  
+        </Col>
       </Row>
     </Container>
+    <Canvas style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
+    <color attach="background" args={["#abdbe3"]} />
+    <PerspectiveCamera position={[20, 50, 30]} fov={75} makeDefault lookAt={targetObject} rotation={[-Math.PI/2, 0, Math.PI]}/>
+    <ambientLight intensity={2} color="#fff7e6"/>
+    <directionalLight
+      castShadow
+      targetObject ={targetObject}
+      intensity={4}
+      shadow-camera-top={30}
+      shadow-camera-bottom={-60}
+      shadow-camera-left={-120}
+      shadow-camera-right={100}
+      shadow-camera-far={100}
+      shadow-mapSize-height={512*4}
+      shadow-mapSize-width={512*4}
+      position={[50, 80, -50]}
+      color="#ffffff"
+    />
+    <Physics>
+      <Sand/>
+      <Map1 position={[0, 0, 0]}/>
+      <Map2 position={[0, 0, -94]}/>
+    </Physics>
+    <Rig />
+  </Canvas>
+  </>
   )
 }
