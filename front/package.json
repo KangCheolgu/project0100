@@ -2,6 +2,7 @@
   "name": "project0100",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.82.0",
@@ -10,9 +11,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
-    "bootstrap": "^5.3.2",
     "babel-plugin-glsl": "^1.0.0",
+    "bootstrap": "^5.3.2",
     "framer-motion-3d": "^11.0.3",
+    "gltfjsx": "^6.2.16",
     "gsap": "^3.12.5",
     "howler": "^2.2.4",
     "jotai": "^2.6.3",
@@ -20,6 +22,8 @@
     "lamina": "^1.1.23",
     "leva": "^0.9.35",
     "lil-gui": "^0.19.1",
+    "meshline": "^3.2.0",
+    "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-cookies": "^0.1.1",
     "react-dom": "^18.2.0",
@@ -57,5 +61,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

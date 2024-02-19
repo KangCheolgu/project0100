@@ -21,9 +21,11 @@ import { calculateSpeed } from "./utils/speedCalculator.jsx";
 import useGame from "./stores/useGame.jsx";
 import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
+import { Minimap } from "./Minimap.jsx";
+import axios from "axios";
 
 let checkPointIndex = 0
-let lapseCheck = [false]
+let lapseCheck = [false, false]
 
 const Car = ({ cameraGroup, ...props }) => {
     // 이전 등수 현재등수
@@ -152,22 +154,22 @@ const Car = ({ cameraGroup, ...props }) => {
       cameraGroup.current.quaternion.copy(bodyRotation);
       cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
 
-      /* Phases*/
-      // if (checkPointIndex === 1 && lapseCheck[0] === false) {
+      // if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
       //   around()
       //   lapseCheck[0] = true
       // }
-
-      // if (checkPointIndex === 2) {
-      //   end()     
+      // if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
+      //   end()
       // }
-
-      if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
-        around()
+        
+      if (checkPointIndex ===  CheckPoint.length + 1 && lapseCheck[0] === false) {
         lapseCheck[0] = true
+        around()
       }
-      if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
-        end()     
+      if (checkPointIndex ===  CheckPoint.length * 2 + 1 && lapseCheck[1] === false) {
+        lapseCheck[1] = true
+        end()
+        useGame.setState({ winner: socket.id });
       }
 
       // 체크 포인트 인덱스 갱신 
@@ -197,14 +199,27 @@ const Car = ({ cameraGroup, ...props }) => {
     }
   });
 
-  useEffect(() => {
+  const [targetX, setMinimapTargetX] = useState(1)
+  const [targetZ, setMinimapTargetZ] = useState(12)
 
+  const [myX, setMinimapMyX] = useState(-1)
+  const [myZ, setMinimapMyZ] = useState(-12)
+  
+  useEffect(() => {
+    
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
-
+    
     function updateAnotherPlayer(updateData) {
       const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
+
+      
+      const targetX1 = parseFloat(targetPosition.x.toFixed(2))
+      const targetZ1 = parseFloat(targetPosition.z.toFixed(2))
+      const myX1 = parseFloat(bodyPosition.x.toFixed(2))
+      const myZ1 = parseFloat(bodyPosition.z.toFixed(2))
+      
 
       if (updateData.id === props.id && socket.id !== props.id) {
         const targetQuaternion = new THREE.Quaternion(updateData.quaternion[0], updateData.quaternion[1], updateData.quaternion[2], updateData.quaternion[3]);
@@ -360,7 +375,7 @@ const Car = ({ cameraGroup, ...props }) => {
         };
         socket.emit("currentState", currentState);
       }
-    }, 15);
+    }, 30);
   };
 
   return (<>
@@ -380,12 +395,13 @@ const Car = ({ cameraGroup, ...props }) => {
       <Timer />
        <Html>
         <div style={{position: 'fixed', width: window.screen.width/2 , height: window.screen.height/2 }}>
-          <Needle socket={socket} props={props} currentSpeed={currentSpeed} />
-          <Speedometer socket={socket} props={props} currentSpeed={currentSpeed} />
+          <Needle socket={socket} props={props} currentSpeed={currentSpeed * 2} />
+          <Speedometer socket={socket} props={props} currentSpeed={currentSpeed * 2} />
         </div>
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
+      <Minimap chassisBody={chassisBody} socket={socket} vehicleId={props.id}/>
     </group>
   </>
 
@@ -393,6 +409,6 @@ const Car = ({ cameraGroup, ...props }) => {
 }
 const Car_App = (props) => {
   const cameraGroup = useRef();
-  return <Car {...props} cameraGroup={cameraGroup} />;
+  return <Car {...props} cameraGroup={cameraGroup}/>;
 };
 export default Car_App;

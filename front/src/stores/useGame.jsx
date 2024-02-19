@@ -1,5 +1,7 @@
 import create  from 'zustand' 
 import { subscribeWithSelector } from 'zustand/middleware'
+import { useNavigate } from 'react-router-dom'
+
 
 export default create(subscribeWithSelector(//상태 변경시 자동 호출
 (set)=>
@@ -16,6 +18,9 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
         // lap
         lapse : 1,
 
+        // winner
+        winner : "",
+        recordTime : 0,
         // Phase
         phase: 'ready',
         start:() =>
@@ -43,8 +48,9 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
         {
             set((state)=>
             {  
-                if(state.phase === 'playing')
+                if(state.phase === 'playing') { 
                     return {phase: 'ended', endTime: Date.now()}
+                }
                 return {}
             })
         },
@@ -64,6 +70,6 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
                 else
                     return {count : state.count = -3}
             })
-        }
+        },
     }
 }))

@@ -10,6 +10,7 @@ import GamePage from './GamePage';
 import { LobbyPage } from './lobby/lobby';
 import RoomPage from './lobby/waitingroom';
 import AuthGoogle from './lobby/authgoogle';
+import AuthNaver from './lobby/authnaver';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,7 +20,8 @@ root.render(
       <Route path="/lobby" element={<LobbyPage />} />
       <Route path="/waitingroom" element={<RoomPage />} />
       <Route path="/gameroom" element={<GamePage />} /> 
-      <Route path="/auth/google" element={<AuthGoogle />} /> 
+      <Route path="/auth/google/redirect" element={<AuthGoogle />} /> 
+      <Route path="/auth/naver/redirect" element={<AuthNaver />} /> 
     </Routes>
   </BrowserRouter>
 );

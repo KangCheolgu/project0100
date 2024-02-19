@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 function Needle({ socket, props, currentSpeed }) {
-    const maxSpeed = 70;
+    const maxSpeed = 120;
     // useState to manage the angle state
     const [angle, setAngle] = useState((currentSpeed / maxSpeed) * 90 - 10);
     const [color, setColor] = useState('white'); // 초기 색상 white
