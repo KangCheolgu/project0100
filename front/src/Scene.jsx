@@ -235,8 +235,8 @@ export default function Scene() {
 
   return (
     <>
-      <Interface />
-      <BgmSound />
+      {/*<Interface />
+      <BgmSound />*/}
       {/* {!loadingEnd && 
         // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
       } */}
@@ -245,15 +245,15 @@ export default function Scene() {
           <color attach="background" args={["#abdbe3"]} />
           
           <>
-            <PerspectiveCamera position={[1.5, 8, 4]} fov={75} far={100} layers={[0]} makeDefault/>
+            <PerspectiveCamera position={[1.5, 8, 4]} fov={75} layers={[0]} makeDefault/>
             <Background backgroundColors={backgroundColors}/>
             <Sand/>
             <ambientLight intensity={2} color="#fff7e6"/>
             
-            {/*<Light/>*/}
+            <Light/>
             
             
-            <directionalLight
+            {/*<directionalLight
               castShadow
               targetObject ={targetObject}
               intensity={4}
@@ -266,7 +266,7 @@ export default function Scene() {
               shadow-mapSize-width={512*4}
               position={[50, 80, -50]}
               color="#ffffff"
-            />
+    />*/}
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>
@@ -276,11 +276,11 @@ export default function Scene() {
                   <Map2 position={[0, 0, -94]}/>
                   <Wall />
                 
-                {
+                {/*
                   players.map((player, index) => (
                     <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
                   ))
-                }
+                  */}
       
                 {isObstacleStarted && (
                 <>

@@ -1,11 +1,68 @@
-import {Container, Row, Col, Button} from 'reactstrap';
+import {Container, Row, Col} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { socket } from './lobby';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cookie from 'react-cookies';
+import * as React from 'react';
+import Avatar from '@mui/joy/Avatar';
+import Chip from '@mui/joy/Chip';
+import Box from '@mui/joy/Box';
+import Button from '@mui/joy/Button';
+import ButtonGroup from '@mui/joy/ButtonGroup';
+import Card from '@mui/joy/Card';
+import CardContent from '@mui/joy/CardContent';
+import Typography from '@mui/joy/Typography';
+import Map1 from '../Map1/Map1';
+import Map2 from '../Map2/Map2';
+import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
+import { OrbitControls, useProgress, Stats, PerspectiveCamera, CameraShake, Html } from '@react-three/drei';
+import { Physics, Debug } from "@react-three/cannon";
+import * as THREE from 'three';
+import Sand from '../Sand';
+import { Background } from '../components/Background';
+import Light from "../Light.jsx";
+import SvgIcon from "@mui/material/SvgIcon";
+import { SvgIconComponent } from "@mui/icons-material";
+import SportsScoreIcon from '@mui/icons-material/SportsScore';
+function Flag(props){
+  return (
+    <SvgIcon component={SportsScoreIcon} inheritViewBox/>
+  )
+}
+function ProfileCard(props) {
+  const name = props.name
+  return (
+    <Card
+      sx={{
+        width: 320,
+        maxWidth: '100%',
+        boxShadow: 'lg',
+      }}
+    >
+      <CardContent sx={{ alignItems: 'center', textAlign: 'center'}}>
+        <Avatar src="/static/images/avatar/1.jpg" sx={{ '--Avatar-size': '6rem' }} />
+        <Chip
+          size="sm"
+          variant="soft"
+          color="primary"
+          sx={{
+            mt: -1,
+            mb: 1,
+            border: '3px solid',
+            borderColor: 'background.surface',
+          }}
+        >■ ■ ■ <Flag sx={{fontSize: "large"}}/> ■ ■ ■</Chip>
+        
+        <Typography style={{ fontSize: "2.5rem" }}>{name}</Typography>
+        
+        
+      </CardContent>
+    </Card>
+  );
+}
 
-function RoomPage() {
+export default function RoomPage() {
 
   const navigate = useNavigate();
   const [players, setPlayers] = useState([])
@@ -76,67 +133,74 @@ function RoomPage() {
 
   },[currentRoomHost, currentRoomName, players, spectators]) 
 
-  return (
-    <Container style={{marginTop:"30px"}}>
+  const targetObject = new THREE.Object3D();
+  targetObject.position.set(0, 0, -50);
+  
+  function Rig() {
+    const [vec] = useState(() => new THREE.Vector3())
+    const { camera, mouse } = useThree()
+    useFrame(() => camera.position.lerp(vec.set(mouse.x * 2+20, 15, 30), 0.05))
+    return <CameraShake maxYaw={0.01} maxPitch={0.01} maxRoll={0.01} yawFrequency={0.5} pitchFrequency={0.5} rollFrequency={0.4} />
+  }
+  
+  return (<>
+
+    <Container style={{marginTop:"100px"}}>
       <Row style={{textAlign:"center"}}>
         <Col></Col>  
-        <Col md="10" style={{fontSize:"50px"}}> {currentRoomHost}님 의 방</Col>  
-        <Col></Col>  
-      </Row>
-      <br />
-      <Row style={{textAlign:"center"}}>
-        <Col></Col>  
-        <Col md="8" style={{border:"solid 1px", padding:"50px 80px 50px 80px"}}>
-          <Row style={{height:"300px"}}>
-            <Col style={{height:"100%", border:"1px solid", borderRadius:"10px"}}>
+        
+        <Col md="8" style={{ backgroundColor:"rgba(255, 255, 255, 0.5)", padding:"50px 80px 50px 80px"} }>
+          <Row>
+            <Typography style={{ fontSize: "3rem", marginBottom:"30px" }}>Wating Room</Typography>
+          </Row>
+          <Row style={{height:"230px"}}>
+            <Col>
               <Row>
-                <Col style={{fontSize:"30px", backgroundColor:"#e2e2e2", borderRadius:"10px 10px 0px 0px", borderTopRightRadius:"10px"}}>
-                  참가자
-                </Col>
-              </Row>
-              {
-                players && players.map((player, index) => (
-                  <Row key={index}>
-                    <Col style={{fontSize:"30px", backgroundColor:"#e2e2e2", border:"1px solid", margin:"10px 10px 0px 10px"}}>
-                      {player.name ? player.name : "Guest"}
+                {
+                players && players.map((player) => (
+                    <Col >
+                      <ProfileCard name={player.name?player.name:"Guest"}/>
                     </Col>
-                  </Row> 
                 ))
-              }
+                }
+              </Row>
             </Col>
-            <Col md="1"></Col>
-            <Col style={{height:"100%", border:"1px solid", borderRadius:"10px"}}>
-              <Row>
-                <Col style={{fontSize:"30px", backgroundColor:"#e2e2e2", borderRadius:"10px 10px 0px 0px", borderTopRightRadius:"10px"}}>
-                  관전자
-                </Col>
-              </Row>
-              {
-                spectators && spectators.map((spectator, index) => (
-                  <Row key={index}>
-                    <Col style={{fontSize:"30px", backgroundColor:"#e2e2e2", border:"1px solid", margin:"10px 10px 0px 10px"}}>
-                      {spectator.name ? spectator.name : "Guest"}
-                    </Col>
-                  </Row> 
-                ))
-              }
+          </Row>
+          <Row style={{marginTop:"20px"}}>
+            <Col style={{height:"100px"}}>
+              
+              <Button 
+                onClick={(e) => {e.currentTarget.style.marginTop = "15px"; e.currentTarget.style.marginBottom="5px"; e.currentTarget.style.boxShadow="0px 0px 0px 0px";  startGameInRoom();}}
+                style={{width:"100%", height:"100px", fontSize:"40px", 
+                boxShadow: "7px 7px 0px 2px #000000",  transition: "all 0.2s", 
+                fontSize:"3.5rem", 
+                textShadow: "-3px 0px black, 0px 3px black, 3px 0px black, 0px -3px black",
+                backgroundColor: "#000080"
+                }}>{/* #FFD400  #FFF0A6*/}
+                  GAME START</Button>
             </Col>
           </Row>
           <Row style={{marginTop:"20px"}}>
             <Col>
-              <Button onClick={startGameInRoom} style={{width:"100%", height:"100px", fontSize:"40px"}}>GAME START</Button> 
-            </Col>
-          </Row>
-          <Row style={{marginTop:"20px"}}>
-            <Col>
-              <Button onClick={exitRoom} style={{width:"50%", height:"50px", fontSize:"20px"}}>나가기</Button> 
+              {/*<Button onClick={exitRoom} style={{width:"50%", height:"50px", fontSize:"20px"}}>나가기</Button>*/} 
             </Col>
           </Row>
         </Col>  
         <Col></Col>  
-      </Row>
+            </Row>
     </Container>
+    <Canvas style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
+      <color attach="background" args={["#abdbe3"]} />
+      <PerspectiveCamera position={[20, 50, 30]} fov={75} makeDefault lookAt={targetObject} rotation={[-Math.PI/2, 0, Math.PI]}/>
+      <ambientLight intensity={2} color="#fff7e6"/>
+      <Light/>
+      <Physics>
+        <Sand/>
+        <Map1 position={[0, 0, 0]}/>
+        <Map2 position={[0, 0, -94]}/>
+      </Physics>
+      <Rig />
+    </Canvas>
+  </>
   )
 }
-
-export default RoomPage;

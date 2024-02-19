@@ -41,41 +41,42 @@ function LoginPage() {
   }
 
   return (<>
-  <Container style={{ position: 'relative' }}>
-      <Row style={{textAlign:"center"}} >
-        <Col style={{ fontSize:"160px"}}>제로백</Col>
-      </Row>
-      <Row style={{textAlign:"center", height:"250px", }}>
-        <Col></Col>
-        <Col md="5" style={{border:"1px solid", borderRadius:"10px", padding:"10px"}}>
-          <Row style={{marginTop:"10px"}}>
-            <Col style={{fontSize:"30px"}}>지금 바로 접속하세요!</Col>
-          </Row>
-          <Row style={{marginTop:"40px"}}>
-            <Col md="2"></Col>
-            <Col>
-              <Button onClick={signInWithGoogle} style={{width:"100%", backgroundColor:"white", border:"none", padding:"0"}}>
-                <img src={googleButton} typeof='button' style={{ width: '100%', height: 'auto'}} alt="google button Img"/>
-              </Button>
-            </Col>
-            <Col md="2"></Col>
-            <Col>
-              <Button onClick={signInWithNaver} style={{width:"100%", backgroundColor:"white", border:"none", padding:"0"}}>
-                <img src={naverButton} typeof='button' style={{ width: '100%', height: 'auto'}} alt="google button Img"/>
-              </Button>
-            </Col>
-            <Col md="2"></Col> 
-            {/* <Col>
-              <Button onClick={signInWithKakao} style={{width:"100%", backgroundColor:"white", border:"none", padding:"0"}}>
-                <img src={kakaoButton} typeof='button' style={{ width: '100%', height: 'auto'}} alt="google button Img"/>
-              </Button>
-            </Col>
-            <Col md="1"></Col> */}
-          </Row>
-        </Col>
-        <Col></Col>
-      </Row>
-  </Container>
+    <Container style={{ position: 'relative' }}>
+        <Row style={{textAlign:"center"}} >
+          <Col style={{ fontSize:"160px"}}>제로백</Col>
+        </Row>
+        <Row style={{textAlign:"center", height:"250px", }}>
+          <Col></Col>
+          <Col md="5" style={{border:"1px solid", borderRadius:"10px", padding:"10px"}}>
+            <Row style={{marginTop:"10px"}}>
+              <Col style={{fontSize:"30px"}}>지금 바로 접속하세요!</Col>
+            </Row>
+            <Row style={{marginTop:"40px"}}>
+              <Col md="2"></Col>
+              <Col>
+                <Button onClick={signInWithGoogle} style={{width:"100%", backgroundColor:"white", border:"none", padding:"0"}}>
+                  <img src={googleButton} typeof='button' style={{ width: '100%', height: 'auto'}} alt="google button Img"/>
+                </Button>
+              </Col>
+              <Col md="2"></Col>
+              <Col>
+                <Button onClick={signInWithNaver} style={{width:"100%", backgroundColor:"white", border:"none", padding:"0"}}>
+                  <img src={naverButton} typeof='button' style={{ width: '100%', height: 'auto'}} alt="google button Img"/>
+                </Button>
+              </Col>
+              <Col md="2"></Col> 
+              {/* <Col>
+                <Button onClick={signInWithKakao} style={{width:"100%", backgroundColor:"white", border:"none", padding:"0"}}>
+                  <img src={kakaoButton} typeof='button' style={{ width: '100%', height: 'auto'}} alt="google button Img"/>
+                </Button>
+              </Col>
+              <Col md="1"></Col> */}
+            </Row>
+          </Col>
+          <Col></Col>
+        </Row>
+    </Container>
+
   <Canvas style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
     <color attach="background" args={["#abdbe3"]} />
     <PerspectiveCamera position={[20, 50, 30]} fov={75} makeDefault lookAt={targetObject} rotation={[-Math.PI/2, 0, Math.PI]}/>
