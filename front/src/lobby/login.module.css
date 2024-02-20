@@ -1,10 +1,24 @@
+@font-face {
+  font-family: 'CookieRun_Black'; /* 사용할 폰트 이름 */
+  src: url('/public/assets/fonts/CookieRun_Black.ttf') format('truetype'); /* 폰트 파일의 경로 */
+}
+@font-face {
+  font-family: 'CookieRun_Bold'; /* 사용할 폰트 이름 */
+  src: url('/public/assets/fonts/CookieRun_Bold.ttf') format('truetype'); /* 폰트 파일의 경로 */
+}
+
+@font-face {
+  font-family: 'CookieRun_Regular'; /* 사용할 폰트 이름 */
+  src: url('/public/assets/fonts/CookieRun_Regular.ttf') format('truetype'); /* 폰트 파일의 경로 */
+}
+
 .title{
   margin-top: 50px;
   text-align: center;
   margin-bottom: 30px;
 }
 
-.title-text{
+.title_text{
   font-size: 160px;
 }
 
@@ -15,7 +29,7 @@
   height: 250px;
 }
 
-.inside-contents {
+.inside_contents {
   
   width: 50%; /* 테두리의 너비를 조정합니다. */
   margin: 0 auto; /* 테두리를 수평 가운데 정렬합니다. */
@@ -32,20 +46,21 @@
 }
 
 /* 로그인하여 게임 시작! */
-.center-text{
+.center_text{
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 26px;
+  font-family: 'CookieRun_Regular';
 }
 
 /* 로그인 요소들 */
-.login-area{
+.login_area{
   margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 /* 구글 네이버 버튼 */
-.google-btn{
+.google_btn{
   background: white;
           color: black;
           width: 350px;
@@ -60,17 +75,17 @@
           color:rgb(66,67,68);
 }
 
-.google-btn span{
+.google_btn span{
   margin-left: 30px;
   font-size: 16px;
 }
 
-.google-btn:hover {
+.google_btn:hover {
   background: rgb(247,247,247);
   color: black;
 }
 
-.naver-btn{
+.naver_btn{
   background: #03C75A;
           color: black;
           width: 350px;
@@ -85,17 +100,17 @@
           color:rgb(66,67,68);
 }
 
-.naver-btn span{
+.naver_btn span{
   margin-left: 30px;
   font-size: 16px;
   color: white;
 }
 
-.naver-btn:hover {
+.naver_btn:hover {
   background: rgb(3,195,90);
   color: black;
 }
 
-.google-btn, .naver-btn{
+.google_btn, .naver_btn{
   margin: 10px;
 }

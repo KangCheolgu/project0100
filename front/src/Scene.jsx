@@ -31,7 +31,6 @@ import { Background } from "./components/Background.jsx";
 import { gsap } from "gsap";
 import Wall from "./Map2/ColliderWall_Map2.jsx";
 import Light from "./Light.jsx";
-import { Perf } from 'r3f-perf'
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
@@ -253,7 +252,7 @@ export default function Scene() {
             {/* <Light/> */}
             
             
-            {/* <directionalLight
+            <directionalLight
               castShadow
               targetObject ={targetObject}
               intensity={2}
@@ -262,11 +261,11 @@ export default function Scene() {
               shadow-camera-left={-120}
               shadow-camera-right={100}
               shadow-camera-far={100}
-              shadow-mapSize-height={512*4}
-              shadow-mapSize-width={512*4}
+              shadow-mapSize-height={512*6}
+              shadow-mapSize-width={512*6}
               position={[50, 80, -50]}
               color="#ffffff"
-            /> */}
+            />
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>

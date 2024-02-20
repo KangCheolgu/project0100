@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import cookie from 'react-cookies';
 import axios from "axios";
-import './lobby.css'
+import styles from './lobby.module.css'
+import directionkey from "../static/button/directionkey.png"
 
 import Map1 from '../Map1/Map1';
 import Map2 from '../Map2/Map2';
@@ -142,32 +143,49 @@ export const LobbyPage = () => {
   }
 
   return (<>
-    <Container className='lobby-container'>
+    <Container className={styles.lobby_container}>
       {/* 환영합니다. */}
-      <Row className='welcome'>
+      <Row className={styles.welcome}>
         <Col md="1"></Col>
         <Col>{userName} 님 환영합니다. &nbsp;&nbsp;&nbsp; 
           <Button onClick={logOut}>로그아웃</Button></Col>
         <Col md="1"></Col>
       </Row>
       {/* 겉에 큰 박스 */}
-      <Row className='lobby'>
+      <Row className={styles.lobby}>
         <Col>
-          <Row className='row1'>
-            <Col className='left-area'>
-              <div className='control-area'></div>
-              <div className='ranking-area'></div>
+          <Row className={styles.row1}>
+            <Col className={styles.left_area}>
+              <div className={styles.text}><h4>RANKING</h4></div>
+              <div className={styles.ranking_area}>
+              </div>
+              <div className={styles.text}><h4>CONTROL</h4></div>
+              <div className={styles.control_area}>
+
+                <br/>
+                <span className={styles.keyboard}>SPACE</span>
+                 : brake<br/><br/>
+                <span className={styles.keyboard}>SHIFT</span>
+                 : booster<br/>
+                 <br/>
+                <span className={styles.keyboard}>H</span>
+                 : horn<br/><br/>
+                <span className={styles.keyboard}>R</span>
+                 : reset<br/>
+              </div>
+              <img className={styles.key} src={directionkey} alt="directionkey" />
             </Col>
             <Col md="2"></Col>
             {/* 대기방 영역 */}
-            <Col className='right-area' >
-              <div className='room-area'>
+            <Col className={styles.right_area} >
+              <div className={styles.text}><h4>ROOM</h4></div>
+              <div className={styles.room_area}>
                 <Col>
                   {
                     roomList ? roomList.map((room, index) => (
-                      <Row className='players-room' >
+                      <Row className={styles.players_room} >
                         <Col>
-                          <Button className='join-btn'
+                          <Button className={styles.join_btn}
                           onClick={() => joinRoom({
                             userEmail: room.roomName,
                             userName: userName,
@@ -200,8 +218,8 @@ export const LobbyPage = () => {
                   }
                 </Col>
               </div>
-              <div className='create-room-area'>
-                <Button className='create-room' onClick={createRoom}>
+              <div className={styles.create_room_area}>
+                <Button className={styles.create_room} onClick={createRoom}>
                     방 만들기
                   </Button>
               </div>
