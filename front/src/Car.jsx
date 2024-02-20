@@ -88,11 +88,7 @@ const Car = ({ cameraGroup, ...props }) => {
   );
 
   // brake lights
-  // const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
-
-  // 클락션 소리 /////////////////////////////////////////////////////////
-  const klaxonDuration = 500; // 1초
-  ///////////////////////////////////////////////////////////////////////
+  const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
 
   // 자동차 충돌
   const [isCollision, setIsCollision] = useState(false)
@@ -109,7 +105,7 @@ const Car = ({ cameraGroup, ...props }) => {
     engineSoundRef.current.play().catch(error => console.error("엔진 소리 재생 실패:", error));
   }, []);
 
-  useVehicleControls(vehicleApi, chassisApi, props.id, props.state, klaxonDuration, klaxonSoundFile);
+  useVehicleControls(vehicleApi, chassisApi, props.id, props.state, klaxonSoundFile, brakeLightsOn);
 
   // 속도계 
   const [currentSpeed, setCurrentSpeed] = useState(0);
@@ -376,7 +372,7 @@ const Car = ({ cameraGroup, ...props }) => {
     <group ref={vehicle} castShadow receiveShadow>
       <Suspense>
         <group ref={chassisBody} castShadow>
-          <CarModel castShadow />
+          <CarModel castShadow index={props.index} />
         </group>
       </Suspense>
       <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
