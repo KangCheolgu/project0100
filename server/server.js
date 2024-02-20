@@ -193,7 +193,6 @@ io.on('connection', (socket) => {
         // 이는 Scene.jsx 에서 받을거임 
         console.log(Object.keys(rooms[roomName].allPings).length); 
         if (Object.keys(rooms[roomName].allPings).length === numClients && isStartSignalSent === false) {
-          console.log("startSignal 보낸겨?");
           io.to(roomName).emit("startSignal", rooms[roomName].allPings);
           isStartSignalSent = true
         }

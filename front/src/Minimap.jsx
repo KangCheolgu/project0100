@@ -125,7 +125,7 @@ export function Minimap({size=250, size_height=350, chassisBody, socket, vehicle
         </>,    
         virtualScene,
       )}
-      <MiniMapTexture buffer={buffer} />
+      {/* <MiniMapTexture buffer={buffer} /> */}
     </>
     );
 }

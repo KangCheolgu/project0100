@@ -250,13 +250,13 @@ export default function Scene() {
             <Sand/>
             <ambientLight intensity={2} color="#fff7e6"/>
             
-            <Light/>
+            {/* <Light/> */}
             
             
-            {/*<directionalLight
+            {/* <directionalLight
               castShadow
               targetObject ={targetObject}
-              intensity={4}
+              intensity={2}
               shadow-camera-top={30}
               shadow-camera-bottom={-60}
               shadow-camera-left={-120}
@@ -266,7 +266,7 @@ export default function Scene() {
               shadow-mapSize-width={512*4}
               position={[50, 80, -50]}
               color="#ffffff"
-    />*/}
+            /> */}
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>
@@ -299,9 +299,9 @@ export default function Scene() {
                 )}
             {/*</Debug>*/}
             </Physics>
-            {spectators.map((spectator, index) => (
+            {/* {spectators.map((spectator, index) => (
               <Spectator id={spectator.id} key={index} position={spectator.position} />
-            ))}
+            ))} */}
           
           </>          
           </Suspense>
