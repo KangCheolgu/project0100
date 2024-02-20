@@ -31,7 +31,6 @@ import { Background } from "./components/Background.jsx";
 import { gsap } from "gsap";
 import Wall from "./Map2/ColliderWall_Map2.jsx";
 import Light from "./Light.jsx";
-import { Perf } from 'r3f-perf'
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
