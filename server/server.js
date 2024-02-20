@@ -42,7 +42,7 @@ const rooms = {}
 var numClients = 2
 
 io.on('connection', (socket) => {
-
+  console.log(socket.id);
   // 접속시 룸리스트 출력
   socket.on("roomlist", () => {
     console.log(rooms);
@@ -148,6 +148,8 @@ io.on('connection', (socket) => {
     // 게임 시작후 
     socket.on("startGame", () => {
 
+      let isStartSignalSent = false;
+
       console.log("startGame 받음");
       // 해당 방의 플레이어 정보 업데이트
       io.to(roomName).emit("updatePlayers", rooms[roomName]);
@@ -171,6 +173,8 @@ io.on('connection', (socket) => {
         callback();
       });
 
+      
+
       socket.on("pingResult", (averagePing) => {
         // 자신의 아이디와 핑을 상대방에게 보내기 위해 JSON 으로 만듦
         if (averagePing === null) {
@@ -188,8 +192,9 @@ io.on('connection', (socket) => {
         // 모든 유저가 상대에게 핑데이터를 보냈다면 스타트 시그널을 보냄
         // 이는 Scene.jsx 에서 받을거임 
         console.log(Object.keys(rooms[roomName].allPings).length); 
-        if (Object.keys(rooms[roomName].allPings).length === numClients) {
+        if (Object.keys(rooms[roomName].allPings).length === numClients && isStartSignalSent === false) {
           io.to(roomName).emit("startSignal", rooms[roomName].allPings);
+          isStartSignalSent = true
         }
       });
 
@@ -248,7 +253,9 @@ io.on('connection', (socket) => {
       // 해당 방 정보를 삭제하고 방 목록에서 제거
       if (rooms[roomName])
         delete rooms[roomName];
-  
+
+      socket.disconnect(true);
+      // socket.emit("toLobby")
       // 방 정보가 업데이트된 것을 클라이언트에게 알림
       io.emit("getRoomList", rooms);
     });

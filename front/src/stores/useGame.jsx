@@ -39,7 +39,15 @@ export default create(subscribeWithSelector(//상태 변경시 자동 호출
             set((state)=>
             {
                 if(state.phase === 'playing'|| state.phase==='ended')
-                    return {phase: 'ready', isIn: [false, false, false, false], lapse: 1}
+                    return {
+                        phase: 'ready',
+                        count: 5,
+                        lapse: 1,
+                        recordTime:0,
+                        winner:"",
+                        startTime: 0, 
+                        endTime: 0,
+                    }
                 return {}
             })
         },

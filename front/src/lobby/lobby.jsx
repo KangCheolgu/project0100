@@ -122,6 +122,7 @@ export const LobbyPage = () => {
   },[roomList])
 
   useEffect(() => {
+    socket.connect();
     // 처음에 렌더링 되면 방 리스트와 랭킹을 불러와서 나타냄
     socket.emit("roomlist")
     // getRankingList()

@@ -105,13 +105,15 @@ const Car = ({ cameraGroup, ...props }) => {
     engineSoundRef.current.play().catch(error => console.error("엔진 소리 재생 실패:", error));
   }, []);
 
-  useVehicleControls(vehicleApi, chassisApi, props.id, props.state, klaxonSoundFile, brakeLightsOn);
+  useVehicleControls(vehicleApi, chassisApi, props.id, props.state, klaxonDuration, klaxonSoundFile);
 
   // 속도계 
   const [currentSpeed, setCurrentSpeed] = useState(0);
   const lastSpeed = useRef(0); // Reference to store the last updated speed
   const lastPosition = useRef(new Vector3());
   const lastUpdateTime = useRef(Date.now());
+
+  useVehicleControls(vehicleApi, chassisApi, props.id, props.state, klaxonDuration, klaxonSoundFile);
 
   useEffect(() => {
     if (socket.id === props.id) {
@@ -254,8 +256,8 @@ const Car = ({ cameraGroup, ...props }) => {
           const myZ = parseFloat(bodyPosition.z.toFixed(3))
 
           // 체크포인트 축이 z라면 x 비교 
-          if (CheckPoint[checkPointIndex].axis === 'z') {
-            if (targetX > myX) {
+          if (CheckPoint[checkPointIndex % (CheckPoint.length)].axis === 'z') {
+            if (Math.abs(CheckPoint[checkPointIndex % (CheckPoint.length)].x - targetX) < Math.abs(CheckPoint[checkPointIndex % (CheckPoint.length)].x - myX)) {
               const newRank = 2
               setPreviousRank(currentRank);
               setCurrentRank(newRank);
@@ -266,7 +268,7 @@ const Car = ({ cameraGroup, ...props }) => {
             }
             // 체크 포인트 축이 x라면 z비교
           } else {
-            if (targetZ > myZ) {
+            if (Math.abs(CheckPoint[checkPointIndex % (CheckPoint.length)].z - targetZ) < Math.abs(CheckPoint[checkPointIndex % (CheckPoint.length)].z - myZ)) {
               const newRank = 2
               setPreviousRank(currentRank);
               setCurrentRank(newRank);
@@ -362,7 +364,7 @@ const Car = ({ cameraGroup, ...props }) => {
         };
         socket.emit("currentState", currentState);
       }
-    }, 30);
+    }, 50);
   };
 
   return (<>
@@ -370,11 +372,9 @@ const Car = ({ cameraGroup, ...props }) => {
       <Speed id={socket.id}/>
     </group>
     <group ref={vehicle} castShadow receiveShadow>
-      <Suspense>
-        <group ref={chassisBody} castShadow>
-          <CarModel castShadow index={props.index} />
-        </group>
-      </Suspense>
+      <group ref={chassisBody} castShadow>
+        <CarModel castShadow />
+      </group>
       <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[1]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
@@ -388,7 +388,7 @@ const Car = ({ cameraGroup, ...props }) => {
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
-      <Minimap chassisBody={chassisBody} socket={socket}  vehicleId={props.id}/>
+      {/* <Minimap chassisBody={chassisBody} socket={socket}  vehicleId={props.id}/> */}
     </group>
   </>
 
