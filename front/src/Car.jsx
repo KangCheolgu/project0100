@@ -21,6 +21,7 @@ import { calculateSpeed } from "./utils/speedCalculator.jsx";
 import useGame from "./stores/useGame.jsx";
 import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
+import { Minimap } from "./Minimap.jsx";
 import axios from "axios";
 
 let checkPointIndex = 0
@@ -116,30 +117,30 @@ const Car = ({ cameraGroup, ...props }) => {
   const lastPosition = useRef(new Vector3());
   const lastUpdateTime = useRef(Date.now());
 
-  // useEffect(() => {
-  //   if (socket.id === props.id) {
-  //     const updateSpeed = () => {
-  //       const now = Date.now();
-  //       const deltaTime = (now - lastUpdateTime.current) / 1000; // Convert to seconds
-  //       const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
-  //       // Use the utility function to calculate speed
-  //       const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
-  //       // Check if the speed has changed significantly (by 10 km/h or more)
-  //       // if (Math.abs(speed - lastSpeed.current) >= 10) {
-  //         setCurrentSpeed(speed); // Update the state only if the change is significant
-  //         lastSpeed.current = speed; // Update the last speed reference
-  //       // }
+  useEffect(() => {
+    if (socket.id === props.id) {
+      const updateSpeed = () => {
+        const now = Date.now();
+        const deltaTime = (now - lastUpdateTime.current) / 1000; // Convert to seconds
+        const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
+        // Use the utility function to calculate speed
+        const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
+        // Check if the speed has changed significantly (by 10 km/h or more)
+        // if (Math.abs(speed - lastSpeed.current) >= 10) {
+          setCurrentSpeed(speed); // Update the state only if the change is significant
+          lastSpeed.current = speed; // Update the last speed reference
+        // }
 
-  //       // Always update the last position and time, regardless of whether the speed was updated
-  //       lastPosition.current.copy(currentPosition);
-  //       lastUpdateTime.current = now;
-  //     };
+        // Always update the last position and time, regardless of whether the speed was updated
+        lastPosition.current.copy(currentPosition);
+        lastUpdateTime.current = now;
+      };
     
 
-  //     const intervalId = setInterval(updateSpeed, 500); // Continue to check speed every 200ms
-  //     return () => clearInterval(intervalId);
-  //   }
-  // }, []);
+      const intervalId = setInterval(updateSpeed, 500); // Continue to check speed every 200ms
+      return () => clearInterval(intervalId);
+    }
+  }, []);
 
   // 랩타임 관련
   const end = useGame((state)=> state.end)
@@ -161,11 +162,11 @@ const Car = ({ cameraGroup, ...props }) => {
       //   end()
       // }
         
-      if (checkPointIndex ===  1 && lapseCheck[0] === false) {
+      if (checkPointIndex ===  CheckPoint.length + 1 && lapseCheck[0] === false) {
         lapseCheck[0] = true
         around()
       }
-      if (checkPointIndex ===  2 && lapseCheck[1] === false) {
+      if (checkPointIndex ===  CheckPoint.length * 2 + 1 && lapseCheck[1] === false) {
         lapseCheck[1] = true
         end()
         useGame.setState({ winner: socket.id });
@@ -198,33 +199,36 @@ const Car = ({ cameraGroup, ...props }) => {
     }
   });
 
+  
   useEffect(() => {
-
+    
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
-
+    
     function updateAnotherPlayer(updateData) {
       const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
 
+      
+      
       if (updateData.id === props.id && socket.id !== props.id) {
         const targetQuaternion = new THREE.Quaternion(updateData.quaternion[0], updateData.quaternion[1], updateData.quaternion[2], updateData.quaternion[3]);
         const targetVelocity = new THREE.Vector3(updateData.velocity.x, updateData.velocity.y, updateData.velocity.z);
         const targetAcceleration = new THREE.Vector3(updateData.acceleration.x, updateData.acceleration.y, updateData.acceleration.z);
-
+        
         const networkLatency = 0.003; // 3ms = 0.003 seconds, 핑 3ms 가정
         const delta = 0;
         const adjustedDelta = delta + networkLatency; // 전송 주기 + 서버 핑
-
+        
         const extrapolatedPosition = targetPosition.clone();
         extrapolatedPosition.add(targetVelocity.clone().multiplyScalar(adjustedDelta));
         extrapolatedPosition.add(targetAcceleration.clone().multiplyScalar(0.5 * Math.pow(adjustedDelta, 2)));
-
+        
         // extrapolation을 한 포지션과 이전 위치를 interpolation
         const lerpFactor = 0.4; // Interpolation strength
         lastPosition.lerp(extrapolatedPosition, lerpFactor);
         chassisApi.position.copy(lastPosition);
-
+        
         // quaternion interpolation
         lastQuaternion.slerp(targetQuaternion, lerpFactor);
         chassisApi.quaternion.copy(lastQuaternion);
@@ -252,6 +256,7 @@ const Car = ({ cameraGroup, ...props }) => {
           // 나의 실시간 위치
           const myX = parseFloat(bodyPosition.x.toFixed(3))
           const myZ = parseFloat(bodyPosition.z.toFixed(3))
+
           // 체크포인트 축이 z라면 x 비교 
           if (CheckPoint[checkPointIndex].axis === 'z') {
             if (targetX > myX) {
@@ -381,12 +386,13 @@ const Car = ({ cameraGroup, ...props }) => {
       <Timer />
        <Html>
         <div style={{position: 'fixed', width: window.screen.width/2 , height: window.screen.height/2 }}>
-          <Needle socket={socket} props={props} currentSpeed={currentSpeed} />
-          <Speedometer socket={socket} props={props} currentSpeed={currentSpeed} />
+          <Needle socket={socket} props={props} currentSpeed={currentSpeed * 2} />
+          <Speedometer socket={socket} props={props} currentSpeed={currentSpeed * 2} />
         </div>
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
+      <Minimap chassisBody={chassisBody} socket={socket}  vehicleId={props.id}/>
     </group>
   </>
 
@@ -394,6 +400,6 @@ const Car = ({ cameraGroup, ...props }) => {
 }
 const Car_App = (props) => {
   const cameraGroup = useRef();
-  return <Car {...props} cameraGroup={cameraGroup} />;
+  return <Car {...props} cameraGroup={cameraGroup}/>;
 };
 export default Car_App;

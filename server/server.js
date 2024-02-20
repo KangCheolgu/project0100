@@ -163,7 +163,7 @@ io.on('connection', (socket) => {
 
       // 각 소켓에서 보낸 위치 정보를 받고 다른 유저에게 전달
       socket.on('currentState', (data) => {
-        // console.log(data);
+        //console.log(data);
         socket.broadcast.to(roomName).emit('updateAnotherPlayer', data);
         // io.emit('updateAnotherPlayer', "data")
       });

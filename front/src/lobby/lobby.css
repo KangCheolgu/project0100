@@ -1,0 +1,97 @@
+.lobby-container{
+  margin-top: 100px;
+}
+/* 000님 환영합니다. */
+.welcome{
+  font-size: 20px;
+  margin-bottom: 12px;
+  text-align: right;
+}
+
+/* 네모 박스 */
+.lobby{
+  margin: 0 auto;
+  width: 80%;
+  max-width: 900px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 50px 80px 50px 80px;
+  height: 530px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* .row1{
+  display: flex;
+} */
+/* 왼쪽 구역 */
+.left-area{
+  width: 100%;
+  height: 450px;
+}
+/* 조작감 만지는 곳 */
+.control-area{
+  width: 100%;
+  height: 300px;
+  margin-left: 1px;
+}
+
+.ranking-area{
+  width: 100%;
+  height: 130px;
+  margin-top: 10px;
+}
+
+/* 오른쪽 구역 */
+.right-area{
+  width: 100%;
+  height: 450px;
+  
+}
+
+.room-area{
+  border-radius: 10px;
+  flex: 1; /* 자유 공간을 다 차지하도록 확장 */
+  font-size: 30px;
+  padding: 0 0 10px 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 370px; /* 내용이 들어갔을 때 최대 높이 제한 */
+  background-color: rgba(255, 255, 255, 0.7);
+  scrollbar-color: lightgray white;
+  scrollbar-width: thin;
+}
+
+.room-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin-top: 10px;  
+}
+
+/* 방들 */
+.players-room{
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  margin-top: 10px;
+  padding: auto;
+}
+
+/* 방만들기 버튼 */
+.create-room-area{
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+}
+
+.create-room{
+  width: 100%;
+  height: 50px;
+}
+
+
+.join-btn{
+  width: 100%;
+  height: 100%;
+}

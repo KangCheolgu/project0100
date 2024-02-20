@@ -49,7 +49,6 @@ body,
     top:5%;
     left:3%;
 }
-
 .rankingSpace {
     font-size: 30px;
     position: absolute;
@@ -208,6 +207,7 @@ body,
   height: auto; /* 높이 자동 조정 */
   z-index: 9999; /* 다른 요소들보다 위로 올리기 */
 }
+
 
 @font-face {
   font-family: 'Aptos';

@@ -1,0 +1,75 @@
+.startbtn{
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid red; /* 변수가 아닌 실제 색상값 사용 */
+    border-radius: 0.6em;
+    color: red; /* 변수가 아닌 실제 색상값 사용 */
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 700; /* 중복된 속성 제거 */
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+  
+    &:hover,
+    &:focus {
+      color: #fff;
+      outline: 0;
+      border-radius: 3em;
+      border-color: turquoise; /* 변수가 아닌 실제 색상값 사용 */
+      background: linear-gradient(to right, 
+        rgba(64, 224, 208, 0.4), /* 투명도가 있는 rgba 색상 사용 */
+        rgba(64, 224, 208, 0.4) 5%,
+        turquoise 5%, 
+        turquoise 10%,
+        rgba(64, 224, 208, 0.4) 10%,
+        rgba(64, 224, 208, 0.4) 15%,
+        turquoise 15%, 
+        turquoise 20%,
+        rgba(64, 224, 208, 0.4) 20%,
+        rgba(64, 224, 208, 0.4) 25%,
+        turquoise 25%, 
+        turquoise 30%,
+        rgba(64, 224, 208, 0.4) 30%,
+        rgba(64, 224, 208, 0.4) 35%,
+        turquoise 35%, 
+        turquoise 40%,
+        rgba(64, 224, 208, 0.4) 40%,
+        rgba(64, 224, 208, 0.4) 45%,
+        turquoise 45%, 
+        turquoise 50%,
+        rgba(64, 224, 208, 0.4) 50%,
+        rgba(64, 224, 208, 0.4) 55%,
+        turquoise 55%, 
+        turquoise 60%,
+        rgba(64, 224, 208, 0.4) 60%,
+        rgba(64, 224, 208, 0.4) 65%,
+        turquoise 65%, 
+        turquoise 70%,
+        rgba(64, 224, 208, 0.4) 70%,
+        rgba(64, 224, 208, 0.4) 75%,
+        turquoise 75%, 
+        turquoise 80%,
+        rgba(64, 224, 208, 0.4) 80%,
+        rgba(64, 224, 208, 0.4) 85%,
+        turquoise 85%, 
+        turquoise 90%,
+        rgba(64, 224, 208, 0.4) 90%,
+        rgba(64, 224, 208, 0.4) 95%,
+        turquoise 95%, 
+        turquoise 100%);
+      background-size: 100% 100%; /* background 크기 지정 */
+      transition: background 300ms ease-in-out;
+      
+      &:hover {
+        background-position: 100px;
+      }
+    }
+  }

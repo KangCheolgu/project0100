@@ -42,7 +42,7 @@ export default function Interface(){
     const toLobby = () => {
       restart()
       socket.emit("leaveAndGoToLobby")
-      navigate("/lobby") 
+      navigate("/lobby")
     }
 
     useEffect(() => {
@@ -143,11 +143,11 @@ export default function Interface(){
           useGame.setState({ recordTime : tmpRecord });
           setWinnerData(winnerSocketData.name)
 
-          axios.post('http://localhost:5000/api/database/saveWinnerRecord', {
-            name: winnerSocketData.name,
-            email: winnerSocketData.email,
-            record: tmpRecord,
-          });
+          // axios.post('http://localhost:5000/api/database/saveWinnerRecord', {
+          //   name: winnerSocketData.name,
+          //   email: winnerSocketData.email,
+          //   record: tmpRecord,
+          // });
         }
       }
     }, [tmpRecord]);
@@ -192,7 +192,8 @@ export default function Interface(){
               {player2Ranking === "1등" ? '1st : ' : '2nd : '} {players[1].name}
             </div>
           )}
-        </div>k
+        </div>
+        
         {/* Countdown */}
         {count > 0 && count < 4 && 
           <div className={`countdown ${animationStart ? 'countdown-animation' : ''}`} >

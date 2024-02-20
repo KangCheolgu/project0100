@@ -5,15 +5,20 @@ import * as THREE from 'three';
 const Light = () => {
   const lightRef = useRef();
   const { scene } = useThree();
+  const targetObject = new THREE.Object3D();
+  targetObject.position.set(0, 0, -50);
 
   // Create a DirectionalLight
   const light = new THREE.DirectionalLight(0xffffff, 0.7);
-  light.position.set(30, 60, -30); // Set light position
+  light.position.set(50, 80, -50); // Set light position
+  light.target =targetObject
+  targetObject.position.set(0, 0, -50);
   light.castShadow = true; // Enable shadow casting
-  light.shadow.camera.top = 100;
-  light.shadow.camera.bottom = -100;
-  light.shadow.camera.left = -100;
+  light.shadow.camera.top = 30;
+  light.shadow.camera.bottom = -60;
+  light.shadow.camera.left = -120;
   light.shadow.camera.right = 100;
+  light.shadow.camera.far = 100;
   light.shadow.mapSize.height = 512 * 4;
   light.shadow.mapSize.width = 512 * 4;
   lightRef.current = light;
