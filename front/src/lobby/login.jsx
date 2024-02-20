@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import googleButton from "../static/button/googlelogo.png"
 import naverButton from "../static/button/naverlogo.png"
-import './login.css'
 
 import Map1 from '../Map1/Map1';
 import Map2 from '../Map2/Map2';

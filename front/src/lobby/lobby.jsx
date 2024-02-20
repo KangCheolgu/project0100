@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import cookie from 'react-cookies';
 import axios from "axios";
-import './lobby.css'
 
 import Map1 from '../Map1/Map1';
 import Map2 from '../Map2/Map2';

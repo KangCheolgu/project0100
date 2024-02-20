@@ -240,7 +240,7 @@ export default function Scene() {
       {/* {!loadingEnd && 
         // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
       } */}
-      <Canvas shadows frameloop="demand">
+      <Canvas shadows >
         <Suspense fallback={null}>
           <color attach="background" args={["#abdbe3"]} />
           
@@ -252,15 +252,15 @@ export default function Scene() {
             
             <Light/>
             
-            
-            {/*<directionalLight
+            {/*
+            <directionalLight
               castShadow
               targetObject ={targetObject}
               intensity={4}
-              shadow-camera-top={30}
-              shadow-camera-bottom={-60}
-              shadow-camera-left={-120}
-              shadow-camera-right={100}
+              shadow-camera-top={150}
+              shadow-camera-bottom={-150}
+              shadow-camera-left={-200}
+              shadow-camera-right={200}
               shadow-camera-far={100}
               shadow-mapSize-height={512*4}
               shadow-mapSize-width={512*4}

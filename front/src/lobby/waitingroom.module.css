@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik:700&display=swap");
+
+@font-face {
+  font-family: 'CookieRun_Black'; /* 사용할 폰트 이름 */
+  src: url('/public/assets/fonts/CookieRun_Black.ttf') format('truetype'); /* 폰트 파일의 경로 */
+}
+@font-face {
+  font-family: 'CookieRun_Bold'; /* 사용할 폰트 이름 */
+  src: url('/public/assets/fonts/CookieRun_Bold.ttf') format('truetype'); /* 폰트 파일의 경로 */
+}
+@font-face {
+  font-family: 'CookieRun_Regular'; /* 사용할 폰트 이름 */
+  src: url('/public/assets/fonts/CookieRun_Regular.ttf') format('truetype'); /* 폰트 파일의 경로 */
+}
+
+.container{
+  margin-top: 100px;
+  font-family: CookieRun_Regular, sans-serif;
+}
+.mainBox{
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 50px 80px 50px 80px;
+}
+.titleContext{
+  font-family: Cookierun_Black;
+  font-size: 2.5rem;
+  margin-bottom:30px;
+  color : #003d6b;
+}
+.btn {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #ABDBE3;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #003d6b;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+  border-radius: 5px;
+}
+.btn span {
+  position: relative; 
+  z-index: 1;
+  color:inherit;
+  font-family: CookieRun_Regular, sans-serif;
+  font-size: 1.3em;
+}
+.btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: #ABDBE3;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  
+}
+.btn:hover{
+  color: #004F6B;
+}
+.btn:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+
+
+
+.btn:active {
+  transform: translate(0em, 0.75em);
+}
+.btn:active::before {
+  transform: translate3d(0, 0, -1em);
+}
+
+.neon {
+  position: absolute;
+  z-index: 1;
+  font-family: CookieRun_Black, sans-serif;
+  color: #FB4264;
+  font-size: 3rem;
+  text-shadow: 0 0 3vw #F40A35;
+  top: 19rem;
+  left: 48%;
+  transform: translate(0,0 );
+
+}
+
+.flux {
+  position: absolute;
+  z-index:1;
+  font-family: CookieRun_Black;
+  color: #426DFB;
+  font-size: 3rem;
+  text-shadow: 0 0 3vw #2356FF;
+  top: 19rem;
+  left:50.5%;
+}
+
+.neon {
+  animation: neon 1s ease infinite;
+  -moz-animation: neon 1s ease infinite;
+  -webkit-animation: neon 1s ease infinite;
+}
+
+@keyframes neon {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #faa616, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+    color: #F9E09B;
+  }
+  {/*50% {
+    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+    color: #806914;
+  }W*/}
+}
+
+.flux {
+  animation: flux 2s linear infinite;
+  -moz-animation: flux 2s linear infinite;
+  -webkit-animation: flux 2s linear infinite;
+  -o-animation: flux 2s linear infinite;
+}
+
+@keyframes flux {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #2551ff, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+    color: #ABDBE3;
+  }
+  {/*50% {
+    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+    color: #146C80;
+  }*/}
+}
