@@ -244,12 +244,12 @@ export default function Scene() {
           <color attach="background" args={["#abdbe3"]} />
           
           <>
-            <PerspectiveCamera position={[1.5, 8, 4]} fov={75} far={100} layers={[0]} makeDefault/>
+            <PerspectiveCamera position={[1.5, 8, 4]} fov={75} layers={[0]} makeDefault/>
             <Background backgroundColors={backgroundColors}/>
             <Sand/>
             <ambientLight intensity={2} color="#fff7e6"/>
             
-            {/*<Light/>*/}
+            {/* <Light/> */}
             
             
             <directionalLight
@@ -261,11 +261,11 @@ export default function Scene() {
               shadow-camera-left={-120}
               shadow-camera-right={100}
               shadow-camera-far={100}
-              shadow-mapSize-height={512*4}
-              shadow-mapSize-width={512*4}
+              shadow-mapSize-height={512*6}
+              shadow-mapSize-width={512*6}
               position={[50, 80, -50]}
               color="#ffffff"
-            />
+    />
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>

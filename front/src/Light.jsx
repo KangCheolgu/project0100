@@ -21,7 +21,6 @@ const Light = () => {
   light.shadow.camera.far = 100;
   light.shadow.mapSize.height = 512 * 4;
   light.shadow.mapSize.width = 512 * 4;
-  light.target = targetObject;
   lightRef.current = light;
 
   // Create a DirectionalLightHelper
@@ -30,8 +29,8 @@ const Light = () => {
 
   // Add the light and helper to the scene
   scene.add(lightRef.current);
-  scene.add(helper);
-  scene.add(shadowHelper);
+  {/*scene.add(helper);
+scene.add(shadowHelper);*/}
   return null; // Since this component doesn't render any JSX, return null
 };
 
