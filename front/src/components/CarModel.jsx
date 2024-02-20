@@ -7,13 +7,29 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function CarModel(props) {
-  const { nodes, materials } = useGLTF('/assets/models/ToyCar-red.glb')
-  return (
-    <group {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.Formula.geometry} material={materials.toy_Cars_color_01} position={[0, -0.1, 0]} rotation={[Math.PI / 2, 0, Math.PI]} scale={0.0017}>
-      </mesh>
-    </group>
-  )
+  const modelPath = props.index === 0 ? '/assets/models/ToyCar-blue.glb' : '/assets/models/ToyCar-red.glb';
+  const { nodes, materials } = useGLTF(modelPath);
+  
+  if(props.index === 0 && nodes.Formula) {
+    return (
+      <group {...props} dispose={null}>
+        <mesh castShadow receiveShadow geometry={nodes.Formula.geometry} material={materials.toy_Cars_color_01} position={[0, -0.1, 0]} rotation={[Math.PI / 2, 0, Math.PI]} scale={0.0017}>
+        <mesh geometry={nodes.BreakLight_L.geometry} material={materials['red-l']} position={[44, -175, -71]} scale={150}/>
+        <mesh geometry={nodes.BreakLight_R.geometry} material={materials['red-r']} position={[-44, -175, -71]} scale={150}/>
+        </mesh>
+      </group>
+    )
+  } else if (nodes.Formula) {
+    return (
+      <group {...props} dispose={null}>
+        <mesh castShadow receiveShadow geometry={nodes.Formula.geometry} material={materials.toy_Cars_color_01} position={[0, -0.1, 0]} rotation={[Math.PI / 2, 0, Math.PI]} scale={0.0017}>
+        <mesh geometry={nodes.BreakLight_L.geometry} material={materials['red-l']} position={[44, -175, -71]} scale={150}/>
+        <mesh geometry={nodes.BreakLight_R.geometry} material={materials['red-r']} position={[-44, -175, -71]} scale={150}/>
+        </mesh>
+      </group>
+    )
+  }
 }
 
+useGLTF.preload('/assets/models/ToyCar-blue.glb')
 useGLTF.preload('/assets/models/ToyCar-red.glb')

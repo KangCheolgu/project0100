@@ -4,7 +4,7 @@ import klaxonSoundFile from '../sound/car-horn/car-horn-1.wav';
 import * as THREE from 'three';
 
 export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
-  const engineForce = 70;
+  const engineForce = 80;
   const [brake, setBrake] = useState(false);
   const klaxonDuration = 500;
 
