@@ -7,6 +7,11 @@
   src: url('/public/assets/fonts/CookieRun_Bold.ttf') format('truetype'); /* 폰트 파일의 경로 */
 }
 
+@font-face {
+  font-family: 'CookieRun_Regular'; /* 사용할 폰트 이름 */
+  src: url('/public/assets/fonts/CookieRun_Regular.ttf') format('truetype'); /* 폰트 파일의 경로 */
+}
+
 .lobby_container{
   margin-top: 100px;
 }
@@ -16,7 +21,7 @@
   margin-bottom: 12px;
   text-align: right;
   margin-right: 90px;
-  font-family: 'CookieRun_Bold';
+  font-family: 'CookieRun_Regular';
 }
 
 /* 네모 박스 */
@@ -29,6 +34,10 @@
   padding: 50px 80px 50px 80px;
   height: 530px;
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.text{
+  font-family: 'CookieRun_Bold'
 }
 
 /* .row1{
@@ -52,6 +61,7 @@
   scrollbar-color: lightgray white;
   scrollbar-width: thin;
   margin-bottom: 7px;
+  
 }
 /* 조작법 */
 .control_area{
@@ -60,6 +70,7 @@
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.7);
   text-align: left;
+  font-family: 'CookieRun_Regular'
 }
 
 /* 오른쪽 구역 */
@@ -108,12 +119,15 @@
 .create_room{
   width: 100%;
   height: 50px;
+  font-family: 'CookieRun_Bold';
+  font-size: 24px;
 }
 
 
 .join_btn{
   width: 100%;
   height: 100%;
+  font-family: 'CookieRun_Regular';
 }
 
 

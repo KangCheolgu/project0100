@@ -155,10 +155,10 @@ export const LobbyPage = () => {
         <Col>
           <Row className={styles.row1}>
             <Col className={styles.left_area}>
-              <div><h4>RANKING</h4></div>
+              <div className={styles.text}><h4>RANKING</h4></div>
               <div className={styles.ranking_area}>
               </div>
-              <div><h4>CONTROL</h4></div>
+              <div className={styles.text}><h4>CONTROL</h4></div>
               <div className={styles.control_area}>
 
                 <br/>
@@ -177,7 +177,7 @@ export const LobbyPage = () => {
             <Col md="2"></Col>
             {/* 대기방 영역 */}
             <Col className={styles.right_area} >
-              <div><h4>ROOM</h4></div>
+              <div className={styles.text}><h4>ROOM</h4></div>
               <div className={styles.room_area}>
                 <Col>
                   {
