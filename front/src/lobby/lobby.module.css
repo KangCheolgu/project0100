@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'CookieRun_Black'; /* 사용할 폰트 이름 */
+  src: url('/public/assets/fonts/CookieRun_Black.ttf') format('truetype'); /* 폰트 파일의 경로 */
+}
+@font-face {
+  font-family: 'CookieRun_Bold'; /* 사용할 폰트 이름 */
+  src: url('/public/assets/fonts/CookieRun_Bold.ttf') format('truetype'); /* 폰트 파일의 경로 */
+}
+
 .lobby_container{
   margin-top: 100px;
 }
@@ -7,6 +16,7 @@
   margin-bottom: 12px;
   text-align: right;
   margin-right: 90px;
+  font-family: 'CookieRun_Bold';
 }
 
 /* 네모 박스 */
