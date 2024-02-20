@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import googleButton from "../static/button/googlelogo.png"
 import naverButton from "../static/button/naverlogo.png"
-import './login.css'
+import styles from './login.module.css'
 
 import Map1 from '../Map1/Map1';
 import Map2 from '../Map2/Map2';
@@ -43,20 +43,20 @@ function LoginPage() {
 
   return (<>
   <Container style={{ position: 'relative' }}>
-      <Row className='title' >
-        <Col className='title-text'>0100</Col>
+      <Row className={styles.title} >
+        <Col className={styles.title_text}>0100</Col>
       </Row>
-      <Row className='center'>
+      <Row className={styles.center}>
         <Col></Col>
-        <Col md="5" className='inside-contents'>
-          <Row className='center-text' >
+        <Col md="5" className={styles.inside_contents}>
+          <Row className={styles.center_text}>
             <Col>로그인하여 게임 시작</Col>
           </Row>
-          <Row className='login-area'>
+          <Row className={styles.login_area}>
             <Col md="2"></Col>
             <Col>
               <div>
-              <button className="google-btn" onClick={signInWithGoogle}>
+              <button className={styles.google_btn} onClick={signInWithGoogle}>
                 <img src={googleButton} typeof='button' alt="google button Img" width={25} height={25}/>
                 <span>Google 로그인</span>
               </button>
@@ -65,7 +65,7 @@ function LoginPage() {
             <Col md="2"></Col>
             <Col>
               <div>
-              <button className="naver-btn" onClick={signInWithNaver}>
+              <button className={styles.naver_btn} onClick={signInWithNaver}>
                 <img src={naverButton} typeof='button' alt="naver button Img" width={30} height={30}/>
                 <span>네이버 로그인</span>
               </button>
