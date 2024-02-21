@@ -146,12 +146,6 @@ export default function Interface(){
           socket.emit('phaseEnded', [socket.id, tmpRecord]);
           useGame.setState({ recordTime : tmpRecord });
           setWinnerData(winnerSocketData.name)
-
-          // axios.post('http://localhost:5000/api/database/saveWinnerRecord', {
-          //   name: winnerSocketData.name,
-          //   email: winnerSocketData.email,
-          //   record: tmpRecord,
-          // });
         }
       }
     }, [tmpRecord]);
@@ -220,44 +214,6 @@ export default function Interface(){
           <div className={`startSign ${animationStart ? 'startSign-animation' : ''}`} >
             START
           </div>}
-
-
-        
-        
-
-        {/* 관전자에게만 보이는 부분 */}
-        {isSpectator && (
-          <div style={{position:"fixed",fontFamily:"sans-serif"}} className="spectator-button">
-            <button  style={{margin:"5px",width:"50px", padding:"7px"}}
-              onClick={() => {
-              console.log("Prev 카메라 버튼");
-              socket.emit("prevCameraButton")
-              }}>
-              Prev
-            </button>
-            <button  style={{margin:"5px",padding:"7px"}}
-              onClick={() => {
-              console.log("1 Player 카메라 버튼");
-              socket.emit("1pCameraButton")
-              }}>
-              1 Player
-            </button>
-            <button style={{margin:"5px", padding:"7px"}}
-              onClick={() => {
-              console.log("2 Player 카메라 버튼");
-              socket.emit("2pCameraButton")
-              }}>
-              2 Player
-            </button>  
-            <button  style={{margin:"5px", padding:"7px"}}
-            onClick={() => {
-            console.log("Next 카메라 버튼");
-            socket.emit("nextCameraButton")
-            }}>
-              Next
-            </button>
-          </div>
-        )}
 
         {/* 플레이어 한테만 보이는 부분 */}
         {!isSpectator && (

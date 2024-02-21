@@ -23,11 +23,13 @@ import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
 import Minimap from "./utils/Minimap.jsx";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 let checkPointIndex = 0
 let lapseCheck = [false, false]
 
 const Car = ({ cameraGroup, ...props }) => {
+  const navigate = useNavigate();
     // 이전 등수 현재등수
   const [previousRank, setPreviousRank] = useState(1);
   const [currentRank, setCurrentRank] = useState(1);
@@ -107,6 +109,29 @@ const Car = ({ cameraGroup, ...props }) => {
     engineSoundRef.current.loop = true;
     engineSoundRef.current.volume = 0.4;
     engineSoundRef.current.play().catch(error => console.error("엔진 소리 재생 실패:", error));
+
+    const handleWindowBlur = () => {
+        if (engineSoundRef.current) {
+            engineSoundRef.current.pause();
+        }
+    };
+
+    const handleWindowFocus = () => {
+        if (window.location.pathname === '/gameroom') {
+            engineSoundRef.current.play();
+        }
+    };
+
+    window.addEventListener('blur', handleWindowBlur);
+    window.addEventListener('focus', handleWindowFocus);
+
+    return () => {
+        window.removeEventListener('blur', handleWindowBlur);
+        window.removeEventListener('focus', handleWindowFocus);
+        if (engineSoundRef.current) {
+            engineSoundRef.current.pause();
+        }
+    };
   }, []);
 
   // 속도계 
@@ -153,20 +178,22 @@ const Car = ({ cameraGroup, ...props }) => {
         // 부스터 이펙트 위치 및 방향 지정.
       cameraGroup.current.quaternion.copy(bodyRotation);
       cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
-
-      // if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
-      //   around()
-      //   lapseCheck[0] = true
-      // }
-      // if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
-      //   end()
-      // }
         
-      if (checkPointIndex ===  CheckPoint.length + 1 && lapseCheck[0] === false) {
+      // if (checkPointIndex ===  CheckPoint.length + 1 && lapseCheck[0] === false) {
+      //   lapseCheck[0] = true
+      //   around()
+      // }
+      // if (checkPointIndex ===  CheckPoint.length * 2 + 1 && lapseCheck[1] === false) {
+      //   lapseCheck[1] = true
+      //   end()
+      //   useGame.setState({ winner: socket.id });
+      // }
+
+      if (checkPointIndex ===  1 && lapseCheck[0] === false) {
         lapseCheck[0] = true
         around()
       }
-      if (checkPointIndex ===  CheckPoint.length * 2 + 1 && lapseCheck[1] === false) {
+      if (checkPointIndex ===  2 && lapseCheck[1] === false) {
         lapseCheck[1] = true
         end()
         useGame.setState({ winner: socket.id });
