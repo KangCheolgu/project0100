@@ -34,8 +34,8 @@ export default function Section3(props){
         <Border_1 position={[position[0]+57, position[1]-0.04, position[2]-12]} rotation={[0, Math.PI/2, 0]} />
         <Border_1 position={[position[0]+57, position[1]-0.04, position[2]-18]} rotation={[0, Math.PI/2, 0]} />
 
-        <ColliderBox scale={[8.5, 0.1, 8.5]} rotation={[0, Math.PI/4, 0]} position={[position[0]+51, position[1]+0.05, position[2]-21]}/>
-        <ColliderBox scale={[8.5, 0.1, 8.5]} rotation={[0, Math.PI/4, 0]} position={[position[0]+51, position[1]+0.05, position[2]-9]}/>
+        <ColliderBox scale={[8.75, 0.1, 8.75]} rotation={[0, Math.PI/4, 0]} position={[position[0]+51, position[1]+0.05, position[2]-21]}/>
+        <ColliderBox scale={[8.75, 0.1, 8.75]} rotation={[0, Math.PI/4, 0]} position={[position[0]+51, position[1]+0.05, position[2]-9]}/>
 
         <Grass position={[position[0]+48, position[1]-0.05, position[2]-24]}/>
         <Grass position={[position[0]+48, position[1]-0.05, position[2]-18]}/>

@@ -35,7 +35,6 @@ export default function Interface(){
     // 유저 목록을 받아서 목록에 추가해줌
     const [players, setPlayers] = useState([])
     const [spectators, setSpectators] = useState([])
-    const [ranking, setRanking] = useState("");
     const [animationStart, setAnimationStart] = useState(null);
     const [player1Ranking, setPlayer1Ranking] = useState("1등");
     const [player2Ranking, setPlayer2Ranking] = useState("2등");
@@ -44,8 +43,9 @@ export default function Interface(){
     const winner = useGame((state) => state.winner);
     const [tmpRecord, setTmpRecord] = useState(0)
     const toLobby = () => {
+      restart()
       socket.emit("leaveAndGoToLobby")
-      navigate("/lobby") 
+      navigate("/lobby")
     }
 
     useEffect(() => {
@@ -145,12 +145,16 @@ export default function Interface(){
           socket.emit('phaseEnded', [socket.id, tmpRecord]);
           useGame.setState({ recordTime : tmpRecord });
           setWinnerData(winnerSocketData.name)
-
           axios.post(CURRENT_URL + '/api/database/saveWinnerRecord', {
             name: winnerSocketData.name,
             email: winnerSocketData.email,
             record: tmpRecord,
           });
+          // axios.post('http://localhost:5000/api/database/saveWinnerRecord', {
+          //   name: winnerSocketData.name,
+          //   email: winnerSocketData.email,
+          //   record: tmpRecord,
+          // });
         }
       }
     }, [tmpRecord]);
@@ -187,7 +191,7 @@ export default function Interface(){
         <div className='rankingSpace'>
           {players.length >= 1 && (
             <div className={player1Ranking === "1등" ? 'first-place' : 'other-places'}>
-              {player1Ranking === "1등" ? '1st : ' : '2nd :'} {players[0].name}
+              <span style={{color:"red"}}>{player1Ranking === "1등" ? '1st : ' : '2nd :'}</span> {players[0].name}
             </div>
           )}
           {players.length >= 2 && (
@@ -195,7 +199,8 @@ export default function Interface(){
               {player2Ranking === "1등" ? '1st : ' : '2nd : '} {players[1].name}
             </div>
           )}
-        </div>k
+        </div>
+        
         {/* Countdown */}
         {count > 0 && count < 4 && 
           <div className={`countdown ${animationStart ? 'countdown-animation' : ''}`} >
