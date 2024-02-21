@@ -139,6 +139,14 @@ export default function RoomPage() {
   
   return (<>
     <Container className={styles.container}>
+      <Row>
+        <Col md="8"></Col>
+        <Col>
+          <button className={styles.exit_btn} onClick={exitRoom}>
+            <img src="/assets/images/exit.png" alt="EXIT"/></button> 
+        </Col>
+        
+      </Row>
       <div className={styles.neon}>V </div>
       <div className={styles.flux}>S </div>
       <Row style={{textAlign:"center"}}>
@@ -163,18 +171,13 @@ export default function RoomPage() {
           </Row>
           <Row style={{marginTop:"20px"}}>
             <Col>
-              
               <button className={styles.btn}
                 onClick={(e) => {startGameInRoom();}}
                 sx={{fontFamily: 'CookieRun_Black, sans-serif'}}>
                 <span>GAME START</span></button>
             </Col>
           </Row>
-          {/*<Row>
-            <Col>
-              <Button onClick={exitRoom} style={{width:"50%", height:"50px", fontSize:"20px"}}>나가기</Button> 
-            </Col>
-          </Row>*/}
+          
         </Col>  
         <Col></Col>  
       </Row>

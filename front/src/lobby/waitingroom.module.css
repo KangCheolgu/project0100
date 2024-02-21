@@ -20,6 +20,7 @@
 .mainBox{
   background-color: rgba(255, 255, 255, 0.5);
   padding: 50px 80px 50px 80px;
+  border-radius : 10px;
 }
 .titleContext{
   font-family: Cookierun_Black;
@@ -120,10 +121,6 @@
     text-shadow: 0 0 1vw #faa616, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
     color: #F9E09B;
   }
-  {/*50% {
-    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
-    color: #806914;
-  }W*/}
 }
 
 .flux {
@@ -139,8 +136,46 @@
     text-shadow: 0 0 1vw #2551ff, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
     color: #ABDBE3;
   }
-  {/*50% {
-    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
-    color: #146C80;
-  }*/}
+}
+.exit_btn img{
+  width : 32px;
+  height : 32px;
+}
+
+.exit_btn {
+  display: flex;
+  align-items: center;
+  background: #ffb344;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  border: none;
+  color: white;
+  width: 130px;
+  margin-left:70px;
+  margin-bottom: 12px;
+}
+.exit_btn:before {
+  font-family:'CookieRun_Regular';
+  content: '나가기';
+  font-size: 20px;
+  display: block;
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  transition: all 0.2s ;
+}
+.exit_btn:before {
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.4);
+  line-height: 37px;
+}
+
+.exit_btn:hover:before {
+  margin-left: 0px;
+  transform: scale(1.1,1.1);
+  -ms-transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+  box-shadow: 0px 0px 0px -2px rgba(0, 0, 0, 0.25);
 }
