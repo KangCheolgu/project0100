@@ -9,6 +9,7 @@ import Scene from './Scene'
 import { socket } from "./lobby/lobby.jsx";
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import finallap from './static/button/finallap.png'
 
 export default function Interface(){
     const navigate = useNavigate()
@@ -28,6 +29,7 @@ export default function Interface(){
     const phase = useGame((state) => state.phase);
     const recordTime = useGame((state) => state.recordTime);
     let count = useGame((state) => state.count);
+    let lapCount = useGame((state)=> state.lapse);
 
     // 유저 목록을 받아서 목록에 추가해줌
     const [players, setPlayers] = useState([])
@@ -39,6 +41,8 @@ export default function Interface(){
     const [winnerData, setWinnerData] = useState()
     const winner = useGame((state) => state.winner);
     const [tmpRecord, setTmpRecord] = useState(0)
+    const [showImage, setShowImage] = useState(false)
+
     const toLobby = () => {
       restart()
       socket.emit("leaveAndGoToLobby")
@@ -152,6 +156,18 @@ export default function Interface(){
       }
     }, [tmpRecord]);
 
+
+    useEffect(()=>{
+      if(lapCount === 2){
+        setShowImage(true)
+        const timeout = setTimeout(()=>{
+          setShowImage(false)
+        }, 2000)
+
+        return () => clearTimeout(timeout)
+      }
+    }, [lapCount])
+
     function formatTime(milliseconds) {
       // 밀리초를 분, 초, 밀리초로 변환합니다.
       const minutes = Math.floor(milliseconds / (1000 * 60));
@@ -163,7 +179,6 @@ export default function Interface(){
   
       return formattedTime;
   }
-
 
 
     const controls = useKeyboardControls((state)=>state)
@@ -205,6 +220,9 @@ export default function Interface(){
           <div className={`startSign ${animationStart ? 'startSign-animation' : ''}`} >
             START
           </div>}
+
+
+        
         
 
         {/* 관전자에게만 보이는 부분 */}
@@ -261,6 +279,12 @@ export default function Interface(){
         {/* Controls */}
       </>
       }
+      {showImage &&
+        <div className='finallap'>
+            <img src={finallap} alt='finallap' width={350}/>
+        </div>
+      }
+      
       {/* 게임 종료시 */}
       { phase==='ended' ?
         <>

@@ -13,13 +13,9 @@
 }
 
 .title{
-  margin-top: 50px;
   text-align: center;
-  margin-bottom: 30px;
-}
-
-.title_text{
-  font-size: 160px;
+  margin-bottom: -20px;
+  margin-left: 60px;
 }
 
 /* 전체 가운데 테두리 */
