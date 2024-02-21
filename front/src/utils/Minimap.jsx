@@ -42,7 +42,7 @@ function Minimap({ socket, props, chassisBody }) {
   // 실제 구현에서는 게임 월드와 미니맵의 스케일 비율에 따라 조정 필요
   const myCarStyle = {
     position: 'absolute',
-    left: `${myPosition.x * scaleX + 40}px`,
+    left: `${myPosition.x * scaleX + 37}px`,
     top: `${myPosition.z * scaleZ + 360}px`,
     width: '100px',
     height: '100px',
