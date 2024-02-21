@@ -11,7 +11,7 @@ import { useFrame } from "@react-three/fiber";
 import { CarModel } from "./components/CarModel.jsx";
 import { Wheel } from "./components/Wheel.jsx";
 import { CheckPoint } from "./utils/CheckPoint.jsx";
-import collisionSound from './sound/car-hit/car-hit-2.wav';
+import collisionSound from './sound/car-hit/car-hit-6.wav';
 import klaxonSoundFile from './sound/car-horn/car-horn-1.wav';
 import engineSoundFile from './sound/engines/1/low_on.wav';
 import { Speed } from "./Speeds.jsx";
