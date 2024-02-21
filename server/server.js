@@ -187,14 +187,15 @@ io.on('connection', (socket) => {
         };
       
         console.log(rooms[roomName].allPings);
+        console.log("isStartSignalSent : ", isStartSignalSent);
         //상대방에게 핑데이터 보냄 이는 Scene.jsx 에서 받을거임
         socket.broadcast.to(roomName).emit("opponentPing", rooms[roomName].allPings[socket.id]);
         // 모든 유저가 상대에게 핑데이터를 보냈다면 스타트 시그널을 보냄
         // 이는 Scene.jsx 에서 받을거임 
         console.log(Object.keys(rooms[roomName].allPings).length); 
         if (Object.keys(rooms[roomName].allPings).length === numClients && isStartSignalSent === false) {
-          io.to(roomName).emit("startSignal", rooms[roomName].allPings);
           isStartSignalSent = true
+          io.to(roomName).emit("startSignal", rooms[roomName].allPings);
         }
       });
 
