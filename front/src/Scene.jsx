@@ -49,6 +49,11 @@ export default function Scene() {
   var countIntervalRef = useRef(null)
   const start = useGame((state) => state.start)
 
+  const startCountdown = ()=>{
+    countIntervalRef.current = setInterval(()=>{
+       Countdown()
+     }, 1000)
+   }
   //count값 바뀔 때마다 
   useEffect(()=>{
     const countDownSound = new Howl({
@@ -77,11 +82,7 @@ export default function Scene() {
     }
   },[count])
 
-  const startCountdown = ()=>{
-   countIntervalRef.current = setInterval(()=>{
-      Countdown()
-    }, 1000)
-  }
+  
   // 카운트 다운 관련 끝
 
 /////////// 핑관련 변수들
@@ -90,7 +91,7 @@ export default function Scene() {
   let cnt = 0;
   let totalDuration = 0;
 
-  const startPingCheck = async () => {
+  const startPingCheck = () => {
     //핑 체크 0.1초 간격
     console.log("핑체크");
     const pingCheck = setInterval(() => {
@@ -145,20 +146,6 @@ export default function Scene() {
       setOpponentPing(pingData.ping)
     })
 
-     // 스타트 시그널을 받으면 
-    socket.on("startSignal", (allPings)=>{
-      // 상대핑의 평균을 구하여 
-      const allPingsArray = Object.values(allPings);
-      const opponentPingData = allPingsArray.find(ping => ping.id !== socket.id);
-      const myPingData = allPingsArray.find(ping => ping.id === socket.id);
-      // const myPing = allPingsArray.find(ping => ping.id === socket.id);
-      const startSignal = setTimeout(() => {
-        if(count > -3) startCountdown()
-      }, opponentPingData.ping/2)
-
-      return () => clearTimeout(startSignal)
-    })
-
     //유저 업데이트
     socket.on("updatePlayers", onPlayers)
 
@@ -166,8 +153,30 @@ export default function Scene() {
       socket.off("updatePlayers", onPlayers);
       socket.off("opponentPing")
       socket.off("clientCount")
+    })
+  },[])
+
+  useEffect(() => {
+
+    // 스타트 시그널을 받으면 
+    socket.on("startSignal", (allPings)=>{
+      console.log("스타트 시그널");
+      // 상대핑의 평균을 구하여 
+      const allPingsArray = Object.values(allPings);
+      const opponentPingData = allPingsArray.find(ping => ping.id !== socket.id);
+      const myPingData = allPingsArray.find(ping => ping.id === socket.id);
+      
+      const startSignal = setTimeout(() => {
+        if(count > -3) startCountdown()
+      }, opponentPingData.ping/2)
+
+      return () => clearTimeout(startSignal)
+    })
+
+    return (() => {
       socket.off("startSignal")
     })
+
   },[])
 
   // 상대에게 내 핑 상태를 보냄

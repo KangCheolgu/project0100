@@ -34,7 +34,7 @@ function Needle({ socket, props, currentSpeed }) {
                     transformOrigin: '240px 50%',
                     clipPath: 'polygon(60% 0, 100% 50%, 60% 100%, 0 50%)',
                     transition: 'transform 0.5s ease-out', // CSS transition for smooth movement
-                    opacity: 0.7
+                    opacity: 0.7,
                 }}
             />
         );
