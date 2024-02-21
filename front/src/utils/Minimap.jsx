@@ -52,8 +52,8 @@ function Minimap({ socket, props, chassisBody }) {
 
   const opponentCarStyle = {
     position: 'absolute',
-    left: `${opponentPosition.x * scaleX + 50}px`,
-    top: `${opponentPosition.z * scaleZ + 420}px`,
+    left: `${opponentPosition.x * scaleX + 40}px`,
+    top: `${opponentPosition.z * scaleZ + 360}px`,
     width: '100px',
     height: '100px',
     transform: 'translate(-50%, -50%)', // 중앙 정렬
@@ -62,7 +62,7 @@ function Minimap({ socket, props, chassisBody }) {
 
     if (socket.id === props.id) {
   return (
-    <div style={{ position: 'absolute', bottom: '90%', right: '10%' }}>
+    <div style={{ position: 'absolute', bottom: '60%', right: '10%' }}>
       <img src={minimapSrc} alt="Minimap" style={{ width: '280px', height: '480px' }} />
       <img src={blueCarSrc} alt="My Car" style={myCarStyle} />
       <img src={redCarSrc} alt="Opponent's Car" style={opponentCarStyle} />
