@@ -163,14 +163,14 @@ export const LobbyPage = () => {
 
                 <br/>
                 <span className={styles.keyboard}>SPACE</span>
-                 : brake<br/><br/>
+                 :&nbsp; 브레이크<br/><br/>
                 <span className={styles.keyboard}>SHIFT</span>
-                 : booster<br/>
+                 :&nbsp;부스터<br/>
                  <br/>
                 <span className={styles.keyboard}>H</span>
-                 : horn<br/><br/>
+                 :&nbsp;빵빵<br/><br/>
                 <span className={styles.keyboard}>R</span>
-                 : reset<br/>
+                :&nbsp;리셋<br/>
               </div>
               <img className={styles.key} src={directionkey} alt="directionkey" />
             </Col>
