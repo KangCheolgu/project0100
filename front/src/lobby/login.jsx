@@ -15,6 +15,7 @@ import { Physics, Debug } from "@react-three/cannon";
 import * as THREE from 'three';
 import Sand from '../Sand';
 import { Background } from '../components/Background';
+import ZerobackTitle from "../static/button/title.png"
 
 // const CURRENT_URL = "http://localhost:5000"
 const CURRENT_URL = "https://project0100.shop"
@@ -44,9 +45,9 @@ function LoginPage() {
 
   return (<>
   <Container style={{ position: 'relative' }}>
-      <Row className={styles.title} >
-        <Col className={styles.title_text}>0100</Col>
-      </Row>
+      <div className={styles.title} md={2}>
+            <img src={ZerobackTitle} alt='title img' width={600}/>
+      </div>
       <Row className={styles.center}>
         <Col></Col>
         <Col md="5" className={styles.inside_contents}>
