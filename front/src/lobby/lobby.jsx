@@ -99,17 +99,17 @@ export const LobbyPage = () => {
     }
   }
   // 기록이 작은 순으로 3개 가져옴
-  // const getRankingList = async () => {
-  //   try {
-  //       const response = await axios.get(CURRENT_URL + '/api/database/getrankinglist');
-  //       // 서버로부터 받은 랭킹 목록을 반환합니다.
-  //       console.log("response");
-  //       return response.data;
-  //   } catch (error) {
-  //       console.error('Error fetching ranking list:', error);
-  //       return []; // 에러 발생 시 빈 배열 반환
-  //   }
-  // };
+  const getRankingList = async () => {
+    try {
+        const response = await axios.get(CURRENT_URL + '/api/database/getrankinglist');
+        // 서버로부터 받은 랭킹 목록을 반환합니다.
+        console.log("response");
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching ranking list:', error);
+        return []; // 에러 발생 시 빈 배열 반환
+    }
+  };
 
   useEffect(() => {
     // 받은 방 리스트
@@ -125,7 +125,6 @@ export const LobbyPage = () => {
   },[roomList])
 
   useEffect(() => {
-    socket.connect();
     // 처음에 렌더링 되면 방 리스트와 랭킹을 불러와서 나타냄
     socket.emit("roomlist")
     // getRankingList()
@@ -230,7 +229,7 @@ export const LobbyPage = () => {
                       <Row className={styles.players_room} >
                         <Col>
                           <button className={`${styles.join_btn} buttonSound`}
-                          onClick={() => joinRoom({
+                            onClick={() => joinRoom({
                             userEmail: room.roomName,
                             userName: userName,
                             type:0
@@ -238,7 +237,7 @@ export const LobbyPage = () => {
                           key={room.roomName}>
                             <p className={styles.btnText}>{room.roomHost} 님의 방</p>
                             <div className={styles.btnTwo}>
-                              <p className={styles.btText2}>GO!</p>
+                              <p className={styles.btnText2}>GO!</p>
                             </div>
                           </button>
                         </Col>
