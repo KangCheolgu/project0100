@@ -8,7 +8,7 @@ function Minimap({ socket, props, chassisBody }) {
   const blueCarSrc = '/assets/images/blue-car.png';
   const redCarSrc = '/assets/images/red-car.png';
 
-  const scaleX = 150 / 40 ;
+  const scaleX = 150 / 40;
   const scaleZ = 250 / 100;
 
   useEffect(() => {

@@ -366,7 +366,7 @@ const Car = ({ cameraGroup, ...props }) => {
         };
         socket.emit("currentState", currentState);
       }
-    }, 50);
+    }, 30);
   };
 
   return (<>
