@@ -20,29 +20,20 @@ import { OrbitControls, useProgress, Stats, PerspectiveCamera, CameraShake, Html
 import { Physics, Debug } from "@react-three/cannon";
 import * as THREE from 'three';
 import Sand from '../Sand';
-import Light from "../Light.jsx";
-import SvgIcon from "@mui/material/SvgIcon";
-import SportsScoreIcon from '@mui/icons-material/SportsScore';
+import styles from './waitingroom.module.css'
 
-function Flag(props){
-  return (
-    <SvgIcon component={SportsScoreIcon} inheritViewBox/>
-  )
-}
 function ProfileCard(props, cnt) {
   const name = props.name
   const isHost=["Host", "Player"]
   return (
     <Card
       sx={{
-        width: 320,
-        maxWidth: '100%',
+        width: 200,
         boxShadow: 'lg',
       }}
       style={{ backgroundColor: "white" }}
     >
-      <img src="/assets/images/flag3.png" style={{position:"absolute", width:"100px", height:"100px", transform: "translateX(-10px) rotate(-45deg) scaleX(-1)"}}/>
-      <img src="/assets/images/flag3.png" style={{position:"absolute", width:"100px", height:"100px", transform: "translateX(200px) rotate(45deg)"}}/>
+      <img src="/assets/images/flag3.png" style={{position:"absolute", width:"80px", height:"80px", transform: "translateX(-40px) translateY(-20px) rotate(-45deg) scaleX(-1)"}}/>
       <CardContent sx={{ alignItems: 'center', textAlign: 'center'}}>
         <Avatar src="/static/images/avatar/1.jpg" sx={{ '--Avatar-size': '6rem' }} />
         <Chip
@@ -57,7 +48,7 @@ function ProfileCard(props, cnt) {
           }}
         >{cnt?"Player":"Host"}</Chip>
         
-        <Typography style={{ fontSize: "2.5rem" }}>{name}</Typography>
+        <Typography style={{ fontSize: "1.5rem" }}>{name}</Typography>
         
         
       </CardContent>
@@ -147,20 +138,22 @@ export default function RoomPage() {
   }
   
   return (<>
-    <Container style={{marginTop:"100px"}}>
+    <Container className={styles.container}>
+      <div className={styles.neon}>V </div>
+      <div className={styles.flux}>S </div>
       <Row style={{textAlign:"center"}}>
         <Col></Col>  
         
-        <Col md="8" style={{ backgroundColor:"rgba(255, 255, 255, 0.5)", padding:"50px 80px 50px 80px"} }>
-          <Row>
-            <Typography style={{ fontSize: "3rem", marginBottom:"30px" }}>Wating Room</Typography>
+        <Col md="8" className={styles.mainBox}>
+          <Row className={styles.title}>
+            <div class={styles.titleContext}>Waiting Room</div>
           </Row>
           <Row style={{height:"230px"}}>
-            <Col>
+            <Col style={{display:"flex", justifyContent: "center"}}>
               <Row>
                 {
                 players && players.map((player, index) => (
-                    <Col >
+                    <Col style={{marginLeft:"40px", marginRight:"40px"}}>
                       <ProfileCard name={player.name?player.name:"Guest"} cnt={index}/>
                     </Col>
                 ))
@@ -169,41 +162,23 @@ export default function RoomPage() {
             </Col>
           </Row>
           <Row style={{marginTop:"20px"}}>
-            <Col style={{height:"100px"}}>
-              
-              <Button className="btn"
-                onClick={(e) => {e.currentTarget.style.marginTop = "15px"; e.currentTarget.style.marginBottom="5px"; e.currentTarget.style.boxShadow="0px 0px 0px 0px";  startGameInRoom();}}
-                sx={{fontFamily: 'CookieRun_Black, sans-serif'}}
-                style={{width:"100%", height:"100px", fontSize:"40px", 
-                boxShadow: "7px 7px 0px 2px #01939A",  transition: "all 0.2s", 
-                fontSize:"3.5rem", 
-                textShadow: "-3px 0px black, 0px 3px black, 3px 0px black, 0px -3px black",
-                backgroundColor: "#5DC8CD"
-                }}>{/*#FFD400  #FFF0A6 #000080*/}
-                  GAME START</Button>
-            </Col>
-          </Row>
-          <Row style={{marginTop:"20px"}}>
             <Col>
-              {/*<Button onClick={exitRoom} style={{width:"50%", height:"50px", fontSize:"20px"}}>나가기</Button>*/} 
+              
+              <button className={styles.btn}
+                onClick={(e) => {startGameInRoom();}}
+                sx={{fontFamily: 'CookieRun_Black, sans-serif'}}>
+                <span>GAME START</span></button>
             </Col>
           </Row>
+          {/*<Row>
+            <Col>
+              <Button onClick={exitRoom} style={{width:"50%", height:"50px", fontSize:"20px"}}>나가기</Button> 
+            </Col>
+          </Row>*/}
         </Col>  
         <Col></Col>  
-            </Row>
+      </Row>
     </Container>
-    <Canvas style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
-      <color attach="background" args={["#abdbe3"]} />
-      <PerspectiveCamera position={[20, 50, 30]} fov={75} makeDefault lookAt={targetObject} rotation={[-Math.PI/2, 0, Math.PI]}/>
-      <ambientLight intensity={2} color="#fff7e6"/>
-      <Light/>
-      <Physics>
-        <Sand/>
-        <Map1 position={[0, 0, 0]}/>
-        <Map2 position={[0, 0, -94]}/>
-      </Physics>
-      <Rig />
-    </Canvas>
   </>
   )
 }

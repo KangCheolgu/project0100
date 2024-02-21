@@ -239,7 +239,7 @@ export default function Scene() {
       {/* {!loadingEnd && 
         // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
       } */}
-      <Canvas shadows frameloop="demand">
+      <Canvas shadows >
         <Suspense fallback={null}>
           <color attach="background" args={["#abdbe3"]} />
           
@@ -255,7 +255,7 @@ export default function Scene() {
             <directionalLight
               castShadow
               targetObject ={targetObject}
-              intensity={4}
+              intensity={2}
               shadow-camera-top={30}
               shadow-camera-bottom={-60}
               shadow-camera-left={-120}
@@ -265,7 +265,7 @@ export default function Scene() {
               shadow-mapSize-width={512*6}
               position={[50, 80, -50]}
               color="#ffffff"
-    />
+            />
             <OrbitControls />
             <Stats/>
             <Physics gravity={[0, -3, 0]}>
@@ -298,9 +298,9 @@ export default function Scene() {
                 )}
             {/*</Debug>*/}
             </Physics>
-            {spectators.map((spectator, index) => (
+            {/* {spectators.map((spectator, index) => (
               <Spectator id={spectator.id} key={index} position={spectator.position} />
-            ))}
+            ))} */}
           
           </>          
           </Suspense>

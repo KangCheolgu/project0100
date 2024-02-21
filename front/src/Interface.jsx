@@ -32,7 +32,6 @@ export default function Interface(){
     // 유저 목록을 받아서 목록에 추가해줌
     const [players, setPlayers] = useState([])
     const [spectators, setSpectators] = useState([])
-    const [ranking, setRanking] = useState("");
     const [animationStart, setAnimationStart] = useState(null);
     const [player1Ranking, setPlayer1Ranking] = useState("1등");
     const [player2Ranking, setPlayer2Ranking] = useState("2등");
@@ -41,6 +40,7 @@ export default function Interface(){
     const winner = useGame((state) => state.winner);
     const [tmpRecord, setTmpRecord] = useState(0)
     const toLobby = () => {
+      restart()
       socket.emit("leaveAndGoToLobby")
       navigate("/lobby")
     }
