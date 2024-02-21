@@ -239,7 +239,7 @@ export default function Scene() {
       {/* {!loadingEnd && 
         // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
       } */}
-      <Canvas shadows frameloop="demand">
+      <Canvas shadows >
         <Suspense fallback={null}>
           <color attach="background" args={["#abdbe3"]} />
           

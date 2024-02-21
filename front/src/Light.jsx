@@ -9,7 +9,7 @@ const Light = () => {
   targetObject.position.set(0, 0, -50);
 
   // Create a DirectionalLight
-  const light = new THREE.DirectionalLight(0xffffff, 0.7);
+  const light = new THREE.DirectionalLight(0xffffff, 0.5);
   light.position.set(50, 80, -50); // Set light position
   light.target =targetObject
   targetObject.position.set(0, 0, -50);
@@ -19,8 +19,8 @@ const Light = () => {
   light.shadow.camera.left = -120;
   light.shadow.camera.right = 100;
   light.shadow.camera.far = 100;
-  light.shadow.mapSize.height = 512 * 4;
-  light.shadow.mapSize.width = 512 * 4;
+  light.shadow.mapSize.height = 512;
+  light.shadow.mapSize.width = 512;
   lightRef.current = light;
 
   // Create a DirectionalLightHelper
@@ -29,8 +29,8 @@ const Light = () => {
 
   // Add the light and helper to the scene
   scene.add(lightRef.current);
-  {/*scene.add(helper);
-scene.add(shadowHelper);*/}
+  scene.add(helper);
+scene.add(shadowHelper);
   return null; // Since this component doesn't render any JSX, return null
 };
 
