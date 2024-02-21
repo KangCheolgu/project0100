@@ -125,14 +125,13 @@ export const LobbyPage = () => {
   },[roomList])
 
   useEffect(() => {
-    socket.connect();
     // 처음에 렌더링 되면 방 리스트와 랭킹을 불러와서 나타냄
     socket.emit("roomlist")
-    // getRankingList()
-    // .then(rankingList => {
-    //     console.log('Ranking list:', rankingList);
-    //     // 여기서 랭킹 목록을 처리합니다.
-    // });
+    getRankingList()
+    .then(rankingList => {
+        console.log('Ranking list:', rankingList);
+        // 여기서 랭킹 목록을 처리합니다.
+    });
   },[])
 
   const targetObject = new THREE.Object3D();

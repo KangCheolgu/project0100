@@ -136,7 +136,7 @@ export default function Scene() {
         console.log("클라이언트 카운트다운");
         const pingCheck = setTimeout(() => {
           startPingCheck()
-        }, 4000)
+        }, 10000)
 
         return () => clearTimeout(pingCheck)
     })
@@ -168,7 +168,7 @@ export default function Scene() {
       
       const startSignal = setTimeout(() => {
         if(count > -3) startCountdown()
-      }, opponentPingData.ping/2)
+      }, opponentPingData.ping)
 
       return () => clearTimeout(startSignal)
     })

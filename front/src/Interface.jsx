@@ -206,7 +206,7 @@ export default function Interface(){
         <div className='rankingSpace'>
           {players.length >= 1 && (
             <div className={player1Ranking === "1등" ? 'first-place' : 'other-places'}>
-              <span style={{color:"red"}}>{player1Ranking === "1등" ? '1st : ' : '2nd :'}</span> {players[0].name}
+              {player1Ranking === "1등" ? '1st : ' : '2nd :'} {players[0].name}
             </div>
           )}
           {players.length >= 2 && (
