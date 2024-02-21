@@ -13,7 +13,7 @@ export default function Section1(props){
     const position = props.position || [60, 0, -60]
 
     return(
-    <group castShadow receiveShadow >
+    <group castShadow >
 
     <Bridge position={[position[0], position[1]-6, position[2] + 43]} rotation={[0, -Math.PI/2 , 0]} />
     <Bridge position={[position[0], position[1]-6, position[2] + 18]} rotation={[0, -Math.PI/2 , 0]} />
@@ -21,14 +21,14 @@ export default function Section1(props){
     <Bridge position={[position[0]-60, position[1]-6, position[2] + 48]} rotation={[0, Math.PI/2 , 0]} />
     <Bridge position={[position[0]-60, position[1]-6, position[2] + 23]} rotation={[0, Math.PI/2 , 0]} />
 
-    <Building_10_Blue position={[position[0]+10, position[1], position[2]-9.5]} />
-    <Building_9_Red position={[position[0]+8, position[1], position[2]-15.3]} rotation={[0, Math.PI / 2, 0]} />
-    <Building_5_Red position={[position[0]+7.5, position[1], position[2]-21.5]} rotation={[0, -Math.PI / 2, 0]}/>
-    <Building_10_Red position={[position[0]+7.5, position[1], position[2]-26.5]} rotation={[0, -Math.PI / 2, 0]}/>
+    <Building_10_Blue castShadow position={[position[0]+10, position[1], position[2]-9.5]} />
+    <Building_9_Red castShadow position={[position[0]+8, position[1], position[2]-15.3]} rotation={[0, Math.PI / 2, 0]} />
+    <Building_5_Red castShadow position={[position[0]+7.5, position[1], position[2]-21.5]} rotation={[0, -Math.PI / 2, 0]}/>
+    <Building_10_Red castShadow position={[position[0]+7.5, position[1], position[2]-26.5]} rotation={[0, -Math.PI / 2, 0]}/>
     <Building_4_Red position={[position[0]+5.5, position[1], position[2]-34]} rotation={[0, 0, 0]} />
-    <Building_9_Blue position={[position[0]-0.5, position[1], position[2]-38]} rotation={[0, 0, 0]} />
+    <Building_9_Blue castShadow position={[position[0]-0.5, position[1], position[2]-38]} rotation={[0, 0, 0]} />
     <Building_9_Red position={[position[0]-19.5, position[1], position[2]-37]} rotation={[0, 0, 0]} />
-    <Building_10_Blue position={[position[0]-14, position[1], position[2]-38]} rotation={[0, Math.PI / 2, 0]}/>
+    <Building_10_Blue castShadow position={[position[0]-14, position[1], position[2]-38]} rotation={[0, Math.PI / 2, 0]}/>
 
     <Building_2 position={[position[0]-8.5, position[1], position[2]-20]} rotation={[0, Math.PI / 2, 0]}/>
 
@@ -38,13 +38,13 @@ export default function Section1(props){
 
     <Building_3_Red position={[position[0]-24, position[1], position[2]+6]} rotation={[0, Math.PI, 0]} />
 
-    <Building_9_Blue position={[position[0]-28.5, position[1], position[2]-30]} rotation={[0, Math.PI / 2, 0]} />
+    <Building_9_Blue castShadow position={[position[0]-28.5, position[1], position[2]-30]} rotation={[0, Math.PI / 2, 0]} />
 
     <Building_8_Green position={[position[0]-28, position[1], position[2]-38]} rotation={[0, 0, 0]} />
 
-    <Building_7_Blue position={[position[0]-27, position[1], position[2]-20]} rotation={[0, Math.PI / 2, 0]} />
+    <Building_7_Blue castShadow position={[position[0]-27, position[1], position[2]-20]} rotation={[0, Math.PI / 2, 0]} />
 
-    <Building_3_Red position={[position[0]-27, position[1], position[2]-13]} rotation={[0, Math.PI / 2, 0]} />
+    <Building_3_Red castShadow position={[position[0]-27, position[1], position[2]-13]} rotation={[0, Math.PI / 2, 0]} />
 
     <Building_10_Red position={[position[0]-35, position[1], position[2]-38]} rotation={[0, 0, 0]}/>
 
@@ -70,21 +70,21 @@ export default function Section1(props){
 
     <Building_5_Red position={[position[0]-41, position[1], position[2]+5.5]} rotation={[0, Math.PI, 0]}/>
 
-    <TrafficLight position={[position[0] - 4, position[1] - 0.09, position[2] - 6]} rotation={[0, Math.PI / 2, 0]}/>
-    <TrafficLight position={[position[0] - 33, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+    <TrafficLight castShadow position={[position[0] - 4, position[1] - 0.09, position[2] - 6]} rotation={[0, Math.PI / 2, 0]}/>
+    <TrafficLight castShadow position={[position[0] - 33, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
 
-    <Block position={[position[0]-4, position[1] -0.1, position[2] + 7]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-4, position[1] -0.1, position[2] + 5]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-5, position[1] -0.1, position[2] + 3]} rotation={[0, -Math.PI / 4, 0]}/>
-    <Block position={[position[0]-12, position[1] -0.1, position[2] + 3]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-24, position[1] -0.1, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-30, position[1] -0.1, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-43, position[1] -0.1, position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-53, position[1] -0.1, position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
-    <Block position={[position[0]-58.5, position[1] -0.1, position[2] + 20]} rotation={[0, 0, 0]}/>
-    <Block position={[position[0]-61.5, position[1] -0.1, position[2] + 30]} rotation={[0, 0, 0]}/>
-    <Block position={[position[0]-58.5, position[1] -0.1, position[2] + 40]} rotation={[0, 0, 0]}/>
-    <Block position={[position[0]-61.5, position[1] -0.1, position[2] + 50]} rotation={[0, 0, 0]}/>
+    <Block castShadow position={[position[0]-4, position[1] -0.1, position[2] + 7]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block castShadow position={[position[0]-4, position[1] -0.1, position[2] + 5]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block castShadow position={[position[0]-5, position[1] -0.1, position[2] + 3]} rotation={[0, -Math.PI / 4, 0]}/>
+    <Block castShadow position={[position[0]-12, position[1] -0.1, position[2] + 3]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block castShadow position={[position[0]-24, position[1] -0.1, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block castShadow position={[position[0]-30, position[1] -0.1, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block castShadow position={[position[0]-43, position[1] -0.1, position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block castShadow position={[position[0]-53, position[1] -0.1, position[2] + 1]} rotation={[0, Math.PI / 2, 0]}/>
+    <Block castShadow position={[position[0]-58.5, position[1] -0.1, position[2] + 20]} rotation={[0, 0, 0]}/>
+    <Block castShadow position={[position[0]-61.5, position[1] -0.1, position[2] + 30]} rotation={[0, 0, 0]}/>
+    <Block castShadow position={[position[0]-58.5, position[1] -0.1, position[2] + 40]} rotation={[0, 0, 0]}/>
+    <Block castShadow position={[position[0]-61.5, position[1] -0.1, position[2] + 50]} rotation={[0, 0, 0]}/>
 
     <Cone position={[position[0] + 1, position[1] -0.1, position[2] - 29.5]} rotation={[0, -Math.PI / 4, 0]}/>
     <Cone position={[position[0] + 2.2, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
@@ -99,67 +99,67 @@ export default function Section1(props){
     <Hatch position={[position[0] + 1, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
     <Hatch position={[position[0] -60, position[1] -0.1, position[2] - 31]} rotation={[0, -Math.PI / 4, 0]}/>
 
-    <IceCreamCart position={[position[0] + 5.5, position[1] , position[2] - 1]} rotation={[0, -Math.PI / 4, 0]}/>
+    <IceCreamCart castShadow position={[position[0] + 5.5, position[1] , position[2] - 1]} rotation={[0, -Math.PI / 4, 0]}/>
 
-    <CarGreen position={[position[0] - 15, position[1] - 0.09, position[2] - 33]} rotation={[Math.PI / 36, -Math.PI / 2, 0]} />
-    <CarRed position={[position[0] - 40, position[1] - 0.09, position[2] - 33]} rotation={[Math.PI / 36, -Math.PI / 2, 0]} />
-    <CarGreen position={[position[0] - 55, position[1] - 0.09, position[2] - 33]} rotation={[Math.PI / 36, -Math.PI / 2, 0]} />
+    <CarGreen castShadow position={[position[0] - 15, position[1] - 0.09, position[2] - 33]} rotation={[Math.PI / 36, -Math.PI / 2, 0]} />
+    <CarRed castShadow position={[position[0] - 40, position[1] - 0.09, position[2] - 33]} rotation={[Math.PI / 36, -Math.PI / 2, 0]} />
+    <CarGreen castShadow position={[position[0] - 55, position[1] - 0.09, position[2] - 33]} rotation={[Math.PI / 36, -Math.PI / 2, 0]} />
 
-    <CarRed position={[position[0] - 15, position[1] - 0.09, position[2] - 20]} rotation={[0, Math.PI, -Math.PI / 36]} />
-    <CarGreen position={[position[0] - 21, position[1] - 0.09, position[2] - 10]} rotation={[0, 0, -Math.PI / 36]} />
-    <CarRed position={[position[0] - 33, position[1] - 0.09, position[2] - 20]} rotation={[0, Math.PI, -Math.PI / 36]} />
-    <CarGreen position={[position[0] - 39, position[1] - 0.09, position[2] - 15]} rotation={[0, 0, -Math.PI / 36]} />
-    <CarRed position={[position[0] - 63, position[1] - 0.09, position[2] - 10]} rotation={[0, 0, -Math.PI / 36]} />
-    <CarGreen position={[position[0] - 63, position[1] - 0.09, position[2]]} rotation={[0, 0, -Math.PI / 36]} />
+    <CarRed castShadow position={[position[0] - 15, position[1] - 0.09, position[2] - 20]} rotation={[0, Math.PI, -Math.PI / 36]} />
+    <CarGreen castShadow position={[position[0] - 21, position[1] - 0.09, position[2] - 10]} rotation={[0, 0, -Math.PI / 36]} />
+    <CarRed castShadow position={[position[0] - 33, position[1] - 0.09, position[2] - 20]} rotation={[0, Math.PI, -Math.PI / 36]} />
+    <CarGreen castShadow position={[position[0] - 39, position[1] - 0.09, position[2] - 15]} rotation={[0, 0, -Math.PI / 36]} />
+    <CarRed castShadow position={[position[0] - 63, position[1] - 0.09, position[2] - 10]} rotation={[0, 0, -Math.PI / 36]} />
+    <CarGreen castShadow position={[position[0] - 63, position[1] - 0.09, position[2]]} rotation={[0, 0, -Math.PI / 36]} />
 
-    <Palm_5 position={[position[0] + 9, position[1] - 0.09, position[2] - 1]} rotation={[0, Math.PI / 2, 0]}/>
-    <Palm_2 position={[position[0] - 7, position[1] - 0.09, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
-    <Palm_2 position={[position[0] - 8.3, position[1] - 0.09, position[2] - 1]} rotation={[0, Math.PI / 2, 0]} />
-    <Palm_2 position={[position[0] -9, position[1] - 0.09, position[2] - 7]} />
-    <Palm_2 position={[position[0] - 9, position[1] - 0.1, position[2] - 5]} />
-    <Palm_2 position={[position[0] - 10, position[1] - 0.1, position[2] - 8]} rotation={[0, Math.PI / 2, 0]} />
-    <Palm_2 position={[position[0] - 9, position[1] - 0.1, position[2] - 15]} />
+    <Palm_5 castShadow position={[position[0] + 9, position[1] - 0.09, position[2] - 1]} rotation={[0, Math.PI / 2, 0]}/>
+    <Palm_2 castShadow position={[position[0] - 7, position[1] - 0.09, position[2] - 12]} rotation={[0, Math.PI / 2, 0]} />
+    <Palm_2 castShadow position={[position[0] - 8.3, position[1] - 0.09, position[2] - 1]} rotation={[0, Math.PI / 2, 0]} />
+    <Palm_2 castShadow position={[position[0] -9, position[1] - 0.09, position[2] - 7]} />
+    <Palm_2 castShadow position={[position[0] - 9, position[1] - 0.1, position[2] - 5]} />
+    <Palm_2 castShadow position={[position[0] - 10, position[1] - 0.1, position[2] - 8]} rotation={[0, Math.PI / 2, 0]} />
+    <Palm_2 castShadow position={[position[0] - 9, position[1] - 0.1, position[2] - 15]} />
 
-    <Palm_2 position={[position[0] -8.5, position[1] - 0.09, position[2] - 37]} rotation={[0, Math.PI / 2, 0]}/>
+    <Palm_2 castShadow position={[position[0] -8.5, position[1] - 0.09, position[2] - 37]} rotation={[0, Math.PI / 2, 0]}/>
 
-    <Palm_2 position={[position[0] - 10, position[1] - 0.09, position[2] -11]} rotation={[0, Math.PI / 2, 0]} />
-    <Palm_2 position={[position[0] - 10, position[1] - 0.1, position[2]]} rotation={[0, Math.PI, 0]}/>
-    <Palm_2 position={[position[0] - 10, position[1] - 0.1, position[2] - 2]} />
-    <Palm_2 position={[position[0] -9, position[1] - 0.09, position[2] - 7]} />
+    <Palm_2 castShadow position={[position[0] - 10, position[1] - 0.09, position[2] -11]} rotation={[0, Math.PI / 2, 0]} />
+    <Palm_2 castShadow position={[position[0] - 10, position[1] - 0.1, position[2]]} rotation={[0, Math.PI, 0]}/>
+    <Palm_2 castShadow position={[position[0] - 10, position[1] - 0.1, position[2] - 2]} />
+    <Palm_2 castShadow position={[position[0] -9, position[1] - 0.09, position[2] - 7]} />
 
-    <Lighter position={[position[0] - 4, position[1] - 0.09, position[2] - 3]} />
-    <Lighter position={[position[0] - 4, position[1] - 0.09, position[2] - 13]} />
-    <Lighter position={[position[0] - 4, position[1] - 0.09, position[2] - 23]} />
+    <Lighter castShadow position={[position[0] - 4, position[1] - 0.09, position[2] - 3]} />
+    <Lighter castShadow position={[position[0] - 4, position[1] - 0.09, position[2] - 13]} />
+    <Lighter castShadow position={[position[0] - 4, position[1] - 0.09, position[2] - 23]} />
 
-    <Lighter position={[position[0] - 14, position[1] - 0.09, position[2] - 23]} />
-    <Lighter position={[position[0] - 14, position[1] - 0.09, position[2] - 13]} />
-    <Lighter position={[position[0] - 14, position[1] - 0.09, position[2] - 3]} />
+    <Lighter castShadow position={[position[0] - 14, position[1] - 0.09, position[2] - 23]} />
+    <Lighter castShadow position={[position[0] - 14, position[1] - 0.09, position[2] - 13]} />
+    <Lighter castShadow position={[position[0] - 14, position[1] - 0.09, position[2] - 3]} />
 
-    <Lighter position={[position[0] - 22, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]} />
-    <Lighter position={[position[0] - 22, position[1] - 0.09, position[2] - 26]} />
-    <Lighter position={[position[0] - 22, position[1] - 0.09, position[2] - 16]} />
-    <Lighter position={[position[0] - 22, position[1] - 0.09, position[2] - 5]} />
+    <Lighter castShadow position={[position[0] - 22, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]} />
+    <Lighter castShadow position={[position[0] - 22, position[1] - 0.09, position[2] - 26]} />
+    <Lighter castShadow position={[position[0] - 22, position[1] - 0.09, position[2] - 16]} />
+    <Lighter castShadow position={[position[0] - 22, position[1] - 0.09, position[2] - 5]} />
 
-    <Lighter position={[position[0] - 32, position[1] - 0.09, position[2] - 5]} />
-    <Lighter position={[position[0] - 32, position[1] - 0.09, position[2] - 22]} />
+    <Lighter castShadow position={[position[0] - 32, position[1] - 0.09, position[2] - 5]} />
+    <Lighter castShadow position={[position[0] - 32, position[1] - 0.09, position[2] - 22]} />
 
-    <Lighter position={[position[0] - 40, position[1] - 0.09, position[2] - 5]} />
-    <Lighter position={[position[0] - 40, position[1] - 0.09, position[2] - 23]}/>
-    <Lighter position={[position[0] - 48, position[1] - 0.09, position[2] - 26]} rotation={[0, Math.PI / 2, 0]}/>
-    <Lighter position={[position[0] - 48, position[1] - 0.09, position[2] - 33.5]} rotation={[0, Math.PI / 2, 0]}/>
+    <Lighter castShadow position={[position[0] - 40, position[1] - 0.09, position[2] - 5]} />
+    <Lighter castShadow position={[position[0] - 40, position[1] - 0.09, position[2] - 23]}/>
+    <Lighter castShadow position={[position[0] - 48, position[1] - 0.09, position[2] - 26]} rotation={[0, Math.PI / 2, 0]}/>
+    <Lighter castShadow position={[position[0] - 48, position[1] - 0.09, position[2] - 33.5]} rotation={[0, Math.PI / 2, 0]}/>
 
-    <Lighter position={[position[0] - 56, position[1] - 0.09, position[2] - 5]} />
-    <Lighter position={[position[0] - 56, position[1] - 0.09, position[2] - 23]}/>
+    <Lighter castShadow position={[position[0] - 56, position[1] - 0.09, position[2] - 5]} />
+    <Lighter castShadow position={[position[0] - 56, position[1] - 0.09, position[2] - 23]}/>
 
-    <Lighter position={[position[0] - 64, position[1] - 0.09, position[2] - 5]} />
-    <Lighter position={[position[0] - 64, position[1] - 0.09, position[2] - 23]}/>
-    <Lighter position={[position[0] - 64, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
+    <Lighter castShadow position={[position[0] - 64, position[1] - 0.09, position[2] - 5]} />
+    <Lighter castShadow position={[position[0] - 64, position[1] - 0.09, position[2] - 23]}/>
+    <Lighter castShadow position={[position[0] - 64, position[1] - 0.09, position[2] - 33]} rotation={[0, Math.PI / 2, 0]}/>
 
-    <Lighter position={[position[0] + 4, position[1] - 0.09, position[2] - 3]} />
-    <Lighter position={[position[0] + 4, position[1] - 0.09, position[2] - 13]} />
-    <Lighter position={[position[0] + 4, position[1] - 0.09, position[2] - 23]} />
+    <Lighter castShadow position={[position[0] + 4, position[1] - 0.09, position[2] - 3]} />
+    <Lighter castShadow position={[position[0] + 4, position[1] - 0.09, position[2] - 13]} />
+    <Lighter castShadow position={[position[0] + 4, position[1] - 0.09, position[2] - 23]} />
 
-    <Lighter position={[position[0] -9, position[1] - 0.09, position[2] - 34]} rotation={[0, Math.PI / 2, 0]}/>
+    <Lighter castShadow position={[position[0] -9, position[1] - 0.09, position[2] - 34]} rotation={[0, Math.PI / 2, 0]}/>
 
     <Clumb_empty_1 position={[position[0] + 9, position[1] - 0.09, position[2] - 1]} />
     <Clumb_empty_1 position={[position[0] -8.5, position[1] - 0.09, position[2] - 37]} scale={0.7}/>
@@ -182,35 +182,35 @@ export default function Section1(props){
     <Bench position={[position[0] -10, position[1] - 0.09, position[2] - 37]} rotation={[0, Math.PI / 2, 0]}/>
     <Bench position={[position[0] -7, position[1] - 0.09, position[2] - 37]} rotation={[0, -Math.PI / 2, 0]}/>
 
-    <Hydrant position={[position[0] + 3, position[1] - 0.04, position[2] - 32]} />
-    <Hydrant position={[position[0] - 5, position[1] - 0.04, position[2] - 26]} />
-    <Hydrant position={[position[0] - 23, position[1] + 0.04, position[2] - 4]} />
+    <Hydrant castShadow position={[position[0] + 3, position[1] - 0.04, position[2] - 32]} />
+    <Hydrant castShadow position={[position[0] - 5, position[1] - 0.04, position[2] - 26]} />
+    <Hydrant castShadow position={[position[0] - 23, position[1] + 0.04, position[2] - 4]} />
 
-    <TrashCan position={[position[0] - 27.5, position[1] - 0.04, position[2] - 10.1]} />
-    <TrashBag position={[position[0] - 26, position[1] + 0.04, position[2] - 9.3]} />
-    <TrashBag position={[position[0] - 27, position[1] + 0.04, position[2] - 9.1]} />
-    <TrashBag position={[position[0] - 28, position[1] + 0.04, position[2] - 9.2]} />
+    <TrashCan castShadow position={[position[0] - 27.5, position[1] - 0.04, position[2] - 10.1]} />
+    <TrashBag castShadow position={[position[0] - 26, position[1] + 0.04, position[2] - 9.3]} />
+    <TrashBag castShadow position={[position[0] - 27, position[1] + 0.04, position[2] - 9.1]} />
+    <TrashBag castShadow position={[position[0] - 28, position[1] + 0.04, position[2] - 9.2]} />
 
-    <BasketballCourt position={[position[0] - 48, position[1] - 0.09, position[2] - 11]} rotation={[0, 0, 0]} scale={0.7}/>
+    <BasketballCourt receiveShadow position={[position[0] - 48, position[1] - 0.09, position[2] - 11]} rotation={[0, 0, 0]} scale={0.7}/>
 
-    <Metalfence position={[position[0] - 44.5, position[1] - 0.09, position[2]-0.7]} rotation={[0, 0, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 48, position[1] - 0.09, position[2]-0.7]} rotation={[0, 0, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 51.5, position[1] - 0.09, position[2]-0.7]} rotation={[0, 0, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 44.5, position[1] - 0.09, position[2]-21]} rotation={[0, 0, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 48, position[1] - 0.09, position[2]-21]} rotation={[0, 0, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 51.5, position[1] - 0.09, position[2]-21]} rotation={[0, 0, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 44.5, position[1] - 0.09, position[2]-0.7]} rotation={[0, 0, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 48, position[1] - 0.09, position[2]-0.7]} rotation={[0, 0, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 51.5, position[1] - 0.09, position[2]-0.7]} rotation={[0, 0, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 44.5, position[1] - 0.09, position[2]-21]} rotation={[0, 0, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 48, position[1] - 0.09, position[2]-21]} rotation={[0, 0, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 51.5, position[1] - 0.09, position[2]-21]} rotation={[0, 0, 0]} scale={0.5}/>
 
-    <Metalfence position={[position[0] - 42.7, position[1] - 0.09, position[2]-16.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 42.7, position[1] - 0.09, position[2]-13]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 42.7, position[1] - 0.09, position[2]-9.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 42.7, position[1] - 0.09, position[2]-6]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 42.7, position[1] - 0.09, position[2]-2.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 42.7, position[1] - 0.09, position[2]-16.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 42.7, position[1] - 0.09, position[2]-13]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 42.7, position[1] - 0.09, position[2]-9.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 42.7, position[1] - 0.09, position[2]-6]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 42.7, position[1] - 0.09, position[2]-2.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
 
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-19.2]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-15.7]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-12.2]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-8.7]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
-    <Metalfence position={[position[0] - 53.5, position[1] - 0.09, position[2]-2.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 53.5, position[1] - 0.09, position[2]-19.2]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 53.5, position[1] - 0.09, position[2]-15.7]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 53.5, position[1] - 0.09, position[2]-12.2]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 53.5, position[1] - 0.09, position[2]-8.7]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
+    <Metalfence castShadow position={[position[0] - 53.5, position[1] - 0.09, position[2]-2.5]} rotation={[0, Math.PI / 2, 0]} scale={0.5}/>
 
     {/* 보더라인 */}
     <Border_1 position={[position[0] + 3.1, position[1]-0.14, position[2] + 6]} rotation={[0, Math.PI / 2, 0]} />

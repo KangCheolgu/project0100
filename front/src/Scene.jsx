@@ -270,8 +270,8 @@ export default function Scene() {
               shadow-camera-left={-120}
               shadow-camera-right={100}
               shadow-camera-far={100}
-              shadow-mapSize-height={512*6}
-              shadow-mapSize-width={512*6}
+              shadow-mapSize-height={512*4}
+              shadow-mapSize-width={512*4}
               position={[50, 80, -50]}
               color="#ffffff"
             />
