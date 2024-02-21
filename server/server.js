@@ -247,10 +247,12 @@ io.on('connection', (socket) => {
 
     //게임이 끝나고 로비로 갈때
     socket.on("leaveAndGoToLobby", () => {
+      // 노래끔
+      io.to(roomName).emit("turnOffBgm")
       // 현재 방 정보를 가져오기 위해 플레이어의 방 이름을 확인하고 방에서 나가기
       socket.leave(roomName);
       console.log(`${socket.id} left room ${roomName}`);
-  
+      
       // 해당 방 정보를 삭제하고 방 목록에서 제거
       if (rooms[roomName])
         delete rooms[roomName];

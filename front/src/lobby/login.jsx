@@ -16,6 +16,8 @@ import * as THREE from 'three';
 import Sand from '../Sand';
 import { Background } from '../components/Background';
 import ZerobackTitle from "../static/button/title.png"
+import LoginBgmSound from '../sound/LoginSound';
+import ButtonSound from '../sound/ButtonSound';;
 
 // const CURRENT_URL = "http://localhost:5000"
 const CURRENT_URL = "https://project0100.shop"
@@ -43,7 +45,11 @@ function LoginPage() {
     return <CameraShake maxYaw={0.01} maxPitch={0.01} maxRoll={0.01} yawFrequency={0.5} pitchFrequency={0.5} rollFrequency={0.4} />
   }
 
-  return (<>
+  return (
+  <>
+  <LoginBgmSound/>
+  <ButtonSound />
+
   <Container style={{ position: 'relative' }}>
       <div className={styles.title} md={2}>
             <img src={ZerobackTitle} alt='title img' width={600}/>
@@ -58,7 +64,7 @@ function LoginPage() {
             <Col md="2"></Col>
             <Col>
               <div>
-              <button className={styles.google_btn} onClick={signInWithGoogle}>
+              <button className={`${styles.google_btn} buttonSound`} onClick={signInWithGoogle}>
                 <img src={googleButton} typeof='button' alt="google button Img" width={25} height={25}/>
                 <span>Google 로그인</span>
               </button>
@@ -67,7 +73,7 @@ function LoginPage() {
             <Col md="2"></Col>
             <Col>
               <div>
-              <button className={styles.naver_btn} onClick={signInWithNaver}>
+              <button className={`${styles.naver_btn}  buttonSound`} onClick={signInWithNaver}>
                 <img src={naverButton} typeof='button' alt="naver button Img" width={30} height={30}/>
                 <span>네이버 로그인</span>
               </button>

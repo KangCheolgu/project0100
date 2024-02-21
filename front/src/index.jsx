@@ -11,9 +11,11 @@ import { LobbyPage } from './lobby/lobby';
 import RoomPage from './lobby/waitingroom';
 import AuthGoogle from './lobby/authgoogle';
 import AuthNaver from './lobby/authnaver';
-// 2024 02 21 버전 
+import LobbyBgmSound from './sound/LobbySound';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <>
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<LoginPage />} />
@@ -24,4 +26,5 @@ root.render(
       <Route path="/auth/naver/redirect" element={<AuthNaver />} /> 
     </Routes>
   </BrowserRouter>
+  </>
 );
