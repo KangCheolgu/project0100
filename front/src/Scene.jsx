@@ -236,8 +236,9 @@ export default function Scene() {
       colorB: "#55ab8f",
     });
   }, []);
+
+
   
-  const [loadingEnd, setLoadingEnd] = useState(false)
   const targetObject = new THREE.Object3D();
   targetObject.position.set(0, 0, -50);
 
@@ -263,7 +264,6 @@ export default function Scene() {
               
               {/*<Light/>*/}
               
-              
               <directionalLight
                 castShadow
                 targetObject ={targetObject}
@@ -277,7 +277,7 @@ export default function Scene() {
                 shadow-mapSize-width={512}
                 position={[50, 80, -50]}
                 color="#ffffff"
-      />
+              />
               <OrbitControls />
               <Stats/>
               <Physics gravity={[0, -3, 0]}>

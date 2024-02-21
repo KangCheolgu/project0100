@@ -16,8 +16,11 @@ import { Physics, Debug } from "@react-three/cannon";
 import * as THREE from 'three';
 import Sand from '../Sand';
 import { Background } from '../components/Background';
-export const socket = io("http://localhost:5000/")
+import LobbyBgmSound from '../sound/LobbySound';
+import ButtonSound from '../sound/ButtonSound';;
 
+
+export const socket = io("http://localhost:5000/")
 // export const socket = io("https://project0100.shop")
 
 const CURRENT_URL = "http://localhost:5000"
@@ -143,6 +146,8 @@ export const LobbyPage = () => {
   }
 
   return (<>
+    <LobbyBgmSound/>
+    <ButtonSound />
     <Container className={styles.lobby_container}>
       {/* 환영합니다. */}
       <Row className={styles.welcome}>
@@ -211,7 +216,7 @@ export const LobbyPage = () => {
                       </Row>
                       <Row className={styles.players_room} >
                         <Col>
-                          <button className={styles.join_btn}>
+                          <button className={`${styles.join_btn} buttonSound`}>
                             <p className={styles.btnText}> 문대경 님의 방</p>
                             <div className={styles.btnTwo}>
                               <p className={styles.btnText2}>GO!</p>
@@ -224,7 +229,7 @@ export const LobbyPage = () => {
                     roomList.length !== 0 ? roomList.map((room, index) => (
                       <Row className={styles.players_room} >
                         <Col>
-                          <button className={styles.join_btn}
+                          <button className={`${styles.join_btn} buttonSound`}
                           onClick={() => joinRoom({
                             userEmail: room.roomName,
                             userName: userName,
@@ -233,7 +238,7 @@ export const LobbyPage = () => {
                           key={room.roomName}>
                             <p className={styles.btnText}>{room.roomHost} 님의 방</p>
                             <div className={styles.btnTwo}>
-                              <p className={styles.btnText2}>GO!</p>
+                              <p className={styles.btText2}>GO!</p>
                             </div>
                           </button>
                         </Col>
@@ -251,7 +256,7 @@ export const LobbyPage = () => {
                 </Col>
               </div>
               <div className={styles.create_room_area}>
-                <button className={styles.create_room} onClick={createRoom}>
+                <button className={`${styles.create_room} buttonSound`} onClick={createRoom}>
                   </button>
               </div>
             </Col> 
