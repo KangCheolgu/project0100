@@ -209,6 +209,29 @@ body,
   z-index: 9999; /* 다른 요소들보다 위로 올리기 */
 }
 
+.finallap{
+    display: 'flex';
+    text-align: center;
+    margin-top: 90px;
+}
+
+.finallap img{
+    animation: flicker 0.5s infinite linear;
+}
+
+@keyframes flicker{
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
 
 @font-face {
   font-family: 'Aptos';
