@@ -147,8 +147,11 @@ export const LobbyPage = () => {
       {/* 환영합니다. */}
       <Row className={styles.welcome}>
         <Col md="1"></Col>
-        <Col>{userName} 님 환영합니다. &nbsp;&nbsp;&nbsp; 
-          <Button onClick={logOut}>로그아웃</Button></Col>
+        <Col>
+          <span className={styles.lobby_name}>LOBBY</span>
+          {userName} 님 환영합니다. &nbsp;&nbsp;&nbsp; 
+          <button className={styles.logout_btn} onClick={logOut}></button></Col>
+
         <Col md="1"></Col>
       </Row>
       {/* 겉에 큰 박스 */}
@@ -158,6 +161,21 @@ export const LobbyPage = () => {
             <Col className={styles.left_area}>
               <div className={styles.text}><h4>RANKING</h4></div>
               <div className={styles.ranking_area}>
+                  <Row className={styles.rank_row_1}>
+                    <Col className={styles.rank_col_1} md={3}>1st</Col>
+                    <Col className={styles.rank_col_2} md={4}>SB choi</Col>
+                    <Col className={styles.rank_col_3}>2:12:000</Col>
+                  </Row>
+                  <Row className={styles.rank_row}>
+                    <Col className={styles.rank_col_1} md={3}>2nd</Col>
+                    <Col className={styles.rank_col_2} md={4}>김김김</Col>
+                    <Col className={styles.rank_col_3}>2:13:333</Col>
+                  </Row>
+                  <Row className={styles.rank_row}>
+                    <Col className={styles.rank_col_1} md={3}>3rd</Col>
+                    <Col className={styles.rank_col_2} md={4}>밤양갱</Col>
+                    <Col className={styles.rank_col_3}>2:14:333</Col>
+                  </Row>
               </div>
               <div className={styles.text}><h4>CONTROL</h4></div>
               <div className={styles.control_area}>
@@ -181,47 +199,60 @@ export const LobbyPage = () => {
               <div className={styles.text}><h4>ROOM</h4></div>
               <div className={styles.room_area}>
                 <Col>
-                  {
-                    roomList ? roomList.map((room, index) => (
+                <Row className={styles.players_room} >
+                        <Col>
+                          <button className={styles.join_btn}>
+                            <p className={styles.btnText}> 김현수 님의 방</p>
+                            <div className={styles.btnTwo}>
+                              <p className={styles.btnText2}>GO!</p>
+                            </div>
+                          </button>
+                        </Col>
+                      </Row>
                       <Row className={styles.players_room} >
                         <Col>
-                          <Button className={styles.join_btn}
+                          <button className={styles.join_btn}>
+                            <p className={styles.btnText}> 문대경 님의 방</p>
+                            <div className={styles.btnTwo}>
+                              <p className={styles.btnText2}>GO!</p>
+                            </div>
+                          </button>
+                        </Col>
+                      </Row>
+                      
+                  {
+                    roomList.length !== 0 ? roomList.map((room, index) => (
+                      <Row className={styles.players_room} >
+                        <Col>
+                          <button className={styles.join_btn}
                           onClick={() => joinRoom({
                             userEmail: room.roomName,
                             userName: userName,
                             type:0
                           })}
                           key={room.roomName}>
-                            <span>{room.roomHost} 님의 방</span>
-                          </Button>
+                            <p className={styles.btnText}>{room.roomHost} 님의 방</p>
+                            <div className={styles.btnTwo}>
+                              <p className={styles.btnText2}>GO!</p>
+                            </div>
+                          </button>
                         </Col>
-                        {/* <Col md="3" style={{height:"100%", padding:"0"}}>
-                          <Button 
-                            onClick={() => spectateRoom({
-                              userEmail: room.roomName,
-                              userName: userName,
-                              type:1
-                            })}
-                            style={{width:"100%", height:"100%"}} 
-                            key={room.roomName}>
-                              <span style={{fontSize:"13px"}}>관전</span>
-                          </Button>
-                        </Col> */}
                       </Row>
                     )) : (
-                      <Row style={{height:"50px", marginTop:"10px"}}>
-                        <Col style={{height:"100%"}}>
-                          현재 방이 없습니다!
-                        </Col>
-                      </Row>
+                      <>
+                       {/* <Row style={{height:"50px", marginTop:"10px"}}>
+                         <Col style={{height:"100%"}}>
+                           현재 방이 없습니다!
+                         </Col>
+                       </Row> */}
+                      </>
                     )
                   }
                 </Col>
               </div>
               <div className={styles.create_room_area}>
-                <Button className={styles.create_room} onClick={createRoom}>
-                    방 만들기
-                  </Button>
+                <button className={styles.create_room} onClick={createRoom}>
+                  </button>
               </div>
             </Col> 
           </Row>

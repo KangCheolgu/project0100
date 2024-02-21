@@ -21,7 +21,7 @@ import { calculateSpeed } from "./utils/speedCalculator.jsx";
 import useGame from "./stores/useGame.jsx";
 import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
-import { Minimap } from "./Minimap.jsx";
+import Minimap from "./utils/Minimap.jsx";
 import axios from "axios";
 
 let checkPointIndex = 0
@@ -366,7 +366,7 @@ const Car = ({ cameraGroup, ...props }) => {
         };
         socket.emit("currentState", currentState);
       }
-    }, 50);
+    }, 30);
   };
 
   return (<>
@@ -382,10 +382,11 @@ const Car = ({ cameraGroup, ...props }) => {
       <Wheel wheelRef={wheels[2]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[3]} radius={wheelRadius} />
       <Timer />
-       <Html>
+         <Html>
         <div style={{position: 'fixed', width: window.screen.width/2 , height: window.screen.height/2 }}>
           <Needle socket={socket} props={props} currentSpeed={currentSpeed * 2} />
           <Speedometer socket={socket} props={props} currentSpeed={currentSpeed * 2} />
+          <Minimap socket={socket} props={props} chassisBody={chassisBody} />
         </div>
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>

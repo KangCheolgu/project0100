@@ -41,7 +41,8 @@ function Speedometer({ socket, props, currentSpeed }) {
             right: rightpos,
             color: color,
             fontSize: '90px',
-            fontFamily: 'Aptos, sans-serif', // Aptos 폰트 적용
+            fontFamily: 'RacingFont, sans-serif', // Aptos 폰트 적용
+            textShadow: '-2px 0px black, 0px 2px black, 2px 0px black, 0px -2px black'
           }}
         >
           {currentSpeed}
@@ -52,8 +53,9 @@ function Speedometer({ socket, props, currentSpeed }) {
             bottom: '3%',
             right: '8%',
             color: color,
-            fontSize: '30px',
-            fontFamily: 'Aptos-italic, sans-serif', // Aptos 폰트 적용
+            fontSize: '40px',
+            fontFamily: 'RacingFont, sans-serif', // Aptos 폰트 적용
+            textShadow: '-2px 0px black, 0px 2px black, 2px 0px black, 0px -2px black'
           }}
         >
           KMH
