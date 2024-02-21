@@ -36,7 +36,7 @@ router.get('/google', (req, res) => {
 });
 
 router.post('/google/gettoken', async (req, res) => {
-  // console.log("콘솔로그", req.body);
+  console.log("콘솔로그", req.body);
   const resp = await axios.post('https://oauth2.googleapis.com/token', {
     // x-www-form-urlencoded(body)
     code: req.body.code,
