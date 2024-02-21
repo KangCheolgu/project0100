@@ -25,7 +25,8 @@ export const useWheels = (width, height, front, radius) => {
         customSlidingRotationalSpeed: -30, // 사용자 정의 슬라이딩 회전 속도 (라디안/초, 음수 값은 반시계 방향 회전)
         useCustomSlidingRotationalSpeed: true, // 사용자 정의 슬라이딩 회전 속도 사용 여부
         sleepSpeedLimit: 1, // 슬립 상태에서 자동으로 차량을 꺼냄 (낮을수록 민감, 높을수록 허용)
-    };
+        
+    };  
 
     const wheelInfos = [
         {
@@ -53,6 +54,7 @@ export const useWheels = (width, height, front, radius) => {
     const wheelFunc = () => ({
         collisionFilterGroup: 0,
         mass: 50,
+        linearDamping:1000,
         shapes: [
             {
             args: [wheelInfo.radius, wheelInfo.radius, 0.1, 16],

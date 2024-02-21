@@ -192,7 +192,7 @@ export default function RoomPage() {
         <Col></Col>  
             </Row>
     </Container>
-    <Canvas style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
+    {/* <Canvas style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
       <color attach="background" args={["#abdbe3"]} />
       <PerspectiveCamera position={[20, 50, 30]} fov={75} makeDefault lookAt={targetObject} rotation={[-Math.PI/2, 0, Math.PI]}/>
       <ambientLight intensity={2} color="#fff7e6"/>
@@ -203,7 +203,7 @@ export default function RoomPage() {
         <Map2 position={[0, 0, -94]}/>
       </Physics>
       <Rig />
-    </Canvas>
+    </Canvas> */}
   </>
   )
 }
