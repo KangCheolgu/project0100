@@ -96,17 +96,17 @@ export const LobbyPage = () => {
     }
   }
   // 기록이 작은 순으로 3개 가져옴
-  // const getRankingList = async () => {
-  //   try {
-  //       const response = await axios.get(CURRENT_URL + '/api/database/getrankinglist');
-  //       // 서버로부터 받은 랭킹 목록을 반환합니다.
-  //       console.log("response");
-  //       return response.data;
-  //   } catch (error) {
-  //       console.error('Error fetching ranking list:', error);
-  //       return []; // 에러 발생 시 빈 배열 반환
-  //   }
-  // };
+  const getRankingList = async () => {
+    try {
+        const response = await axios.get(CURRENT_URL + '/api/database/getrankinglist');
+        // 서버로부터 받은 랭킹 목록을 반환합니다.
+        console.log("response");
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching ranking list:', error);
+        return []; // 에러 발생 시 빈 배열 반환
+    }
+  };
 
   useEffect(() => {
     // 받은 방 리스트
