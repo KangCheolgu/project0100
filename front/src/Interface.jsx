@@ -10,6 +10,8 @@ import { socket } from "./lobby/lobby.jsx";
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import finallap from './static/button/finallap.png'
+import {Container, Row, Col} from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Interface(){
     const navigate = useNavigate()
@@ -25,6 +27,8 @@ export default function Interface(){
     const rightward = useKeyboardControls((state) => state.rightward);
     const shift = useKeyboardControls((state) => state.shift);
     const space = useKeyboardControls((state) => state.space);
+    const reposition = useKeyboardControls((state) => state.reposition);
+    const horn = useKeyboardControls((state) => state.horn);
     const restart = useGame((state) => state.restart);
     const phase = useGame((state) => state.phase);
     const recordTime = useGame((state) => state.recordTime);
@@ -216,22 +220,99 @@ export default function Interface(){
           </div>}
 
         {/* 플레이어 한테만 보이는 부분 */}
-        {!isSpectator && (
-              <div className="controls">
-              <div className="raw">
-                  <div className={`key ${forward ? 'active' : '' }`}></div>
-              </div>
-              <div className="raw">
-                  <div className={`key ${leftward ? 'active' : '' }`}></div>
-                  <div className={`key ${backward ? 'active' : '' }`}></div>
-                  <div className={`key ${rightward ? 'active' : '' }`}></div>
-              </div>
-              <div className="raw">
-                  <div className={`key ${shift ? 'active' : ''} large`}></div> {/* shift 키에 large 클래스 추가 */}
-                  <div className={`key ${space ? 'active' : ''} large`}></div> {/* 스페이스 바에 large 클래스 추가 */}
-              </div>
-        </div>
-        )}
+        <>
+          <Container className="controls">
+            <Row>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+
+              <Col>
+                <div className="raw">
+                    <div className={`key ${shift ? 'active' : ''} middle`}></div> {/* shift 키에 large 클래스 추가 */}
+                </div>
+              </Col>
+              <Col md="2">
+                <div className="raw">
+                    <div className={`key ${forward ? 'active' : '' }`}></div>
+                </div>
+              </Col>
+              <Col >
+                <div className="raw">
+                    <div className={`key ${reposition ? 'active' : ''}`}></div> {/* 스페이스 바에 large 클래스 추가 */}
+                </div>
+              </Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+
+            </Row>
+            <Row>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+
+              <Col>
+                <div className="raw">
+                    <div className={`key ${space ? 'active' : ''} large`}></div> {/* 스페이스 바에 large 클래스 추가 */}
+                </div>
+              </Col>
+              <Col className="raw" md="2">
+                    <div className={`key ${leftward ? 'active' : '' }`}></div>
+                    <div className={`key ${backward ? 'active' : '' }`}></div>
+                    <div className={`key ${rightward ? 'active' : '' }`}></div>
+              </Col>
+              <Col >
+                <div className="raw">
+                    <div className={`key ${horn ? 'active' : ''}`}></div> {/* 스페이스 바에 large 클래스 추가 */}
+                </div>
+              </Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+              <Col></Col>
+
+            </Row>
+          </Container>
+
+        </>
         {/* Controls */}
       </>
       }
