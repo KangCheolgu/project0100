@@ -29,7 +29,6 @@ let checkPointIndex = 0
 let lapseCheck = [false, false]
 
 const Car = ({ cameraGroup, ...props }) => {
-  const navigate = useNavigate();
     // 이전 등수 현재등수
   const [previousRank, setPreviousRank] = useState(1);
   const [currentRank, setCurrentRank] = useState(1);

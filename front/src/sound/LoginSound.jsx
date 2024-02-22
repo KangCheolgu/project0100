@@ -20,14 +20,14 @@ const LoginBgmSound = () => {
 
         // 배경 음악이 현재 재생 중이 아닌 경우에만 재생합니다.
         if (!bgmRef.current.playing() && location.pathname === '/login') {
-            console.log("노래재생");
+            // console.log("노래재생");
             LobbyBGMEffect.play();
         }
 
         return () => {
             // '/gameroom'으로 이동할 때 배경 음악을 중지합니다.
             if (location.pathname !== '/login' && bgmRef.current) {
-                console.log("노래종료");
+                // console.log("노래종료");
                 bgmRef.current.stop();
             }
         };
