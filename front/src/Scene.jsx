@@ -70,9 +70,6 @@ export default function Scene() {
     }
   },[count])
 
-  
-  // 카운트 다운 관련 끝
-
 /////////// 핑관련 변수들
   const [averagePing, setAveragePing] = useState(null);
   const [opponentPing, setOpponentPing] = useState(null);
@@ -233,9 +230,6 @@ export default function Scene() {
     <>
       <Interface />
       <BgmSound />
-      {/* {!loadingEnd && 
-        // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
-      } */}
       <Canvas shadows >
         <Suspense fallback={null}>
           <Preload all />
@@ -248,9 +242,6 @@ export default function Scene() {
               <Background backgroundColors={backgroundColors}/>
               <Sand/>
               <ambientLight intensity={2} color="#fff7e6"/>
-              
-              {/*<Light/>*/}
-              
               
               <directionalLight
                 castShadow
@@ -284,11 +275,8 @@ export default function Scene() {
                   {/* 장애물 배치 */}
                   <SpinObstacle position={[25,0.5,-28]} offset={3}/>
                   <SpinObstacle position={[27,0.5,-97]} offset={4}/>
-                  {/* <LeftAndRightObstacle/> */}
-                  {/* <ShutterObstacle/> */}
                   <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
                   <CarGreenObstacle/>
-                  {/* <MotorObstacle/> */}
                   <CrabObstacle position ={[7,-0.03,0]} offset={32} />
                   <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
                   <CrabObstacle position={[0,-0.03,0]} offset={38}/>
@@ -296,12 +284,7 @@ export default function Scene() {
                   )}
               {/*</Debug>*/}
               </Physics>
-              {/* {spectators.map((spectator, index) => (
-                <Spectator id={spectator.id} key={index} position={spectator.position} />
-              ))} */}
-            
             </>
-              {/*<BakeShadows/>*/}
             </Bvh>    
           </Suspense>
       </Canvas>

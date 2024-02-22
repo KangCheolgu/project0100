@@ -4,7 +4,6 @@ import { Html } from '@react-three/drei'
 import { useWheels } from "./utils/useWheels";
 import { useVehicleControls } from "./utils/useVehicleControls";
 import { Vector3 } from "three";
-// import { socket } from "./Scene.jsx";
 import { socket } from "./lobby/lobby.jsx";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
@@ -13,7 +12,7 @@ import { Wheel } from "./components/Wheel.jsx";
 import { CheckPoint } from "./utils/CheckPoint.jsx";
 import collisionSound from './sound/car-hit/car-hit-6.wav';
 import klaxonSoundFile from './sound/car-horn/car-horn-1.wav';
-import engineSoundFile from './sound/engines/1/low_on.wav';
+import engineSoundFile from './sound/engines/1/enginesound.wav';
 import { Speed } from "./Speeds.jsx";
 import FollowCamera from "./utils/FollowCamera.jsx";
 import { CollisionHandler } from "./CollisionHandler.jsx";
@@ -21,9 +20,8 @@ import { calculateSpeed } from "./utils/speedCalculator.jsx";
 import useGame from "./stores/useGame.jsx";
 import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
+import EngineSound from "./utils/EngineSound.jsx"
 import Minimap from "./utils/Minimap.jsx";
-import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 
 let checkPointIndex = 0
 let lapseCheck = [false, false]
@@ -100,35 +98,35 @@ const Car = ({ cameraGroup, ...props }) => {
   };
 
   // 엔진 소리 관리
-  const engineSoundRef = useRef(new Audio(engineSoundFile));
-  useEffect(() => {
-    engineSoundRef.current.loop = true;
-    engineSoundRef.current.volume = 0.4;
-    engineSoundRef.current.play().catch(error => console.error("엔진 소리 재생 실패:", error));
+  // const engineSoundRef = useRef(new Audio(engineSoundFile));
+  // useEffect(() => {
+  //   engineSoundRef.current.loop = true;
+  //   engineSoundRef.current.volume = 0.4;
+  //   engineSoundRef.current.play().catch(error => console.error("엔진 소리 재생 실패:", error));
 
-    const handleWindowBlur = () => {
-        if (engineSoundRef.current) {
-            engineSoundRef.current.pause();
-        }
-    };
+  //   const handleWindowBlur = () => {
+  //       if (engineSoundRef.current) {
+  //           engineSoundRef.current.pause();
+  //       }
+  //   };
 
-    const handleWindowFocus = () => {
-        if (window.location.pathname === '/gameroom') {
-            engineSoundRef.current.play();
-        }
-    };
+  //   const handleWindowFocus = () => {
+  //       if (window.location.pathname === '/gameroom') {
+  //           engineSoundRef.current.play();
+  //       }
+  //   };
 
-    window.addEventListener('blur', handleWindowBlur);
-    window.addEventListener('focus', handleWindowFocus);
+  //   window.addEventListener('blur', handleWindowBlur);
+  //   window.addEventListener('focus', handleWindowFocus);
 
-    return () => {
-        window.removeEventListener('blur', handleWindowBlur);
-        window.removeEventListener('focus', handleWindowFocus);
-        if (engineSoundRef.current) {
-            engineSoundRef.current.pause();
-        }
-    };
-  }, []);
+  //   return () => {
+  //       window.removeEventListener('blur', handleWindowBlur);
+  //       window.removeEventListener('focus', handleWindowFocus);
+  //       if (engineSoundRef.current) {
+  //           engineSoundRef.current.pause();
+  //       }
+  //   };
+  // }, []);
 
   // 속도계 
   const [currentSpeed, setCurrentSpeed] = useState(0);
@@ -414,10 +412,9 @@ const Car = ({ cameraGroup, ...props }) => {
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
-      {/* <Minimap chassisBody={chassisBody} socket={socket}  vehicleId={props.id}/> */}
+      <EngineSound currentSpeed={currentSpeed} engineSoundFile={engineSoundFile} />
     </group>
   </>
-
   )
 }
 const Car_App = (props) => {
