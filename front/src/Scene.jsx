@@ -108,10 +108,11 @@ export default function Scene() {
       //핑체크 interval 중단
       clearInterval(pingCheck); 
       // 평균 핑 계산 ms이니까 소수점 둘째자리면 충분하다고 생각
-      const average = parseFloat((totalDuration / cnt).toFixed(2));
-      setAveragePing(average);
-      socket.off("ping");
     }, 2000);
+
+    const average = parseFloat((totalDuration / cnt).toFixed(2));
+    setAveragePing(average);
+    socket.off("ping");
 
     // 핑타임아웃 중단
     return () => (clearTimeout(pingTImeOut))
@@ -132,22 +133,22 @@ export default function Scene() {
     }
     
     // 내가 설정한 최대 인원 숫자와 현재 인원이 같으면 핑체크 시작
-    socket.on("clientCount", () => {
+    socket.once("clientCount", () => {
         console.log("클라이언트 카운트다운");
         const pingCheck = setTimeout(() => {
           startPingCheck()
-        }, 4000)
+        }, 10000)
 
         return () => clearTimeout(pingCheck)
     })
 
-    socket.on("opponentPing", (pingData)=>{
+    socket.once("opponentPing", (pingData)=>{
       console.log("oppo ping :", pingData.ping);
       setOpponentPing(pingData.ping)
     })
 
     //유저 업데이트
-    socket.on("updatePlayers", onPlayers)
+    socket.once("updatePlayers", onPlayers)
 
     return (() => {
       socket.off("updatePlayers", onPlayers);
@@ -159,7 +160,7 @@ export default function Scene() {
   useEffect(() => {
 
     // 스타트 시그널을 받으면 
-    socket.on("startSignal", (allPings)=>{
+    socket.once("startSignal", (allPings)=>{
       console.log("스타트 시그널");
       // 상대핑의 평균을 구하여 
       const allPingsArray = Object.values(allPings);
@@ -168,7 +169,7 @@ export default function Scene() {
       
       const startSignal = setTimeout(() => {
         if(count > -3) startCountdown()
-      }, opponentPingData.ping/2)
+      }, opponentPingData.ping)
 
       return () => clearTimeout(startSignal)
     })
@@ -236,9 +237,8 @@ export default function Scene() {
       colorB: "#55ab8f",
     });
   }, []);
-
-
   
+  const [loadingEnd, setLoadingEnd] = useState(false)
   const targetObject = new THREE.Object3D();
   targetObject.position.set(0, 0, -50);
 
@@ -250,7 +250,6 @@ export default function Scene() {
         // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
       } */}
       <Canvas shadows >
-        <Suspense fallback={null}>
           <Preload all />
           <AdaptiveDpr pixelated />
           <Bvh>
@@ -264,10 +263,11 @@ export default function Scene() {
               
               {/*<Light/>*/}
               
+              
               <directionalLight
                 castShadow
                 targetObject ={targetObject}
-                intensity={1}
+                intensity={4}
                 shadow-camera-top={100}
                 shadow-camera-bottom={-100}
                 shadow-camera-left={-120}
@@ -277,16 +277,17 @@ export default function Scene() {
                 shadow-mapSize-width={512}
                 position={[50, 80, -50]}
                 color="#ffffff"
-              />
+      />
               <OrbitControls />
               <Stats/>
               <Physics gravity={[0, -3, 0]}>
                 {/*<Debug>*/}
+                  <Suspense fallback={<LoadingPage />}>
                     <ColliderWall/>
                     <Map1 position={[0, 0, 0]}/>
                     <Map2 position={[0, 0, -94]}/>
                     <Wall />
-                  
+                  </Suspense>
                   {
                     players.map((player, index) => (
                       <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
@@ -317,7 +318,7 @@ export default function Scene() {
             </>
               <BakeShadows/>
             </Bvh>          
-          </Suspense>
+          
       </Canvas>
     </>
   );

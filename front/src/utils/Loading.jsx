@@ -15,9 +15,6 @@ const LoadingPage = ({started, onStarted}) => {
           <div style={{fontWeight:"bold", fontSize:"30px"}}> {progress.toFixed(2)} Loading . . .</div>
           <img src={Spinner} alt="로딩" />
       </div>
-      <button className="loadingScreen_button" onClick={onStarted} disabled={progress < 100}>
-        로딩완료
-      </button>
     </div>
   );
 };
