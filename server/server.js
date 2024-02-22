@@ -186,13 +186,13 @@ io.on('connection', (socket) => {
             ping: averagePing,
         };
       
-        console.log(rooms[roomName].allPings);
-        console.log("isStartSignalSent : ", isStartSignalSent);
+        // console.log(rooms[roomName].allPings);
+        // console.log("isStartSignalSent : ", isStartSignalSent);
         //상대방에게 핑데이터 보냄 이는 Scene.jsx 에서 받을거임
         socket.broadcast.to(roomName).emit("opponentPing", rooms[roomName].allPings[socket.id]);
         // 모든 유저가 상대에게 핑데이터를 보냈다면 스타트 시그널을 보냄
         // 이는 Scene.jsx 에서 받을거임 
-        console.log(Object.keys(rooms[roomName].allPings).length); 
+        // console.log(Object.keys(rooms[roomName].allPings).length); 
         if (Object.keys(rooms[roomName].allPings).length === numClients && isStartSignalSent === false) {
           isStartSignalSent = true
           io.to(roomName).emit("startSignal", rooms[roomName].allPings);
@@ -211,7 +211,7 @@ io.on('connection', (socket) => {
 
       // 카메라 컨트롤 구역
       socket.on("prevCameraButton", () => {
-        console.log('prev');
+        // console.log('prev');
         io.to(roomName).emit("prevCameraMove")
       })
       socket.on("1pCameraButton", () => {
@@ -221,7 +221,7 @@ io.on('connection', (socket) => {
         io.to(roomName).emit("2pCameraMove")
       })
       socket.on("nextCameraButton", () => {
-        console.log('next');
+        // console.log('next');
         io.to(roomName).emit("nextCameraMove")
       })
 
@@ -247,10 +247,12 @@ io.on('connection', (socket) => {
 
     //게임이 끝나고 로비로 갈때
     socket.on("leaveAndGoToLobby", () => {
+      // 노래끔
+      io.to(roomName).emit("turnOffBgm")
       // 현재 방 정보를 가져오기 위해 플레이어의 방 이름을 확인하고 방에서 나가기
       socket.leave(roomName);
       console.log(`${socket.id} left room ${roomName}`);
-  
+      
       // 해당 방 정보를 삭제하고 방 목록에서 제거
       if (rooms[roomName])
         delete rooms[roomName];

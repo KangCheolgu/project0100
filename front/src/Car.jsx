@@ -11,7 +11,7 @@ import { useFrame } from "@react-three/fiber";
 import { CarModel } from "./components/CarModel.jsx";
 import { Wheel } from "./components/Wheel.jsx";
 import { CheckPoint } from "./utils/CheckPoint.jsx";
-import collisionSound from './sound/car-hit/car-hit-2.wav';
+import collisionSound from './sound/car-hit/car-hit-6.wav';
 import klaxonSoundFile from './sound/car-horn/car-horn-1.wav';
 import engineSoundFile from './sound/engines/1/low_on.wav';
 import { Speed } from "./Speeds.jsx";
@@ -23,6 +23,7 @@ import Speedometer from "./utils/Speedometer.jsx";
 import Needle from "./utils/Needle_v1.jsx";
 import Minimap from "./utils/Minimap.jsx";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 let checkPointIndex = 0
 let lapseCheck = [false, false]
@@ -87,9 +88,6 @@ const Car = ({ cameraGroup, ...props }) => {
     useRef(null),
   );
 
-  // brake lights
-  // const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
-
   // 클락션 소리 /////////////////////////////////////////////////////////
   const klaxonDuration = 500; // 1초
   ///////////////////////////////////////////////////////////////////////
@@ -107,6 +105,29 @@ const Car = ({ cameraGroup, ...props }) => {
     engineSoundRef.current.loop = true;
     engineSoundRef.current.volume = 0.4;
     engineSoundRef.current.play().catch(error => console.error("엔진 소리 재생 실패:", error));
+
+    const handleWindowBlur = () => {
+        if (engineSoundRef.current) {
+            engineSoundRef.current.pause();
+        }
+    };
+
+    const handleWindowFocus = () => {
+        if (window.location.pathname === '/gameroom') {
+            engineSoundRef.current.play();
+        }
+    };
+
+    window.addEventListener('blur', handleWindowBlur);
+    window.addEventListener('focus', handleWindowFocus);
+
+    return () => {
+        window.removeEventListener('blur', handleWindowBlur);
+        window.removeEventListener('focus', handleWindowFocus);
+        if (engineSoundRef.current) {
+            engineSoundRef.current.pause();
+        }
+    };
   }, []);
 
   // 속도계 
@@ -115,7 +136,7 @@ const Car = ({ cameraGroup, ...props }) => {
   const lastPosition = useRef(new Vector3());
   const lastUpdateTime = useRef(Date.now());
 
-  useVehicleControls(vehicleApi, chassisApi, props.id, props.state, klaxonDuration, klaxonSoundFile);
+  const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, chassisBody, checkPointIndex, props.id, props.state, klaxonDuration, klaxonSoundFile);
 
   useEffect(() => {
     if (socket.id === props.id) {
@@ -153,14 +174,6 @@ const Car = ({ cameraGroup, ...props }) => {
         // 부스터 이펙트 위치 및 방향 지정.
       cameraGroup.current.quaternion.copy(bodyRotation);
       cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
-
-      // if (checkPointIndex === (CheckPoint.length) + 1 && lapseCheck[0] === false) {
-      //   around()
-      //   lapseCheck[0] = true
-      // }
-      // if (checkPointIndex === (CheckPoint.length) * 2 + 1) {
-      //   end()
-      // }
         
       if (checkPointIndex ===  CheckPoint.length + 1 && lapseCheck[0] === false) {
         lapseCheck[0] = true
@@ -171,6 +184,16 @@ const Car = ({ cameraGroup, ...props }) => {
         end()
         useGame.setState({ winner: socket.id });
       }
+
+      // if (checkPointIndex ===  2 && lapseCheck[0] === false) {
+      //   lapseCheck[0] = true
+      //   around()
+      // }
+      // if (checkPointIndex ===  3 && lapseCheck[1] === false) {
+      //   lapseCheck[1] = true
+      //   end()
+      //   useGame.setState({ winner: socket.id });
+      // }
 
       // 체크 포인트 인덱스 갱신 
       // 지정된 위치를 지나면 checkpointIndex를 올림
@@ -375,7 +398,7 @@ const Car = ({ cameraGroup, ...props }) => {
     </group>
     <group ref={vehicle} castShadow receiveShadow>
       <group ref={chassisBody} castShadow>
-        <CarModel castShadow index={props.index} />
+        <CarModel castShadow index={props.index} brakeLightsOn={brakeLightsOn}/>
       </group>
       <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[1]} radius={wheelRadius} />

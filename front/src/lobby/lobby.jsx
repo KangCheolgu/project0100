@@ -16,8 +16,11 @@ import { Physics, Debug } from "@react-three/cannon";
 import * as THREE from 'three';
 import Sand from '../Sand';
 import { Background } from '../components/Background';
-export const socket = io("http://localhost:5000/")
+import LobbyBgmSound from '../sound/LobbySound';
+import ButtonSound from '../sound/ButtonSound';;
 
+
+export const socket = io("http://localhost:5000/")
 // export const socket = io("https://project0100.shop")
 
 const CURRENT_URL = "http://localhost:5000"
@@ -96,17 +99,17 @@ export const LobbyPage = () => {
     }
   }
   // 기록이 작은 순으로 3개 가져옴
-  // const getRankingList = async () => {
-  //   try {
-  //       const response = await axios.get(CURRENT_URL + '/api/database/getrankinglist');
-  //       // 서버로부터 받은 랭킹 목록을 반환합니다.
-  //       console.log("response");
-  //       return response.data;
-  //   } catch (error) {
-  //       console.error('Error fetching ranking list:', error);
-  //       return []; // 에러 발생 시 빈 배열 반환
-  //   }
-  // };
+  const getRankingList = async () => {
+    try {
+        const response = await axios.get(CURRENT_URL + '/api/database/getrankinglist');
+        // 서버로부터 받은 랭킹 목록을 반환합니다.
+        console.log("response");
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching ranking list:', error);
+        return []; // 에러 발생 시 빈 배열 반환
+    }
+  };
 
   useEffect(() => {
     // 받은 방 리스트
@@ -122,7 +125,6 @@ export const LobbyPage = () => {
   },[roomList])
 
   useEffect(() => {
-    socket.connect();
     // 처음에 렌더링 되면 방 리스트와 랭킹을 불러와서 나타냄
     socket.emit("roomlist")
     // getRankingList()
@@ -143,6 +145,8 @@ export const LobbyPage = () => {
   }
 
   return (<>
+    <LobbyBgmSound/>
+    <ButtonSound />
     <Container className={styles.lobby_container}>
       {/* 환영합니다. */}
       <Row className={styles.welcome}>
@@ -211,7 +215,7 @@ export const LobbyPage = () => {
                       </Row>
                       <Row className={styles.players_room} >
                         <Col>
-                          <button className={styles.join_btn}>
+                          <button className={`${styles.join_btn} buttonSound`}>
                             <p className={styles.btnText}> 문대경 님의 방</p>
                             <div className={styles.btnTwo}>
                               <p className={styles.btnText2}>GO!</p>
@@ -224,8 +228,8 @@ export const LobbyPage = () => {
                     roomList.length !== 0 ? roomList.map((room, index) => (
                       <Row className={styles.players_room} >
                         <Col>
-                          <button className={styles.join_btn}
-                          onClick={() => joinRoom({
+                          <button className={`${styles.join_btn} buttonSound`}
+                            onClick={() => joinRoom({
                             userEmail: room.roomName,
                             userName: userName,
                             type:0
@@ -251,7 +255,7 @@ export const LobbyPage = () => {
                 </Col>
               </div>
               <div className={styles.create_room_area}>
-                <button className={styles.create_room} onClick={createRoom}>
+                <button className={`${styles.create_room} buttonSound`} onClick={createRoom}>
                   </button>
               </div>
             </Col> 

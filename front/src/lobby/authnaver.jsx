@@ -46,7 +46,7 @@ function AuthNaver() {
   }, []);
 
   return (
-    <div>네이버 로딩 중</div>
+    <div></div>
   );
 }
 

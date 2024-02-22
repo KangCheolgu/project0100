@@ -1,6 +1,5 @@
 import Scene from './Scene';
 import { KeyboardControls } from '@react-three/drei';
-
 const GamePage = () => {
     return (
         <>

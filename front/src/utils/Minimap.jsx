@@ -8,7 +8,7 @@ function Minimap({ socket, props, chassisBody }) {
   const blueCarSrc = '/assets/images/blue-car.png';
   const redCarSrc = '/assets/images/red-car.png';
 
-  const scaleX = 150 / 40;
+  const scaleX = 150 / 32;
   const scaleZ = 250 / 100;
 
   useEffect(() => {
@@ -42,20 +42,20 @@ function Minimap({ socket, props, chassisBody }) {
   // 실제 구현에서는 게임 월드와 미니맵의 스케일 비율에 따라 조정 필요
   const myCarStyle = {
     position: 'absolute',
-    left: `${myPosition.x * scaleX + 40}px`,
-    top: `${myPosition.z * scaleZ + 360}px`,
-    width: '100px',
-    height: '100px',
+    left: `${myPosition.x * scaleX + 80}px`,
+    top: `${myPosition.z * scaleZ + 380}px`,
+    width: '20%',
+    height: '15%',
     transform: 'translate(-50%, -50%)', // 중앙 정렬
     zIndex: 999,
   };
 
   const opponentCarStyle = {
     position: 'absolute',
-    left: `${opponentPosition.x * scaleX + 40}px`,
-    top: `${opponentPosition.z * scaleZ + 360}px`,
-    width: '100px',
-    height: '100px',
+    left: `${opponentPosition.x * scaleX + 80}px`,
+    top: `${opponentPosition.z * scaleZ + 380}px`,
+    width: '20%',
+    height: '15%',
     transform: 'translate(-50%, -50%)', // 중앙 정렬
     zIndex: 999,
   };
@@ -63,7 +63,7 @@ function Minimap({ socket, props, chassisBody }) {
     if (socket.id === props.id) {
   return (
     <div style={{ position: 'absolute', bottom: '60%', right: '10%' }}>
-      <img src={minimapSrc} alt="Minimap" style={{ width: '280px', height: '480px' }} />
+      <img src={minimapSrc} alt="Minimap" style={{ width: '100%', height: '100%' }} />
       <img src={blueCarSrc} alt="My Car" style={myCarStyle} />
       <img src={redCarSrc} alt="Opponent's Car" style={opponentCarStyle} />
     </div>
