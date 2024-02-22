@@ -20,7 +20,7 @@ const BgmSound = () => {
             src: [backgroundMusic],
             loop: true, // 오디오 반복 재생 여부
             autoplay: true, // 자동 재생 여부
-            volume: 0.1,
+            volume: 0.2,
         });
 
         bgmRef.current = BGMEffect; // Howler 인스턴스 저장

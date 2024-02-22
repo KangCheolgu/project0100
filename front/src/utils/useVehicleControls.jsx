@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { socket } from "../lobby/lobby.jsx";
 import klaxonSoundFile from '../sound/car-horn/car-horn-1.wav';
-import * as THREE from 'three';
+import brakeSoundFile from '../sound/engines/1/brake.wav';
 import { Vector3 } from "three";
 import { CheckPoint } from "./CheckPoint.jsx";
 
@@ -16,6 +16,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, chassisBody, checkPoi
 
   // brake
   const [brakeLightsOn, setBrakeLightsOn] = useState(false);
+  const brakeSound = useRef(new Audio(brakeSoundFile));
 
   const [currentEngineForce, setCurrentEngineForce] = useState(engineForce);
 
@@ -58,6 +59,11 @@ export const useVehicleControls = (vehicleApi, chassisApi, chassisBody, checkPoi
     if (e.key === ' ') {
       setBrake(true);
       setBrakeLightsOn(true);  // Turn on brake lights
+
+       // brakeSound 재생
+      brakeSound.current.play().catch((error) =>
+        console.error('브레이크 소리 재생 실패:', error)
+      );
     }
     
     // 클락션 소리 및 쉬프트 키와 함께 'h' 키 처리
