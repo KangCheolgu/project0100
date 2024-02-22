@@ -43,7 +43,7 @@ export const useVehicleControls = (vehicleApi, chassisApi, chassisBody, checkPoi
       }
     };
 
-    if( state === true && socket.id === id){  
+    if( socket.id === id) {  
       window.addEventListener('keydown', handleKeyPress);
 
       return () => {

@@ -88,6 +88,10 @@ const Car = ({ cameraGroup, ...props }) => {
     useRef(null),
   );
 
+  // 클락션 소리 /////////////////////////////////////////////////////////
+  const klaxonDuration = 500; // 1초
+  ///////////////////////////////////////////////////////////////////////
+
   // 자동차 충돌
   const [isCollision, setIsCollision] = useState(false)
   const handleCollision = () => {
@@ -132,7 +136,7 @@ const Car = ({ cameraGroup, ...props }) => {
   const lastPosition = useRef(new Vector3());
   const lastUpdateTime = useRef(Date.now());
 
-  const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, chassisBody, checkPointIndex, props.id, props.state, klaxonSoundFile);
+  const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, chassisBody, checkPointIndex, props.id, props.state, klaxonDuration, klaxonSoundFile);
 
   useEffect(() => {
     if (socket.id === props.id) {
@@ -171,25 +175,25 @@ const Car = ({ cameraGroup, ...props }) => {
       cameraGroup.current.quaternion.copy(bodyRotation);
       cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
         
-      // if (checkPointIndex ===  CheckPoint.length + 1 && lapseCheck[0] === false) {
-      //   lapseCheck[0] = true
-      //   around()
-      // }
-      // if (checkPointIndex ===  CheckPoint.length * 2 + 1 && lapseCheck[1] === false) {
-      //   lapseCheck[1] = true
-      //   end()
-      //   useGame.setState({ winner: socket.id });
-      // }
-
-      if (checkPointIndex ===  2 && lapseCheck[0] === false) {
+      if (checkPointIndex ===  CheckPoint.length + 1 && lapseCheck[0] === false) {
         lapseCheck[0] = true
         around()
       }
-      if (checkPointIndex ===  3 && lapseCheck[1] === false) {
+      if (checkPointIndex ===  CheckPoint.length * 2 + 1 && lapseCheck[1] === false) {
         lapseCheck[1] = true
         end()
         useGame.setState({ winner: socket.id });
       }
+
+      // if (checkPointIndex ===  2 && lapseCheck[0] === false) {
+      //   lapseCheck[0] = true
+      //   around()
+      // }
+      // if (checkPointIndex ===  3 && lapseCheck[1] === false) {
+      //   lapseCheck[1] = true
+      //   end()
+      //   useGame.setState({ winner: socket.id });
+      // }
 
       // 체크 포인트 인덱스 갱신 
       // 지정된 위치를 지나면 checkpointIndex를 올림
@@ -217,8 +221,10 @@ const Car = ({ cameraGroup, ...props }) => {
       }
     }
   });
+
   
   useEffect(() => {
+    
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
     
@@ -385,7 +391,6 @@ const Car = ({ cameraGroup, ...props }) => {
       }
     }, 30);
   };
-  console.log(brakeLightsOn);
 
   return (<>
     <group ref={cameraGroup}>
@@ -409,7 +414,8 @@ const Car = ({ cameraGroup, ...props }) => {
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
-      </group>
+      {/* <Minimap chassisBody={chassisBody} socket={socket}  vehicleId={props.id}/> */}
+    </group>
   </>
 
   )

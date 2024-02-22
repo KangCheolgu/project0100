@@ -13,11 +13,11 @@ export function CarModel({ brakeLightsOn, index, ...props }) {
     if (materials.redl && materials.redr) {
       materials.redl.emissive = brakeLightColor;
       materials.redr.emissive = brakeLightColor;
-      console.log(brakeLightColor);
+      // console.log(brakeLightColor);
     }
   }, [brakeLightsOn, materials]);
 
-  console.log(brakeLightsOn);
+  // console.log(brakeLightsOn);
 
   if(index === 0 && nodes.Formula) {
     return (
