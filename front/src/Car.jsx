@@ -357,7 +357,7 @@ const Car = ({ cameraGroup, ...props }) => {
 
     useInterval(() => {
       if (socket.id === props.id) {
-        const delta = 0.30; // 100ms expressed in seconds
+        const delta = 0.15; // 100ms expressed in seconds
         const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
         const bodyQuaternion = chassisBody.current.getWorldQuaternion(worldQuaternion);
 
@@ -387,7 +387,7 @@ const Car = ({ cameraGroup, ...props }) => {
         };
         socket.emit("currentState", currentState);
       }
-    }, 30);
+    }, 15);
   };
 
   return (<>

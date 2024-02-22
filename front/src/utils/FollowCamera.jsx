@@ -20,9 +20,11 @@ const FollowCamera = ({ chassisBody, socket, vehicleId }) => {
 
             // Use a more direct approach for smoothing camera movement.
 
-            // smoothedCameraPosition.lerp(cameraPosition, 0.2);
+            // smoothedCameraPosition.lerp(cameraPosition, 0.3);
 
+            // option 1. smoothCamera
             // state.camera.position.copy(smoothedCameraPosition);
+            // option 2. camera
             state.camera.position.copy(cameraPosition);
 
             // Directly set the camera target without intermediate variables.

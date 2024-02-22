@@ -1,8 +1,7 @@
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 import backgroundMusic from './bgm/RacingBoy.mp3'
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { socket } from '../lobby/lobby';
 
 const BgmSound = () => {
     // 오디오 파일 경로 설정
@@ -20,12 +19,11 @@ const BgmSound = () => {
         const BGMEffect = new Howl({
             src: [backgroundMusic],
             loop: true, // 오디오 반복 재생 여부
-            autoplay: true // 자동 재생 여부
+            autoplay: true, // 자동 재생 여부
+            volume: 0.1,
         });
 
         bgmRef.current = BGMEffect; // Howler 인스턴스 저장
-
-        
 
         if (navigate && window.location.pathname === '/gameroom' ) {
             BGMEffect.play();
