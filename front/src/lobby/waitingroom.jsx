@@ -21,6 +21,7 @@ import { Physics, Debug } from "@react-three/cannon";
 import * as THREE from 'three';
 import Sand from '../Sand';
 import styles from './waitingroom.module.css'
+import ButtonSound from '../sound/ButtonSound';;
 
 function ProfileCard(props, cnt) {
   const name = props.name
@@ -138,6 +139,7 @@ export default function RoomPage() {
   }
   
   return (<>
+    <ButtonSound />
     <Container className={styles.container}>
       <Row>
         <Col md="8"></Col>
@@ -154,7 +156,7 @@ export default function RoomPage() {
         
         <Col md="8" className={styles.mainBox}>
           <Row className={styles.title}>
-            <div class={styles.titleContext}>Waiting Room</div>
+            <div className={styles.titleContext}>Waiting Room</div>
           </Row>
           <Row style={{height:"230px"}}>
             <Col style={{display:"flex", justifyContent: "center"}}>
@@ -171,7 +173,8 @@ export default function RoomPage() {
           </Row>
           <Row style={{marginTop:"20px"}}>
             <Col>
-              <button className={styles.btn}
+              
+              <button className={`${styles.btn} buttonSound`}
                 onClick={(e) => {startGameInRoom();}}
                 sx={{fontFamily: 'CookieRun_Black, sans-serif'}}>
                 <span>GAME START</span></button>

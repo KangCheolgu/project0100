@@ -1,36 +1,24 @@
-import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { Physics, Debug } from "@react-three/cannon";
 import Car_App from "./Car.jsx";
-import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense, useLayoutEffect } from "react";
 import { OrbitControls, useProgress, Stats, PerspectiveCamera, BakeShadows, Bvh, Preload, AdaptiveDpr, AdaptiveEvents} from '@react-three/drei';
 import Interface from "./Interface"
-import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
-import LoadingPage from "./utils/Loading.jsx";
 import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./Map1/ColliderWall.jsx"
-import { SkyCube } from "./components/SkyCube.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle, CrabObstacle, Brick} from "./components/MoveObstacle.jsx";
-import Countdown from "./sound/CountDown.jsx";
-import StartSound from "./sound/StartSound.jsx";
+import { SpinObstacle, CarRedObstacle, CarGreenObstacle, CrabObstacle } from "./components/MoveObstacle.jsx";
 import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
 import { socket } from "./lobby/lobby.jsx";
-import Spectator from "./Spectator.jsx";
-import Water from "./Water.jsx";
 import * as THREE from "three";
-import Interaface2 from "./Interface2.jsx";
 import Sand from "./Sand.jsx";
-import { ResortOcean } from "./components/ResortOcean.jsx";
-import { ResortOceanSmall } from "./components/ResortOceanSmall.jsx";
 import { Background } from "./components/Background.jsx";
 import { gsap } from "gsap";
 import Wall from "./Map2/ColliderWall_Map2.jsx";
-import Light from "./Light.jsx";
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
