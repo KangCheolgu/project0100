@@ -23,7 +23,6 @@ const CURRENT_URL = "http://localhost:5000"
 // const CURRENT_URL = "https://project0100.shop"
 
 function LoginPage() {
-  const navigate = useNavigate();
 
   const signInWithGoogle = () => {
     window.open(CURRENT_URL + "/api/auth/google", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')

@@ -247,7 +247,7 @@ export default function Scene() {
               <directionalLight
                 castShadow
                 targetObject ={targetObject}
-                intensity={4}
+                intensity={2}
                 shadow-camera-top={100}
                 shadow-camera-bottom={-100}
                 shadow-camera-left={-120}

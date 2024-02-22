@@ -110,38 +110,58 @@ body,
  /**
  * Controls
  */
-.controls
-{
-    position: absolute;
-    bottom: 10%;
-    left: 0;
-    width: 100%;
-}
-
-.controls .raw
-{
-    display: flex;
-    justify-content: center;
-}
-
-.controls .key
-{
-    width: 40px;
-    height: 40px;
-    margin: 4px;
-    border: 2px solid #ffffff;
-    background: #ffffff44;
-}
-
-.controls .key.large
-{
-    width: 144px;
-}
-
-.controls .key.active
-{
-    background: #ffffff99;
-}
+ .controls
+ {
+     text-align: center;
+     position: absolute;
+     bottom: 10%;
+     left: 0;
+     right:0;
+     width: 100%;
+ }
+ 
+ .controls .raw
+ {
+     display: flex;
+     justify-content: center;
+ }
+ 
+ .controls .key
+ {
+     font-family: "aptos-bold";
+     font-size: 30px;
+     padding-top: 0px;
+     width: 40px;
+     height: 40px;
+     margin: 4px;
+     border: 2px solid #ffffff;
+     background: #ffffff44;
+ }
+ 
+ .controls .key.large
+ {
+     width: 144px;
+ }
+ 
+ .controls .key.middle
+ {  
+     margin-right: 59px;
+     width: 90px;
+ }
+ 
+ .controls .key.middle.active
+ {  
+     background: #ffffff99;
+ }
+ .controls .key.large.active
+ {  
+     background: #ffffff99;
+ }
+ 
+ .controls .key.active
+ {
+     background: #ffffff99;
+ }
 
 .countdown
 {
