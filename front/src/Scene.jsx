@@ -13,7 +13,7 @@ import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./Map1/ColliderWall.jsx"
 import { SkyCube } from "./components/SkyCube.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle, CrabObstacle, Brick} from "./components/MoveObstacle.jsx";
+import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle, CrabObstacle, Brick, Basketball} from "./components/MoveObstacle.jsx";
 import Countdown from "./sound/CountDown.jsx";
 import StartSound from "./sound/StartSound.jsx";
 import { Howl, Howler } from 'howler';

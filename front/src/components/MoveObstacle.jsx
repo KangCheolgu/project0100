@@ -478,6 +478,22 @@ export function CrabObstacle(props){
   )
 }
 
+export function Basketball(){
+  const [Box1, api1] = useSphere(() =>({
+    mass: 1,
+    args: [1],
+    position: [0,0,0]
+  }))
+
+  return (
+    <mesh>
+      
+    </mesh>
+
+  )
+}
+
+
 export function Brick(){
   const [Box1, api1] = useBox(() =>({
     mass: 1,
