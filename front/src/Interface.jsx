@@ -217,20 +217,26 @@ export default function Interface(){
 
         {/* 플레이어 한테만 보이는 부분 */}
         {!isSpectator && (
-              <div className="controls">
+          <div className="controls-group">
+            <div className="controls1">
               <div className="raw">
                   <div className={`key ${forward ? 'active' : '' }`}></div>
               </div>
+              <div className="raw" style={{}}>
+                <div className={`key ${leftward ? 'active' : '' }`}></div>
+                <div className={`key ${backward ? 'active' : '' }`}></div>
+                <div className={`key ${rightward ? 'active' : '' }`}></div>
+              </div>
+            </div>
+            <div className="controls2" style={{}}>
               <div className="raw">
-                  <div className={`key ${leftward ? 'active' : '' }`}></div>
-                  <div className={`key ${backward ? 'active' : '' }`}></div>
-                  <div className={`key ${rightward ? 'active' : '' }`}></div>
+                <div className={`key ${shift ? 'active' : ''} large`} style={{textAlign:"center", paddingTop: "6px", marginLeft:"10px"}}>Shift</div> {/* shift 키에 large 클래스 추가 */}
               </div>
               <div className="raw">
-                  <div className={`key ${shift ? 'active' : ''} large`}></div> {/* shift 키에 large 클래스 추가 */}
-                  <div className={`key ${space ? 'active' : ''} large`}></div> {/* 스페이스 바에 large 클래스 추가 */}
+                <div className={`key ${space ? 'active' : ''} large`} style={{textAlign:"center", paddingTop:"6px"}}>Space</div> {/* 스페이스 바에 large 클래스 추가 */}
               </div>
-        </div>
+            </div>
+          </div>
         )}
         {/* Controls */}
       </>

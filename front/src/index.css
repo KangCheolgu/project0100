@@ -110,21 +110,41 @@ body,
  /**
  * Controls
  */
-.controls
+.controls1
 {
     position: absolute;
     bottom: 10%;
-    left: 0;
+    left: -7%;
+    width: 100%;
+}
+.controls2
+{
+    position: absolute;
+    bottom: 10%;
+    left: 7%;
     width: 100%;
 }
 
-.controls .raw
+.controls1 .raw
+{
+    display: flex;
+    justify-content: center;
+}
+.controls2 .raw
 {
     display: flex;
     justify-content: center;
 }
 
-.controls .key
+.controls1 .key
+{
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    border: 2px solid #ffffff;
+    background: #ffffff44;
+}
+.controls2 .key
 {
     width: 40px;
     height: 40px;
@@ -133,16 +153,23 @@ body,
     background: #ffffff44;
 }
 
-.controls .key.large
+.control1 .key.large
+{
+    width: 144px;
+}
+.control2 .key.large
 {
     width: 144px;
 }
 
-.controls .key.active
+.controls1 .key.active
 {
     background: #ffffff99;
 }
-
+.controls2 .key.active
+{
+    background: #ffffff99;
+}
 .countdown
 {
     font-family: 'RacingFont';
