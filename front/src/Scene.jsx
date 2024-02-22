@@ -1,36 +1,24 @@
-import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { Physics, Debug } from "@react-three/cannon";
 import Car_App from "./Car.jsx";
-import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense, useLayoutEffect } from "react";
-import { OrbitControls, useProgress, Stats, PerspectiveCamera, BakeShadows, Bvh, Preload, AdaptiveDpr } from '@react-three/drei';
+import { OrbitControls, Stats, PerspectiveCamera } from '@react-three/drei';
 import Interface from "./Interface"
-import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
-import LoadingPage from "./utils/Loading.jsx";
 import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./Map1/ColliderWall.jsx"
-import { SkyCube } from "./components/SkyCube.jsx";
-import {LeftAndRightObstacle, SpinObstacle, UpDownObstacle, ShutterObstacle, LeftRightObstacle, Bump, CarRedObstacle, CarGreenObstacle, MotorObstacle, CrabObstacle, Brick} from "./components/MoveObstacle.jsx";
-import Countdown from "./sound/CountDown.jsx";
-import StartSound from "./sound/StartSound.jsx";
+import { SpinObstacle, CarRedObstacle, CarGreenObstacle, CrabObstacle } from "./components/MoveObstacle.jsx";
 import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
 import { socket } from "./lobby/lobby.jsx";
-import Spectator from "./Spectator.jsx";
-import Water from "./Water.jsx";
 import * as THREE from "three";
-import Interaface2 from "./Interface2.jsx";
 import Sand from "./Sand.jsx";
-import { ResortOcean } from "./components/ResortOcean.jsx";
-import { ResortOceanSmall } from "./components/ResortOceanSmall.jsx";
 import { Background } from "./components/Background.jsx";
 import { gsap } from "gsap";
 import Wall from "./Map2/ColliderWall_Map2.jsx";
-import Light from "./Light.jsx";
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
@@ -108,11 +96,10 @@ export default function Scene() {
       //핑체크 interval 중단
       clearInterval(pingCheck); 
       // 평균 핑 계산 ms이니까 소수점 둘째자리면 충분하다고 생각
+      const average = parseFloat((totalDuration / cnt).toFixed(2));
+      setAveragePing(average);
+      socket.off("ping");
     }, 2000);
-
-    const average = parseFloat((totalDuration / cnt).toFixed(2));
-    setAveragePing(average);
-    socket.off("ping");
 
     // 핑타임아웃 중단
     return () => (clearTimeout(pingTImeOut))
@@ -133,22 +120,22 @@ export default function Scene() {
     }
     
     // 내가 설정한 최대 인원 숫자와 현재 인원이 같으면 핑체크 시작
-    socket.once("clientCount", () => {
+    socket.on("clientCount", () => {
         console.log("클라이언트 카운트다운");
         const pingCheck = setTimeout(() => {
           startPingCheck()
-        }, 10000)
+        }, 4000)
 
         return () => clearTimeout(pingCheck)
     })
 
-    socket.once("opponentPing", (pingData)=>{
+    socket.on("opponentPing", (pingData)=>{
       console.log("oppo ping :", pingData.ping);
       setOpponentPing(pingData.ping)
     })
 
     //유저 업데이트
-    socket.once("updatePlayers", onPlayers)
+    socket.on("updatePlayers", onPlayers)
 
     return (() => {
       socket.off("updatePlayers", onPlayers);
@@ -160,7 +147,7 @@ export default function Scene() {
   useEffect(() => {
 
     // 스타트 시그널을 받으면 
-    socket.once("startSignal", (allPings)=>{
+    socket.on("startSignal", (allPings)=>{
       console.log("스타트 시그널");
       // 상대핑의 평균을 구하여 
       const allPingsArray = Object.values(allPings);
@@ -169,7 +156,7 @@ export default function Scene() {
       
       const startSignal = setTimeout(() => {
         if(count > -3) startCountdown()
-      }, opponentPingData.ping)
+      }, opponentPingData.ping/2)
 
       return () => clearTimeout(startSignal)
     })
@@ -250,75 +237,65 @@ export default function Scene() {
         // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
       } */}
       <Canvas shadows >
-          <Preload all />
-          <AdaptiveDpr pixelated />
-          <Bvh>
-            <color attach="background" args={["#abdbe3"]} />
-            
-            <>
-              <PerspectiveCamera position={[1.5, 8, 4]} fov={75} layers={[0]} makeDefault/>
-              <Background backgroundColors={backgroundColors}/>
-              <Sand/>
-              <ambientLight intensity={2} color="#fff7e6"/>
-              
-              {/*<Light/>*/}
-              
-              
-              <directionalLight
-                castShadow
-                targetObject ={targetObject}
-                intensity={4}
-                shadow-camera-top={100}
-                shadow-camera-bottom={-100}
-                shadow-camera-left={-120}
-                shadow-camera-right={100}
-                shadow-camera-far={150}
-                shadow-mapSize-height={512}
-                shadow-mapSize-width={512}
-                position={[50, 80, -50]}
-                color="#ffffff"
-      />
-              <OrbitControls />
-              <Stats/>
-              <Physics gravity={[0, -3, 0]}>
-                {/*<Debug>*/}
-                  <Suspense fallback={<LoadingPage />}>
-                    <ColliderWall/>
-                    <Map1 position={[0, 0, 0]}/>
-                    <Map2 position={[0, 0, -94]}/>
-                    <Wall />
-                  </Suspense>
-                  {
-                    players.map((player, index) => (
-                      <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
-                    ))
-                  }
-        
-                  {isObstacleStarted && (
-                  <>
-                  {/* 장애물 배치 */}
-                  <SpinObstacle position={[25,0.5,-28]} offset={3}/>
-                  <SpinObstacle position={[27,0.5,-97]} offset={4}/>
-                  {/* <LeftAndRightObstacle/> */}
-                  {/* <ShutterObstacle/> */}
-                  <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
-                  <CarGreenObstacle/>
-                  {/* <MotorObstacle/> */}
-                  <CrabObstacle position ={[7,-0.03,0]} offset={32} />
-                  <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
-                  <CrabObstacle position={[0,-0.03,0]} offset={38}/>
-                  </>
-                  )}
-              {/*</Debug>*/}
-              </Physics>
-              {/* {spectators.map((spectator, index) => (
-                <Spectator id={spectator.id} key={index} position={spectator.position} />
-              ))} */}
-            
-            </>
-              <BakeShadows/>
-            </Bvh>          
+        <Suspense fallback={null}>
+          <color attach="background" args={["#abdbe3"]} />
           
+          <>
+            <PerspectiveCamera position={[1.5, 8, 4]} fov={75} layers={[0]} makeDefault/>
+            <Background backgroundColors={backgroundColors}/>
+            <Sand/>
+            <ambientLight intensity={2} color="#fff7e6"/>
+            
+            {/* <Light/> */}
+            
+            <directionalLight
+              castShadow
+              targetObject ={targetObject}
+              intensity={2}
+              shadow-camera-top={30}
+              shadow-camera-bottom={-60}
+              shadow-camera-left={-120}
+              shadow-camera-right={100}
+              shadow-camera-far={100}
+              shadow-mapSize-height={512*6}
+              shadow-mapSize-width={512*6}
+              position={[50, 80, -50]}
+              color="#ffffff"
+            />
+            <OrbitControls />
+            <Stats/>
+            <Physics gravity={[0, -3, 0]}>
+              {/*<Debug>*/}
+                  <ColliderWall/>
+                  <Map1 position={[0, 0, 0]}/>
+                  <Map2 position={[0, 0, -94]}/>
+                  <Wall />
+                
+                {
+                  players.map((player, index) => (
+                    <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
+                  ))
+                }
+      
+                {isObstacleStarted && (
+                <>
+                {/* 장애물 배치 */}
+                <SpinObstacle position={[25,0.5,-28]} offset={3}/>
+                <SpinObstacle position={[27,0.5,-97]} offset={4}/>
+                {/* <LeftAndRightObstacle/> */}
+                {/* <ShutterObstacle/> */}
+                <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
+                <CarGreenObstacle/>
+                {/* <MotorObstacle/> */}
+                <CrabObstacle position ={[7,-0.03,0]} offset={32} />
+                <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
+                <CrabObstacle position={[0,-0.03,0]} offset={38}/>
+                </>
+                )}
+            {/*</Debug>*/}
+            </Physics>
+          </>          
+          </Suspense>
       </Canvas>
     </>
   );
