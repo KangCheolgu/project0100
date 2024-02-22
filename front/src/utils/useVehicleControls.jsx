@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { socket } from "../lobby/lobby.jsx";
 import klaxonSoundFile from '../sound/car-horn/car-horn-1.wav';
 import * as THREE from 'three';
+import { Vector3 } from "three";
+import { CheckPoint } from "./CheckPoint.jsx";
 
-export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
+export const useVehicleControls = (vehicleApi, chassisApi, chassisBody, checkPointIndex, id, state) => {
   const engineForce = 80;
   const [brake, setBrake] = useState(false);
   const klaxonDuration = 500;
@@ -17,6 +19,37 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
 
   const [currentEngineForce, setCurrentEngineForce] = useState(engineForce);
 
+  useEffect(() => {
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'r') {
+            const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
+            chassisApi.position.set(currentPosition.x,currentPosition.y + 0.05,currentPosition.z);
+            chassisApi.velocity.set(0, 0, 0); // Optionally reset velocity
+            chassisApi.angularVelocity.set(0, 0, 0); // Optionally reset angular velocity
+            if(checkPointIndex !== 0 && CheckPoint[checkPointIndex % (CheckPoint.length)].axis === "x"){
+              if((CheckPoint[checkPointIndex % (CheckPoint.length)].z - currentPosition.z) >= 0) {
+                chassisApi.quaternion.set(0, 1, 0, 0)
+              } else {
+                chassisApi.quaternion.set(0, 0, 0, 1);
+              }
+            } else if (checkPointIndex !== 0 && CheckPoint[checkPointIndex % (CheckPoint.length)].axis === "z") {
+              if((CheckPoint[checkPointIndex % (CheckPoint.length)].x - currentPosition.x) >= 0) {
+                chassisApi.quaternion.set(0, -1, 0, 1);
+              } else {
+                chassisApi.quaternion.set(0, 1, 0, 1);
+              }
+            }
+        }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+        window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [checkPointIndex]);
+
   // 키 다운 이벤트
   const handleKeyDown = (e) => {
     // for brake lights
@@ -26,15 +59,24 @@ export const useVehicleControls = (vehicleApi, chassisApi, id, state) => {
     }
 
     // 'R' 키 입력 시 자동차 위치 y 좌표 증가 및 쿼터니언 초기화
-    if (e.key === 'r') {
-      chassisApi.position.subscribe((position) => {
-        const newPosition = [position[0], position[1] + 0.005, position[2]]; // Slightly raise the y-coordinate
-        chassisApi.position.set(...newPosition);
-      });
-      chassisApi.quaternion.set(0, 1, 0, 0); // Reset quaternion to upright orientation
-      chassisApi.velocity.set(0, 0, 0); // Optionally reset velocity
-      chassisApi.angularVelocity.set(0, 0, 0); // Optionally reset angular velocity
-    }
+    // if (e.key === 'r') {
+      
+    //   const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
+    //   console.log(checkPointIndex);
+    //   console.log(CheckPoint[checkPointIndex]);
+    //   chassisApi.position.set(currentPosition.x,currentPosition.y + 0.05,currentPosition.z)
+       
+    //   chassisApi.velocity.set(0, 0, 0); // Optionally reset velocity
+    //   chassisApi.angularVelocity.set(0, 0, 0); // Optionally reset angular velocity
+    //   if(CheckPoint[checkPointIndex].axis === 'x'){
+    //     if(CheckPoint[checkPointIndex].z){
+
+    //     }
+    //   }
+        
+    //   chassisApi.quaternion.set(0, 0, 0, 1);
+    // }
+    
 
     // 클락션 소리 및 쉬프트 키와 함께 'h' 키 처리
     if (e.key.toLowerCase() === 'h') {
