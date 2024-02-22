@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Physics, Debug } from "@react-three/cannon";
 import Car_App from "./Car.jsx";
 import { useState, useEffect, useRef, React, Suspense, useLayoutEffect } from "react";
-import { OrbitControls, useProgress, Stats, PerspectiveCamera, BakeShadows, Bvh, Preload, AdaptiveDpr, AdaptiveEvents} from '@react-three/drei';
+import { OrbitControls, Stats, PerspectiveCamera, Bvh, Preload, AdaptiveDpr } from '@react-three/drei';
 import Interface from "./Interface"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
@@ -10,7 +10,7 @@ import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./Map1/ColliderWall.jsx"
 import { SpinObstacle, CarRedObstacle, CarGreenObstacle, CrabObstacle } from "./components/MoveObstacle.jsx";
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
 import { socket } from "./lobby/lobby.jsx";
@@ -19,6 +19,7 @@ import Sand from "./Sand.jsx";
 import { Background } from "./components/Background.jsx";
 import { gsap } from "gsap";
 import Wall from "./Map2/ColliderWall_Map2.jsx";
+import { Ball } from "./components/BasBall.jsx";
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
@@ -260,10 +261,14 @@ export default function Scene() {
               <OrbitControls />
               <Stats/>
               <Physics gravity={[0, -3, 0]}>
-                {/*<Debug>*/}
+                {/* <Debug> */}
                     <ColliderWall/>
                     <Map1 position={[0, 0, 0]}/>
                     <Map2 position={[0, 0, -94]}/>
+                    <Ball position={[15, 0.9, -100]} />
+                    <Ball position={[13, 0.9, -105]} />
+                    <Ball position={[14, 0.9, -110]} />
+                    <Ball position={[15, 0.9, -103]} />
                     <Wall />
                   {
                     players.map((player, index) => (
@@ -282,7 +287,7 @@ export default function Scene() {
                   <CrabObstacle position={[0,-0.03,0]} offset={38}/>
                   </>
                   )}
-              {/*</Debug>*/}
+              {/* </Debug> */}
               </Physics>
             </>
             </Bvh>    

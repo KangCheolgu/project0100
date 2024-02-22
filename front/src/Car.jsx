@@ -97,37 +97,6 @@ const Car = ({ cameraGroup, ...props }) => {
     CollisionHandler(setIsCollision, collisionSound, isCurrentUser);
   };
 
-  // 엔진 소리 관리
-  // const engineSoundRef = useRef(new Audio(engineSoundFile));
-  // useEffect(() => {
-  //   engineSoundRef.current.loop = true;
-  //   engineSoundRef.current.volume = 0.4;
-  //   engineSoundRef.current.play().catch(error => console.error("엔진 소리 재생 실패:", error));
-
-  //   const handleWindowBlur = () => {
-  //       if (engineSoundRef.current) {
-  //           engineSoundRef.current.pause();
-  //       }
-  //   };
-
-  //   const handleWindowFocus = () => {
-  //       if (window.location.pathname === '/gameroom') {
-  //           engineSoundRef.current.play();
-  //       }
-  //   };
-
-  //   window.addEventListener('blur', handleWindowBlur);
-  //   window.addEventListener('focus', handleWindowFocus);
-
-  //   return () => {
-  //       window.removeEventListener('blur', handleWindowBlur);
-  //       window.removeEventListener('focus', handleWindowFocus);
-  //       if (engineSoundRef.current) {
-  //           engineSoundRef.current.pause();
-  //       }
-  //   };
-  // }, []);
-
   // 속도계 
   const [currentSpeed, setCurrentSpeed] = useState(0);
   const lastSpeed = useRef(0); // Reference to store the last updated speed
@@ -144,17 +113,15 @@ const Car = ({ cameraGroup, ...props }) => {
         const currentPosition = chassisBody.current.getWorldPosition(new Vector3());
         // Use the utility function to calculate speed
         const speed = calculateSpeed(currentPosition, lastPosition.current, deltaTime);
+
         // Check if the speed has changed significantly (by 10 km/h or more)
-        // if (Math.abs(speed - lastSpeed.current) >= 10) {
-          setCurrentSpeed(speed); // Update the state only if the change is significant
-          lastSpeed.current = speed; // Update the last speed reference
-        // }
+        setCurrentSpeed(speed); // Update the state only if the change is significant
+        lastSpeed.current = speed; // Update the last speed reference
 
         // Always update the last position and time, regardless of whether the speed was updated
         lastPosition.current.copy(currentPosition);
         lastUpdateTime.current = now;
       };
-    
 
       const intervalId = setInterval(updateSpeed, 500); // Continue to check speed every 200ms
       return () => clearInterval(intervalId);
@@ -183,16 +150,6 @@ const Car = ({ cameraGroup, ...props }) => {
         useGame.setState({ winner: socket.id });
       }
 
-      // if (checkPointIndex ===  2 && lapseCheck[0] === false) {
-      //   lapseCheck[0] = true
-      //   around()
-      // }
-      // if (checkPointIndex ===  3 && lapseCheck[1] === false) {
-      //   lapseCheck[1] = true
-      //   end()
-      //   useGame.setState({ winner: socket.id });
-      // }
-
       // 체크 포인트 인덱스 갱신 
       // 지정된 위치를 지나면 checkpointIndex를 올림
       if(checkPointIndex % (CheckPoint.length) === 13 ){
@@ -219,18 +176,14 @@ const Car = ({ cameraGroup, ...props }) => {
       }
     }
   });
-
   
   useEffect(() => {
-    
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
     
     function updateAnotherPlayer(updateData) {
       const targetPosition = new THREE.Vector3(updateData.position.x, updateData.position.y, updateData.position.z);
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
-
-      
       
       if (updateData.id === props.id && socket.id !== props.id) {
         const targetQuaternion = new THREE.Quaternion(updateData.quaternion[0], updateData.quaternion[1], updateData.quaternion[2], updateData.quaternion[3]);
