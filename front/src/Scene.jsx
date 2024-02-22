@@ -3,7 +3,7 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car_App from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense, useLayoutEffect } from "react";
-import { OrbitControls, useProgress, Stats, PerspectiveCamera, BakeShadows, Bvh, Preload, AdaptiveDpr } from '@react-three/drei';
+import { OrbitControls, useProgress, Stats, PerspectiveCamera, BakeShadows, Bvh, Preload, AdaptiveDpr, AdaptiveEvents} from '@react-three/drei';
 import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
@@ -267,7 +267,7 @@ export default function Scene() {
               <directionalLight
                 castShadow
                 targetObject ={targetObject}
-                intensity={1}
+                intensity={4}
                 shadow-camera-top={100}
                 shadow-camera-bottom={-100}
                 shadow-camera-left={-120}
@@ -286,13 +286,11 @@ export default function Scene() {
                     <Map1 position={[0, 0, 0]}/>
                     <Map2 position={[0, 0, -94]}/>
                     <Wall />
-                  
                   {
                     players.map((player, index) => (
                       <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
                     ))
-                  }
-        
+                  }        
                   {isObstacleStarted && (
                   <>
                   {/* 장애물 배치 */}
@@ -315,8 +313,8 @@ export default function Scene() {
               ))} */}
             
             </>
-              <BakeShadows/>
-            </Bvh>          
+              {/*<BakeShadows/>*/}
+            </Bvh>    
           </Suspense>
       </Canvas>
     </>
