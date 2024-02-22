@@ -3,7 +3,7 @@ import { Physics, Debug } from "@react-three/cannon";
 import Car_App from "./Car.jsx";
 import io from "socket.io-client"
 import { useState, useEffect, useRef, React, Suspense, useLayoutEffect } from "react";
-import { OrbitControls, useProgress, Stats, PerspectiveCamera, BakeShadows, Bvh, Preload, AdaptiveDpr } from '@react-three/drei';
+import { OrbitControls, useProgress, Stats, PerspectiveCamera, BakeShadows } from '@react-three/drei';
 import Interface from "./Interface"
 import {Ground} from "./Ground.jsx"
 import useGame from "./stores/useGame.jsx";
@@ -250,69 +250,17 @@ export default function Scene() {
       } */}
       <Canvas shadows >
         <Suspense fallback={null}>
-          <Preload all />
-          <AdaptiveDpr pixelated />
-          <Bvh>
-            <color attach="background" args={["#abdbe3"]} />
+          <color attach="background" args={["#abdbe3"]} />
+          
+          <>
+            <PerspectiveCamera position={[1.5, 8, 4]} fov={75} layers={[0]} makeDefault/>
+            <Background backgroundColors={backgroundColors}/>
+            <Sand/>
+            <ambientLight intensity={2} color="#fff7e6"/>
             
-            <>
-              <PerspectiveCamera position={[1.5, 8, 4]} fov={75} layers={[0]} makeDefault/>
-              <Background backgroundColors={backgroundColors}/>
-              <Sand/>
-              <ambientLight intensity={2} color="#fff7e6"/>
-              
-              {/*<Light/>*/}
-              
-              
-              <directionalLight
-                castShadow
-                targetObject ={targetObject}
-                intensity={1}
-                shadow-camera-top={100}
-                shadow-camera-bottom={-100}
-                shadow-camera-left={-120}
-                shadow-camera-right={100}
-                shadow-camera-far={150}
-                shadow-mapSize-height={512}
-                shadow-mapSize-width={512}
-                position={[50, 80, -50]}
-                color="#ffffff"
-      />
-              <OrbitControls />
-              <Stats/>
-              <Physics gravity={[0, -3, 0]}>
-                {/*<Debug>*/}
-                    <ColliderWall/>
-                    <Map1 position={[0, 0, 0]}/>
-                    <Map2 position={[0, 0, -94]}/>
-                    <Wall />
-                  
-                  {
-                    players.map((player, index) => (
-                      <Car_App id={player.id} key={player.id} position={player.position} rotation={[0, Math.PI, 0]} color={player.color} state={state} index={index} receiveShadow castShadow/>
-                    ))
-                  }
-        
-                  {isObstacleStarted && (
-                  <>
-                  {/* 장애물 배치 */}
-                  <SpinObstacle position={[25,0.5,-28]} offset={3}/>
-                  <SpinObstacle position={[27,0.5,-97]} offset={4}/>
-                  {/* <LeftAndRightObstacle/> */}
-                  {/* <ShutterObstacle/> */}
-                  <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
-                  <CarGreenObstacle/>
-                  {/* <MotorObstacle/> */}
-                  <CrabObstacle position ={[7,-0.03,0]} offset={32} />
-                  <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
-                  <CrabObstacle position={[0,-0.03,0]} offset={38}/>
-                  </>
-                  )}
-              {/*</Debug>*/}
-              </Physics>
-              {/* {spectators.map((spectator, index) => (
-                <Spectator id={spectator.id} key={index} position={spectator.position} />
-              ))} */} 
+            {/* <Light/> */}
+            
+            
             <directionalLight
               castShadow
               targetObject ={targetObject}
@@ -322,8 +270,8 @@ export default function Scene() {
               shadow-camera-left={-120}
               shadow-camera-right={100}
               shadow-camera-far={100}
-              shadow-mapSize-height={512*4}
-              shadow-mapSize-width={512*4}
+              shadow-mapSize-height={512*6}
+              shadow-mapSize-width={512*6}
               position={[50, 80, -50]}
               color="#ffffff"
             />
@@ -359,15 +307,7 @@ export default function Scene() {
                 )}
             {/*</Debug>*/}
             </Physics>
-            {/* {spectators.map((spectator, index) => (
-              <Spectator id={spectator.id} key={index} position={spectator.position} />
-            ))} */}
-          
           </>          
-            </>
-              <BakeShadows/>
-            </Bvh>          
-
           </Suspense>
       </Canvas>
     </>
