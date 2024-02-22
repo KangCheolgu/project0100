@@ -47,7 +47,7 @@ function AuthGoogle() {
   }, []);
 
   return (
-    <div>구글 로딩 중</div>
+    <div></div>
   );
 }
 

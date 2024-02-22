@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 router.get('/google', (req, res) => {
-  console.log("/auth/google");
+  // console.log("/auth/google");
   let url = 'https://accounts.google.com/o/oauth2/v2/auth';
   url += `?client_id=${GOOGLE_CLIENT_ID}`
   url += `&redirect_uri=${GOOGLE_LOGIN_REDIRECT_URI}`
@@ -57,7 +57,7 @@ router.post('/google/gettoken', async (req, res) => {
 });
 
 router.get('/naver', (req, res) => {
-  console.log("/auth/naver");
+  // console.log("/auth/naver");
   let url = 'https://nid.naver.com/oauth2.0/authorize';
   url += '?response_type=code'
   url += `&client_id=${NAVER_CLIENT_ID}`

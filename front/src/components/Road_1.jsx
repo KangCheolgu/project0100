@@ -13,8 +13,8 @@ export function Road_1(props) {
   const geometry = nodes.Scene.children[0].geometry;
   const vertices = geometry.attributes.position.array;
   const indices  = geometry.index.array;
-  console.log(nodes)
-  console.log(geometry)
+  // console.log(nodes)
+  // console.log(geometry)
   const [ref] = useTrimesh(
     () => ({
       args: [vertices, indices],

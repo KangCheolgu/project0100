@@ -15,7 +15,7 @@ const LobbyBgmSound = () => {
     const navigate = useNavigate();
     
     useEffect(() => {
-        console.log(window.location.pathname);
+        // console.log(window.location.pathname);
         // 오디오 파일 경로
         const BGMEffect = new Howl({
             src: [lobbyBackgroundMusic],
@@ -34,7 +34,7 @@ const LobbyBgmSound = () => {
 
         return () => {
             if (window.location.pathname !== '/lobby') {
-                console.log(window.location.pathname);
+                // console.log(window.location.pathname);
                 bgmRef.current.stop();
             }
         };
