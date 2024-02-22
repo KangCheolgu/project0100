@@ -89,13 +89,6 @@ const Car = ({ cameraGroup, ...props }) => {
     useRef(null),
   );
 
-  // brake lights
-  // const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, props.id, props.state);
-
-  // 클락션 소리 /////////////////////////////////////////////////////////
-  const klaxonDuration = 500; // 1초
-  ///////////////////////////////////////////////////////////////////////
-
   // 자동차 충돌
   const [isCollision, setIsCollision] = useState(false)
   const handleCollision = () => {
@@ -140,7 +133,7 @@ const Car = ({ cameraGroup, ...props }) => {
   const lastPosition = useRef(new Vector3());
   const lastUpdateTime = useRef(Date.now());
 
-  useVehicleControls(vehicleApi, chassisApi, chassisBody, checkPointIndex, props.id, props.state, klaxonDuration, klaxonSoundFile);
+  const { controls, brakeLightsOn } = useVehicleControls(vehicleApi, chassisApi, chassisBody, checkPointIndex, props.id, props.state, klaxonSoundFile);
 
   useEffect(() => {
     if (socket.id === props.id) {
@@ -175,7 +168,6 @@ const Car = ({ cameraGroup, ...props }) => {
     if (socket.id === props.id) {
       const bodyPosition = chassisBody.current.getWorldPosition(worldPosition);
       const bodyRotation = chassisBody.current.getWorldQuaternion(worldQuaternion);
-      console.log(bodyRotation);
         // 부스터 이펙트 위치 및 방향 지정.
       cameraGroup.current.quaternion.copy(bodyRotation);
       cameraGroup.current.position.lerp(new THREE.Vector3(bodyPosition.x, bodyPosition.y - 1.7, bodyPosition.z), delta*24);
@@ -226,10 +218,8 @@ const Car = ({ cameraGroup, ...props }) => {
       }
     }
   });
-
   
   useEffect(() => {
-    
     let lastPosition = new THREE.Vector3(props.position[0], props.position[1], props.position[2]);
     let lastQuaternion = new THREE.Quaternion(chassisApi.quaternion._x, chassisApi.quaternion._y, chassisApi.quaternion._z, chassisApi.quaternion._w);
     
@@ -396,6 +386,7 @@ const Car = ({ cameraGroup, ...props }) => {
       }
     }, 30);
   };
+  console.log(brakeLightsOn);
 
   return (<>
     <group ref={cameraGroup}>
@@ -403,7 +394,7 @@ const Car = ({ cameraGroup, ...props }) => {
     </group>
     <group ref={vehicle} castShadow receiveShadow>
       <group ref={chassisBody} castShadow>
-        <CarModel castShadow index={props.index} />
+        <CarModel castShadow index={props.index} brakeLightsOn={brakeLightsOn}/>
       </group>
       <Wheel wheelRef={wheels[0]} radius={wheelRadius} />
       <Wheel wheelRef={wheels[1]} radius={wheelRadius} />
@@ -419,8 +410,7 @@ const Car = ({ cameraGroup, ...props }) => {
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>
       <FollowCamera chassisBody={chassisBody} socket={socket} vehicleId={props.id} />
-      {/* <Minimap chassisBody={chassisBody} socket={socket}  vehicleId={props.id}/> */}
-    </group>
+      </group>
   </>
 
   )
