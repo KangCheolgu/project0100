@@ -360,7 +360,7 @@ const Car = ({ cameraGroup, ...props }) => {
         <div style={{position: 'fixed', width: window.screen.width/2 , height: window.screen.height/2 }}>
           <Needle socket={socket} props={props} currentSpeed={currentSpeed * 2} />
           <Speedometer socket={socket} props={props} currentSpeed={currentSpeed * 2} />
-          <Minimap socket={socket} props={props} chassisBody={chassisBody} />
+          <Minimap socket={socket} props={props} chassisBody={chassisBody} index={props.index} />
         </div>
           {isCollision && <img className="crash" src="/assets/images/crash.png" alt="crash" />}
       </Html>

@@ -265,10 +265,10 @@ export default function Scene() {
                     <ColliderWall/>
                     <Map1 position={[0, 0, 0]}/>
                     <Map2 position={[0, 0, -94]}/>
-                    <Ball position={[15, 0.9, -100]} />
-                    <Ball position={[13, 0.9, -105]} />
-                    <Ball position={[14, 0.9, -110]} />
-                    <Ball position={[15, 0.9, -103]} />
+                    <Ball castShadow position={[15, 0.9, -100]} />
+                    <Ball castShadow position={[13, 0.9, -105]} />
+                    <Ball castShadow position={[14, 0.9, -110]} />
+                    <Ball castShadow position={[15, 0.9, -103]} />
                     <Wall />
                   {
                     players.map((player, index) => (
