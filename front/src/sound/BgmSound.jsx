@@ -25,7 +25,9 @@ const BgmSound = () => {
 
         bgmRef.current = BGMEffect; // Howler 인스턴스 저장
 
-        BGMEffect.play();
+        if (navigate && window.location.pathname === '/gameroom' ) {
+            BGMEffect.play();
+        }
 
         return () => {
             if (window.location.pathname !== '/gameroom' && bgmRef.current) {
