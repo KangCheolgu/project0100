@@ -8,9 +8,7 @@ import { BananaCar } from './BananaCar'
 import * as THREE from "three";
 import { CarRed, CarGreen, MotorbikeYellow, MotorbikeOrange, MotorbikePizza } from './resort/Vehicles'
 import { Crab } from './Crab'
-import { Rock } from './Rock'
-import { RockLarge } from './RockLarge'
-import { BasketBall } from './BasketBall'
+import { BasketBall3 } from './BasketBall3'
 
 function lerp(from, to, speed) {
   const r = (1 - speed) * from + speed * to
@@ -481,37 +479,37 @@ export function CrabObstacle(props){
 
 export function BasketballObstacle(){
   const [Ball1] = useSphere(() =>({
-    mass: 30,
+    mass: 15,
     args: [0.35],
     position: [11,1,-110]
   }))
 
   const [Ball2] = useSphere(() =>({
-    mass: 30,
+    mass: 15,
     args: [0.35],
     position: [9,1,-103]
   }))
 
   const [Ball3] = useSphere(() =>({
-    mass: 30,
+    mass: 15,
     args: [0.35],
     position: [11,1,-104]
   }))
 
   const [Ball4] = useSphere(() =>({
-    mass: 30,
+    mass: 15,
     args: [0.35],
     position: [13,1,-101]
   }))
 
   const [Ball5] = useSphere(() =>({
-    mass: 30,
+    mass: 15,
     args: [0.35],
     position: [15,1,-110]
   }))
   
   const [Ball6] = useSphere(() =>({
-    mass: 30,
+    mass: 15,
     args: [0.35],
     position: [13,1,-109]
   }))
@@ -525,27 +523,27 @@ export function BasketballObstacle(){
   return (
     <>
     <mesh ref={Ball1}>
-      <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
+      <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
       <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball2}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[0, Math.PI/4, Math.PI/2]}/>
+    <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[0, Math.PI/4, Math.PI/2]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball3} >
-    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[Math.PI/4, Math.PI/2, 0]}/>
+    <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[Math.PI/4, Math.PI/2, 0]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball4}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[0, Math.PI/2, 0]}/>
+    <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[0, Math.PI/2, 0]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball5}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]}/>
+    <BasketBall3 scale={0.55} position={[0,-0.03,0]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball6}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
+    <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
     <meshStandardMaterial/>
     </mesh>
     {/* <mesh ref={Ball7}>

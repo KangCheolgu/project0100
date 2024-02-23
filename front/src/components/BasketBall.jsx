@@ -7,7 +7,7 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function BasketBall(props) {
-  const { nodes, materials } = useGLTF('/assets/models/BasketBall.glb')
+  const { nodes, materials } = useGLTF('/assets/models/BasketBall2.glb')
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
@@ -18,4 +18,4 @@ export function BasketBall(props) {
   )
 }
 
-useGLTF.preload('/assets/models/BasketBall.glb')
+useGLTF.preload('/assets/models/Basketball2.glb')
