@@ -97,9 +97,9 @@ export function ShutterObstacle(props) {
   const [ref, api] = useCompoundBody(
     () => ({
       
-      position: [57,1.2,-37],
+      position: [-3,1.5,-85],
       shapes: [
-        { args: [2,0.3,5], position: [0, 0, 1.75], type: 'Box' },
+        { args: [0.5,0.5,6,5], position: [0, 0, 1.75], type: 'Box' },
       ],
       type: 'Kinematic',
       rotation: [-Math.PI/2,0,-Math.PI/2]
@@ -407,14 +407,14 @@ export function MotorObstacle(props){
   
   const [box, {position}] = useBox(()=>({
     mass: 0,
-    position: [36, 0.5, -90],
+    position: [6, 0.5, -90],
     material: 'object',
     args: [0.5,1,2]
   }),
   useRef()
   )  
   
-  const targetPosition = useRef(-95)
+  const targetPosition = useRef(-105)
   const direction = useRef(1)
 
   useEffect(() => {
@@ -428,13 +428,13 @@ export function MotorObstacle(props){
   useFrame((_, delta) => {
     targetPosition.current += direction.current * delta * 5
     //console.log(targetPosition.current)
-    if (targetPosition.current > -89) direction.current = -1
-    if (targetPosition.current < -103) direction.current = 1
+    if (targetPosition.current > -95) direction.current = -1
+    if (targetPosition.current < -106) direction.current = 1
   })
 
   return (
     <mesh ref={box} castShadow receiveShadow>
-      <MotorbikeYellow position={[0,-0.5,0]}/>
+      <MotorbikeYellow position={[0,-0.4,0]}/>
       <meshStandardMaterial/>
     </mesh>
   )
@@ -480,7 +480,7 @@ export function CrabObstacle(props){
 }
 
 export function BasketballObstacle(){
-  const [Ball1, api] = useSphere(() =>({
+  const [Ball1] = useSphere(() =>({
     mass: 30,
     args: [0.35],
     position: [11,1,-110]
@@ -516,46 +516,42 @@ export function BasketballObstacle(){
     position: [13,1,-109]
   }))
 
-  const [Ball7] = useSphere(() =>({
-    mass: 30,
-    args: [0.35],
-    position: [17,1,-17]
-  }))
+  // const [Ball7] = useSphere(() =>({
+  //   mass: 30,
+  //   args: [0.35],
+  //   position: [17,1,-107]
+  // }))
 
   return (
     <>
     <mesh ref={Ball1}>
-      <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]} castShadow receiveShadow/>
+      <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
       <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball2}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[0, Math.PI/4, Math.PI/2]} castShadow receiveShadow/>
+    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[0, Math.PI/4, Math.PI/2]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball3} >
-    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[Math.PI/4, Math.PI/2, 0]} castShadow receiveShadow/>
+    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[Math.PI/4, Math.PI/2, 0]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball4}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[0, Math.PI/2, 0]} castShadow receiveShadow />
+    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[0, Math.PI/2, 0]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball5}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]} castShadow receiveShadow/>
-    <meshStandardMaterial/>
-    </mesh>
-    <mesh ref={Ball5}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[0, Math.PI/4, Math.PI/2]} castShadow receiveShadow/>
+    <BasketBall scale={1.5} position={[0,-0.05,0]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball6}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]} castShadow receiveShadow/>
+    <BasketBall scale={1.5} position={[0,-0.05,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
     <meshStandardMaterial/>
     </mesh>
-    <mesh ref={Ball7}>
-    <BasketBall scale={1.5} position={[0,-0.05,0]} castShadow receiveShadow/>
+    {/* <mesh ref={Ball7}>
+    <BasketBall scale={1.5} position={[0,-0.05,0]}/>
     <meshStandardMaterial/>
-    </mesh>
+    </mesh> */}
     </>
 
   )

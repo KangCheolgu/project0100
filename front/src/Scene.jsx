@@ -9,7 +9,7 @@ import BgmSound from "./sound/BgmSound.jsx";
 import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./Map1/ColliderWall.jsx"
-import { SpinObstacle, CarRedObstacle, CarGreenObstacle, CrabObstacle, BasketballObstacle } from "./components/MoveObstacle.jsx";
+import { SpinObstacle, CarRedObstacle, CarGreenObstacle, ShutterObstacle,MotorObstacle,CrabObstacle, BasketballObstacle } from "./components/MoveObstacle.jsx";
 import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
@@ -269,7 +269,7 @@ export default function Scene() {
               <OrbitControls />
               <Stats/>
               <Physics gravity={[0, -3, 0]}>
-                {/* <Debug> */}
+                <Debug>
                     <ColliderWall/>
                     <Map1 position={[0, 0, 0]}/>
                     <Map2 position={[0, 0, -94]}/>
@@ -289,13 +289,13 @@ export default function Scene() {
                   {/* <ShutterObstacle/> */}
                   <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
                   <CarGreenObstacle/>
-                  {/* <MotorObstacle/> */}
+                  <MotorObstacle/>
                   <CrabObstacle position ={[7,-0.03,0]} offset={32} />
                   <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
                   <CrabObstacle position={[0,-0.03,0]} offset={38}/>
                   </>
                   )}
-              {/* </Debug> */}
+              </Debug>
               </Physics>
               {/* {spectators.map((spectator, index) => (
                 <Spectator id={spectator.id} key={index} position={spectator.position} />
