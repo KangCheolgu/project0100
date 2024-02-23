@@ -40,7 +40,7 @@ function Speedometer({ socket, props, currentSpeed }) {
             bottom: '10%',
             right: rightpos,
             color: color,
-            fontSize: '90px',
+            fontSize: '120px',
             fontFamily: 'RacingFont, sans-serif', // Aptos 폰트 적용
             textShadow: '-2px 0px black, 0px 2px black, 2px 0px black, 0px -2px black'
           }}
@@ -53,7 +53,7 @@ function Speedometer({ socket, props, currentSpeed }) {
             bottom: '3%',
             right: '8%',
             color: color,
-            fontSize: '40px',
+            fontSize: '60px',
             fontFamily: 'RacingFont, sans-serif', // Aptos 폰트 적용
             textShadow: '-2px 0px black, 0px 2px black, 2px 0px black, 0px -2px black'
           }}

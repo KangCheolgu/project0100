@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Physics, Debug } from "@react-three/cannon";
 import Car_App from "./Car.jsx";
 import { useState, useEffect, useRef, React, Suspense, useLayoutEffect } from "react";
-import { OrbitControls, useProgress, Stats, PerspectiveCamera, BakeShadows, Bvh, Preload, AdaptiveDpr, AdaptiveEvents} from '@react-three/drei';
+import { OrbitControls, Stats, PerspectiveCamera, Bvh, Preload, AdaptiveDpr } from '@react-three/drei';
 import Interface from "./Interface"
 import useGame from "./stores/useGame.jsx";
 import BgmSound from "./sound/BgmSound.jsx";
@@ -19,6 +19,7 @@ import Sand from "./Sand.jsx";
 import { Background } from "./components/Background.jsx";
 import { gsap } from "gsap";
 import Wall from "./Map2/ColliderWall_Map2.jsx";
+import { Ball } from "./components/BasBall.jsx";
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
@@ -69,9 +70,6 @@ export default function Scene() {
       countDownSound.play();
     }
   },[count])
-
-  
-  // 카운트 다운 관련 끝
 
 /////////// 핑관련 변수들
   const [averagePing, setAveragePing] = useState(null);
@@ -233,9 +231,6 @@ export default function Scene() {
     <>
       <Interface />
       <BgmSound />
-      {/* {!loadingEnd && 
-        // <LoadingPage started ={loadingEnd} onStarted={() => setLoadingEnd(true)}/>
-      } */}
       <Canvas shadows >
         <Suspense fallback={null}>
           <Preload all />
@@ -249,13 +244,10 @@ export default function Scene() {
               <Sand/>
               <ambientLight intensity={2} color="#fff7e6"/>
               
-              {/*<Light/>*/}
-              
-              
               <directionalLight
                 castShadow
                 targetObject ={targetObject}
-                intensity={4}
+                intensity={2}
                 shadow-camera-top={100}
                 shadow-camera-bottom={-100}
                 shadow-camera-left={-120}
@@ -273,6 +265,10 @@ export default function Scene() {
                     <ColliderWall/>
                     <Map1 position={[0, 0, 0]}/>
                     <Map2 position={[0, 0, -94]}/>
+                    <Ball castShadow position={[15, 0.9, -100]} />
+                    <Ball castShadow position={[13, 0.9, -105]} />
+                    <Ball castShadow position={[14, 0.9, -110]} />
+                    <Ball castShadow position={[15, 0.9, -103]} />
                     <Wall />
                   {
                     players.map((player, index) => (
@@ -285,8 +281,6 @@ export default function Scene() {
                   {/* 장애물 배치 */}
                   <SpinObstacle position={[25,0.5,-28]} offset={3}/>
                   <SpinObstacle position={[27,0.5,-97]} offset={4}/>
-                  {/* <LeftAndRightObstacle/> */}
-                  {/* <ShutterObstacle/> */}
                   <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
                   <CarGreenObstacle/>
                   <MotorObstacle/>
@@ -297,12 +291,7 @@ export default function Scene() {
                   )}
               {/* </Debug> */}
               </Physics>
-              {/* {spectators.map((spectator, index) => (
-                <Spectator id={spectator.id} key={index} position={spectator.position} />
-              ))} */}
-            
             </>
-              {/*<BakeShadows/>*/}
             </Bvh>    
           </Suspense>
       </Canvas>

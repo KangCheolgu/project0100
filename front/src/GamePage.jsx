@@ -9,7 +9,10 @@ const GamePage = () => {
                 {name: 'backward', keys:['ArrowDown', 'KeyS']},
                 {name: 'leftward', keys:['ArrowLeft', 'KeyA']},
                 {name: 'rightward', keys:['ArrowRight', 'KeyD']},
-                {name: 'jump', keys:['Space']}
+                {name: 'space', keys:['Space']},
+                {name: 'shift', keys:['Shift']},
+                {name: 'reposition', keys:['KeyR']},
+                {name: 'horn', keys:['KeyH']}
                 ] } 
             >
                 <Scene />

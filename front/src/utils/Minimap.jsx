@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as THREE from 'three';
 
-function Minimap({ socket, props, chassisBody }) {
+function Minimap({ socket, props, chassisBody, index }) {
   const [opponentPosition, setOpponentPosition] = useState({ x: 0, z: 0 });
   const [myPosition, setMyPosition] = useState({ x: 0, z: 0 });
   const minimapSrc = '/assets/images/minimap.png';
@@ -60,15 +60,29 @@ function Minimap({ socket, props, chassisBody }) {
     zIndex: 999,
   };
 
-    if (socket.id === props.id) {
-  return (
-    <div style={{ position: 'absolute', bottom: '60%', right: '10%' }}>
-      <img src={minimapSrc} alt="Minimap" style={{ width: '100%', height: '100%' }} />
-      <img src={blueCarSrc} alt="My Car" style={myCarStyle} />
-      <img src={redCarSrc} alt="Opponent's Car" style={opponentCarStyle} />
-    </div>
-  );
+  if (socket.id === props.id) 
+  {
+    if (index === 0)
+    {
+    return (
+      <div style={{ position: 'absolute', bottom: '60%', right: '0%' }}>
+        <img src={minimapSrc} alt="Minimap" style={{ width: '100%', height: '100%' }} />
+        <img src={blueCarSrc} alt="My Car" style={myCarStyle} />
+        <img src={redCarSrc} alt="Opponent's Car" style={opponentCarStyle} />
+      </div>
+    );
     }
+    else
+    {
+    return (
+      <div style={{ position: 'absolute', bottom: '60%', right: '0%' }}>
+        <img src={minimapSrc} alt="Minimap" style={{ width: '100%', height: '100%' }} />
+        <img src={redCarSrc} alt="My Car" style={myCarStyle} />
+        <img src={blueCarSrc} alt="Opponent's Car" style={opponentCarStyle} />
+      </div>
+    );
+    }
+  }
 }
 
 export default Minimap;

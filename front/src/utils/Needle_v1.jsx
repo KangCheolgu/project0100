@@ -29,7 +29,7 @@ function Needle({ socket, props, currentSpeed }) {
                     backgroundColor: color,
                     position: 'absolute',
                     bottom: '22%',
-                    right: '13%',
+                    right: '15%',
                     transform: `translate(-50%, -50%) rotate(${angle}deg)`,
                     transformOrigin: '240px 50%',
                     clipPath: 'polygon(60% 0, 100% 50%, 60% 100%, 0 50%)',
