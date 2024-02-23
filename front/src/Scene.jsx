@@ -121,7 +121,7 @@ export default function Scene() {
         console.log("클라이언트 카운트다운");
         const pingCheck = setTimeout(() => {
           startPingCheck()
-        }, 4000)
+        }, 6000)
 
         return () => clearTimeout(pingCheck)
     })
@@ -246,7 +246,7 @@ export default function Scene() {
               <directionalLight
                 castShadow
                 targetObject ={targetObject}
-                intensity={2}
+                intensity={3}
                 shadow-camera-top={100}
                 shadow-camera-bottom={-100}
                 shadow-camera-left={-120}
@@ -256,7 +256,7 @@ export default function Scene() {
                 shadow-mapSize-width={512}
                 position={[50, 80, -50]}
                 color="#ffffff"
-      />
+              />
               <OrbitControls />
               <Stats/>
               <Physics gravity={[0, -3, 0]}>
