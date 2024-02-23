@@ -269,7 +269,7 @@ export default function Scene() {
               <OrbitControls />
               <Stats/>
               <Physics gravity={[0, -3, 0]}>
-                <Debug>
+                {/* <Debug> */}
                     <ColliderWall/>
                     <Map1 position={[0, 0, 0]}/>
                     <Map2 position={[0, 0, -94]}/>
@@ -295,7 +295,7 @@ export default function Scene() {
                   <CrabObstacle position={[0,-0.03,0]} offset={38}/>
                   </>
                   )}
-              </Debug>
+              {/* </Debug> */}
               </Physics>
               {/* {spectators.map((spectator, index) => (
                 <Spectator id={spectator.id} key={index} position={spectator.position} />
