@@ -118,7 +118,7 @@ export default function Scene() {
     }
     
     // 내가 설정한 최대 인원 숫자와 현재 인원이 같으면 핑체크 시작
-    socket.on("clientCount", () => {
+    socket.once("clientCount", () => {
         console.log("클라이언트 카운트다운");
         const pingCheck = setTimeout(() => {
           startPingCheck()
@@ -127,13 +127,13 @@ export default function Scene() {
         return () => clearTimeout(pingCheck)
     })
 
-    socket.on("opponentPing", (pingData)=>{
+    socket.once("opponentPing", (pingData)=>{
       console.log("oppo ping :", pingData.ping);
       setOpponentPing(pingData.ping)
     })
 
     //유저 업데이트
-    socket.on("updatePlayers", onPlayers)
+    socket.once("updatePlayers", onPlayers)
 
     return (() => {
       socket.off("updatePlayers", onPlayers);
@@ -145,7 +145,7 @@ export default function Scene() {
   useEffect(() => {
 
     // 스타트 시그널을 받으면 
-    socket.on("startSignal", (allPings)=>{
+    socket.once("startSignal", (allPings)=>{
       console.log("스타트 시그널");
       // 상대핑의 평균을 구하여 
       const allPingsArray = Object.values(allPings);
