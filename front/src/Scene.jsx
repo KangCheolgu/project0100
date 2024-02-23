@@ -9,8 +9,8 @@ import BgmSound from "./sound/BgmSound.jsx";
 import Map2 from "./Map2/Map2.jsx"
 import Map1 from "./Map1/Map1.jsx"
 import ColliderWall from "./Map1/ColliderWall.jsx"
-import { SpinObstacle, CarRedObstacle, CarGreenObstacle, CrabObstacle } from "./components/MoveObstacle.jsx";
-import { Howl } from 'howler';
+import { SpinObstacle, CarRedObstacle, CarGreenObstacle, ShutterObstacle,MotorObstacle,CrabObstacle, BasketballObstacle } from "./components/MoveObstacle.jsx";
+import { Howl, Howler } from 'howler';
 import countDown from './sound/countdown/CountDownSoundEffect.mp3'
 import Start from './sound/countdown/StartSoundEffect.mp3'
 import { socket } from "./lobby/lobby.jsx";
@@ -276,12 +276,14 @@ export default function Scene() {
                     ))
                   }        
                   {isObstacleStarted && (
-                  <>
+                    <>
+                    <BasketballObstacle/>
                   {/* 장애물 배치 */}
                   <SpinObstacle position={[25,0.5,-28]} offset={3}/>
                   <SpinObstacle position={[27,0.5,-97]} offset={4}/>
                   <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
                   <CarGreenObstacle/>
+                  <MotorObstacle/>
                   <CrabObstacle position ={[7,-0.03,0]} offset={32} />
                   <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
                   <CrabObstacle position={[0,-0.03,0]} offset={38}/>
