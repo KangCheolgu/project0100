@@ -229,7 +229,6 @@ export default function Scene() {
   return (
     <>
       <Interface />
-      <BgmSound />
       <Canvas shadows >
         <Suspense fallback={null}>
           <Preload all />

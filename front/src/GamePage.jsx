@@ -1,8 +1,10 @@
 import Scene from './Scene';
 import { KeyboardControls } from '@react-three/drei';
+import BgmSound from './sound/BgmSound';
 const GamePage = () => {
     return (
         <>
+            <BgmSound />
             <KeyboardControls
                 map={[
                 {name: 'forward', keys:['ArrowUp', 'KeyW']},
