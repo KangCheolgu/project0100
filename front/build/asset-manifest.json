@@ -1,24 +1,33 @@
 {
   "files": {
-    "main.css": "/static/css/main.e0d884a1.css",
-    "main.js": "/static/js/main.3d79d12b.js",
-    "static/media/RacingBoy.mp3": "/static/media/RacingBoy.180b79408757fecff2ee.mp3",
-    "static/media/low_on.wav": "/static/media/low_on.aa5e15a1f902da46e525.wav",
-    "static/media/three.cjs": "/static/media/three.9e3840f599b8467d4f24.cjs",
+    "main.css": "/static/css/main.01455c2f.css",
+    "main.js": "/static/js/main.474760df.js",
+    "static/media/RacingBoy.mp3": "/static/media/RacingBoy.22feac73ea86a95f8176.mp3",
+    "static/media/enginesound.wav": "/static/media/enginesound.84957cc0b7a8d64ae91f.wav",
+    "static/media/lobby_bgm.mp3": "/static/media/lobby_bgm.4aae425f364153ba0895.mp3",
+    "static/media/CookieRun_Regular.ttf": "/static/media/CookieRun_Regular.52560075f5d887966bf2.ttf",
+    "static/media/CookieRun_Bold.ttf": "/static/media/CookieRun_Bold.07162854e5b0889acf82.ttf",
+    "static/media/CookieRun_Black.ttf": "/static/media/CookieRun_Black.00ee0089b5b041ab4237.ttf",
+    "static/media/finallap.png": "/static/media/finallap.48b66e61b69abffc5054.png",
+    "static/media/login_bgm.mp3": "/static/media/login_bgm.6ffaf9aa5b29def4af59.mp3",
+    "static/media/title.png": "/static/media/title.10f33c08dba431d1fa28.png",
     "static/media/aptos-italic.ttf": "/static/media/aptos-italic.5a31056a7d170218daf6.ttf",
     "static/media/aptos-semibold.ttf": "/static/media/aptos-semibold.a89529df4b927b62782a.ttf",
+    "static/media/brake.wav": "/static/media/brake.fe65a7e9c2924fa528d2.wav",
     "static/media/car-horn-1.wav": "/static/media/car-horn-1.7d3d826ef52d0ea51a6c.wav",
-    "static/media/car-hit-2.wav": "/static/media/car-hit-2.563378138e7eed72a2fa.wav",
+    "static/media/car-hit-6.wav": "/static/media/car-hit-6.73830a314e9e63eeca26.wav",
     "static/media/RACING_HARD.ttf": "/static/media/RACING_HARD.f6240465fd2b7023c93d.ttf",
+    "static/media/directionkey.png": "/static/media/directionkey.36db5953e95d03b05be8.png",
+    "static/media/googlelogo.png": "/static/media/googlelogo.39c52b1bcccb20569aa4.png",
     "static/media/CountDownSoundEffect.mp3": "/static/media/CountDownSoundEffect.41da0fb13551ca15143a.mp3",
     "static/media/StartSoundEffect.mp3": "/static/media/StartSoundEffect.013f3427fd655ab70c89.mp3",
-    "static/media/gear_svg.svg": "/static/media/gear_svg.aad13da276086a313ab4f5b99ecf25cc.svg",
+    "static/media/buttonhigh.mp3": "/static/media/buttonhigh.3e052494a4af07d6f03f.mp3",
     "index.html": "/index.html",
-    "main.e0d884a1.css.map": "/static/css/main.e0d884a1.css.map",
-    "main.3d79d12b.js.map": "/static/js/main.3d79d12b.js.map"
+    "main.01455c2f.css.map": "/static/css/main.01455c2f.css.map",
+    "main.474760df.js.map": "/static/js/main.474760df.js.map"
   },
   "entrypoints": [
-    "static/css/main.e0d884a1.css",
-    "static/js/main.3d79d12b.js"
+    "static/css/main.01455c2f.css",
+    "static/js/main.474760df.js"
   ]
 }
