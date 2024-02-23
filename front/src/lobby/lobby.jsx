@@ -167,7 +167,7 @@ export const LobbyPage = () => {
             <Col className={styles.left_area}>
               <div className={styles.text}><h4>RANKING</h4></div>
               <div className={styles.ranking_area}>
-                {rankingList ? 
+                {/* {rankingList.length !== 0 ? 
                   (
                     <>
                       <Row className={styles.rank_row_1}>
@@ -205,7 +205,24 @@ export const LobbyPage = () => {
                       </Row>
                     </>
                   )
-                }
+                } */}
+                <>
+                      <Row className={styles.rank_row_1}>
+                        <Col className={styles.rank_col_1} md={3}>1st</Col>
+                        <Col className={styles.rank_col_2} md={4}>AAA</Col>
+                        <Col className={styles.rank_col_3}>2:30:000</Col>
+                      </Row>
+                      <Row className={styles.rank_row}>
+                        <Col className={styles.rank_col_1} md={3}>2nd</Col>
+                        <Col className={styles.rank_col_2} md={4}>BBB</Col>
+                        <Col className={styles.rank_col_3}>3:00:000</Col>
+                      </Row>
+                      <Row className={styles.rank_row}>
+                        <Col className={styles.rank_col_1} md={3}>3rd</Col>
+                        <Col className={styles.rank_col_2} md={4}>CCC</Col>
+                        <Col className={styles.rank_col_3}>3:30:000</Col>
+                      </Row>
+                    </>
                   
               </div>
               <div className={styles.text}><h4>CONTROL</h4></div>
