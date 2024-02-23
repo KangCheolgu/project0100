@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/static/css/main.01455c2f.css",
-    "main.js": "/static/js/main.0c781374.js",
-    "static/media/RacingBoy.mp3": "/static/media/RacingBoy.22feac73ea86a95f8176.mp3",
+    "main.js": "/static/js/main.3a12103a.js",
     "static/media/enginesound.wav": "/static/media/enginesound.84957cc0b7a8d64ae91f.wav",
     "static/media/lobby_bgm.mp3": "/static/media/lobby_bgm.4aae425f364153ba0895.mp3",
     "static/media/CookieRun_Regular.ttf": "/static/media/CookieRun_Regular.52560075f5d887966bf2.ttf",
     "static/media/CookieRun_Bold.ttf": "/static/media/CookieRun_Bold.07162854e5b0889acf82.ttf",
     "static/media/CookieRun_Black.ttf": "/static/media/CookieRun_Black.00ee0089b5b041ab4237.ttf",
+    "static/media/RacingBoy_low.mp3": "/static/media/RacingBoy_low.f49fe67b03314db9f10d.mp3",
     "static/media/finallap.png": "/static/media/finallap.48b66e61b69abffc5054.png",
     "static/media/login_bgm.mp3": "/static/media/login_bgm.6ffaf9aa5b29def4af59.mp3",
     "static/media/title.png": "/static/media/title.10f33c08dba431d1fa28.png",
@@ -24,10 +24,10 @@
     "static/media/buttonhigh.mp3": "/static/media/buttonhigh.3e052494a4af07d6f03f.mp3",
     "index.html": "/index.html",
     "main.01455c2f.css.map": "/static/css/main.01455c2f.css.map",
-    "main.0c781374.js.map": "/static/js/main.0c781374.js.map"
+    "main.3a12103a.js.map": "/static/js/main.3a12103a.js.map"
   },
   "entrypoints": [
     "static/css/main.01455c2f.css",
-    "static/js/main.0c781374.js"
+    "static/js/main.3a12103a.js"
   ]
 }

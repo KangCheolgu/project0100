@@ -1,5 +1,5 @@
 import { Howl } from 'howler';
-import backgroundMusic from './bgm/RacingBoy.mp3'
+import backgroundMusic from './bgm/RacingBoy_low.mp3'
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
