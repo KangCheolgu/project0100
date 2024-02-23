@@ -19,7 +19,6 @@ import Sand from "./Sand.jsx";
 import { Background } from "./components/Background.jsx";
 import { gsap } from "gsap";
 import Wall from "./Map2/ColliderWall_Map2.jsx";
-import { Ball } from "./components/BasBall.jsx";
 
 // 여기 변경
 // export const socket = io("http://localhost:5000/")
@@ -265,10 +264,6 @@ export default function Scene() {
                     <ColliderWall/>
                     <Map1 position={[0, 0, 0]}/>
                     <Map2 position={[0, 0, -94]}/>
-                    <Ball castShadow position={[15, 0.9, -100]} />
-                    <Ball castShadow position={[13, 0.9, -105]} />
-                    <Ball castShadow position={[14, 0.9, -110]} />
-                    <Ball castShadow position={[15, 0.9, -103]} />
                     <Wall />
                   {
                     players.map((player, index) => (
@@ -277,8 +272,8 @@ export default function Scene() {
                   }        
                   {isObstacleStarted && (
                     <>
-                    <BasketballObstacle/>
                   {/* 장애물 배치 */}
+                  <BasketballObstacle/>
                   <SpinObstacle position={[25,0.5,-28]} offset={3}/>
                   <SpinObstacle position={[27,0.5,-97]} offset={4}/>
                   <CarRedObstacle position={[0,0,0]} offset={-80} rotation={[0,Math.PI,0]}/>
@@ -287,6 +282,7 @@ export default function Scene() {
                   <CrabObstacle position ={[7,-0.03,0]} offset={32} />
                   <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
                   <CrabObstacle position={[0,-0.03,0]} offset={38}/>
+                  {/* <ShutterObstacle/> */}
                   </>
                   )}
               {/* </Debug> */}

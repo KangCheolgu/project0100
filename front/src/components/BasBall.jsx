@@ -8,7 +8,7 @@ useGLTF.preload(`/assets/models/Basketball.glb`);
 
 export function Ball({ position }) {
   // 변경된 모델 경로로 useGLTF를 업데이트합니다.
-  const { nodes, materials } = useGLTF(`/assets/models/Basketball.glb`);
+  const { nodes, materials } = useGLTF(`/assets/models/Basketball2.glb`);
   const [info, setInfo] = useState(false)
   const [ref, api] = useSphere(() => ({
     position,
