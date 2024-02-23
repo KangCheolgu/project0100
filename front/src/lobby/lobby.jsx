@@ -20,11 +20,11 @@ import LobbyBgmSound from '../sound/LobbySound';
 import ButtonSound from '../sound/ButtonSound';;
 
 
-export const socket = io("http://localhost:5000/")
-// export const socket = io("https://project0100.shop")
+// export const socket = io("http://localhost:5000/")
+export const socket = io("https://project0100.shop")
 
-const CURRENT_URL = "http://localhost:5000"
-// const CURRENT_URL = "https://project0100.shop"
+// const CURRENT_URL = "http://localhost:5000"
+const CURRENT_URL = "https://project0100.shop"
 
 export const LobbyPage = () => {
   const navigate = useNavigate()
