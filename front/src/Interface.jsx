@@ -150,6 +150,12 @@ export default function Interface(){
           socket.emit('phaseEnded', [socket.id, tmpRecord]);
           useGame.setState({ recordTime : tmpRecord });
           setWinnerData(winnerSocketData.name)
+
+          // axios.post('https://project0100.shop/api/database/saveWinnerRecord', {
+          //   name: winnerSocketData.name,
+          //   email: winnerSocketData.email,
+          //   record: tmpRecord,
+          // });
         }
       }
     }, [tmpRecord]);

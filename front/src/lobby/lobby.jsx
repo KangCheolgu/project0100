@@ -20,15 +20,16 @@ import LobbyBgmSound from '../sound/LobbySound';
 import ButtonSound from '../sound/ButtonSound';;
 
 
-export const socket = io("http://localhost:5000/")
-// export const socket = io("https://project0100.shop")
+// export const socket = io("http://localhost:5000/")
+export const socket = io("https://project0100.shop")
 
-const CURRENT_URL = "http://localhost:5000"
-// const CURRENT_URL = "https://project0100.shop"
+// const CURRENT_URL = "http://localhost:5000"
+const CURRENT_URL = "https://project0100.shop"
 
 export const LobbyPage = () => {
   const navigate = useNavigate()
   const [roomList, setRoomList] = useState([])
+  const [rankingList, setRankingList] = useState([])
 
   const userEmail = cookie.load("userEmail")
   const userName = cookie.load("userName")
@@ -127,11 +128,12 @@ export const LobbyPage = () => {
   useEffect(() => {
     // 처음에 렌더링 되면 방 리스트와 랭킹을 불러와서 나타냄
     socket.emit("roomlist")
-    // getRankingList()
-    // .then(rankingList => {
-    //     console.log('Ranking list:', rankingList);
-    //     // 여기서 랭킹 목록을 처리합니다.
-    // });
+    getRankingList()
+    .then(rankingList => {
+        console.log('Ranking list:', rankingList);
+        setRankingList(rankingList)
+        // 여기서 랭킹 목록을 처리합니다.
+    });
   },[])
 
   const targetObject = new THREE.Object3D();
@@ -167,18 +169,18 @@ export const LobbyPage = () => {
               <div className={styles.ranking_area}>
                   <Row className={styles.rank_row_1}>
                     <Col className={styles.rank_col_1} md={3}>1st</Col>
-                    <Col className={styles.rank_col_2} md={4}>SB choi</Col>
+                    <Col className={styles.rank_col_2} md={4}>KCG</Col>
                     <Col className={styles.rank_col_3}>2:12:000</Col>
                   </Row>
                   <Row className={styles.rank_row}>
                     <Col className={styles.rank_col_1} md={3}>2nd</Col>
-                    <Col className={styles.rank_col_2} md={4}>김김김</Col>
-                    <Col className={styles.rank_col_3}>2:13:333</Col>
+                    <Col className={styles.rank_col_2} md={4}>LDG</Col>
+                    <Col className={styles.rank_col_3}>2:15:000</Col>
                   </Row>
                   <Row className={styles.rank_row}>
                     <Col className={styles.rank_col_1} md={3}>3rd</Col>
-                    <Col className={styles.rank_col_2} md={4}>밤양갱</Col>
-                    <Col className={styles.rank_col_3}>2:14:333</Col>
+                    <Col className={styles.rank_col_2} md={4}>CSB</Col>
+                    <Col className={styles.rank_col_3}>2:18:000</Col>
                   </Row>
               </div>
               <div className={styles.text}><h4>CONTROL</h4></div>
