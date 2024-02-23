@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.01455c2f.css",
-    "main.js": "/static/js/main.5be34cee.js",
+    "main.js": "/static/js/main.fbd2a41c.js",
     "static/media/RacingBoy.mp3": "/static/media/RacingBoy.22feac73ea86a95f8176.mp3",
     "static/media/enginesound.wav": "/static/media/enginesound.84957cc0b7a8d64ae91f.wav",
     "static/media/lobby_bgm.mp3": "/static/media/lobby_bgm.4aae425f364153ba0895.mp3",
@@ -24,10 +24,10 @@
     "static/media/buttonhigh.mp3": "/static/media/buttonhigh.3e052494a4af07d6f03f.mp3",
     "index.html": "/index.html",
     "main.01455c2f.css.map": "/static/css/main.01455c2f.css.map",
-    "main.5be34cee.js.map": "/static/js/main.5be34cee.js.map"
+    "main.fbd2a41c.js.map": "/static/js/main.fbd2a41c.js.map"
   },
   "entrypoints": [
     "static/css/main.01455c2f.css",
-    "static/js/main.5be34cee.js"
+    "static/js/main.fbd2a41c.js"
   ]
 }
