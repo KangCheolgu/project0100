@@ -479,37 +479,37 @@ export function CrabObstacle(props){
 
 export function BasketballObstacle(){
   const [Ball1] = useSphere(() =>({
-    mass: 15,
+    mass: 1,
     args: [0.35],
     position: [11,1,-110]
   }))
 
   const [Ball2] = useSphere(() =>({
-    mass: 15,
+    mass: 1,
     args: [0.35],
     position: [9,1,-103]
   }))
 
   const [Ball3] = useSphere(() =>({
-    mass: 15,
+    mass: 1,
     args: [0.35],
     position: [11,1,-104]
   }))
 
   const [Ball4] = useSphere(() =>({
-    mass: 15,
+    mass: 1,
     args: [0.35],
     position: [13,1,-101]
   }))
 
   const [Ball5] = useSphere(() =>({
-    mass: 15,
+    mass: 1,
     args: [0.35],
     position: [15,1,-110]
   }))
   
   const [Ball6] = useSphere(() =>({
-    mass: 15,
+    mass: 1,
     args: [0.35],
     position: [13,1,-109]
   }))
@@ -523,27 +523,27 @@ export function BasketballObstacle(){
   return (
     <>
     <mesh ref={Ball1}>
-      <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
+      <BasketBall3 scale={0.68} position={[0, 0, 0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
       <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball2}>
-    <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[0, Math.PI/4, Math.PI/2]}/>
+    <BasketBall3 scale={0.68} position={[0, 0, 0]} rotation={[0, Math.PI/4, Math.PI/2]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball3} >
-    <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[Math.PI/4, Math.PI/2, 0]}/>
+    <BasketBall3 scale={0.68} position={[0, 0, 0]} rotation={[Math.PI/4, Math.PI/2, 0]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball4}>
-    <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[0, Math.PI/2, 0]}/>
+    <BasketBall3 scale={0.68} position={[0, 0, 0]} rotation={[0, Math.PI/2, 0]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball5}>
-    <BasketBall3 scale={0.55} position={[0,-0.03,0]}/>
+    <BasketBall3 scale={0.68} position={[0, 0, 0]}/>
     <meshStandardMaterial/>
     </mesh>
     <mesh ref={Ball6}>
-    <BasketBall3 scale={0.55} position={[0,-0.03,0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
+    <BasketBall3 scale={0.68} position={[0, 0, 0]} rotation={[Math.PI/2, Math.PI/4, Math.PI/2]}/>
     <meshStandardMaterial/>
     </mesh>
     {/* <mesh ref={Ball7}>
