@@ -19,8 +19,8 @@ import ZerobackTitle from "../static/button/title.png"
 import LoginBgmSound from '../sound/LoginSound';
 import ButtonSound from '../sound/ButtonSound';;
 
-const CURRENT_URL = "http://localhost:5000"
-// const CURRENT_URL = "https://project0100.shop"
+// const CURRENT_URL = "http://localhost:5000"
+const CURRENT_URL = "https://project0100.shop"
 
 function LoginPage() {
 
