@@ -10,7 +10,7 @@ export function BasketBall3(props) {
   const { nodes, materials } = useGLTF('/assets/models/Basketball3.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Sphere.geometry} material={materials['Material.001']} />
+      <mesh castShadow receiveShadow geometry={nodes.Sphere.geometry} material={materials['Material.001']} />
     </group>
   )
 }

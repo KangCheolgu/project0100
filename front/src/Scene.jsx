@@ -117,22 +117,22 @@ export default function Scene() {
     }
     
     // 내가 설정한 최대 인원 숫자와 현재 인원이 같으면 핑체크 시작
-    socket.on("clientCount", () => {
+    socket.once("clientCount", () => {
         console.log("클라이언트 카운트다운");
         const pingCheck = setTimeout(() => {
           startPingCheck()
-        }, 4000)
+        }, 6000)
 
         return () => clearTimeout(pingCheck)
     })
 
-    socket.on("opponentPing", (pingData)=>{
+    socket.once("opponentPing", (pingData)=>{
       console.log("oppo ping :", pingData.ping);
       setOpponentPing(pingData.ping)
     })
 
     //유저 업데이트
-    socket.on("updatePlayers", onPlayers)
+    socket.once("updatePlayers", onPlayers)
 
     return (() => {
       socket.off("updatePlayers", onPlayers);
@@ -144,7 +144,7 @@ export default function Scene() {
   useEffect(() => {
 
     // 스타트 시그널을 받으면 
-    socket.on("startSignal", (allPings)=>{
+    socket.once("startSignal", (allPings)=>{
       console.log("스타트 시그널");
       // 상대핑의 평균을 구하여 
       const allPingsArray = Object.values(allPings);
@@ -246,7 +246,7 @@ export default function Scene() {
               <directionalLight
                 castShadow
                 targetObject ={targetObject}
-                intensity={2}
+                intensity={3}
                 shadow-camera-top={100}
                 shadow-camera-bottom={-100}
                 shadow-camera-left={-120}
@@ -256,11 +256,11 @@ export default function Scene() {
                 shadow-mapSize-width={512}
                 position={[50, 80, -50]}
                 color="#ffffff"
-      />
+              />
               <OrbitControls />
               <Stats/>
               <Physics gravity={[0, -3, 0]}>
-                {/* <Debug> */}
+                  {/* <Debug> */}
                     <ColliderWall/>
                     <Map1 position={[0, 0, 0]}/>
                     <Map2 position={[0, 0, -94]}/>
@@ -284,7 +284,7 @@ export default function Scene() {
                   <CrabObstacle position={[0,-0.03,0]} offset={38}/>
                   </>
                   )}
-              {/* </Debug> */}
+               {/* </Debug> */}
               </Physics>
             </>
             </Bvh>    
