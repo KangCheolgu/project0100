@@ -282,7 +282,6 @@ export default function Scene() {
                   <CrabObstacle position ={[7,-0.03,0]} offset={32} />
                   <CrabObstacle position={[-7,-0.03,0]} offset={32}/>
                   <CrabObstacle position={[0,-0.03,0]} offset={38}/>
-                  {/* <ShutterObstacle/> */}
                   </>
                   )}
               {/* </Debug> */}
